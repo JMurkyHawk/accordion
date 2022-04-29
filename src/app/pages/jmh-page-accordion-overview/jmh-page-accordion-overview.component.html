@@ -1,0 +1,44 @@
+<div class="jmCard">
+
+    <h3 class="jmCardTitle" [innerHTML]="jmAcc_Overview_Title"></h3>
+
+    <div class="jmCardContent">
+
+        <section>
+
+            <h4 [innerHTML]="jmAcc_Overview_Content"></h4>
+
+            <p [innerHTML]="jmAcc_Overview_Content1"></p>
+
+            <p [innerHTML]="jmAcc_Overview_Content2"></p>
+
+        </section>
+
+        <section>
+
+            <h4 [innerHTML]="jmAcc_Overview_ContentEnd"></h4>
+
+            <p [innerHTML]="jmAcc_Overview_ContentEnd1"></p>
+
+            <p [innerHTML]="jmAcc_Overview_ContentEnd2"></p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_default_Description}}</h4>
+            
+            <j-murky-hawk-accordion 
+                jmFieldId="accordionDefault"
+                class="jmBackDrop"
+                titleText="{{jmAcc_default_Header}}" >
+                    <p [innerHTML]="jmAcc_default_Content"></p>
+            </j-murky-hawk-accordion>
+
+            <p>{{jmAcc_default_Description1}}</p>
+
+        </section>
+
+    </div>
+    
+</div>

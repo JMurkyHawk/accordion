@@ -1,0 +1,677 @@
+
+@import 'themes';
+@import '../styles';
+
+.jmh {
+    padding: 0 0 5em 0;
+}
+
+.pageHead {
+    background: $jmGradient2;
+    margin: 0 auto;
+    padding: 3.5em 1em 2em 1em;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+        color: var(--white);
+        font-size: 2.25em;
+        font-weight: normal;
+        line-height: 1.65em;
+        margin: 0 auto;
+        padding: 0 0 .75em 0;
+        text-align: center;
+
+        display: flex;
+    
+        a {
+            color: var(--white);
+            font-size: 1em;
+            margin: 0;
+            padding: .1em .5em;
+            text-decoration: none;
+            transition-duration: $transitionDuration;
+            transition-property: $transitionProperty;
+            transition-timing-function: $transitionTimingFunction;
+    
+            &:focus,
+            &:hover {
+                background-color: var(--jmOpaqueBlackB);
+                cursor: pointer !important;
+                margin: 0;
+                padding: .1em .5em;
+                text-decoration: none;
+            }
+    
+            &.active {
+                text-decoration: none;
+            }
+        }
+    }
+
+    a.btn {
+        background-color: transparent;
+        border-color: var(--white);
+        color: var(--white);
+        font-size: 1.25em;
+        margin: 0 0 2.5em 0;
+
+        &:focus,
+        &:hover {
+            border-color: var(--white);
+            margin: 0 0 2.5em 0;
+        }
+    }
+}
+
+h2 {
+    font-size: 2em;
+    text-align: center;
+}
+
+h3,
+h4 {
+    font-size: 1.25em;
+    line-height: 1.6em;
+    margin: 0;
+    text-align: left;
+}
+
+a {
+    color: #0000ff;
+    transition-duration: $transitionDuration;
+    transition-property: $transitionProperty, margin, padding;
+    transition-timing-function: $transitionTimingFunction;
+    
+    &:active,
+    &:focus,
+    &:hover,
+    &:visited {
+        color: #0000ff;
+    }
+
+    &:focus,
+    &:hover {
+        background-color: var(--highlight1);
+        margin: -2px;
+        padding: 2px;
+        text-decoration: none;
+    }
+}
+
+p {
+    margin: 0;
+    padding: 0 0 1em 0;
+}
+
+.block {
+    display: block;
+}
+
+.noPadding { 
+    padding: 0 !important;
+}
+
+.padding1 {
+    padding: 0 0 1em 0;
+}
+
+.padding2 {
+    padding: 0 0 .5em 0;
+}
+
+.noMargin {
+    margin: 0 !important;
+}
+
+.margin1 {
+    margin: 0 0 2em 0 !important;
+}
+
+.margin2 {
+    margin: 0 0 1em 0;
+}
+
+.margin3 {
+    margin: 1em 0 0 0;
+}
+
+.margin4 {
+    margin: 0 0 3em 0;
+}
+
+hr {
+    margin: 1em 0 2.5em 0;
+}
+
+ol,
+ul {
+    margin: 0 0 1em 0;
+    padding: 0 0 0 1em;
+
+    li {
+        padding: 0 0 .25em 0;
+    }
+
+    li.noBullet {
+        list-style-type: none;
+    }
+
+}
+
+ol.customCols,
+ul.customCols {
+    background-color: rgba(0, 110, 153, 0.075);
+    border: 1px solid rgba(0, 110, 153, 1);
+    margin: 0 0 2em 0 !important;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    li {
+        list-style-type: none;
+        padding: .5em 1em;
+
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+
+        &:nth-child(even) {
+            background-color: rgba(0, 110, 153, 0.2);
+        }
+
+        span {
+            width: 50%;
+
+            &:nth-child(odd) {
+                padding: 0 1.5em 0 0;
+            }
+        }
+    }
+
+}
+
+.color1 {
+    color: var(--blue3);
+}
+
+.color2 {
+    color: var(--blueLight);
+}
+
+.color7 {
+    color: var(--orange1);
+}
+
+.srOnly {
+    overflow: hidden;
+    position: absolute;
+    left: -1000%;
+    height: 0;
+    width: 0;
+}
+
+a.btn {
+    background-color: $jmDemoWhite;
+    border: 2px solid $jmDemoColor1;
+    border-radius: 2px;
+    box-shadow: $shadow;
+    color: $jmDemoColor1;
+    //display: block;
+    padding: 1em 1.5em !important;
+    text-decoration: none;
+    transition-duration: $transitionDuration;
+    transition-property: $transitionProperty;
+    transition-timing-function: $transitionTimingFunction;
+
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+    min-width: 10em;
+
+    &:focus,
+    &:hover {
+        background-color: $jmDemoColor1;
+        border-color: $jmDemoColor1;
+        color: $jmDemoWhite !important;
+        margin: 0;
+    }
+
+    &.active {
+        background-color: var(--grayD);
+        border-color: #444444;
+        box-shadow: $shadow2;
+        color: #444444 !important;
+        cursor: not-allowed;
+    }
+}
+
+.navBar {
+    background-color: var(--jmLightNavBackground);
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1),
+        0 2px 2px rgba(0, 0, 0, .1);
+    margin: 0;
+    padding: 2.5em 2.5em 1.5em 2.5em;
+
+    h2 {
+        font-size: 1.5em;
+        font-weight: normal;
+        margin: 0 0 1.5em 0;
+    }
+
+    nav {
+
+        ul {
+            margin: 0;
+            padding: 0;
+
+            display: flex;
+            align-items: stretch;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            li {
+                list-style-type: none;
+                margin: 0 1em 1em 1em;
+
+                a.btn {
+                    text-align: center;
+
+                    display: flex;
+                }
+
+            }
+        }
+    }
+
+}
+
+.jmCard {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    .jmCardTitle {
+        background: var(--cardHeadColor);
+        border-bottom: 1px solid var(--cardHeadBorder);
+        border-radius: 0;
+        color: var(--cardHeadText);
+        font-size: 1.5em;
+        font-weight: normal;
+        margin: 0;
+        padding: 1.5em 2.25em;
+        text-align: center;
+
+        transition-duration: $transitionDuration;
+        transition-property: background-color, border, color;
+        transition-timing-function: $transitionTimingFunction;
+    }
+
+    .jmCardContent {
+        background-color: var(--cardColor);
+        border-radius: 5px;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        color: var(--cardText);
+        transition-duration: $transitionDuration;
+        transition-property: background-color, border, color;
+        transition-timing-function: $transitionTimingFunction;
+
+        j-murky-hawk-accordion {
+            display: block;
+    
+            .jmAccordionContent {
+
+                > :first-child {
+                    padding-top: 1em;
+                }
+
+                > p:last-child {
+                    padding-bottom: 1em;
+                }
+
+            }
+
+            > .jmPanel {
+
+                & + .jmAccordionContent {
+
+                    > :first-child {
+                        padding-top: 0;
+                    }
+
+                    > p:last-child {
+                        padding-bottom: 0;
+                    }
+    
+                }
+
+            }
+    
+            &.accWidth1 {
+                width: 66%;
+            }
+        }
+
+        > section {
+            //padding: 4em 1.5em 6em 1.5em;
+            padding: 2em 1.5em 4em 1.5em;
+
+            > h3, 
+            > h4 {
+                display: block;
+                font-size: 1.5em;
+                margin: 0 0 .5em 0;
+                text-align: center
+            }
+
+            &.leadIn {
+                padding-top: 2em;
+                padding-bottom: 0;
+            }
+            /*
+            &:nth-child(even) {
+                background: rgba(25, 31, 158, .025);
+                border: 1px solid rgba(0, 0, 0, .15);
+                border-right: 0;
+                border-left: 0;
+            }
+            */
+        }
+
+        > h3:first-of-type,
+        > h4:first-of-type {
+            margin-top: 0;
+        }
+
+        > strong {
+            margin: 0 0 1em 0;
+        }
+
+        > p {
+            margin: 0;
+            padding: 0 0 1em 0;
+        }
+
+        ul {
+            margin: .5em 0 1.5em 0;
+        }
+
+        &.spacingV2 {
+
+            > section {
+                //border-bottom: 1px solid #999999;
+                margin: 0 0 4em 0;
+                padding: 0 0 2em 0;
+
+                &:last-child {
+                    border-bottom: none;
+                    margin: 0;
+                }
+            }
+
+        }
+
+    }
+
+}
+
+.jmCard.card2 {
+    margin: 0;
+
+    .jmCardTitle {
+        border-radius: 0;
+    }
+
+    .jmCardContent {
+        padding: 0;
+
+        section {
+            margin: 0;
+            padding: 4em 1.5em 6em 1.5em;
+        
+            &:nth-child(even) {
+                background: rgba(25, 31, 158, .025);
+                border: 1px solid rgba(0, 0, 0, .15);
+                border-right: 0;
+                border-left: 0;
+            }
+
+        }
+
+    }
+
+}
+
+.jmBackDrop {
+    background-color: var(--jmBackDrop-Background);
+    border: 1px solid var(--jmBackDrop-Border);
+    border-radius: 3px;
+    display: block;
+    margin: 0 0 1em 0;
+    overflow: hidden;
+    padding: 1em;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: background-color, border-color, color;
+    transition-property: background-color, border-color, color;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+
+    j-murky-hawk-accordion {
+        margin: 0;
+    }
+
+    > strong,
+    > h4,
+    > h5,
+    > h6 {
+        display: block;
+        font-size: 1em;
+        margin: 0 0 1em 0;
+        font-weight: normal;
+        text-align: center;
+    }
+
+    &.titleCard {
+        border: none;
+        padding: 0;
+
+        .jmBackDropHead {
+            background: var(--range1);
+            //background: var(--blueDark4);
+            color: #000000;
+            display: block;
+            margin: 0;
+            padding: 1em 2em;
+            text-align: center;
+        }
+
+        .jmBackDropContent {
+            background: var(--range1rgbaContent);
+            border: 1px solid var(--jmBackDrop-Border);
+            border-top: none;
+            padding: 1em;
+        }
+
+        &.v2 {
+            .jmBackDropHead {
+                background: var(--range2);
+            }
+            .jmBackDropContent {
+                background: var(--range2rgbaContent);
+                border-color: var(--range2);
+            }
+        }
+
+        &.v3 {
+            .jmBackDropHead {
+                background: var(--range3);
+            }
+            .jmBackDropContent {
+                background: var(--range3rgbaContent);
+                border-color: var(--range3);
+            }
+        }
+
+        &.v4 {
+            .jmBackDropHead {
+                background: var(--range4);
+            }
+            .jmBackDropContent {
+                background: var(--range4rgbaContent);
+                border-color: var(--range4);
+            }
+        }
+
+    }
+
+}
+
+.codeBox,
+.codeBoxMini2 {
+    background-color: var(--codeBackground);
+    border: 1px solid var(--codeBorder);
+    color: var(--white);
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1.25em;
+    line-height: 1.25em;
+    margin: 0 0 2em 0;
+    overflow: auto;
+    padding: 1em 1.25em;
+
+    code pre,
+    code pre {
+        margin: 0;
+    }
+
+}
+
+.codeBoxMini2 {
+    font-size: 1em;
+    line-height: 1em;
+    margin: 0 .25em 1px 0;
+    padding: .25em .5em;
+
+    display: inline-flex;
+    justify-content: center;
+}
+
+/* Larger mobile tablets and desktop, 768px and up */
+
+@media screen and (min-width: 768px) {
+
+    .navBar {
+        nav {
+            ul {
+                flex-direction: row;
+
+                li {
+                    margin: 0 1em 1em 0;
+
+                    flex-direction: row;
+
+                    &:last-of-type {
+                        margin: 0 1em 1em 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .jmCard {
+        border: 1px solid var(--gray6);
+        border-radius: 5px;
+        box-shadow: $shadow;
+        margin-bottom: 7.5em;
+        margin: 5em auto 3em auto;
+        width: 75%;
+        max-width: 55em;
+
+        .jmCardTitle {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .jmCardContent {
+
+            > section {
+                //padding: 3.5em 5em;
+                padding: 2em 5em;
+
+                &:last-child {
+                    padding-bottom: 4em;
+                }
+
+                h4,
+                h5,
+                h6 {
+                    text-align: left;
+                }
+
+                p:last-child {
+                    padding: 0;
+                }
+
+            }
+            
+        }
+    }
+
+    .jmCard.card2 {
+        margin: 4em auto 0 auto;
+    
+        .jmCardContent {
+    
+            section {
+                padding: 4em 3.5em 5em 3.5em;
+
+                &:first-of-type {
+                    padding-top: 2em;
+                }
+            }
+    
+        }
+    
+    }
+
+    .jmBackDrop {
+        padding: 1.5em 2em;
+
+        &.titleCard {
+            padding: 0;
+    
+            > .jmBackDropHead {
+                padding: 1em 2em;
+            }
+    
+            > .jmBackDropContent {
+                padding: 1.5em 2em;
+            }
+    
+        }
+
+    }
+
+}
+
+/* Laptop and desktop screens */
+
+@media screen and (min-width: 1000px) {
+
+    .jmCard {
+        margin: inherit auto 3em auto;
+        width: 66%;
+    }
+
+}

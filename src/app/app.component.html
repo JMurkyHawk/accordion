@@ -1,0 +1,45 @@
+<div class="jmh">
+
+    <div class="pageHead">
+        <h1>
+            {{title}}
+        </h1>
+        <a class="btn" target="_blank" href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">View Code In GitHub</a>
+    </div>
+
+    <div class="navBar">
+
+        <h2>{{navHeading}}</h2>
+        
+        <nav>
+            <ul>
+                <li>
+                    <a class="btn" routerLink="/accordion-overview" routerLinkActive="active" #rla1="routerLinkActive" [attr.tabindex]="rla1.isActive ? -1 : null">Overview</a>
+                </li>
+                <li>
+                    <a class="btn" routerLink="/accordion-type" routerLinkActive="active" #rla2="routerLinkActive" [attr.tabindex]="rla2.isActive ? -1 : null">Display Types</a>
+                </li>
+                <li>
+                    <a class="btn" routerLink="/accordion-title-transition" routerLinkActive="active" #rla3="routerLinkActive" [attr.tabindex]="rla3.isActive ? -1 : null">Title Transitions</a>
+                </li>
+                <li>
+                    <a class="btn" routerLink="/accordion-title-options" routerLinkActive="active" #rla4="routerLinkActive" [attr.tabindex]="rla4.isActive ? -1 : null">Title Options</a>
+                </li>
+                <li>
+                    <a class="btn" routerLink="/accordion-body-options" routerLinkActive="active" #rla5="routerLinkActive" [attr.tabindex]="rla5.isActive ? -1 : null">Body Options</a>
+                </li>
+                <li>
+                    <a class="btn" routerLink="/accordion-custom" routerLinkActive="active" #rla6="routerLinkActive" [attr.tabindex]="rla6.isActive ? -1 : null">Custom styling</a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="mainContent" [@JmhRouteAnimation]="routeIdNumber">
+        
+        <router-outlet (activate)="onActivate()"></router-outlet>
+
+    </div>
+
+</div>

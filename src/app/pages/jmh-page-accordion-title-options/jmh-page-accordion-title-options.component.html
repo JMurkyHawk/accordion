@@ -1,0 +1,183 @@
+<div class="jmCard card2">
+
+    <h3 class="jmCardTitle" [innerHTML]="jmAcc_title_opts_title"></h3>
+
+    <div class="jmCardContent spacingV2">
+
+        <section>
+
+            <h4>{{jmAcc_icon_pos_title}}</h4>
+
+            <div class="jmBackDrop titleCard">
+
+                <p class="jmBackDropHead">{{jmAcc_icon_pos_l_description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionIconPosL"
+                    class="jmBackDropContent"
+                    iconAlign="left"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_icon_pos_l_header" >
+                        <p>{{jmAcc_icon_pos_l_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <div class="jmBackDrop titleCard">
+
+                <p class="jmBackDropHead">{{jmAcc_icon_pos_r_description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionIconPosR"
+                    class="jmBackDropContent"
+                    iconAlign="right"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_icon_pos_r_header" >
+                        <p>{{jmAcc_icon_pos_r_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p>{{jmAcc_icon_pos_description2}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_icon_type_title}}</h4>
+
+            <div class="jmBackDrop titleCard v2">
+
+                <p class="jmBackDropHead">{{jmAcc_icon_type_c_description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionIcon2"
+                    class="jmBackDropContent"
+                    iconType="chevron"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_icon_type_c_header" >
+                        <p>{{jmAcc_icon_type_c_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <div class="jmBackDrop titleCard v2">
+
+                <p class="jmBackDropHead">{{jmAcc_icon_type_pm_description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionIcon2"
+                    class="jmBackDropContent"
+                    iconType="plusMinus"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_icon_type_pm_header" >
+                        <p>{{jmAcc_icon_type_pm_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p>{{jmAcc_icon_type_description}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_title_align_title}}</h4>
+
+            <div class="jmBackDrop titleCard v3">
+
+                <p class="jmBackDropHead">{{jmAcc_title_align_l_description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionTitleAlignL"
+                    class="jmBackDropContent"
+                    titleAlign="left"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_title_align_l_header" >
+                        <p>{{jmAcc_title_align_l_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <div class="jmBackDrop titleCard v3">
+
+                <p class="jmBackDropHead">{{jmAcc_title_align_c_description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionTitleAlignC"
+                    class="jmBackDropContent"
+                    titleAlign="center"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_title_align_c_header" >
+                        <p>{{jmAcc_title_align_c_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <div class="jmBackDrop titleCard v3">
+
+                <p class="jmBackDropHead">{{jmAcc_title_align_r_description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionTitleAlignR"
+                    class="jmBackDropContent"
+                    titleAlign="right"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_title_align_r_header" >
+                        <p>{{jmAcc_title_align_r_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p>{{jmAcc_title_align_description}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_tag_title}}</h4>
+
+            <div class="jmBackDrop titleCard v4">
+
+                <p class="jmBackDropHead">{{jmAcc_tag_description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionTagType"
+                    class="jmBackDropContent"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_tag_header"
+                    titleTagType="h5" >
+                        <p [innerHTML]="jmAcc_tag_content"></p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p class="block" [innerHTML]="jmAcc_tag_description1"></p>
+
+            <p>
+                <span [innerHTML]="jmAcc_tag_description2"></span><br />
+                <span class="codeBoxMini2 margin3" [innerHTML]="jmAcc_tag_code1"></span>
+                <span class="codeBoxMini2 margin3" [innerHTML]="jmAcc_tag_code2"></span>
+                <span class="codeBoxMini2 margin3" [innerHTML]="jmAcc_tag_code3"></span>
+                <span class="codeBoxMini2 margin3" [innerHTML]="jmAcc_tag_code4"></span>
+                <span class="codeBoxMini2 margin3" [innerHTML]="jmAcc_tag_code5"></span>
+                <span class="codeBoxMini2" [innerHTML]="jmAcc_tag_code6"></span>
+            </p>
+
+            <p [innerHTML]="jmAcc_tag_description3"></p>
+
+            <p>{{jmAcc_tag_description2_1}}</p>
+
+        </section>
+
+    </div>
+
+</div>

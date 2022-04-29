@@ -1,0 +1,118 @@
+<div class="jmCard">
+
+    <h3 class="jmCardTitle" [innerHTML]="jmAcc_type_title"></h3>
+
+    <div class="jmCardContent">
+
+        <section class="leadIn">
+
+            <p>{{jmAcc_type_content1}}</p>
+
+            <p>{{jmAcc_type_content1_1}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_type_basic_title}}</h4>
+
+            <div class="jmBackDrop">
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionBasic"
+                    titleText="Basic accordion type"
+                    accordionType="basic" >
+                        <p>{{jmAcc_basic_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p>{{jmAcc_type_basic_content1}}</p>
+            <p>{{jmAcc_type_basic_content2}}</p>
+
+        </section>
+
+
+        <section>
+
+            <h4>{{jmAcc_type_minimal_title}}</h4>
+
+            <div class="jmBackDrop">
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionMinimalist"
+                    titleText="Minimalist accordion type"
+                    accordionType="minimal" >
+                        <p>{{jmAcc_minimal_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p>{{jmAcc_type_minimal_content1}}</p>
+            <p>{{jmAcc_type_minimal_content2}}</p>
+
+        </section>
+
+
+        <section>
+
+            <h4>{{jmAcc_type_panel_title}}</h4>
+
+            <div class="jmBackDrop">
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionPanel"
+                    titleText="Panel accordion type"
+                    accordionType="panel"
+                    [customStylesTitle]="{
+                        'background' : '#ffffff',
+                        'background-ro' : '#151f5e',
+                        'border' : '1px solid #151f5e', 
+                        'border-ro' : '1px solid #151f5e', 
+                        'color' : '#151f5e', 
+                        'color-ro' : '#ffffff' 
+                    }"
+                    [customStylesBody]="{
+                        'border' : '1px solid #000000'
+                    }" >
+                        <p>{{jmAcc_panel_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p>{{jmAcc_type_panel_content1}}</p>
+            <p>{{jmAcc_type_panel_content2}}</p>
+
+        </section>
+
+
+        <section>
+
+            <h4>{{jmAcc_type_title2}}</h4>
+
+            <p class="margin3">{{jmAcc_type_content2}}</p>
+
+            <ul>
+                <li *ngFor="let item of jmAcc_type_li">{{item}}</li>
+            </ul>
+
+            <div class="jmBackDrop">
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionTypeOptions"
+                    accordionType="minimal"
+                    titleTextSlotOpen="{{jmAcc_title_change_type_header1}}"
+                    titleTextSlotClose="{{jmAcc_title_change_type_header2}}"
+                    titleTextSlot="{{jmAcc_title_change_type_header3}}"
+                    iconType="plusMinus"
+                    iconAlign="left" >
+                        <p>{{jmAcc_title_change_type_content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>

@@ -1,0 +1,85 @@
+:root {
+
+    --black: #000000;
+    --gray2: #222222;
+    --gray4: #444444;
+    --gray5: #555555;
+    --gray6: #666666;
+    --grayA: #aaaaaa;
+    --grayC: #cccccc;
+    --grayD: #dddddd;
+    --grayE: #eeeeee;
+    --grayLight2: #f9f9f9;
+    --white: #ffffff;
+    --transparent: transparent;
+
+    --blue1: #71b6ff;
+    --blue3: #9dbde9;
+    --blue6: #eceeff;
+    --blueDark: #151f5e;
+    --blueDark2: #191f9e;
+    --blueDark4: #006EFD;
+    --blueDark4rgba: rgba(0, 110, 253, .025);
+    --blueLight: #00ddff;
+
+    --orange1: #f1995b;
+
+    --range1: #33aaff;
+    --range1rgbaContent: rgba(51, 170, 255, .025);
+    --range2: #77aaff;
+    --range2rgbaContent: rgba(119, 170, 255, .025);
+    --range3: #aaaaff;
+    --range3rgbaContent: rgba(170, 170, 255, .025);
+    --range4: #ddaaff;
+    --range4rgbaContent: rgba(221, 170, 255, .025);
+    /*
+    --range1: #0f55ff;
+    --range2: #3f55ff;
+    --range3: #5f55ff;
+    --range4: #7f55ff;
+    */
+
+    --greenLight: rgba(230, 243, 248, .66);
+
+    --orangeLight: rgb(164, 54, 0);
+
+    --highlight1: rgba(255, 230, 0, 0.5);
+
+    --jmLightNavBackground: rgba(21,31,94, .1);
+
+    --jmOpaqueBlackA: rgba(0, 0, 0, .05);
+    --jmOpaqueBlackB: rgba(0, 0, 0, .1);
+
+    .jmh {
+
+        // Accordion colors
+        j-murky-hawk-accordion {
+            --jm-acc-head-background: var(--transparent);
+            --jm-acc-head-background-ro: var(--transparent);
+            --jm-acc-head-border: 2px solid var(--black);
+            --jm-acc-head-border-ro: 2px solid var(--gray4);
+            --jm-acc-head-color: var(--black);
+            --jm-acc-head-color-ro: var(--gray4);
+
+            --jm-acc-background: var(--white);
+            --jm-acc-border: 1px solid var(--black);
+            --jm-acc-color: var(--black);
+        }
+
+        // Card colors
+        --cardHeadBorder: var(--grayC);
+        --cardHeadColor: var(--blueDark4);
+        --cardHeadColor2: linear-gradient(145deg, var(--blueDark4) 20%, var(--blueDark2) 85%);
+        --cardHeadText: var(--white);
+        --cardColor: var(--white);
+        --cardText: var(--black);
+
+        --jmBackDrop-Background: var(--blueDark4rgba);
+        --jmBackDrop-Border: var(--grayA);
+
+        // Code block colors
+        --codeBackground: var(--gray2);
+        --codeBorder: var(--orangeLight2);
+    }
+
+}

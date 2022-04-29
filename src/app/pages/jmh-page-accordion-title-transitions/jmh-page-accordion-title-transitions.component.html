@@ -1,0 +1,47 @@
+<div class="jmCard">
+
+    <h3 class="jmCardTitle" [innerHTML]="jmAcc_title_trans_title"></h3>
+
+    <div class="jmCardContent">
+
+        <section>
+
+            <h4>{{jmAcc_title_full_title}}</h4>
+
+            <j-murky-hawk-accordion 
+                jmFieldId="accordionTitleChange"
+                class="jmBackDrop"
+                accordionType="minimal"
+                [titleTextOpen]="jmAcc_title_full_header1"
+                [titleTextClosed]="jmAcc_title_full_header2" >
+                    <p>{{jmAcc_title_full_content}}</p>
+            </j-murky-hawk-accordion>
+
+            <p>{{jmAcc_title_full_description}}</p>
+
+            <p>{{jmAcc_title_full_description1}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_title_partial_title}}</h4>
+
+            <j-murky-hawk-accordion 
+                jmFieldId="accordionTitleChangePartial"
+                class="jmBackDrop"
+                titleTextSlotOpen="Show"
+                titleTextSlotClose="Hide"
+                titleTextSlot="{{jmAcc_title_partial_header3}}" >
+                    <p>{{jmAcc_title_partial_content}}</p>
+            </j-murky-hawk-accordion>
+
+            <p>{{jmAcc_title_partial_description}}</p>
+
+            <p>{{jmAcc_title_partial_description1}}</p>
+
+        </section>
+
+    </div>
+
+</div>

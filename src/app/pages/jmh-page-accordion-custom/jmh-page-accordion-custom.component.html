@@ -1,0 +1,141 @@
+<div class="jmCard">
+
+    <h3 class="jmCardTitle" [innerHTML]="jmAcc_custom_title"></h3>
+
+    <div class="jmCardContent">
+
+        <section class="leadIn">
+
+            <strong class="block padding1">{{jmAcc_custom0}}</strong>
+
+            <p class="noMargin">{{jmAcc_custom}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_custom_basic_title}}</h4>
+            
+            <j-murky-hawk-accordion 
+                jmFieldId="accordionCustom"
+                class="jmBackDrop"
+                accordionType="basic"
+                titleTextSlotOpen="Show"
+                titleTextSlotClose="Hide"
+                [titleTextSlot]="jmAcc_custom_header"
+                [customStylesTitle]="{'color': '#cc0031', 'color-ro' : '#770031'}"
+                [customStylesBody]="{'color' : '#cc0031'}" >
+                    <p>{{jmAcc_custom_content}}</p>
+            </j-murky-hawk-accordion>
+
+            <p>{{jmAcc_custom1}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_custom_minimal_title}}</h4>
+
+            <j-murky-hawk-accordion 
+                jmFieldId="accordionCustom"
+                class="jmBackDrop"
+                accordionType="minimal"
+                titleTextSlotOpen="Show"
+                titleTextSlotClose="Hide"
+                [titleTextSlot]="jmAcc_custom_header"
+                [customStylesTitle]="{
+                    'border' : '4px solid #cc0031', 
+                    'border-ro' : '4px solid #770031', 
+                    'color' : '#cc0031', 
+                    'color-ro' : '#770031' 
+                }"
+                [customStylesBody]="{'color' : '#cc0031'}" >
+                    <p>{{jmAcc_custom_content}}</p>
+            </j-murky-hawk-accordion>
+
+            <p>{{jmAcc_custom1_1}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_custom_panel_title}}</h4>
+
+            <j-murky-hawk-accordion 
+                jmFieldId="accordionCustom"
+                class="jmBackDrop"
+                accordionType="panel"
+                titleTextSlotOpen="Show"
+                titleTextSlotClose="Hide"
+                [titleTextSlot]="jmAcc_custom_header"
+                [customStylesTitle]="{
+                    'background' : '#cc0031',
+                    'background-ro' : '#ffffff',
+                    'border' : '3px solid #cc0031', 
+                    'border-ro' : '3px solid #cc0031', 
+                    'color' : '#ffffff', 
+                    'color-ro' : '#770031' 
+                }"
+                [customStylesBody]="{
+                    'background' : '#ffeded',
+                    'border' : '3px solid #cc0031',
+                    'color' : '#770031'
+                }" >
+                    <p>{{jmAcc_custom_content}}</p>
+            </j-murky-hawk-accordion>
+
+            <p>{{jmAcc_custom1_2}}</p>
+
+            <p>{{jmAcc_custom2}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_custom3}}</h4>
+            <p>{{jmAcc_custom3_0}}</p>
+            <p>{{jmAcc_custom3_1}}</p>
+            <ol class="customCols">
+                <li *ngFor="let key of objectKeys(jmAcc_custom_title_styling)">
+                    <span>{{key}}: </span>
+                    <span>{{jmAcc_custom_title_styling[key]}}</span>
+                </li>
+            </ol>
+
+            <p>{{jmAcc_custom3_2}}</p>
+            <ol class="customCols">
+                <li *ngFor="let key of objectKeys(jmAcc_custom_content_styling)">
+                    <span>{{key}}: </span>
+                    <span>{{jmAcc_custom_content_styling[key]}}</span>
+                </li>
+            </ol>
+
+            <p>{{jmAcc_custom4_1}}</p>
+            <ol class="margin4">
+                <li>{{jmAcc_custom4_2}}</li>
+                <li>{{jmAcc_custom4_3}}</li>
+                <li>{{jmAcc_custom4_4}}</li>
+            </ol>
+
+            <h4>{{jmAcc_custom_samples}}</h4>
+
+            <p class="padding2">{{jmAcc_custom4_5}} <br />{{jmAcc_customCodeIntro}}</p>
+            <div class="codeBox">
+                <code>
+                    <pre [innerHTML]="jmAcc_custom4_6"></pre>
+                </code>
+            </div>
+
+            <p class="padding2">{{jmAcc_custom4_7}} <br />{{jmAcc_customCodeIntro}}</p>
+            <div class="codeBox">
+                <code>
+                    <pre [innerHTML]="jmAcc_custom4_8"></pre>
+                </code>
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+

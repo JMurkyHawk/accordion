@@ -1,0 +1,412 @@
+/*-----------------------
+    Table of Contents
+-------------------------
+    
+    1. Default colors
+    2. Accordion clickable header base styles
+    3. Accordion clickable header text & icon alignment options
+    4. Accordion body styling
+    5. Minimal-type (title underline for open state) accordion option styling
+    6. Minimal-type accordion clickable header text & icon alignment styling
+    7. Panel-type accordion option styling
+
+------------------------------
+    End Table of Contents
+-----------------------------*/
+
+
+/*-----------------------
+    1. Default colors
+-------------------------*/
+    
+$accordionColorBlack: #000000;
+$accordionColorWhite: #ffffff;
+$accordionColor1: #333333;
+$accordionColor2: #fefefe;
+
+:root {
+
+    --jm-acc-head-background: #cccccc;
+    --jm-acc-head-background-ro: #dedede;
+    --jm-acc-head-color: #000000;
+    --jm-acc-head-color-ro: #000000;
+    --jm-acc-head-border: 1px solid #333333;
+    --jm-acc-head-border-ro: 1px solid #333333;
+
+    --jm-acc-background: #ffffff;
+    --jm-acc-border: 1px solid #000000;
+    --jm-acc-color: #000000;
+
+}
+
+:host {
+
+    // Put box-shadow on the accordion header and body to accommodate rounded corners
+    //box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    display: block;
+    position: relative;
+    
+}
+    
+/*-------------------------------------------
+    2. Accordion clickable header styling
+---------------------------------------------*/
+    
+.jmAccordionHeader {
+    //position: relative;
+
+    display: flex;
+
+    button {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        color: var(--jm-acc-head-color);
+        cursor: pointer;
+        font-size: 1em;
+        overflow: hidden;
+        padding: 1em 0;
+        position: relative;
+        width: 100%;
+
+        transition-duration: .5s;
+        transition-property: background-color, border-color, border-radius, border-width, color, text-shadow;
+        transition-timing-function: ease;
+
+        display: flex;
+        align-content: flex-start;
+        align-items: flex-start;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        ::ng-deep svg {
+
+            height: 1em;
+            width: 1em;
+
+            line,
+            polygon,
+            polyline,
+            rect {
+                transition-duration: .5s;
+                transition-property: fill, stroke;
+                transition-timing-function: ease;
+                stroke: var(--jm-acc-head-color) !important;
+                stroke-width: 12;
+                stroke-linecap: round;
+            }
+
+        }
+
+        &:focus,
+        &:hover {
+            color: var(--jm-acc-head-color-ro);
+
+            ::ng-deep svg {
+
+                line,
+                polygon,
+                polyline,
+                rect {
+                    stroke: var(--jm-acc-head-color-ro) !important;
+                }
+                
+            }
+        }
+
+        .jmAccordionHeaderOpenClose {
+            font-size: 1em;
+            font-weight: bold;
+            line-height: 1em;
+            margin: .25em 1em 0 0;
+            padding: 0;
+            position: relative;
+
+            height: 1em;
+            width: 1em;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            > * {
+                line-height: 1em;
+                position: absolute;
+
+                height: 1em;
+                width: 1em;
+
+                display: flex;
+                align-content: center;
+                justify-content: center;
+            }
+
+            ::ng-deep svg {
+                height: 1em;
+                width: 1em;
+
+                rect,
+                polygon {
+                    fill: #000000;
+                }
+
+                .iconArrowPointer {
+                    outline: #000000;
+                    stroke-width: 10;
+                }
+            }
+
+        }
+
+        .jmAccordionHeadText {
+            font-size: 1em;
+            font-weight: normal;
+            line-height: 1.5em;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            text-align: left;
+            width: 100%;
+
+            div {
+                width: 100%; 
+
+                position: relative;
+                top: 0;
+            }
+
+            .titleTextSlot {
+                display: inline-block;
+                position: relative;
+
+                .slotChangeContainer {
+                    display: inline-block;
+                    position: relative;
+
+                    transition-duration: 250ms;
+                    transition-property: width;
+                    transition-timing-function: ease-in-out;
+                
+                    > span {
+                        display: block;
+                        position: relative;
+                        text-align: left;
+                        top: 0;
+                        left: 0;
+                        white-space: pre;
+                        width: auto;
+                    }
+                
+                }
+
+            }
+
+        }
+
+    }
+
+}
+    
+    
+/*-----------------------------------------------------------------
+    3. Accordion clickable header text & icon alignment options
+-------------------------------------------------------------------*/
+    
+.jmAccordionHeader {
+
+    &.iconAlignRight {
+        button {
+            .jmAccordionHeaderOpenClose {
+                margin: .25em 0 0 1em;
+                padding: 0;
+                
+                order: 2;
+            }
+        }
+    }
+
+    &.textAlignRight {
+        button {
+            .jmAccordionHeadText {
+                text-align: right; 
+            }
+        }
+    }
+
+    &.textAlignCenter {
+        button {
+            .jmAccordionHeadText {
+                text-align: center; 
+            }
+        }
+    }
+    
+}
+    
+    
+/*-------------------------------
+    4. Accordion body styling
+---------------------------------*/
+    
+.jmAccordionContent {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: var(--jm-acc-color);
+    overflow: hidden;
+    padding: 0;
+
+    transition-duration: .25s;
+    transition-property: background-color, border-color, border-width, border-radius, color, text-shadow;
+    transition-timing-function: ease;
+
+    > :first-child {
+        padding-top: 1em;
+    }
+
+    > :last-child {
+        padding-bottom: 1em;
+    }
+
+    // Allow scrolling for accordion defined content height option
+    &.addScroll {
+        overflow: auto;
+    }
+    
+}
+    
+    
+/*-------------------------------------------------------------------------------
+    5. Minimal-type (title underline for open state) accordion option styling
+---------------------------------------------------------------------------------*/
+    
+.jmMinimal.jmAccordionHeader {
+
+    &.jmAccOpen {
+        button:before {
+            width: calc(100% + .25em);
+        }
+    }
+
+    button {
+        background: none;
+        border: none;
+        box-shadow: none;
+        overflow: visible;
+        padding: 1em 0 1em 0;
+
+        &:before {
+            border-bottom: var(--jm-acc-head-border);
+            content: '';
+            display: block;
+            width: 0%;
+
+            transition-duration: .35s;
+            transition-property: border-color, width;
+            transition-timing-function: ease;
+    
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: -.25em;
+        }
+
+        &:focus,
+        &:hover {
+            color: var(--jm-acc-head-color-ro);
+
+            &:before {
+                border-bottom: var(--jm-acc-head-border-ro);
+            }
+
+            .jmAccordionHeaderOpenClose {
+                ::ng-deep svg {
+                    .iconSvgStroke {
+                        stroke: var(--jm-acc-head-color-ro) !important;
+                    }
+                }
+            }
+            
+        }
+    }
+
+    & + .jmAccordionContent {
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0 0 0 0 !important;
+    }
+
+}
+    
+    
+/*------------------------------------------------------------------------------
+    6. Minimal-type accordion clickable header text & icon alignment options
+--------------------------------------------------------------------------------*/
+    
+.jmMinimal.jmAccordionHeader {
+
+    &.iconAlignRight {
+
+        button:before {
+            right: 0;
+            left: auto;
+        }
+
+    }
+
+    &.jmAccOpen {
+
+        &.iconLeft button:before {
+            width: 100%;
+        }
+    }
+
+}
+    
+    
+/*--------------------------------------------
+    7. Panel-type accordion option styling
+----------------------------------------------*/
+    
+.jmPanel.jmAccordionHeader {
+    
+    button {
+        background-color: var(--jm-acc-head-background);
+        border: var(--jm-acc-head-border);
+        border-radius: 3px 3px 0 0;  /* No bottom border radius. All radii added below if acc content is NOT rendered. */
+        padding: 1em 1.5em;
+
+        &:focus,
+        &:hover {
+            background-color: var(--jm-acc-head-background-ro);
+            border: var(--jm-acc-head-border-ro);
+            color: var(--jm-acc-head-color-ro);
+        }
+
+        &:only-child {
+            border-radius: 2px;
+        }
+        
+    }
+
+    & + .jmAccordionContent {
+        background-color: var(--jm-acc-background);
+        border: var(--jm-acc-border);
+        border-top: none;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, .2);
+        padding: 0em 1.5em 0em 1.5em;
+
+        > :first-child {
+            padding-top: 0;
+        }
+
+        > :last-child {
+            padding-bottom: 0;
+        }
+    }
+    
+}
+    

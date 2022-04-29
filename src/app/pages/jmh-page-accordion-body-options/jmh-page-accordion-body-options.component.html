@@ -1,0 +1,63 @@
+<div class="jmCard card2">
+
+    <h3 class="jmCardTitle" [innerHTML]="jmAcc_opts_body_title"></h3>
+
+    <div class="jmCardContent spacingV2">
+
+        <section>
+
+            <h4>{{jmAcc_open_Title}}</h4>
+
+            <div class="jmBackDrop titleCard">
+
+                <p class="jmBackDropHead">{{jmAcc_open_Description}}</p>
+                
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionOpen"
+                    class="jmBackDropContent"
+                    [defaultOpen]="true"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_open_Header" >
+                        <p>{{jmAcc_open_Content}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p>{{jmAcc_open_Description1}}</p>
+
+        </section>
+
+        <section>
+
+            <h4>{{jmAcc_height_Title}}</h4>
+
+            <div class="jmBackDrop titleCard v2">
+
+                <p class="jmBackDropHead">{{jmAcc_height_Description}}</p>
+
+                <j-murky-hawk-accordion 
+                    jmFieldId="accordionHeight"
+                    class="jmBackDropContent"
+                    titleTextSlotOpen="Show"
+                    titleTextSlotClose="Hide"
+                    [titleTextSlot]="jmAcc_height_Header"
+                    [customHeight]="jmAcc_height_HeightValue" >
+                        <p class="padding5" 
+                            [innerHTML]="jmAcc_height_Content1  
+                            + jmAcc_height_Content2 
+                            + jmAcc_height_Content2 
+                            + jmAcc_height_Content2">
+                        </p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+            <p>{{jmAcc_height_Description1}}</p>
+            <p>{{jmAcc_height_Description2}}</p>
+
+        </section>
+
+    </div>
+
+</div>
