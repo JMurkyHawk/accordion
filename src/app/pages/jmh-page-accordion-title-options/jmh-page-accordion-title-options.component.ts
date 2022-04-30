@@ -37,17 +37,17 @@ export class JmhPageAccordionTitleOptionsComponent implements OnInit {
     
     public jmAcc_title_align_title: string = "Heading text alignment";
 
-    public jmAcc_title_align_l_header: string = "title text left aligned";
+    public jmAcc_title_align_l_header: string = "title align left content";
     public jmAcc_title_align_l_content: string = "Content for accordion title text left aligned";
     public jmAcc_title_align_l_description: string = 'Left align title text';
 
     public jmAcc_title_align_c_title: string = "Heading text alignment";
-    public jmAcc_title_align_c_header: string = "title text center aligned";
+    public jmAcc_title_align_c_header: string = "title align center content";
     public jmAcc_title_align_c_content: string = "Content for accordion title text center aligned";
     public jmAcc_title_align_c_description: string = 'Center title text';
 
     public jmAcc_title_align_r_title: string = "Heading text alignment";
-    public jmAcc_title_align_r_header: string = "title text right aligned";
+    public jmAcc_title_align_r_header: string = "title align right content";
     public jmAcc_title_align_r_content: string = "Content for accordion title text right aligned";
     public jmAcc_title_align_r_description: string = 'Right align title text';
 

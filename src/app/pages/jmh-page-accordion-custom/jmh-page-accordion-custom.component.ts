@@ -25,8 +25,9 @@ export class JmhPageAccordionCustomComponent implements OnInit {
     public jmAcc_custom2: string = "The accordion Panel type's component body can also be assigned its own custom background color, text color, and borders. ";
     
     public jmAcc_custom3: string = "Implementing custom styling";
-    public jmAcc_custom3_0: string = "This can be done by changing the accordion-specific custom css variables, or via inputs on the component instance itself. "
-        + "Global accordion styling is best done via css variables in the application's root stylesheet. "
+    public jmAcc_custom3_0: string = "This can be done by changing the accordion-specific custom css variables, either in the component's style sheet or the application's global style sheet. "
+        + "This could also be done via inputs on the component instance itself. "
+        + "Global accordion styling is best done via css variables. "
     public jmAcc_custom3_1: string = "Note: the border properties use the css shorthand: width type color. "
         + "For example: 2px solid #ff0000. "
         + "Properties available to customize the component title, and their corresponding css variables for use in the global stylesheet: ";
@@ -49,9 +50,9 @@ export class JmhPageAccordionCustomComponent implements OnInit {
     };
 
     public jmAcc_custom4_1: string = "For customizing individual component instance styles: " 
-    public jmAcc_custom4_2: string = "Applying a custom style class to the container, then updating the accordion css variables inside a selector for the custom style class."
-    public jmAcc_custom4_3: string = "To change 1 or 2 styles, applying custom style values by providing these values to the individual component instance inputs."
-    public jmAcc_custom4_4: string = "To change a larger number of styles, providing custom values as an object. ";
+    public jmAcc_custom4_2: string = "Provide custom values as an object to the <j-murky-hawk-accordion> component. "
+    public jmAcc_custom4_3: string = "";
+    public jmAcc_custom4_4: string = "Alternately, apply a custom style class to the container, then updating the accordion css variables inside a selector for the custom style class. ";
     public jmAcc_custom4_5: string = "Custom title styles are provided via the 'customStylesTitle' input. "
     
     public jmAcc_custom_samples: string = "Implementation code samples";

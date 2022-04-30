@@ -50,36 +50,33 @@
     --jmOpaqueBlackA: rgba(0, 0, 0, .05);
     --jmOpaqueBlackB: rgba(0, 0, 0, .1);
 
-    .jmh {
+    // Card colors
+    --cardHeadBorder: var(--grayC);
+    --cardHeadColor: var(--blueDark4);
+    --cardHeadColor2: linear-gradient(145deg, var(--blueDark4) 20%, var(--blueDark2) 85%);
+    --cardHeadText: var(--white);
+    --cardColor: var(--white);
+    --cardText: var(--black);
 
-        // Accordion colors
-        j-murky-hawk-accordion {
-            --jm-acc-head-background: var(--transparent);
-            --jm-acc-head-background-ro: var(--transparent);
-            --jm-acc-head-border: 2px solid var(--black);
-            --jm-acc-head-border-ro: 2px solid var(--gray4);
-            --jm-acc-head-color: var(--black);
-            --jm-acc-head-color-ro: var(--gray4);
+    --jmBackDrop-Background: var(--blueDark4rgba);
+    --jmBackDrop-Border: var(--grayA);
 
-            --jm-acc-background: var(--white);
-            --jm-acc-border: 1px solid var(--black);
-            --jm-acc-color: var(--black);
-        }
+    // Code block colors
+    --codeBackground: var(--gray2);
+    --codeBorder: var(--orange1);
 
-        // Card colors
-        --cardHeadBorder: var(--grayC);
-        --cardHeadColor: var(--blueDark4);
-        --cardHeadColor2: linear-gradient(145deg, var(--blueDark4) 20%, var(--blueDark2) 85%);
-        --cardHeadText: var(--white);
-        --cardColor: var(--white);
-        --cardText: var(--black);
+    // Accordion colors
+    j-murky-hawk-accordion {
+        --jm-acc-head-background: var(--transparent);
+        --jm-acc-head-background-ro: var(--transparent);
+        --jm-acc-head-border: 2px solid var(--black);
+        --jm-acc-head-border-ro: 2px solid var(--gray5);
+        --jm-acc-head-color: var(--black);
+        --jm-acc-head-color-ro: var(--gray5);
 
-        --jmBackDrop-Background: var(--blueDark4rgba);
-        --jmBackDrop-Border: var(--grayA);
-
-        // Code block colors
-        --codeBackground: var(--gray2);
-        --codeBorder: var(--orangeLight2);
+        --jm-acc-background: var(--white);
+        --jm-acc-border: 1px solid var(--black);
+        --jm-acc-color: var(--black);
     }
 
 }

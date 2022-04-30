@@ -18,28 +18,20 @@
 /*-----------------------
     1. Default colors
 -------------------------*/
-    
-$accordionColorBlack: #000000;
-$accordionColorWhite: #ffffff;
-$accordionColor1: #333333;
-$accordionColor2: #fefefe;
 
-:root {
+:host {
 
-    --jm-acc-head-background: #cccccc;
-    --jm-acc-head-background-ro: #dedede;
+    // Component default colors
+    --jm-acc-head-background: #efefef;
+    --jm-acc-head-background-ro: #ffffff;
     --jm-acc-head-color: #000000;
-    --jm-acc-head-color-ro: #000000;
-    --jm-acc-head-border: 1px solid #333333;
-    --jm-acc-head-border-ro: 1px solid #333333;
+    --jm-acc-head-color-ro: #444444;
+    --jm-acc-head-border: 1px solid #000000;
+    --jm-acc-head-border-ro: 1px solid #444444;
 
     --jm-acc-background: #ffffff;
     --jm-acc-border: 1px solid #000000;
     --jm-acc-color: #000000;
-
-}
-
-:host {
 
     // Put box-shadow on the accordion header and body to accommodate rounded corners
     //box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
@@ -280,11 +272,11 @@ $accordionColor2: #fefefe;
     5. Minimal-type (title underline for open state) accordion option styling
 ---------------------------------------------------------------------------------*/
     
-.jmMinimal.jmAccordionHeader {
+.jmMinimal {
 
     &.jmAccOpen {
         button:before {
-            width: calc(100% + .25em);
+            width: calc(100% + .5em);
         }
     }
 
@@ -344,12 +336,12 @@ $accordionColor2: #fefefe;
     6. Minimal-type accordion clickable header text & icon alignment options
 --------------------------------------------------------------------------------*/
     
-.jmMinimal.jmAccordionHeader {
+.jmMinimal {
 
     &.iconAlignRight {
 
         button:before {
-            right: 0;
+            right: -.25em;
             left: auto;
         }
 
@@ -358,7 +350,7 @@ $accordionColor2: #fefefe;
     &.jmAccOpen {
 
         &.iconLeft button:before {
-            width: 100%;
+            width: calc(100% + .5em);
         }
     }
 
@@ -369,12 +361,12 @@ $accordionColor2: #fefefe;
     7. Panel-type accordion option styling
 ----------------------------------------------*/
     
-.jmPanel.jmAccordionHeader {
+.jmPanel {
     
     button {
         background-color: var(--jm-acc-head-background);
         border: var(--jm-acc-head-border);
-        border-radius: 3px 3px 0 0;  /* No bottom border radius. All radii added below if acc content is NOT rendered. */
+        border-radius: 3px;
         padding: 1em 1.5em;
 
         &:focus,
@@ -383,11 +375,15 @@ $accordionColor2: #fefefe;
             border: var(--jm-acc-head-border-ro);
             color: var(--jm-acc-head-color-ro);
         }
-
-        &:only-child {
-            border-radius: 2px;
-        }
         
+    }
+
+    &.jmAccOpen {
+
+        button {
+            border-radius: 3px 3px 0 0;
+        }
+
     }
 
     & + .jmAccordionContent {
@@ -396,7 +392,7 @@ $accordionColor2: #fefefe;
         border-top: none;
         border-bottom-right-radius: 3px;
         border-bottom-left-radius: 3px;
-        box-shadow: 0 2px 2px rgba(0, 0, 0, .2);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
         padding: 0em 1.5em 0em 1.5em;
 
         > :first-child {

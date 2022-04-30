@@ -43,7 +43,7 @@ export const jmAccordionIconAnimation =
                     style({
                         offset: .5,
                         opacity: 1,
-                        transform: 'rotate(-45deg)', 
+                        transform: 'rotate(-25deg)', 
                         transformOrigin: '50% 50%', 
                         width: '100%'
                     }),
@@ -73,7 +73,7 @@ export const jmAccordionIconAnimation =
                     style({
                         offset: .5,
                         opacity: 1,
-                        transform: 'rotate(-45deg)', 
+                        transform: 'rotate(-25deg)', 
                         transformOrigin: '50% 50%',
                         width: '100%'
                     }),
