@@ -6,7 +6,7 @@
 
         <section class="leadIn">
 
-            <strong class="block padding1">{{jmAcc_custom0}}</strong>
+            <h4>{{jmAcc_custom0}}</h4>
 
             <p class="noMargin">{{jmAcc_custom}}</p>
 
@@ -92,44 +92,105 @@
 
         <section>
 
-            <h4>{{jmAcc_custom3}}</h4>
-            <p>{{jmAcc_custom3_0}}</p>
-            <p>{{jmAcc_custom3_1}}</p>
-            <ol class="customCols">
-                <li *ngFor="let key of objectKeys(jmAcc_custom_title_styling)">
-                    <span>{{key}}: </span>
-                    <span>{{jmAcc_custom_title_styling[key]}}</span>
-                </li>
-            </ol>
+            <h4>{{jmAcc_custom_implement_sub_title1}}</h4>
+            
+            <div class="group">
+                
+                <p>{{jmAcc_custom3_0}}</p>
+                <p class="jmHighlight" [innerHTML]="jmAcc_custom3_1"></p>
+                <p class="padding2">{{jmAcc_custom3_1_1}}</p>
+                <ol class="customCols">
+                    <li *ngFor="let key of objectKeys(jmAcc_custom_title_styling)">
+                        <span>{{key}}: </span>
+                        <span>{{jmAcc_custom_title_styling[key]}}</span>
+                    </li>
+                </ol>
 
-            <p>{{jmAcc_custom3_2}}</p>
-            <ol class="customCols">
-                <li *ngFor="let key of objectKeys(jmAcc_custom_content_styling)">
-                    <span>{{key}}: </span>
-                    <span>{{jmAcc_custom_content_styling[key]}}</span>
-                </li>
-            </ol>
+                <p class="padding2">{{jmAcc_custom3_2}}</p>
+                <ol class="customCols margin4">
+                    <li *ngFor="let key of objectKeys(jmAcc_custom_content_styling)">
+                        <span>{{key}}: </span>
+                        <span>{{jmAcc_custom_content_styling[key]}}</span>
+                    </li>
+                </ol>
 
-            <p>{{jmAcc_custom4_1}}</p>
-            <ol class="margin4">
-                <li>{{jmAcc_custom4_2}}</li>
-                <li>{{jmAcc_custom4_4}}</li>
-            </ol>
+                <div class="subGroup">
+                    
+                    <h5>{{jmAcc_custom_implement_sub_title1_2}}</h5>
 
-            <h4>{{jmAcc_custom_samples}}</h4>
+                    <p [innerHTML]="jmAcc_custom3_3"></p>
+                    <ul class="customCols v2">
+                        <li *ngFor="let key of jmAcc_custom3_3_list">{{key}}</li>
+                    </ul>
 
-            <p class="padding2">{{jmAcc_custom4_5}} <br />{{jmAcc_customCodeIntro}}</p>
-            <div class="codeBox">
-                <code>
-                    <pre [innerHTML]="jmAcc_custom4_6"></pre>
-                </code>
+                    <p class="padding2">{{jmAcc_custom3_3_2}}</p>
+                    <ul class="customCols v2">
+                        <li *ngFor="let key of jmAcc_custom3_3_list2">{{key}}</li>
+                    </ul>
+
+                    <p class="padding2" [innerHTML]="jmAcc_custom3_3_3"></p>
+                    <div class="codeBox">
+                        <code>
+                            <pre [innerHTML]="jmAcc_custom3_code"></pre>
+                        </code>
+                    </div>
+                
+                </div>
+
             </div>
 
-            <p class="padding2">{{jmAcc_custom4_7}} <br />{{jmAcc_customCodeIntro}}</p>
-            <div class="codeBox">
-                <code>
-                    <pre [innerHTML]="jmAcc_custom4_8"></pre>
-                </code>
+            <h4>{{jmAcc_custom_implement_sub_title2}}</h4>
+
+            <div class="group">
+
+                <p class="padding2">{{jmAcc_custom4_1}}</p>
+                <ol class="margin1">
+                    <li *ngFor="let key of jmAcc_custom4_list">{{key}}</li>
+                </ol>
+
+                <div class="subGroup">
+
+                    <h5>{{jmAcc_custom_implement_heading_title}}</h5>
+
+                    <p [innerHTML]="jmAcc_custom_single_acc_title_desc"></p>
+                    <p class="jmHighlight" [innerHTML]="jmAcc_custom_single_acc_title_desc2"></p>
+                    <ul class="customCols">
+                        <li *ngFor="let key of objectKeys(jmAcc_custom_single_acc_title_props)">
+                            <span>{{key}}: </span> 
+                            <span>{{jmAcc_custom_single_acc_title_props[key]}}</span>
+                        </li>
+                    </ul>
+
+                    <p class="padding2">Custom title styling example: </p>
+                    <div class="codeBox">
+                        <code>
+                            <pre [innerHTML]="jmAcc_custom_single_acc_title_code"></pre>
+                        </code>
+                    </div>
+
+                </div>
+
+                <div class="subGroup">
+
+                    <h5>{{jmAcc_custom_implement_body_title}}</h5>
+
+                    <p [innerHTML]="jmAcc_custom_single_acc_body_desc"></p>
+                    <ul class="customCols">
+                        <li *ngFor="let key of objectKeys(jmAcc_custom_single_acc_body_props)">
+                            <span>{{key}}: </span>
+                            <span>{{jmAcc_custom_single_acc_body_props[key]}}</span>
+                        </li>
+                    </ul>
+
+                    <p class="padding2">Custom body styling example: </p>
+                    <div class="codeBox">
+                        <code>
+                            <pre [innerHTML]="jmAcc_custom_single_acc_body_code"></pre>
+                        </code>
+                    </div>
+
+                </div>
+            
             </div>
 
         </section>

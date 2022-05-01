@@ -17,7 +17,7 @@
 
     h1 {
         color: var(--white);
-        font-size: 2.25em;
+        font-size: 2.5em;
         font-weight: normal;
         line-height: 1.65em;
         margin: 0 auto;
@@ -76,6 +76,13 @@ h4 {
     font-size: 1.25em;
     line-height: 1.6em;
     margin: 0;
+    text-align: left;
+}
+
+h5 {
+    font-size: 1.1em;
+    line-height: 1.4em;
+    margin: 0 0 .5em 0;
     text-align: left;
 }
 
@@ -140,7 +147,7 @@ p {
 }
 
 .margin4 {
-    margin: 0 0 3em 0;
+    margin: 0 0 3em 0 !important;
 }
 
 hr {
@@ -166,7 +173,7 @@ ol.customCols,
 ul.customCols {
     background-color: rgba(0, 110, 153, 0.075);
     border: 1px solid rgba(0, 110, 153, 1);
-    margin: 0 0 2em 0 !important;
+    margin: 0 0 1.5em 0;
     padding: 0;
 
     display: flex;
@@ -193,6 +200,22 @@ ul.customCols {
         }
     }
 
+}
+
+ol.customCols,
+ul.customCols {
+    
+    &.v2 {
+        background-color: rgba(75, 0, 130, .075);
+        border: 1px solid rgba(75, 0, 130, 1);
+
+        li {
+
+            &:nth-child(even) {
+                background-color: rgba(75, 0, 130, .2);
+            }
+        }
+    }
 }
 
 .color1 {
@@ -307,10 +330,10 @@ a.btn {
         border-bottom: 1px solid var(--cardHeadBorder);
         border-radius: 0;
         color: var(--cardHeadText);
-        font-size: 1.5em;
+        font-size: 1.75em;
         font-weight: normal;
         margin: 0;
-        padding: 1.5em 2.25em;
+        padding: 1.25em 2.25em;
         text-align: center;
 
         transition-duration: $transitionDuration;
@@ -366,19 +389,19 @@ a.btn {
 
         > section {
             //padding: 4em 1.5em 6em 1.5em;
-            padding: 2em 1.5em 4em 1.5em;
+            padding: 2em 1.5em 5em 1.5em;
 
             > h3, 
             > h4 {
                 display: block;
-                font-size: 1.5em;
+                font-size: 1.6em;
+                line-height: 1.5em;
                 margin: 0 0 .5em 0;
                 text-align: center
             }
 
             &.leadIn {
                 padding-top: 2em;
-                padding-bottom: 0;
             }
             /*
             &:nth-child(even) {
@@ -402,10 +425,6 @@ a.btn {
         > p {
             margin: 0;
             padding: 0 0 1em 0;
-        }
-
-        ul {
-            margin: .5em 0 1.5em 0;
         }
 
         &.spacingV2 {
@@ -539,6 +558,16 @@ a.btn {
 
 }
 
+.jmHighlight {
+    background-color: var(--jmBackDrop-Background);
+    border: 1px solid var(--jmBackDrop-Border);
+    border-radius: 3px;
+    display: block;
+    margin: 0 0 1em 0;
+    overflow: hidden;
+    padding: 1em;
+}
+
 .codeBox,
 .codeBoxMini2 {
     background-color: var(--codeBackground);
@@ -547,7 +576,7 @@ a.btn {
     font-family: 'Source Code Pro', monospace;
     font-size: 1.25em;
     line-height: 1.25em;
-    margin: 0 0 2em 0;
+    margin: 0 0 4em 0;
     overflow: auto;
     padding: 1em 1.25em;
 
@@ -559,6 +588,7 @@ a.btn {
 }
 
 .codeBoxMini2 {
+    border-width: 1px;
     font-size: 1em;
     line-height: 1em;
     margin: 0 .25em 1px 0;
@@ -608,7 +638,7 @@ a.btn {
 
             > section {
                 //padding: 3.5em 5em;
-                padding: 2em 5em;
+                padding: 2em 5em 2em 5em;
 
                 &:last-child {
                     padding-bottom: 4em;
@@ -635,7 +665,7 @@ a.btn {
         .jmCardContent {
     
             section {
-                padding: 2.5em 3.5em 2.5em 3.5em;
+                padding: 2em 3.5em 2em 3.5em;
 
                 &:first-of-type {
                     padding-top: 3em;

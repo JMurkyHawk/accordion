@@ -24,13 +24,14 @@ export class JmhPageAccordionCustomComponent implements OnInit {
     public jmAcc_custom1_2: string = "The accordion Panel type allows the title's background color, text color, and borders to use custom values for the title's normal and hover/focus states. "; 
     public jmAcc_custom2: string = "The accordion Panel type's component body can also be assigned its own custom background color, text color, and borders. ";
     
-    public jmAcc_custom3: string = "Implementing custom styling";
+    public jmAcc_custom_implement_title: string = "Implementing custom styling";
+    public jmAcc_custom_implement_sub_title1: string = "Global accordion styling";
     public jmAcc_custom3_0: string = "This can be done by changing the accordion-specific custom css variables, either in the component's style sheet or the application's global style sheet. "
         + "This could also be done via inputs on the component instance itself. "
         + "Global accordion styling is best done via css variables. "
-    public jmAcc_custom3_1: string = "Note: the border properties use the css shorthand: width type color. "
-        + "For example: 2px solid #ff0000. "
-        + "Properties available to customize the component title, and their corresponding css variables for use in the global stylesheet: ";
+    public jmAcc_custom3_1: string = "<strong>Note:</strong>  the border properties use the css shorthand: border-width border-style border-color. "
+        + "For example: 2px solid #ff0000 ";
+    public jmAcc_custom3_1_1: string = "Properties available to customize the component title, and their corresponding css variables for use in the global stylesheet: ";
     
     public objectKeys = Object.keys;
     public jmAcc_custom_title_styling: { [key: string ] : string } = {
@@ -49,16 +50,61 @@ export class JmhPageAccordionCustomComponent implements OnInit {
         "Content text color" : "--jm-acc-color"
     };
 
-    public jmAcc_custom4_1: string = "For customizing individual component instance styles: " 
-    public jmAcc_custom4_2: string = "Provide custom values as an object to the <j-murky-hawk-accordion> component. "
-    public jmAcc_custom4_3: string = "";
-    public jmAcc_custom4_4: string = "Alternately, apply a custom style class to the container, then updating the accordion css variables inside a selector for the custom style class. ";
-    public jmAcc_custom4_5: string = "Custom title styles are provided via the 'customStylesTitle' input. "
+    public jmAcc_custom_implement_sub_title1_2: string = "Global implementation";
+    public jmAcc_custom3_3: string = "To style all instances of the accordion in the application <strong>without</strong> modifying the component scss file, define the accordion css variables inside a j-murky-hawk-accordion selector. "
+        + "If the 'minimal' accordion type is used, only the following values will be applied: ";
+    public jmAcc_custom3_3_list: Array<string> = [
+        "-jm-acc-head-border", 
+        "--jm-acc-head-border-ro",
+        "--jm-acc-head-color",
+        "--jm-acc-head-color-ro", 
+        "--jm-acc-color"
+    ];
+    public jmAcc_custom3_3_2: string = "For the 'basic' accordion type, only these values will be applied: ";
+    public jmAcc_custom3_3_list2: Array<string> = [
+        "--jm-acc-head-color", 
+        "--jm-acc-head-color-ro", 
+        "--jm-acc-color"
+    ];
+
+    public jmAcc_custom3_3_3: string = "Copying the following block into the application's global stylesheet would <strong>overrirde all</strong> accordion instances throughout the app (except where custom styling is provided individually, described in the next section) with the values provided: ";
+    public jmAcc_custom3_code: string = 
+        "<span class='color1'>j-murky-hawk-accordion</span> { \r"
+        + "    <span class='color2'>--jm-acc-head-background</span>: <span class='color7'>#4b0082</span>; \r"
+        + "    <span class='color2'>--jm-acc-head-background-ro</span>: <span class='color7'>#5f3082</span>; \r"
+        + "    <span class='color2'>--jm-acc-head-border</span>: <span class='color7'>2px solid #4b0082</span>; \r"
+        + "    <span class='color2'>--jm-acc-head-border-ro</span>: <span class='color7'>2px solid #4b0082</span>; \r"
+        + "    <span class='color2'>--jm-acc-head-color</span>: <span class='color7'>#ffffff</span>; \r"
+        + "    <span class='color2'>--jm-acc-head-color-ro</span>: <span class='color7'>#ffffff</span>; \r"
+        + "\r"
+        + "    <span class='color2'>--jm-acc-background</span>: <span class='color7'>#D8BFD8</span>; \r"
+        + "    <span class='color2'>--jm-acc-border</span>: <span class='color7'>#4b0082</span>; \r"
+        + "    <span class='color2'>--jm-acc-color</span>: <span class='color7'>#000000</span>; \r"
+        + "}";
+
+    public jmAcc_custom_implement_sub_title2: string = "Individual accordion styling";
+    public jmAcc_custom4_1: string = "To customize individual component instance styling: " 
+    public jmAcc_custom4_list: Array<string> = [
+        "Provide custom values as an object to the <j-murky-hawk-accordion> component. ",
+        "Alternately, apply a custom style class to the container, then updating the accordion css variables inside a selector for the custom style class. "
+    ];
+
+    public jmAcc_custom_implement_heading_title: string = "Individual title styling"; 
+
+    public jmAcc_custom_single_acc_title_desc: string = "Properties available to customize the component title, and their corresponding key value for the object to pass to the <i>[customStylesTitle]</i> input: "
+    public jmAcc_custom_single_acc_title_props: { [key: string ] : string } = {
+        "Heading background color" : "background",
+        "Heading background color on hover/focus" : "background-ro",
+        "Heading border" : "border",
+        "Heading border on hover/focus" : "border-ro",
+        "Heading text color" : "color",
+        "Heading text color on hover/focus" : "color-ro"
+    };
+
+    public jmAcc_custom_code_intro: string = "Example: ";
+    public jmAcc_custom_single_acc_title_desc2: string = "<strong>Note:</strong>  the -ro appended to the end of each value denotes the rollover (focus/hover) state of that value. ";
     
-    public jmAcc_custom_samples: string = "Implementation code samples";
-    
-    public jmAcc_customCodeIntro: string = "Example: ";
-    public jmAcc_custom4_6: string = 
+    public jmAcc_custom_single_acc_title_code: string = 
         "&lt;<span class=\'color1\'>j-murky-hawk-accordion</span> <br />"
         + "    <span class=\'color2\'>jmFieldId</span>=<span class=\'color7\'>\"accordionCustomTitle\"</span> <br />"
         + "    <span class=\'color2\'>titleText</span>=<span class=\'color7\'>\"Sample title text\"</span> <br />"
@@ -74,8 +120,15 @@ export class JmhPageAccordionCustomComponent implements OnInit {
         + "    &lt;<span class='color1'>p</span>&gt;Sample Accordion Content</span>&lt;/<span class=\'color1'\>p</span>&gt; <br />"
         + "&lt;/<span class='color1'>j-murky-hawk-accordion</span>&gt;";
 
-    public jmAcc_custom4_7: string = "Custom content styles are provided via 'customStylesBody'. ";
-    public jmAcc_custom4_8: string = 
+    public jmAcc_custom_implement_body_title: string = "Individual body styling";
+    public jmAcc_custom_single_acc_body_desc: string = "Properties available to customize the component body content, and their corresponding key value for the object to pass to the <i>[customStylesBody]</i> input: "
+    public jmAcc_custom_single_acc_body_props: { [key: string ] : string } = {
+        "Body content background color" : "background",
+        "Body content border" : "border",
+        "Body content text color" : "color",
+    };
+    
+    public jmAcc_custom_single_acc_body_code: string = 
         "&lt;<span class=\'color1\'>j-murky-hawk-accordion</span> <br />"
         + "    <span class=\'color2\'>jmFieldId</span>=<span class=\'color7\'>'accordionCustomContent'</span> <br />"
         + "    <span class=\'color2\'>titleText</span>=<span class=\'color7\'>'Sample title text'</span> <br />"

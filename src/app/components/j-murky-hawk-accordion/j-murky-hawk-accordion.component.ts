@@ -149,7 +149,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     errorMsgProvideOpts(value: string, inputName: string, allowableTypes: Array<string>) {
 
         console.error(
-            `'${value}' is not a valid input value for ${inputName} on jm-accordion: ` +
+            `'${value}' is not a valid input value for ${inputName} on <jm-accordion> component. ` +
             `Valid values for ${inputName}: ${allowableTypes}`
         );
 
