@@ -63,10 +63,10 @@
             <ng-template #accordionHeadContent>
                 
                 <!-- Default/unchanging title text -->
-                <div *ngIf="titleTextTransitionOptions.useDefaultTitleText" [innerHTML]="titleText"></div>
+                <div *ngIf="titleTransition === 'none' || !titleTransition" [innerHTML]="titleText"></div>
                 
                 <!-- Partial title text change -->
-                <div *ngIf="titleText === titleTextSlot" class="titleTextSlot" >
+                <div *ngIf="titleTransition === 'partial'" class="titleTextSlot" >
 
                     <span [style.width.px]="slotWidth" class="slotChangeContainer" >
                         
@@ -85,12 +85,12 @@
                 </div>
 
                 <!-- Full title text change -->
-                <div *ngIf="(titleText === titleTextOpen) && (titleText !== titleTextSlot)" [innerHTML]="titleText"
+                <div *ngIf="titleTransition === 'full' && jmAccordionOpen" [innerHTML]="titleText"
                     [@jmAccordionTitleAnimation]="titleText === titleTextOpen ? 'open2' : 'close2' "></div>
 
-                <div *ngIf="(titleText === titleTextClosed) && (titleText !== titleTextSlot)" [innerHTML]="titleText"
+                <div *ngIf="titleTransition === 'full' && !jmAccordionOpen" [innerHTML]="titleText"
                     [@jmAccordionTitleAnimation]="titleText === titleTextClosed ? 'close2' : 'open2' " ></div>
-
+                
             </ng-template>
             
         </button>

@@ -20,9 +20,10 @@
                 jmFieldId="accordionCustom"
                 class="jmBackDrop"
                 accordionType="basic"
-                titleTextSlotOpen="Show"
-                titleTextSlotClose="Hide"
-                [titleTextSlot]="jmAcc_custom_header"
+                titleTransition="partial"
+                titleTextOpen="Show"
+                titleTextClosed="Hide"
+                [titleText]="jmAcc_custom_header"
                 [customStylesTitle]="{'color': '#cc0031', 'color-ro' : '#770031'}"
                 [customStylesBody]="{'color' : '#cc0031'}" >
                     <p>{{jmAcc_custom_content}}</p>
@@ -40,9 +41,10 @@
                 jmFieldId="accordionCustom"
                 class="jmBackDrop"
                 accordionType="minimal"
-                titleTextSlotOpen="Show"
-                titleTextSlotClose="Hide"
-                [titleTextSlot]="jmAcc_custom_header"
+                titleTransition="partial"
+                titleTextOpen="Show"
+                titleTextClosed="Hide"
+                [titleText]="jmAcc_custom_header"
                 [customStylesTitle]="{
                     'border' : '4px solid #cc0031', 
                     'border-ro' : '4px solid #770031', 
@@ -65,9 +67,10 @@
                 jmFieldId="accordionCustom"
                 class="jmBackDrop"
                 accordionType="panel"
-                titleTextSlotOpen="Show"
-                titleTextSlotClose="Hide"
-                [titleTextSlot]="jmAcc_custom_header"
+                titleTransition="partial"
+                titleTextOpen="Show"
+                titleTextClosed="Hide"
+                [titleText]="jmAcc_custom_header"
                 [customStylesTitle]="{
                     'background' : '#cc0031',
                     'background-ro' : '#ffffff',
@@ -183,7 +186,7 @@
                     </ul>
 
                     <p class="padding2">Custom body styling example: </p>
-                    <div class="codeBox">
+                    <div class="codeBox noMargin">
                         <code>
                             <pre [innerHTML]="jmAcc_custom_single_acc_body_code"></pre>
                         </code>

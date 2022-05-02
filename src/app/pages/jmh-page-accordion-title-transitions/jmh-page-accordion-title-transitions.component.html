@@ -11,7 +11,7 @@
             <j-murky-hawk-accordion 
                 jmFieldId="accordionTitleChange"
                 class="jmBackDrop"
-                accordionType="minimal"
+                titleTransition="full"
                 [titleTextOpen]="jmAcc_title_full_header1"
                 [titleTextClosed]="jmAcc_title_full_header2" >
                     <p>{{jmAcc_title_full_content}}</p>
@@ -30,9 +30,10 @@
             <j-murky-hawk-accordion 
                 jmFieldId="accordionTitleChangePartial"
                 class="jmBackDrop"
-                titleTextSlotOpen="Show"
-                titleTextSlotClose="Hide"
-                titleTextSlot="{{jmAcc_title_partial_header3}}" >
+                titleTransition="partial"
+                titleTextOpen="Show"
+                titleTextClosed="Hide"
+                titleText="{{jmAcc_title_partial_header3}}" >
                     <p>{{jmAcc_title_partial_content}}</p>
             </j-murky-hawk-accordion>
 

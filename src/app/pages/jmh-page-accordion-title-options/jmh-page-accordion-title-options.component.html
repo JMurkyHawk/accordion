@@ -16,9 +16,10 @@
                     jmFieldId="accordionIconPosL"
                     class="jmBackDropContent"
                     iconAlign="left"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_icon_pos_l_header" >
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_icon_pos_l_header" >
                         <p>{{jmAcc_icon_pos_l_content}}</p>
                 </j-murky-hawk-accordion>
 
@@ -32,9 +33,10 @@
                     jmFieldId="accordionIconPosR"
                     class="jmBackDropContent"
                     iconAlign="right"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_icon_pos_r_header" >
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_icon_pos_r_header" >
                         <p>{{jmAcc_icon_pos_r_content}}</p>
                 </j-murky-hawk-accordion>
 
@@ -56,9 +58,10 @@
                     jmFieldId="accordionIcon2"
                     class="jmBackDropContent"
                     iconType="chevron"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_icon_type_c_header" >
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_icon_type_c_header" >
                         <p>{{jmAcc_icon_type_c_content}}</p>
                 </j-murky-hawk-accordion>
 
@@ -72,9 +75,10 @@
                     jmFieldId="accordionIcon2"
                     class="jmBackDropContent"
                     iconType="plusMinus"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_icon_type_pm_header" >
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_icon_type_pm_header" >
                         <p>{{jmAcc_icon_type_pm_content}}</p>
                 </j-murky-hawk-accordion>
 
@@ -96,9 +100,10 @@
                     jmFieldId="accordionTitleAlignL"
                     class="jmBackDropContent"
                     titleAlign="left"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_title_align_l_header" >
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_title_align_l_header" >
                         <p>{{jmAcc_title_align_l_content}}</p>
                 </j-murky-hawk-accordion>
 
@@ -112,9 +117,10 @@
                     jmFieldId="accordionTitleAlignC"
                     class="jmBackDropContent"
                     titleAlign="center"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_title_align_c_header" >
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_title_align_c_header" >
                         <p>{{jmAcc_title_align_c_content}}</p>
                 </j-murky-hawk-accordion>
 
@@ -128,9 +134,10 @@
                     jmFieldId="accordionTitleAlignR"
                     class="jmBackDropContent"
                     titleAlign="right"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_title_align_r_header" >
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_title_align_r_header" >
                         <p>{{jmAcc_title_align_r_content}}</p>
                 </j-murky-hawk-accordion>
 
@@ -151,9 +158,10 @@
                 <j-murky-hawk-accordion 
                     jmFieldId="accordionTagType"
                     class="jmBackDropContent"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_tag_header"
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_tag_header"
                     titleTagType="h5" >
                         <p [innerHTML]="jmAcc_tag_content"></p>
                 </j-murky-hawk-accordion>

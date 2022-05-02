@@ -139,11 +139,11 @@
 
                 rect,
                 polygon {
-                    fill: #000000;
+                    fill: var(--jm-acc-head-color);
                 }
 
                 .iconArrowPointer {
-                    outline: #000000;
+                    outline: var(--jm-acc-head-color);
                     stroke-width: 10;
                 }
             }
@@ -155,6 +155,7 @@
             font-weight: normal;
             line-height: 1.5em;
             margin: 0;
+            min-height: 1.5em;
             padding: 0;
             position: relative;
             text-align: left;

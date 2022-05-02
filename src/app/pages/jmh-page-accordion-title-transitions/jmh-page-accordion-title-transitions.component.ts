@@ -11,6 +11,8 @@ export class JmhPageAccordionTitleTransitionsComponent implements OnInit {
 
     public jmAcc_title_full_title: string = "Full Transition"
     public jmAcc_title_full_description: string = "The accordion component will use different title text when the component is open and closed.";
+    public jmAcc_title_full_description0: string = "To use this option, set titleTransition to full: ";
+    public jmAcc_title_full_code: string = "<span class=\'color2\'>titleTransition</span>=\'<span class=\'color7\'>full</span>\'";
     public jmAcc_title_full_description1: string = " The icon, title, and content will animate when the component opens and closes.";
     public jmAcc_title_full_header1: string = "Hide full title change content";
     public jmAcc_title_full_header2: string = "Show full title change content";

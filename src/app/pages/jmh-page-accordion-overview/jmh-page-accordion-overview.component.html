@@ -31,7 +31,10 @@
             <j-murky-hawk-accordion 
                 jmFieldId="accordionDefault"
                 class="jmBackDrop"
-                titleText="{{jmAcc_default_Header}}" >
+                titleTransition="partial"
+                titleTextOpen="Show"
+                titleTextClosed="Hide"
+                [titleText]="jmAcc_default_Header" >
                     <p [innerHTML]="jmAcc_default_Content"></p>
             </j-murky-hawk-accordion>
 

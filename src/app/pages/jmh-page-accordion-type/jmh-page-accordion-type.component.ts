@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class JmhPageAccordionTypeComponent implements OnInit {
 
     public jmAcc_type_title: string = "Accordion Display Types";
+
+    public jmAcc_type_title_2: string = "Changing accordion appearance";
     public jmAcc_type_content1: string = "The accordion can be displayed as 1 of 3 types: Basic, Minimal, or Panel. ";
     public jmAcc_type_content1_1: string = "The accordion component defaults to a block display, so it will take the width of its parent container as demonstrated in the example boxes below."
 

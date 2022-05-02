@@ -30,7 +30,7 @@ export class JmhPageAccordionCustomComponent implements OnInit {
         + "This could also be done via inputs on the component instance itself. "
         + "Global accordion styling is best done via css variables. "
     public jmAcc_custom3_1: string = "<strong>Note:</strong>  the border properties use the css shorthand: border-width border-style border-color. "
-        + "For example: 2px solid #ff0000 ";
+        + "<br />For example: 2px solid #ff0000 ";
     public jmAcc_custom3_1_1: string = "Properties available to customize the component title, and their corresponding css variables for use in the global stylesheet: ";
     
     public objectKeys = Object.keys;

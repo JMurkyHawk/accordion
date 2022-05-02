@@ -6,6 +6,8 @@
 
         <section class="leadIn">
 
+            <h4>{{jmAcc_type_title_2}}</h4>
+
             <p>{{jmAcc_type_content1}}</p>
 
             <p>{{jmAcc_type_content1_1}}</p>
@@ -101,9 +103,10 @@
                 <j-murky-hawk-accordion 
                     jmFieldId="accordionTypeOptions"
                     accordionType="minimal"
-                    titleTextSlotOpen="{{jmAcc_title_change_type_header1}}"
-                    titleTextSlotClose="{{jmAcc_title_change_type_header2}}"
-                    titleTextSlot="{{jmAcc_title_change_type_header3}}"
+                    titleTransition="partial"
+                    titleTextOpen="{{jmAcc_title_change_type_header1}}"
+                    titleTextClosed="{{jmAcc_title_change_type_header2}}"
+                    titleText="{{jmAcc_title_change_type_header3}}"
                     iconType="plusMinus"
                     iconAlign="left" >
                         <p>{{jmAcc_title_change_type_content}}</p>

@@ -16,9 +16,10 @@
                     jmFieldId="accordionOpen"
                     class="jmBackDropContent"
                     [defaultOpen]="true"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_open_Header" >
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_open_Header" >
                         <p>{{jmAcc_open_Content}}</p>
                 </j-murky-hawk-accordion>
 
@@ -39,9 +40,10 @@
                 <j-murky-hawk-accordion 
                     jmFieldId="accordionHeight"
                     class="jmBackDropContent"
-                    titleTextSlotOpen="Show"
-                    titleTextSlotClose="Hide"
-                    [titleTextSlot]="jmAcc_height_Header"
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="jmAcc_height_Header"
                     [customHeight]="jmAcc_height_HeightValue" >
                         <p class="padding5" 
                             [innerHTML]="jmAcc_height_Content1  

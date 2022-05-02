@@ -112,27 +112,28 @@ describe('JMurkyHawkAccordionComponent', () => {
          * So... I'll just call component.jmAccordionHeaderActivated(), then manually change titleTextSlotChange. 
          */
 
-        component.titleTextSlotOpen = "Open ";
-        component.titleTextSlotClose = "Close ";
-        component.titleTextSlot = "test text content";
+        component.titleTextOpen = "Open ";
+        component.titleTextClosed = "Close ";
+        component.titleTextSlotChange = component.titleTextOpen;
+        component.titleText = "test text content";
 
         component.ngOnInit();
         expect(component.titleTextSlotChange + component.titleText )
-            .toBe(component.titleTextSlotOpen + component.titleTextSlot);
+            .toBe(component.titleTextOpen + component.titleText);
 
         spyOn(component, 'jmAccordionHeaderActivated');
         component.jmAccordionHeaderActivated();
-        component.titleTextSlotChange = component.titleTextSlotClose;
+        component.titleTextSlotChange = component.titleTextClosed;
         expect(component.jmAccordionHeaderActivated).toHaveBeenCalled();
         fixture.detectChanges();
         expect(component.titleTextSlotChange + component.titleText )
-            .toBe(component.titleTextSlotClose + component.titleTextSlot);
+            .toBe(component.titleTextClosed + component.titleText);
 
         component.jmAccordionHeaderActivated();
-        component.titleTextSlotChange = component.titleTextSlotOpen;
+        component.titleTextSlotChange = component.titleTextOpen;
         fixture.detectChanges();
         expect(component.titleTextSlotChange + component.titleText )
-            .toBe(component.titleTextSlotOpen + component.titleTextSlot);
+            .toBe(component.titleTextOpen + component.titleText);
 
     });
 

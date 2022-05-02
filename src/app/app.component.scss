@@ -335,6 +335,7 @@ a.btn {
         margin: 0;
         padding: 1.25em 2.25em;
         text-align: center;
+        text-transform: capitalize;
 
         transition-duration: $transitionDuration;
         transition-property: background-color, border, color;
@@ -389,7 +390,7 @@ a.btn {
 
         > section {
             //padding: 4em 1.5em 6em 1.5em;
-            padding: 2em 1.5em 5em 1.5em;
+            padding: 2em 1.5em 2em 1.5em;
 
             > h3, 
             > h4 {
@@ -401,7 +402,7 @@ a.btn {
             }
 
             &.leadIn {
-                padding-top: 2em;
+                padding-top: 3em;
             }
             /*
             &:nth-child(even) {
@@ -458,7 +459,7 @@ a.btn {
 
         section {
             margin: 0;
-            padding: 4em 1.5em 6em 1.5em;
+            padding: 3em 1.5em 2em 1.5em;
         
             &:nth-child(even) {
                 //background: rgba(25, 31, 158, .025);
@@ -576,7 +577,7 @@ a.btn {
     font-family: 'Source Code Pro', monospace;
     font-size: 1.25em;
     line-height: 1.25em;
-    margin: 0 0 4em 0;
+    margin: 0 0 3em 0;
     overflow: auto;
     padding: 1em 1.25em;
 
@@ -638,7 +639,7 @@ a.btn {
 
             > section {
                 //padding: 3.5em 5em;
-                padding: 2em 5em 2em 5em;
+                padding: 2em 5em 2.5em 5em;
 
                 &:last-child {
                     padding-bottom: 4em;
@@ -665,7 +666,7 @@ a.btn {
         .jmCardContent {
     
             section {
-                padding: 2em 3.5em 2em 3.5em;
+                padding: 2em 3.5em 3.5em 3.5em;
 
                 &:first-of-type {
                     padding-top: 3em;
