@@ -1,22 +1,22 @@
 <div class="jmCard">
 
-    <h3 class="jmCardTitle" [innerHTML]="jmAcc_type_title"></h3>
+    <h3 class="jmCardTitle" [innerHTML]="title"></h3>
 
     <div class="jmCardContent">
 
         <section class="leadIn">
 
-            <h4>{{jmAcc_type_title_2}}</h4>
+            <h4>{{type_title_2}}</h4>
 
-            <p>{{jmAcc_type_content1}}</p>
+            <p>{{type_content1}}</p>
 
-            <p>{{jmAcc_type_content1_1}}</p>
+            <p>{{type_content1_1}}</p>
 
         </section>
 
         <section>
 
-            <h4>{{jmAcc_type_basic_title}}</h4>
+            <h4>{{type_basic_title}}</h4>
 
             <div class="jmBackDrop">
 
@@ -24,20 +24,20 @@
                     jmFieldId="accordionBasic"
                     titleText="Basic accordion type"
                     accordionType="basic" >
-                        <p>{{jmAcc_basic_content}}</p>
+                        <p>{{basic_content}}</p>
                 </j-murky-hawk-accordion>
 
             </div>
 
-            <p>{{jmAcc_type_basic_content1}}</p>
-            <p>{{jmAcc_type_basic_content2}}</p>
+            <p>{{type_basic_content1}}</p>
+            <p>{{type_basic_content2}}</p>
 
         </section>
 
 
         <section>
 
-            <h4>{{jmAcc_type_minimal_title}}</h4>
+            <h4>{{type_minimal_title}}</h4>
 
             <div class="jmBackDrop">
 
@@ -45,20 +45,20 @@
                     jmFieldId="accordionMinimalist"
                     titleText="Minimalist accordion type"
                     accordionType="minimal" >
-                        <p>{{jmAcc_minimal_content}}</p>
+                        <p>{{minimal_content}}</p>
                 </j-murky-hawk-accordion>
 
             </div>
 
-            <p>{{jmAcc_type_minimal_content1}}</p>
-            <p>{{jmAcc_type_minimal_content2}}</p>
+            <p>{{type_minimal_content1}}</p>
+            <p>{{type_minimal_content2}}</p>
 
         </section>
 
 
         <section>
 
-            <h4>{{jmAcc_type_panel_title}}</h4>
+            <h4>{{type_panel_title}}</h4>
 
             <div class="jmBackDrop">
 
@@ -77,25 +77,25 @@
                     [customStylesBody]="{
                         'border' : '1px solid #000000'
                     }" >
-                        <p>{{jmAcc_panel_content}}</p>
+                        <p>{{panel_content}}</p>
                 </j-murky-hawk-accordion>
 
             </div>
 
-            <p>{{jmAcc_type_panel_content1}}</p>
-            <p>{{jmAcc_type_panel_content2}}</p>
+            <p>{{type_panel_content1}}</p>
+            <p>{{type_panel_content2}}</p>
 
         </section>
 
 
         <section>
 
-            <h4>{{jmAcc_type_title2}}</h4>
+            <h4>{{type_title2}}</h4>
 
-            <p class="margin3">{{jmAcc_type_content2}}</p>
+            <p class="margin3">{{type_content2}}</p>
 
             <ul>
-                <li *ngFor="let item of jmAcc_type_li">{{item}}</li>
+                <li *ngFor="let item of type_li">{{item}}</li>
             </ul>
 
             <div class="jmBackDrop">
@@ -104,12 +104,12 @@
                     jmFieldId="accordionTypeOptions"
                     accordionType="minimal"
                     titleTransition="partial"
-                    titleTextOpen="{{jmAcc_title_change_type_header1}}"
-                    titleTextClosed="{{jmAcc_title_change_type_header2}}"
-                    titleText="{{jmAcc_title_change_type_header3}}"
+                    titleTextOpen="{{title_change_type_header1}}"
+                    titleTextClosed="{{title_change_type_header2}}"
+                    titleText="{{title_change_type_header3}}"
                     iconType="plusMinus"
                     iconAlign="left" >
-                        <p>{{jmAcc_title_change_type_content}}</p>
+                        <p>{{title_change_type_content}}</p>
                 </j-murky-hawk-accordion>
 
             </div>

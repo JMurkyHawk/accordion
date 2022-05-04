@@ -1,31 +1,31 @@
 <div class="jmCard">
 
-    <h3 class="jmCardTitle" [innerHTML]="jmAcc_title_trans_title"></h3>
+    <h3 class="jmCardTitle" [innerHTML]="title"></h3>
 
     <div class="jmCardContent">
 
         <section>
 
-            <h4>{{jmAcc_title_full_title}}</h4>
+            <h4>{{full_title}}</h4>
 
             <j-murky-hawk-accordion 
                 jmFieldId="accordionTitleChange"
                 class="jmBackDrop"
                 titleTransition="full"
-                [titleTextOpen]="jmAcc_title_full_header1"
-                [titleTextClosed]="jmAcc_title_full_header2" >
-                    <p>{{jmAcc_title_full_content}}</p>
+                [titleTextOpen]="full_header1"
+                [titleTextClosed]="full_header2" >
+                    <p>{{full_content}}</p>
             </j-murky-hawk-accordion>
 
-            <p>{{jmAcc_title_full_description}}</p>
+            <p>{{full_description}}</p>
 
-            <p>{{jmAcc_title_full_description1}}</p>
+            <p>{{full_description1}}</p>
 
         </section>
 
         <section>
 
-            <h4>{{jmAcc_title_partial_title}}</h4>
+            <h4>{{partial_title}}</h4>
 
             <j-murky-hawk-accordion 
                 jmFieldId="accordionTitleChangePartial"
@@ -33,13 +33,13 @@
                 titleTransition="partial"
                 titleTextOpen="Show"
                 titleTextClosed="Hide"
-                titleText="{{jmAcc_title_partial_header3}}" >
-                    <p>{{jmAcc_title_partial_content}}</p>
+                titleText="{{partial_header3}}" >
+                    <p>{{partial_content}}</p>
             </j-murky-hawk-accordion>
 
-            <p>{{jmAcc_title_partial_description}}</p>
+            <p>{{partial_description}}</p>
 
-            <p>{{jmAcc_title_partial_description1}}</p>
+            <p>{{partial_description1}}</p>
 
         </section>
 

@@ -47,17 +47,17 @@ describe('JMurkyHawkAccordionComponent', () => {
         btn.triggerEventHandler('click', null);
         expect(component.jmAccordionHeaderActivated).toHaveBeenCalled();
 
-        component.jmAccordionOpen = false;
+        component.isAccordionOpen = false;
         component.toggle();
-        expect(component.jmAccordionOpen).toBeTrue();
+        expect(component.isAccordionOpen).toBeTrue();
         component.toggle();
-        expect(component.jmAccordionOpen).toBeFalse();
+        expect(component.isAccordionOpen).toBeFalse();
     });
 
-    it('should show the accordion\'s body content when the component initially renders, if defaultOpen is true', () => {
-        component.defaultOpen = true;
-        component.checkDefaultOpen();
-        expect(component.jmAccordionOpen).toBeTrue();
+    it('should show the accordion\'s body content when the component initially renders, if isOpenByDefault is true', () => {
+        component.isOpenByDefault = true;
+        component.checkIsOpenByDefault();
+        expect(component.isAccordionOpen).toBeTrue();
     });
 
     it('should have an id value', () => {
@@ -96,7 +96,7 @@ describe('JMurkyHawkAccordionComponent', () => {
          * component.titleTextSlotChange + ' ' + component.titleText
          * 
          * But keeping the animation code below in the component's .html template: 
-         * [@jmAccordionTitleAnimationSlot]="jmAccordionOpen ? 'close' : 'open'" 
+         * [@jmAccordionTitleAnimationSlot]="isAccordionOpen ? 'close' : 'open'" 
          * 
          * causes the component.accordionHeader.textContent to not update at all when using: 
          * spyOn(component, 'jmAccordionHeaderActivated'); 

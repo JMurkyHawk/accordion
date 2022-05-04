@@ -1,20 +1,20 @@
 <div class="jmCard">
 
-    <h3 class="jmCardTitle" [innerHTML]="jmAcc_custom_title"></h3>
+    <h3 class="jmCardTitle" [innerHTML]="custom_title"></h3>
 
     <div class="jmCardContent">
 
         <section class="leadIn">
 
-            <h4>{{jmAcc_custom0}}</h4>
+            <h4>{{custom0}}</h4>
 
-            <p class="noMargin">{{jmAcc_custom}}</p>
+            <p class="noMargin">{{custom}}</p>
 
         </section>
 
         <section>
 
-            <h4>{{jmAcc_custom_basic_title}}</h4>
+            <h4>{{custom_basic_title}}</h4>
             
             <j-murky-hawk-accordion 
                 jmFieldId="accordionCustom"
@@ -23,19 +23,19 @@
                 titleTransition="partial"
                 titleTextOpen="Show"
                 titleTextClosed="Hide"
-                [titleText]="jmAcc_custom_header"
+                [titleText]="custom_header"
                 [customStylesTitle]="{'color': '#cc0031', 'color-ro' : '#770031'}"
                 [customStylesBody]="{'color' : '#cc0031'}" >
-                    <p>{{jmAcc_custom_content}}</p>
+                    <p>{{custom_content}}</p>
             </j-murky-hawk-accordion>
 
-            <p>{{jmAcc_custom1}}</p>
+            <p>{{custom1}}</p>
 
         </section>
 
         <section>
 
-            <h4>{{jmAcc_custom_minimal_title}}</h4>
+            <h4>{{custom_minimal_title}}</h4>
 
             <j-murky-hawk-accordion 
                 jmFieldId="accordionCustom"
@@ -44,7 +44,7 @@
                 titleTransition="partial"
                 titleTextOpen="Show"
                 titleTextClosed="Hide"
-                [titleText]="jmAcc_custom_header"
+                [titleText]="custom_header"
                 [customStylesTitle]="{
                     'border' : '4px solid #cc0031', 
                     'border-ro' : '4px solid #770031', 
@@ -52,16 +52,16 @@
                     'color-ro' : '#770031' 
                 }"
                 [customStylesBody]="{'color' : '#cc0031'}" >
-                    <p>{{jmAcc_custom_content}}</p>
+                    <p>{{custom_content}}</p>
             </j-murky-hawk-accordion>
 
-            <p>{{jmAcc_custom1_1}}</p>
+            <p>{{custom1_1}}</p>
 
         </section>
 
         <section>
 
-            <h4>{{jmAcc_custom_panel_title}}</h4>
+            <h4>{{custom_panel_title}}</h4>
 
             <j-murky-hawk-accordion 
                 jmFieldId="accordionCustom"
@@ -70,7 +70,7 @@
                 titleTransition="partial"
                 titleTextOpen="Show"
                 titleTextClosed="Hide"
-                [titleText]="jmAcc_custom_header"
+                [titleText]="custom_header"
                 [customStylesTitle]="{
                     'background' : '#cc0031',
                     'background-ro' : '#ffffff',
@@ -84,57 +84,57 @@
                     'border' : '3px solid #cc0031',
                     'color' : '#770031'
                 }" >
-                    <p>{{jmAcc_custom_content}}</p>
+                    <p>{{custom_content}}</p>
             </j-murky-hawk-accordion>
 
-            <p>{{jmAcc_custom1_2}}</p>
+            <p>{{custom1_2}}</p>
 
-            <p>{{jmAcc_custom2}}</p>
+            <p>{{custom2}}</p>
 
         </section>
 
         <section>
 
-            <h4>{{jmAcc_custom_implement_sub_title1}}</h4>
+            <h4>{{custom_implement_sub_title1}}</h4>
             
             <div class="group">
                 
-                <p>{{jmAcc_custom3_0}}</p>
-                <p class="jmHighlight" [innerHTML]="jmAcc_custom3_1"></p>
-                <p class="padding2">{{jmAcc_custom3_1_1}}</p>
+                <p>{{custom3_0}}</p>
+                <p class="jmHighlight" [innerHTML]="custom3_1"></p>
+                <p class="padding2">{{custom3_1_1}}</p>
                 <ol class="customCols">
-                    <li *ngFor="let key of objectKeys(jmAcc_custom_title_styling)">
+                    <li *ngFor="let key of objectKeys(custom_title_styling)">
                         <span>{{key}}: </span>
-                        <span>{{jmAcc_custom_title_styling[key]}}</span>
+                        <span>{{custom_title_styling[key]}}</span>
                     </li>
                 </ol>
 
-                <p class="padding2">{{jmAcc_custom3_2}}</p>
+                <p class="padding2">{{custom3_2}}</p>
                 <ol class="customCols margin4">
-                    <li *ngFor="let key of objectKeys(jmAcc_custom_content_styling)">
+                    <li *ngFor="let key of objectKeys(custom_content_styling)">
                         <span>{{key}}: </span>
-                        <span>{{jmAcc_custom_content_styling[key]}}</span>
+                        <span>{{custom_content_styling[key]}}</span>
                     </li>
                 </ol>
 
                 <div class="subGroup">
                     
-                    <h5>{{jmAcc_custom_implement_sub_title1_2}}</h5>
+                    <h5>{{custom_implement_sub_title1_2}}</h5>
 
-                    <p [innerHTML]="jmAcc_custom3_3"></p>
+                    <p [innerHTML]="custom3_3"></p>
                     <ul class="customCols v2">
-                        <li *ngFor="let key of jmAcc_custom3_3_list">{{key}}</li>
+                        <li *ngFor="let key of custom3_3_list">{{key}}</li>
                     </ul>
 
-                    <p class="padding2">{{jmAcc_custom3_3_2}}</p>
+                    <p class="padding2">{{custom3_3_2}}</p>
                     <ul class="customCols v2">
-                        <li *ngFor="let key of jmAcc_custom3_3_list2">{{key}}</li>
+                        <li *ngFor="let key of custom3_3_list2">{{key}}</li>
                     </ul>
 
-                    <p class="padding2" [innerHTML]="jmAcc_custom3_3_3"></p>
+                    <p class="padding2" [innerHTML]="custom3_3_3"></p>
                     <div class="codeBox">
                         <code>
-                            <pre [innerHTML]="jmAcc_custom3_code"></pre>
+                            <pre [innerHTML]="custom3_code"></pre>
                         </code>
                     </div>
                 
@@ -142,32 +142,32 @@
 
             </div>
 
-            <h4>{{jmAcc_custom_implement_sub_title2}}</h4>
+            <h4>{{custom_implement_sub_title2}}</h4>
 
             <div class="group">
 
-                <p class="padding2">{{jmAcc_custom4_1}}</p>
+                <p class="padding2">{{custom4_1}}</p>
                 <ol class="margin1">
-                    <li *ngFor="let key of jmAcc_custom4_list">{{key}}</li>
+                    <li *ngFor="let key of custom4_list">{{key}}</li>
                 </ol>
 
                 <div class="subGroup">
 
-                    <h5>{{jmAcc_custom_implement_heading_title}}</h5>
+                    <h5>{{custom_implement_heading_title}}</h5>
 
-                    <p [innerHTML]="jmAcc_custom_single_acc_title_desc"></p>
-                    <p class="jmHighlight" [innerHTML]="jmAcc_custom_single_acc_title_desc2"></p>
+                    <p [innerHTML]="custom_single_acc_title_desc"></p>
+                    <p class="jmHighlight" [innerHTML]="custom_single_acc_title_desc2"></p>
                     <ul class="customCols">
-                        <li *ngFor="let key of objectKeys(jmAcc_custom_single_acc_title_props)">
+                        <li *ngFor="let key of objectKeys(custom_single_acc_title_props)">
                             <span>{{key}}: </span> 
-                            <span>{{jmAcc_custom_single_acc_title_props[key]}}</span>
+                            <span>{{custom_single_acc_title_props[key]}}</span>
                         </li>
                     </ul>
 
                     <p class="padding2">Custom title styling example: </p>
                     <div class="codeBox">
                         <code>
-                            <pre [innerHTML]="jmAcc_custom_single_acc_title_code"></pre>
+                            <pre [innerHTML]="custom_single_acc_title_code"></pre>
                         </code>
                     </div>
 
@@ -175,20 +175,20 @@
 
                 <div class="subGroup">
 
-                    <h5>{{jmAcc_custom_implement_body_title}}</h5>
+                    <h5>{{custom_implement_body_title}}</h5>
 
-                    <p [innerHTML]="jmAcc_custom_single_acc_body_desc"></p>
+                    <p [innerHTML]="custom_single_acc_body_desc"></p>
                     <ul class="customCols">
-                        <li *ngFor="let key of objectKeys(jmAcc_custom_single_acc_body_props)">
+                        <li *ngFor="let key of objectKeys(custom_single_acc_body_props)">
                             <span>{{key}}: </span>
-                            <span>{{jmAcc_custom_single_acc_body_props[key]}}</span>
+                            <span>{{custom_single_acc_body_props[key]}}</span>
                         </li>
                     </ul>
 
                     <p class="padding2">Custom body styling example: </p>
                     <div class="codeBox noMargin">
                         <code>
-                            <pre [innerHTML]="jmAcc_custom_single_acc_body_code"></pre>
+                            <pre [innerHTML]="custom_single_acc_body_code"></pre>
                         </code>
                     </div>
 

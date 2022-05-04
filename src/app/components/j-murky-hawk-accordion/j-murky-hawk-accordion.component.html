@@ -2,7 +2,7 @@
 
     <div class="jmAccordionHeader"
             [ngClass]="{ 
-                'jmAccOpen' : jmAccordionOpen, 
+                'jmAccOpen' : isAccordionOpen, 
                 'jmMinimal' : accordionType === 'minimal', 
                 'jmPanel' : accordionType === 'panel', 
                 'iconAlignRight' : iconAlign === 'right', 
@@ -13,19 +13,19 @@
                 
         <button id="{{jmFieldId}}" 
                 (click)="jmAccordionHeaderActivated()" 
-                [attr.aria-expanded]="jmAccordionOpen"
+                [attr.aria-expanded]="isAccordionOpen"
                 attr.aria-controls="{{jmFieldId}}Content"
                 #jmAccordionComponentButton>
             
             <!-- Title icon options -->
             <div class="jmAccordionHeaderOpenClose">
-                <span *ngIf="iconType === 'plusMinus'" [@jmAccordionIconAnimation]="!jmAccordionOpen ? 'open' : 'close' ">
+                <span *ngIf="iconType === 'plusMinus'" [@jmAccordionIconAnimation]="!isAccordionOpen ? 'open' : 'close' ">
                     <jm-svg-render class="plusLine" src="assets/images/icon-minus.svg"></jm-svg-render>
                 </span>
                 <span *ngIf="iconType === 'plusMinus'">
                     <jm-svg-render src="assets/images/icon-minus.svg"></jm-svg-render>
                 </span>
-                <span *ngIf="iconType === 'chevron'" [@jmAccordionIconAnimation2]="jmAccordionOpen ? 'open' : 'close' ">
+                <span *ngIf="iconType === 'chevron'" [@jmAccordionIconAnimation2]="isAccordionOpen ? 'open' : 'close' ">
                     <jm-svg-render src="assets/images/icon-arrow-pointer.svg"></jm-svg-render>
                 </span>
             </div>
@@ -70,12 +70,12 @@
 
                     <span [style.width.px]="slotWidth" class="slotChangeContainer" >
                         
-                        <span *ngIf="jmAccordionOpen" class="slot1"
-                            [@jmAccordionTitleAnimationSlot]="jmAccordionOpen ? 'close' : 'open'" 
+                        <span *ngIf="isAccordionOpen" class="slot1"
+                            [@jmAccordionTitleAnimationSlot]="isAccordionOpen ? 'close' : 'open'" 
                             [innerHTML]="titleTextSlotChange + ' ' " #titleSlotOpen></span>
 
-                        <span *ngIf="!jmAccordionOpen" class="slot2"
-                            [@jmAccordionTitleAnimationSlot]="jmAccordionOpen ? 'close' : 'open'" 
+                        <span *ngIf="!isAccordionOpen" class="slot2"
+                            [@jmAccordionTitleAnimationSlot]="isAccordionOpen ? 'close' : 'open'" 
                             [innerHTML]="titleTextSlotChange + ' ' " #titleSlotClose></span>
 
                     </span>
@@ -85,10 +85,10 @@
                 </div>
 
                 <!-- Full title text change -->
-                <div *ngIf="titleTransition === 'full' && jmAccordionOpen" [innerHTML]="titleText"
+                <div *ngIf="titleTransition === 'full' && isAccordionOpen" [innerHTML]="titleText"
                     [@jmAccordionTitleAnimation]="titleText === titleTextOpen ? 'open2' : 'close2' "></div>
 
-                <div *ngIf="titleTransition === 'full' && !jmAccordionOpen" [innerHTML]="titleText"
+                <div *ngIf="titleTransition === 'full' && !isAccordionOpen" [innerHTML]="titleText"
                     [@jmAccordionTitleAnimation]="titleText === titleTextClosed ? 'close2' : 'open2' " ></div>
                 
             </ng-template>
@@ -98,10 +98,10 @@
     </div>
 
     <!-- Accordion content -->
-    <div *ngIf="jmAccordionOpen" 
+    <div *ngIf="isAccordionOpen" 
             id="{{jmFieldId}}Content" 
             class="jmAccordionContent" 
-            [ngClass]="{'jmAccOpen' : jmAccordionOpen, 'jmMinimal' : accordionType === 'minimal' }"
+            [ngClass]="{'jmAccOpen' : isAccordionOpen, 'jmMinimal' : accordionType === 'minimal' }"
             attr.aria-labelledby="{{jmFieldId}}"
             [style.height]="customHeight"
             #jmAccordionContent

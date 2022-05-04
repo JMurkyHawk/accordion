@@ -25,7 +25,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     @Input() titleText: string = 'Hide/Show Content';
     @Input() titleTextOpen: string = ''; 
     @Input() titleTextClosed: string = ''; 
-    @Input() defaultOpen: boolean = false;
+    @Input() isOpenByDefault: boolean = false;
     @Input() customHeight: string = '';
 
     @Input() 
@@ -130,7 +130,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     @ViewChild('titleSlotClose', {static: false}) titleSlotClose!: ElementRef;
     @ViewChild('jmAccordionContent', {static: false}) jmAccordionContent!: ElementRef;
     
-    public jmAccordionOpen: boolean = false;
+    public isAccordionOpen: boolean = false;
     // Provide default accordion options
     private _accordionType: any = 'minimal';
     private _titleTransition: any = 'none';
@@ -164,7 +164,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
       Getter/Setter Methods  
     ------------------------- */
 
-    errorMsgProvideOpts(value: string, inputName: string, allowableTypes: Array<string>) {
+    errorMessageProvideOpts(value: string, inputName: string, allowableTypes: Array<string>) {
 
         console.error(
             `'${value}' is not a valid input value for ${inputName} on the <jm-accordion> component. ` +
@@ -178,12 +178,12 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         if ( allowableTypes.includes(value) ) {
             return value;
         } else {
-            return this.errorMsgProvideOpts(value, inputName, allowableTypes);
+            return this.errorMessageProvideOpts(value, inputName, allowableTypes);
         }
 
     }
 
-    errorMsgCustomStylingObj(property: string, capSetElementStr: string, keyList: Array<string>) {
+    errorMessageCustomStylingObj(property: string, capSetElementStr: string, keyList: Array<string>) {
         
         let message: string = 
             `'${property}' is not a property available to customize on the ` +
@@ -212,7 +212,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
                 if ( keyList.includes(property) ) {
                     this.stylesTitle[property] = evalObj[property];
                 } else {
-                    this.errorMsgCustomStylingObj(property, capSetElementStr, keyList);
+                    this.errorMessageCustomStylingObj(property, capSetElementStr, keyList);
                 }
 
             } else if ( setElement === 'body' ) {
@@ -222,7 +222,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
                 if ( keyList.includes(property) ) {
                    this.stylesBody[property] = evalObj[property];
                 } else {
-                    this.errorMsgCustomStylingObj(property, capSetElementStr, keyList);
+                    this.errorMessageCustomStylingObj(property, capSetElementStr, keyList);
                 }
 
             }
@@ -244,7 +244,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
 
         this.titleSlotAdjust();
 
-        this.checkDefaultOpen();
+        this.checkIsOpenByDefault();
 
     }
 
@@ -329,22 +329,22 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     updateAccordionTitle() {
 
         // If accordion title text for open state is provided, replace titleText with that
-        if ( this._titleTransition === 'full' && !this.jmAccordionOpen ) {
+        if ( this._titleTransition === 'full' && !this.isAccordionOpen ) {
             this.titleText = this.titleTextOpen;
         }
 
         // If accordion title text for closed state is provided, replace titleText with that
-         if ( this._titleTransition === 'full' && this.jmAccordionOpen) {
+         if ( this._titleTransition === 'full' && this.isAccordionOpen) {
             this.titleText = this.titleTextClosed;
         }
 
         // If accordion partial title text open state transition is provided, replace partial title with that
-        if ( this._titleTransition === 'partial' && !this.jmAccordionOpen ) {
+        if ( this._titleTransition === 'partial' && !this.isAccordionOpen ) {
             this.titleTextSlotChange = this.titleTextOpen;
         }
 
         // If accordion partial title text close state transition is provided, replace partial title with that
-        if ( this._titleTransition === 'partial' && this.jmAccordionOpen ) {
+        if ( this._titleTransition === 'partial' && this.isAccordionOpen ) {
             this.titleTextSlotChange = this.titleTextClosed;
         }
 
@@ -367,17 +367,17 @@ export class JMurkyHawkAccordionComponent implements OnInit {
 
     }
 
-    checkDefaultOpen() {
+    checkIsOpenByDefault() {
         // Method info: 
-        //    defaultOpen is used to set the default display state of the accordion component's content.
-        //    If this.defaultOpen is set to true, the accordion will be expanded when the component is initally rendered
-        //    on the page. checkDefaultOpen() checks this variable's value and sets the component state accoringly.
+        //    isOpenByDefault is used to set the default display state of the accordion component's content.
+        //    If this.isOpenByDefault is set to true, the accordion will be expanded when the component is initally rendered
+        //    on the page. checkIsOpenByDefault() checks this variable's value and sets the component state accoringly.
 
-        if (this.defaultOpen) {
-            this.jmAccordionOpen = true;
+        if (this.isOpenByDefault) {
+            this.isAccordionOpen = true;
             this.updateAccordionTitle();
         } else {
-            this.jmAccordionOpen = false;
+            this.isAccordionOpen = false;
             this.updateAccordionTitle();
         }
 
@@ -385,7 +385,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
 
     toggle() {
 
-        this.jmAccordionOpen = !this.jmAccordionOpen;
+        this.isAccordionOpen = !this.isAccordionOpen;
 
         this.updateAccordionTitle();
 

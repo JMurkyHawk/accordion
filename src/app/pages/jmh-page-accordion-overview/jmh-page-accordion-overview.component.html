@@ -1,32 +1,32 @@
 <div class="jmCard">
 
-    <h3 class="jmCardTitle" [innerHTML]="jmAcc_Overview_Title"></h3>
+    <h3 class="jmCardTitle" [innerHTML]="overview_title"></h3>
 
     <div class="jmCardContent">
 
         <section>
 
-            <h4 [innerHTML]="jmAcc_Overview_Content"></h4>
+            <h4 [innerHTML]="overview_content"></h4>
 
-            <p [innerHTML]="jmAcc_Overview_Content1"></p>
+            <p [innerHTML]="overview_content1"></p>
 
-            <p [innerHTML]="jmAcc_Overview_Content2"></p>
-
-        </section>
-
-        <section>
-
-            <h4 [innerHTML]="jmAcc_Overview_ContentEnd"></h4>
-
-            <p [innerHTML]="jmAcc_Overview_ContentEnd1"></p>
-
-            <p [innerHTML]="jmAcc_Overview_ContentEnd2"></p>
+            <p [innerHTML]="overview_content2"></p>
 
         </section>
 
         <section>
 
-            <h4>{{jmAcc_default_Description}}</h4>
+            <h4 [innerHTML]="overview_content_end"></h4>
+
+            <p [innerHTML]="overview_content_end1"></p>
+
+            <p [innerHTML]="overview_content_end2"></p>
+
+        </section>
+
+        <section>
+
+            <h4>{{default_description}}</h4>
             
             <j-murky-hawk-accordion 
                 jmFieldId="accordionDefault"
@@ -34,11 +34,11 @@
                 titleTransition="partial"
                 titleTextOpen="Show"
                 titleTextClosed="Hide"
-                [titleText]="jmAcc_default_Header" >
-                    <p [innerHTML]="jmAcc_default_Content"></p>
+                [titleText]="default_header" >
+                    <p [innerHTML]="default_content"></p>
             </j-murky-hawk-accordion>
 
-            <p>{{jmAcc_default_Description1}}</p>
+            <p>{{default_description1}}</p>
 
         </section>
 

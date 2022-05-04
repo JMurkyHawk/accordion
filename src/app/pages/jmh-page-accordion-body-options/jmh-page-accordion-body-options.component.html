@@ -1,41 +1,41 @@
 <div class="jmCard card2">
 
-    <h3 class="jmCardTitle" [innerHTML]="jmAcc_opts_body_title"></h3>
+    <h3 class="jmCardTitle" [innerHTML]="opts_body_title"></h3>
 
     <div class="jmCardContent spacingV2">
 
         <section>
 
-            <h4>{{jmAcc_open_Title}}</h4>
+            <h4>{{open_title}}</h4>
 
             <div class="jmBackDrop titleCard">
 
-                <p class="jmBackDropHead">{{jmAcc_open_Description}}</p>
+                <p class="jmBackDropHead">{{open_description}}</p>
                 
                 <j-murky-hawk-accordion 
                     jmFieldId="accordionOpen"
                     class="jmBackDropContent"
-                    [defaultOpen]="true"
+                    [isOpenByDefault]="true"
                     titleTransition="partial"
                     titleTextOpen="Show"
                     titleTextClosed="Hide"
-                    [titleText]="jmAcc_open_Header" >
-                        <p>{{jmAcc_open_Content}}</p>
+                    [titleText]="open_header" >
+                        <p>{{open_content}}</p>
                 </j-murky-hawk-accordion>
 
             </div>
 
-            <p>{{jmAcc_open_Description1}}</p>
+            <p>{{open_description1}}</p>
 
         </section>
 
         <section>
 
-            <h4>{{jmAcc_height_Title}}</h4>
+            <h4>{{height_title}}</h4>
 
             <div class="jmBackDrop titleCard v2">
 
-                <p class="jmBackDropHead">{{jmAcc_height_Description}}</p>
+                <p class="jmBackDropHead">{{height_description}}</p>
 
                 <j-murky-hawk-accordion 
                     jmFieldId="accordionHeight"
@@ -43,20 +43,20 @@
                     titleTransition="partial"
                     titleTextOpen="Show"
                     titleTextClosed="Hide"
-                    [titleText]="jmAcc_height_Header"
-                    [customHeight]="jmAcc_height_HeightValue" >
+                    [titleText]="height_header"
+                    [customHeight]="height_heightValue" >
                         <p class="padding5" 
-                            [innerHTML]="jmAcc_height_Content1  
-                            + jmAcc_height_Content2 
-                            + jmAcc_height_Content2 
-                            + jmAcc_height_Content2">
+                            [innerHTML]="height_content1  
+                            + height_content2 
+                            + height_content2 
+                            + height_content2">
                         </p>
                 </j-murky-hawk-accordion>
 
             </div>
 
-            <p>{{jmAcc_height_Description1}}</p>
-            <p>{{jmAcc_height_Description2}}</p>
+            <p>{{height_description1}}</p>
+            <p>{{height_description2}}</p>
 
         </section>
 
