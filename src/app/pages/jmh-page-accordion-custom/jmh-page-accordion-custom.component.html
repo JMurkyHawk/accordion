@@ -121,7 +121,7 @@
                     
                     <h5>{{custom_implement_sub_title1_2}}</h5>
 
-                    <p [innerHTML]="custom3_3"></p>
+                    <p class="padding2" [innerHTML]="custom3_3"></p>
                     <ul class="customCols v2">
                         <li *ngFor="let key of custom3_3_list">{{key}}</li>
                     </ul>
@@ -148,14 +148,14 @@
 
                 <p class="padding2">{{custom4_1}}</p>
                 <ol class="margin1">
-                    <li *ngFor="let key of custom4_list">{{key}}</li>
+                    <li *ngFor="let key of custom4_list" [innerHTML]="key"></li>
                 </ol>
 
                 <div class="subGroup">
 
                     <h5>{{custom_implement_heading_title}}</h5>
 
-                    <p [innerHTML]="custom_single_acc_title_desc"></p>
+                    <p class="padding2" [innerHTML]="custom_single_acc_title_desc"></p>
                     <p class="jmHighlight" [innerHTML]="custom_single_acc_title_desc2"></p>
                     <ul class="customCols">
                         <li *ngFor="let key of objectKeys(custom_single_acc_title_props)">
@@ -177,7 +177,7 @@
 
                     <h5>{{custom_implement_body_title}}</h5>
 
-                    <p [innerHTML]="custom_single_acc_body_desc"></p>
+                    <p class="padding2" [innerHTML]="custom_single_acc_body_desc"></p>
                     <ul class="customCols">
                         <li *ngFor="let key of objectKeys(custom_single_acc_body_props)">
                             <span>{{key}}: </span>

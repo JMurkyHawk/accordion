@@ -67,7 +67,7 @@ export class JmhPageAccordionCustomComponent implements OnInit {
         "--jm-acc-color"
     ];
 
-    public custom3_3_3: string = "Copying the following block into the application's global stylesheet would <strong>overrirde all</strong> accordion instances throughout the app (except where custom styling is provided individually, described in the next section) with the values provided: ";
+    public custom3_3_3: string = "Copying the following block into the application's global stylesheet would <strong>override all</strong> accordion instances throughout the app (except where custom styling is provided individually, described in the next section) with the values provided: ";
     public custom3_code: string = 
         "<span class='color1'>j-murky-hawk-accordion</span> { \r"
         + "    <span class='color2'>--jm-acc-head-background</span>: <span class='color7'>#4b0082</span>; \r"
@@ -85,7 +85,7 @@ export class JmhPageAccordionCustomComponent implements OnInit {
     public custom_implement_sub_title2: string = "Individual accordion styling";
     public custom4_1: string = "To customize individual component instance styling: " 
     public custom4_list: Array<string> = [
-        "Provide custom values as an object to the <j-murky-hawk-accordion> component. ",
+        "Provide custom values as an object to the <span class=\"inlineBlock\">&lt;j-murky-hawk-accordion&gt;</span> component. ",
         "Alternately, apply a custom style class to the container, then updating the accordion css variables inside a selector for the custom style class. "
     ];
 

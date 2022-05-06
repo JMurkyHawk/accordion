@@ -118,6 +118,10 @@ p {
     display: block;
 }
 
+.inlineBlock {
+    display: inline-block;
+}
+
 .noPadding { 
     padding: 0 !important;
 }
@@ -395,8 +399,8 @@ a.btn {
             > h3, 
             > h4 {
                 display: block;
-                font-size: 1.6em;
-                line-height: 1.5em;
+                font-size: 1.75em;
+                line-height: 1.35em;
                 margin: 0 0 .5em 0;
                 text-align: center
             }
@@ -648,6 +652,8 @@ a.btn {
                 h4,
                 h5,
                 h6 {
+                    font-size: 1.6em;
+                    line-height: 1.5em;
                     text-align: left;
                 }
 
