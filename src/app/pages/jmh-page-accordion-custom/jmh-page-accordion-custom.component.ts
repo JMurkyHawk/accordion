@@ -91,7 +91,7 @@ export class JmhPageAccordionCustomComponent implements OnInit {
 
     public custom_implement_heading_title: string = "Individual title styling"; 
 
-    public custom_single_acc_title_desc: string = "Properties available to customize the component title, and their corresponding key value for the object to pass to the <i>[customStylesTitle]</i> input: "
+    public custom_single_acc_title_desc: string = "Properties available to customize the component title, and their corresponding key value for the object to pass to the <i>customStylesTitle</i> input: "
     public custom_single_acc_title_props: { [key: string ] : string } = {
         "Heading background color" : "background",
         "Heading background color on hover/focus" : "background-ro",
@@ -121,7 +121,7 @@ export class JmhPageAccordionCustomComponent implements OnInit {
         + "&lt;/<span class='color1'>j-murky-hawk-accordion</span>&gt;";
 
     public custom_implement_body_title: string = "Individual body styling";
-    public custom_single_acc_body_desc: string = "Properties available to customize the component body content, and their corresponding key value for the object to pass to the <i>[customStylesBody]</i> input: "
+    public custom_single_acc_body_desc: string = "Properties available to customize the component body content, and their corresponding key value for the object to pass to the <i>customStylesBody</i> input: "
     public custom_single_acc_body_props: { [key: string ] : string } = {
         "Body content background color" : "background",
         "Body content border" : "border",

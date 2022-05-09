@@ -14,8 +14,8 @@ export class JmhPageAccordionTitleTransitionsComponent implements OnInit {
     public full_description0: string = "To use this option, set titleTransition to full: ";
     public full_code: string = "<span class=\'color2\'>titleTransition</span>=\'<span class=\'color7\'>full</span>\'";
     public full_description1: string = " The icon, title, and content will animate when the component opens and closes.";
-    public full_header1: string = "Hide full title change content";
-    public full_header2: string = "Show full title change content";
+    public full_header1: string = "Show full title change content";
+    public full_header2: string = "Hide full title change content";
     public full_content: string = "Content for full accordion title transition";
 
     public partial_title: string = "Partial Transition";
