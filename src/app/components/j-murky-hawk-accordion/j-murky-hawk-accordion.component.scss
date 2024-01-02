@@ -253,11 +253,11 @@
     transition-property: background-color, border-color, border-width, border-radius, color, text-shadow;
     transition-timing-function: ease;
 
-    > :first-child {
+    ::ng-deep > :first-child {
         padding-top: 1em;
     }
 
-    > :last-child {
+    ::ng-deep > :last-child {
         padding-bottom: 1em;
     }
 
@@ -323,7 +323,7 @@
         }
     }
 
-    & + .jmAccordionContent {
+    .jmAccordionContent {
         background: none;
         border: none;
         box-shadow: none;
@@ -339,7 +339,7 @@
     
 .jmMinimal {
 
-    &.iconAlignRight {
+    .iconAlignRight {
 
         button:before {
             right: -.25em;
@@ -350,7 +350,7 @@
 
     &.jmAccOpen {
 
-        &.iconLeft button:before {
+        .iconAlignLeft button:before {
             width: calc(100% + .5em);
         }
     }
@@ -387,7 +387,7 @@
 
     }
 
-    & + .jmAccordionContent {
+    .jmAccordionContent {
         background-color: var(--jm-acc-background);
         border: var(--jm-acc-border);
         border-top: none;

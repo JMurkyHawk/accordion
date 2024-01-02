@@ -9,7 +9,7 @@ import { JmhPageAccordionTypeComponent } from './jmh-page-accordion-type/jmh-pag
 import { JmhPageAccordionTitleTransitionsComponent } from './jmh-page-accordion-title-transitions/jmh-page-accordion-title-transitions.component';
 import { JmhPageAccordionTitleOptionsComponent } from './jmh-page-accordion-title-options/jmh-page-accordion-title-options.component';
 import { JmhPageAccordionBodyOptionsComponent } from './jmh-page-accordion-body-options/jmh-page-accordion-body-options.component';
-
+import { JmhPageAccordionOutputComponent } from './jmh-page-accordion-output/jmh-page-accordion-output.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { JmhPageAccordionBodyOptionsComponent } from './jmh-page-accordion-body-
     JmhPageAccordionTypeComponent,
     JmhPageAccordionTitleTransitionsComponent,
     JmhPageAccordionTitleOptionsComponent,
-    JmhPageAccordionBodyOptionsComponent
+    JmhPageAccordionBodyOptionsComponent,
+    JmhPageAccordionOutputComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +33,8 @@ import { JmhPageAccordionBodyOptionsComponent } from './jmh-page-accordion-body-
     JmhPageAccordionTypeComponent,
     JmhPageAccordionTitleTransitionsComponent,
     JmhPageAccordionTitleOptionsComponent,
-    JmhPageAccordionBodyOptionsComponent
+    JmhPageAccordionBodyOptionsComponent,
+    JmhPageAccordionOutputComponent
   ]
 })
 export class PagesModule { }

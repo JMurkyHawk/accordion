@@ -1,18 +1,21 @@
-<div #componentWrapper>
+<div [ngClass]="{
+        'jmAccOpen' : isAccordionOpen, 
+        'jmMinimal' : accordionType === 'minimal', 
+        'jmPanel' : accordionType === 'panel'
+    }" 
+    [style]="customStyles" 
+    #componentWrapper>
 
     <div class="jmAccordionHeader"
-            [ngClass]="{ 
-                'jmAccOpen' : isAccordionOpen, 
-                'jmMinimal' : accordionType === 'minimal', 
-                'jmPanel' : accordionType === 'panel', 
-                'iconAlignRight' : iconAlign === 'right', 
-                'iconAlignLeft' : iconAlign === 'left', 
-                'textAlignCenter' : titleAlign === 'center', 
-                'textAlignRight': titleAlign === 'right' 
-            }">
-                
+        [ngClass]="{ 
+            'iconAlignRight' : iconAlign === 'right', 
+            'iconAlignLeft' : iconAlign === 'left', 
+            'textAlignCenter' : titleAlign === 'center', 
+            'textAlignRight': titleAlign === 'right' 
+        }">
+            
         <button id="{{jmFieldId}}" 
-                (click)="jmAccordionHeaderActivated()" 
+                (click)="jmAccordionToggle()" 
                 [attr.aria-expanded]="isAccordionOpen"
                 attr.aria-controls="{{jmFieldId}}Content"
                 #jmAccordionComponentButton>
@@ -99,13 +102,17 @@
 
     <!-- Accordion content -->
     <div *ngIf="isAccordionOpen" 
-            id="{{jmFieldId}}Content" 
-            class="jmAccordionContent" 
-            [ngClass]="{'jmAccOpen' : isAccordionOpen, 'jmMinimal' : accordionType === 'minimal' }"
-            attr.aria-labelledby="{{jmFieldId}}"
-            [style.height]="customHeight"
-            #jmAccordionContent
-            [@jmAccordionBodyAnimation] >
+        id="{{jmFieldId}}Content" 
+        class="jmAccordionContent" 
+        [ngClass]="{
+            'jmAccOpen' : isAccordionOpen, 
+            'jmMinimal' : accordionType === 'minimal',
+            'addScroll' : isScrollable
+        }"
+        attr.aria-labelledby="{{jmFieldId}}"
+        [style.height]="customHeight"
+        #jmAccordionContent
+        [@jmAccordionBodyAnimation] >
 
         <ng-content></ng-content>
 

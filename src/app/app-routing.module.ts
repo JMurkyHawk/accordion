@@ -8,6 +8,7 @@ import { JmhPageAccordionBodyOptionsComponent } from './pages/jmh-page-accordion
 import { JmhPageAccordionCustomComponent } from './pages/jmh-page-accordion-custom/jmh-page-accordion-custom.component';
 import { JmhPageAccordionTypeComponent } from './pages/jmh-page-accordion-type/jmh-page-accordion-type.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { JmhPageAccordionOutputComponent } from './pages/jmh-page-accordion-output/jmh-page-accordion-output.component';
 
 const routes: Routes = [
     {
@@ -44,6 +45,11 @@ const routes: Routes = [
         path: 'accordion-custom',
         component: JmhPageAccordionCustomComponent,
         data: { routeIdNumber: 5 }
+    },
+    {
+        path: 'accordion-output',
+        component: JmhPageAccordionOutputComponent,
+        data: { routeIdNumber: 6 }
     },
     {
         path: '**',

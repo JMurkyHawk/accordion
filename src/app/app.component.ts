@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, ViewEncapsulation, ViewChild } from '@angular/core';
 import { NavigationEnd, NavigationStart, ParamMap, Router, RouterOutlet, RoutesRecognized, ActivatedRoute } from '@angular/router';
 
 import { JmhRouteAnimation } from './app-animations';
@@ -17,10 +17,16 @@ export class AppComponent {
     public title: string = 'Angular Accordion Component Demo';
     public navHeading: string = 'Accordion Component Options';
 
+    @ViewChild("skipLinksAnchor", {static: false}) skipLinksAnchor!: ElementRef;
+
     constructor(
         private route: ActivatedRoute
-    ) {
+    ) {  }
 
+    skipLinksClick(event: any) {
+        event.preventDefault();
+        this.skipLinksAnchor.nativeElement.scrollIntoView({ behavior: "smooth", block: 'start' });
+        this.skipLinksAnchor.nativeElement.focus({preventScroll: true});
     }
 
     onActivate() {
