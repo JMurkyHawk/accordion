@@ -5,6 +5,7 @@
             {{title}}
         </h1>
         <a class="btn" target="_blank" href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">View Code In GitHub</a>
+        <button id="skipLinks" (click)="skipLinksClick($event)" #skipLinks>Skip Navigation</button>
     </div>
 
     <div class="navBar">
@@ -31,12 +32,18 @@
                 <li>
                     <a class="btn" routerLink="/accordion-custom" routerLinkActive="active" #rla6="routerLinkActive" [attr.tabindex]="rla6.isActive ? -1 : null">Custom styling</a>
                 </li>
+                <li>
+                    <a class="btn" routerLink="/accordion-output" routerLinkActive="active" #rla7="routerLinkActive" [attr.tabindex]="rla7.isActive ? -1 : null">Output info</a>
+                </li>
             </ul>
         </nav>
 
     </div>
 
-    <div class="mainContent" [@JmhRouteAnimation]="routeIdNumber">
+    <div id="mainContent" [@JmhRouteAnimation]="routeIdNumber" >
+        <div id="skipLinksAnchor"
+            tabindex="0" 
+            #skipLinksAnchor >Main Content</div>
         
         <router-outlet (activate)="onActivate()"></router-outlet>
 

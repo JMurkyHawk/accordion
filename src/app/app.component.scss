@@ -10,6 +10,7 @@
     background: $jmGradient2;
     margin: 0 auto;
     padding: 3.5em 1em 2em 1em;
+    position: relative;
 
     display: flex;
     align-items: center;
@@ -158,6 +159,10 @@ hr {
     margin: 1em 0 2.5em 0;
 }
 
+.preserveWS {
+    white-space: pre;
+}
+
 ol,
 ul {
     margin: 0 0 1em 0;
@@ -234,6 +239,60 @@ ul.customCols {
     color: var(--orange1);
 }
 
+#skipLinks {
+    background-color: var(--white);
+    border: 1px solid var(--white);
+    border-top-right-radius: .25em;
+    border-top-left-radius: .25em;
+    border-bottom: none;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+    color: var(--black);
+    cursor: pointer;
+    display: block;
+    font-size: 1em;
+    line-height: 1em;
+    opacity: 0;
+    padding: .75em 1em;
+    transition-duration: $transitionDuration;
+    transition-property: background-color, border-color, color, opacity, top, right, bottom, left;
+    transition-timing-function: $transitionTimingFunction;
+    z-index: 1;
+
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &:focus {
+        opacity: 1;
+
+        bottom: 0;
+    }
+
+}
+
+#skipLinksAnchor {
+    display: block;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    transition-duration: $transitionDuration;
+    transition-property: opacity, overflow, transform, top, right, bottom, left;
+    transition-timing-function: $transitionTimingFunction;
+    z-index: 1;
+
+    transform: translateY(-50%);
+
+    &:focus {
+        height: auto;
+        opacity: 1;
+        transform: translateY(.5em);
+
+
+    }
+}
+
 .srOnly {
     overflow: hidden;
     position: absolute;
@@ -285,6 +344,8 @@ a.btn {
         0 2px 2px rgba(0, 0, 0, .1);
     margin: 0;
     padding: 2.5em 2.5em 1.5em 2.5em;
+    position: relative;
+    z-index: 10;
 
     h2 {
         font-size: 1.5em;
@@ -318,6 +379,14 @@ a.btn {
         }
     }
 
+}
+
+#mainContent {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .jmCard {
@@ -495,6 +564,12 @@ a.btn {
 
     j-murky-hawk-accordion {
         margin: 0;
+    }
+
+    &.accordionStack {
+        j-murky-hawk-accordion {
+            margin: inherit;
+        }
     }
 
     > strong,

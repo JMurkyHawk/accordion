@@ -1,0 +1,67 @@
+<div class="jmCard">
+
+    <h3 class="jmCardTitle" [innerHTML]="emit_title"></h3>
+
+    <div class="jmCardContent">
+
+        <section class="leadIn">
+
+            <h4>{{emit0}}</h4>
+
+            <p>{{emit}}</p>
+            <p class="noMargin" [innerHTML]="emit1"></p>
+
+        </section>
+
+        <section>
+
+            <div class="jmBackDrop">
+                <h4>{{emit_basic_title}}</h4>
+                <p class="preserveWS">{{emit_info1}} <strong>{{emittedId}}</strong></p>
+                <p class="preserveWS">{{emit_info2}} <strong>{{emittedState}}</strong></p>
+            </div>
+            
+            <div class="jmBackDrop accordionStack">
+
+                <j-murky-hawk-accordion 
+                    [jmFieldId]="emit_id1"
+                    class="jmBackdrop margin2"
+                    accordionType="panel"
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="emit_header"
+                    [emitInfo]="true"
+                    (clickHeader)="getAccordionInfo($event)" >
+                        <p>{{emit_content}}</p>
+                </j-murky-hawk-accordion>
+
+                <j-murky-hawk-accordion 
+                    [jmFieldId]="emit_id2"
+                    class="margin2"
+                    accordionType="panel"
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="emit_header_2"
+                    [emitInfo]="true"
+                    (clickHeader)="getAccordionInfo($event)" >
+                        <p>{{emit_content_2}}</p>
+                </j-murky-hawk-accordion>
+
+                <j-murky-hawk-accordion 
+                    [jmFieldId]="emit_id3"
+                    class="margin2"
+                    accordionType="panel"
+                    titleTransition="partial"
+                    titleTextOpen="Show"
+                    titleTextClosed="Hide"
+                    [titleText]="emit_header_3"
+                    [emitInfo]="true"
+                    (clickHeader)="getAccordionInfo($event)" >
+                        <p>{{emit_content_3}}</p>
+                </j-murky-hawk-accordion>
+
+            </div>
+
+        </section>

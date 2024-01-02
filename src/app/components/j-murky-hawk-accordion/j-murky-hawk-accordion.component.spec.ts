@@ -1,26 +1,30 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { JMurkyHawkAccordionComponent } from './j-murky-hawk-accordion.component';
+import { JMurkyHawkSvgRenderComponent } from '../j-murky-hawk-svg-render/j-murky-hawk-svg-render.component';
 
 describe('JMurkyHawkAccordionComponent', () => {
-  let component: JMurkyHawkAccordionComponent;
-  let fixture: ComponentFixture<JMurkyHawkAccordionComponent>;
-  let debugElement: DebugElement;
-  let accordionHeader: HTMLElement;
-  let accordionButton: HTMLElement;
-  let accordionBody: HTMLElement;
+    let component: JMurkyHawkAccordionComponent;
+    let fixture: ComponentFixture<JMurkyHawkAccordionComponent>;
+    let debugElement: DebugElement;
+    let accordionHeader: HTMLElement;
+    let accordionButton: HTMLElement;
+    let accordionBody: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 BrowserAnimationsModule,
                 HttpClientTestingModule
             ],
-            declarations: [ JMurkyHawkAccordionComponent ]
+            declarations: [ 
+                JMurkyHawkAccordionComponent,
+                JMurkyHawkSvgRenderComponent
+            ]
         })
         .compileComponents();
     }));
@@ -42,16 +46,20 @@ describe('JMurkyHawkAccordionComponent', () => {
 
     it('when title is clicked, should toggle the accordion\'s body content', () => {
         
-        spyOn(component, 'jmAccordionHeaderActivated');
+        spyOn(component, 'jmAccordionToggle');
         let btn = debugElement.query(By.css('button'));
         btn.triggerEventHandler('click', null);
-        expect(component.jmAccordionHeaderActivated).toHaveBeenCalled();
+        expect(component.jmAccordionToggle).toHaveBeenCalled();
 
         component.isAccordionOpen = false;
-        component.toggle();
-        expect(component.isAccordionOpen).toBeTrue();
-        component.toggle();
-        expect(component.isAccordionOpen).toBeFalse();
+        component.jmAccordionToggle();
+        fixture.whenStable().then(() => {
+            expect(component.isAccordionOpen).toBeTrue();
+        });
+        component.jmAccordionToggle();
+        fixture.whenStable().then(() => {
+            expect(component.isAccordionOpen).toBeFalse();
+        });
     });
 
     it('should show the accordion\'s body content when the component initially renders, if isOpenByDefault is true', () => {
@@ -78,7 +86,7 @@ describe('JMurkyHawkAccordionComponent', () => {
     it('new title text for OPEN state when using full-text transition', () => {
         component.titleTextOpen = "Open state using full text title transition";
         component.ngOnInit();
-        component.toggle();
+        component.jmAccordionToggle();
         fixture.detectChanges();
         expect(accordionHeader.textContent).toBe(component.titleText);
 
@@ -121,15 +129,15 @@ describe('JMurkyHawkAccordionComponent', () => {
         expect(component.titleTextSlotChange + component.titleText )
             .toBe(component.titleTextOpen + component.titleText);
 
-        spyOn(component, 'jmAccordionHeaderActivated');
-        component.jmAccordionHeaderActivated();
+        spyOn(component, 'jmAccordionToggle');
+        component.jmAccordionToggle();
         component.titleTextSlotChange = component.titleTextClosed;
-        expect(component.jmAccordionHeaderActivated).toHaveBeenCalled();
+        expect(component.jmAccordionToggle).toHaveBeenCalled();
         fixture.detectChanges();
         expect(component.titleTextSlotChange + component.titleText )
             .toBe(component.titleTextClosed + component.titleText);
 
-        component.jmAccordionHeaderActivated();
+        component.jmAccordionToggle();
         component.titleTextSlotChange = component.titleTextOpen;
         fixture.detectChanges();
         expect(component.titleTextSlotChange + component.titleText )
@@ -139,9 +147,10 @@ describe('JMurkyHawkAccordionComponent', () => {
 
     it('should apply specified height on accordion body in open state when value is provided to customHeight input', () => {
         component.customHeight = '200px';
-        component.toggle();
-        fixture.detectChanges();
-        expect(component.jmAccordionContent.nativeElement.style.height).toBe(component.customHeight);
+        component.jmAccordionToggle();
+        fixture.whenStable().then(() => {
+            expect(accordionBody.style.height).toBe(component.customHeight);
+        });
     });
     
     it('should use default value if accordionType is empty', () => {
@@ -228,6 +237,24 @@ describe('JMurkyHawkAccordionComponent', () => {
         component.customStylesBody = {'x':'y'};
         expect(checkCustomStylesBody).toHaveBeenCalledWith({'x':'y'});
         expect(component.customStylesBody).toEqual({});
+    });
+
+    it('should emit on click', () => {
+        // Spy on event emitter
+        const component = fixture.componentInstance;
+        spyOn(component.clickHeader, 'emit').and.callThrough();
+
+        // Trigger the click
+        const nativeElement = fixture.nativeElement;
+        const button = nativeElement.querySelector('.jmAccordionHeader > button');
+        button.dispatchEvent(new Event('click'));
+
+        fixture.whenStable().then(() => {
+            expect(component.clickHeader.emit).toHaveBeenCalledWith({
+                'id': component.jmFieldId, 
+                'open': component.isAccordionOpen
+            });
+        });
     });
 
 });

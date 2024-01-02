@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -22,7 +22,10 @@ export class JMurkyHawkSvgRenderComponent implements OnInit {
     constructor(public http: HttpClient) {}
 
     ngOnInit() : void {
-        this.http.get(this.src, {responseType: 'text'}).subscribe(data => {
+        // Per Angular's docs, no need to unsubscribe from HttpClient methods: https://angular.io/guide/http-request-data-from-server#starting-the-request
+        this.http
+        .get(this.src, {responseType: 'text'})
+        .subscribe(data => {
             this.jmSvgRenderContainer.nativeElement.innerHTML = data;
         })
     }
