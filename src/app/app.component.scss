@@ -277,12 +277,13 @@ ul.customCols {
     opacity: 0;
     overflow: hidden;
     position: absolute;
+    transform: translateY(-50%);
     transition-duration: $transitionDuration;
     transition-property: opacity, overflow, transform, top, right, bottom, left;
     transition-timing-function: $transitionTimingFunction;
     z-index: 1;
 
-    transform: translateY(-50%);
+    align-self: center;
 
     &:focus {
         height: auto;
@@ -386,7 +387,7 @@ a.btn {
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 }
 
 .jmCard {
