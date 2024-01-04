@@ -1,6 +1,6 @@
 # Accordion
 
-This project uses [Angular CLI](https://github.com/angular/angular-cli) version: 17.0.7  <br />
+This component and demo app use [Angular CLI](https://github.com/angular/angular-cli) version: 17.0.7  <br />
 Test Framework & Test Runner:  <br />
   Karma: 6.3.0,  <br />
   Jasmine-core: 3.8.0  <br /><br />
