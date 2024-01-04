@@ -3,7 +3,7 @@
 @import '../styles';
 
 .jmh {
-    padding: 0 0 5em 0;
+    padding: 0 0 0 0;
 }
 
 .pageHead {
@@ -272,21 +272,22 @@ ul.customCols {
 }
 
 #skipLinksAnchor {
+    color: var(--white);
     display: block;
-    height: 0;
+    line-height: 1.2em;
     opacity: 0;
     overflow: hidden;
+    padding: 0;
     position: absolute;
-    transform: translateY(-50%);
+    transform: translateY(-2em);
     transition-duration: $transitionDuration;
-    transition-property: opacity, overflow, transform, top, right, bottom, left;
+    transition-property: height, opacity, overflow, transform, top, right, bottom, left;
     transition-timing-function: $transitionTimingFunction;
     z-index: 1;
 
     align-self: center;
 
     &:focus {
-        height: auto;
         opacity: 1;
         transform: translateY(.5em);
 
@@ -309,7 +310,7 @@ a.btn {
     box-shadow: $shadow;
     color: $jmDemoColor1;
     //display: block;
-    padding: 1em 1.5em !important;
+    padding: 1em 1.5em;
     text-decoration: none;
     transition-duration: $transitionDuration;
     transition-property: $transitionProperty;
@@ -344,7 +345,7 @@ a.btn {
     box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1),
         0 2px 2px rgba(0, 0, 0, .1);
     margin: 0;
-    padding: 2.5em 2.5em 1.5em 2.5em;
+    padding: 2.5em 1.5em 1.5em 1.5em;
     position: relative;
     z-index: 10;
 
@@ -368,9 +369,11 @@ a.btn {
 
             li {
                 list-style-type: none;
-                margin: 0 1em 1em 1em;
+                margin: 0 0 .5em 0;
+                padding: 0;
 
                 a.btn {
+                    padding: .5em;
                     text-align: center;
 
                     display: flex;
@@ -383,11 +386,20 @@ a.btn {
 }
 
 #mainContent {
+    overflow: hidden;
     position: relative;
+    transition-duration: 500ms; // Match with the page transition speed in app-animations
+    transition-property: height;
+    transition-timing-function: $transitionTimingFunction;
 
     display: flex;
     flex-direction: column;
     align-items: stretch;
+
+    & > :nth-child(3),
+    & > :nth-child(4) {
+        padding: 5em 0;
+    }
 }
 
 .jmCard {
@@ -679,23 +691,96 @@ a.btn {
     justify-content: center;
 }
 
+footer {
+    background-color: var(--jmLightNavBackground);
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1),
+        0 2px 2px rgba(0, 0, 0, .1);
+    margin: 0;
+    padding: 2.5em 1.5em 1em 1.5em;
+
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    align-items: center;
+
+    ul {
+        margin: 0 0 1em 0;
+        padding: 0;
+
+        display: flex;
+        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        li {
+            list-style-type: none;
+            margin: 0 1em .5em 0;
+            padding: 0;
+
+            &:last-of-type {
+                margin: 0 0 1em 0;
+            }
+
+            a,
+            a:visited {
+                border: 1px solid transparent;
+                color: var(--black2);
+                padding: .5em .5em;
+                text-decoration: none;
+
+                &:hover,
+                &:focus {
+                    background-color: var(--blueDark4rgba2);
+                    border: 1px solid var(--range2);
+                    color: var(--black2);
+                    margin: 0;
+                    padding: .5em .5em;
+                }
+
+                &.active {
+                    border: none;
+                    color: var(--gray6) !important;
+                    cursor: not-allowed;
+                    text-decoration: none;
+
+                    &:hover,
+                    &:focus {
+                        background-color: var(--transparent);
+                    }
+                }
+            }
+        }
+    }
+
+    small {
+        p {
+            padding: 0;
+        }
+    }
+}
+
 /* Larger mobile tablets and desktop, 768px and up */
 
 @media screen and (min-width: 768px) {
 
+    #skipLinksAnchor {
+        color: var(--black);
+    }
+
     .navBar {
         nav {
             ul {
+                margin: 0 0 1em 0;
+
                 flex-direction: row;
 
                 li {
-                    margin: 0 1em 1em 0;
+                    margin: 0 .5em .5em 0;
 
                     flex-direction: row;
-
-                    &:last-of-type {
-                        margin: 0 1em 1em 0;
-                    }
                 }
             }
         }
@@ -705,8 +790,8 @@ a.btn {
         border: 1px solid var(--gray6);
         border-radius: 5px;
         box-shadow: $shadow;
-        margin-bottom: 7.5em;
-        margin: 5em auto 3em auto;
+        box-sizing: content-box;
+        margin: 0 auto 0 auto;
         width: 75%;
         max-width: 55em;
 
@@ -743,7 +828,7 @@ a.btn {
     }
 
     .jmCard.card2 {
-        margin: 4em auto 0 auto;
+        margin: 0 auto 0 auto;
     
         .jmCardContent {
     
@@ -784,7 +869,7 @@ a.btn {
 @media screen and (min-width: 1000px) {
 
     .jmCard {
-        margin: inherit auto 3em auto;
+        margin: 0 auto 0 auto;
         width: 66%;
     }
 

@@ -1,6 +1,7 @@
 :root {
 
     --black: #000000;
+    --black2: #121212;
     --gray2: #222222;
     --gray4: #444444;
     --gray5: #555555;
@@ -9,6 +10,7 @@
     --grayC: #cccccc;
     --grayD: #dddddd;
     --grayE: #eeeeee;
+    --grayLight1: #6f6f6f;
     --grayLight2: #f9f9f9;
     --white: #ffffff;
     --transparent: transparent;
@@ -20,6 +22,7 @@
     --blueDark2: #191f9e;
     --blueDark4: #006EFD;
     --blueDark4rgba: rgba(0, 110, 253, .025);
+    --blueDark4rgba2: rgba(0, 110, 253, .1);
     --blueLight: #00ddff;
 
     --orange1: #f1995b;
@@ -45,7 +48,7 @@
 
     --highlight1: rgba(255, 230, 0, 0.5);
 
-    --jmLightNavBackground: #ededed;
+    --jmLightNavBackground: #f3f3f3;
 
     --jmOpaqueBlackA: rgba(0, 0, 0, .05);
     --jmOpaqueBlackB: rgba(0, 0, 0, .1);

@@ -25,18 +25,18 @@ const left = [
     query(':leave', animateChild(), { optional: true }),
     group([
         query(':leave', [
-            style({ left: '0%', position: 'absolute' }), 
+            style({ left: '0%' }), 
             animate(`${animationTiming1} ease`, keyframes([
-                style({ offset: 0 }),
-                style({ offset: .33 }),
+                style({ left: '0%', offset: 0 }),
+                style({ left: '33%', offset: .33, position: 'absolute' }),
                 style({ left: '100%', offset: 1 })
             ]))
         ], { optional: true }),
         query(':enter', [
-            style({ left: '100%', position: 'absolute' }), 
+            style({ left: '100%' }), 
             animate(`${animationTiming1} ease`, keyframes([
                 style({ left: '-100%', offset: 0 }),
-                style({ left: '-100%', offset: .33 }),
+                style({ left: '-65%', offset: .33, position: 'absolute' }),
                 style({ left: '0%', offset: 1 })
             ]))
         ], { optional: true })
@@ -59,18 +59,18 @@ const right = [
     query(':leave', animateChild(), { optional: true }),
     group([
         query(':leave', [
-            style({ left: '0%', position: 'absolute' }), 
+            style({ left: '0%' }), 
             animate(`${animationTiming1} ease`, keyframes([
-                style({ offset: 0 }),
-                style({ offset: .33 }),
+                style({ left: '0%', offset: 0 }),
+                style({ left: '-35%', offset: .35, position: 'absolute' }),
                 style({ left: '-100%', offset: 1 })
             ])),
         ], { optional: true }),
         query(':enter', [
-            style({ left: '-100%', position: 'absolute' }), 
+            style({ left: '-100%' }), 
             animate(`${animationTiming1} ease`, keyframes([
                 style({ left: '100%', offset: 0 }),
-                style({ left: '100%', offset: .33 }),
+                style({ left: '65%', offset: .35, position: 'absolute' }),
                 style({ left: '0%', offset: 1 })
             ]))
         ], { optional: true })
