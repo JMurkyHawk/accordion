@@ -182,11 +182,28 @@ ul {
         font-size: 1.25em;
         margin: 0 0 2.5em 0;
 
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
         &:focus,
         &:hover {
+            background-color: $jmDemoColor1;
             border-color: var(--white);
             margin: 0 0 2.5em 0;
         }
+
+        svg {
+            margin: 0 .5em 0 0;
+
+            height: 1.5em;
+            width: 1.5em;
+
+            .iconSvgFill {
+                fill: var(--white);
+            }
+        }
+
     }
 }
 
