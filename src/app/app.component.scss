@@ -2,71 +2,6 @@
 @import 'themes';
 @import '../styles';
 
-.jmh {
-    padding: 0 0 0 0;
-}
-
-.pageHead {
-    background: $jmGradient2;
-    margin: 0 auto;
-    padding: 3.5em 1em 2em 1em;
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    h1 {
-        color: var(--white);
-        font-size: 2.5em;
-        font-weight: normal;
-        line-height: 1.65em;
-        margin: 0 auto;
-        padding: 0 0 .75em 0;
-        text-align: center;
-
-        display: flex;
-    
-        a {
-            color: var(--white);
-            font-size: 1em;
-            margin: 0;
-            padding: .1em .5em;
-            text-decoration: none;
-            transition-duration: $transitionDuration;
-            transition-property: $transitionProperty;
-            transition-timing-function: $transitionTimingFunction;
-    
-            &:focus,
-            &:hover {
-                background-color: var(--jmOpaqueBlackB);
-                cursor: pointer !important;
-                margin: 0;
-                padding: .1em .5em;
-                text-decoration: none;
-            }
-    
-            &.active {
-                text-decoration: none;
-            }
-        }
-    }
-
-    a.btn {
-        background-color: transparent;
-        border-color: var(--white);
-        color: var(--white);
-        font-size: 1.25em;
-        margin: 0 0 2.5em 0;
-
-        &:focus,
-        &:hover {
-            border-color: var(--white);
-            margin: 0 0 2.5em 0;
-        }
-    }
-}
-
 h2 {
     font-size: 2em;
     text-align: center;
@@ -178,55 +113,6 @@ ul {
 
 }
 
-ol.customCols,
-ul.customCols {
-    background-color: rgba(0, 110, 153, 0.075);
-    border: 1px solid rgba(0, 110, 153, 1);
-    margin: 0 0 1.5em 0;
-    padding: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    li {
-        list-style-type: none;
-        padding: .5em 1em;
-
-        display: flex;
-        flex-direction: row;
-        flex: 1 1 auto;
-
-        &:nth-child(even) {
-            background-color: rgba(0, 110, 153, 0.2);
-        }
-
-        span {
-            width: 50%;
-
-            &:nth-child(odd) {
-                padding: 0 1.5em 0 0;
-            }
-        }
-    }
-
-}
-
-ol.customCols,
-ul.customCols {
-    
-    &.v2 {
-        background-color: rgba(75, 0, 130, .075);
-        border: 1px solid rgba(75, 0, 130, 1);
-
-        li {
-
-            &:nth-child(even) {
-                background-color: rgba(75, 0, 130, .2);
-            }
-        }
-    }
-}
-
 .color1 {
     color: var(--blue3);
 }
@@ -237,6 +123,71 @@ ul.customCols {
 
 .color7 {
     color: var(--orange1);
+}
+
+.jmh {
+    padding: 0 0 0 0;
+}
+
+#pageHead {
+    background: $jmGradient2;
+    margin: 0 auto;
+    padding: 3.5em 1em 2em 1em;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+        color: var(--white);
+        font-size: 2.5em;
+        font-weight: normal;
+        line-height: 1.65em;
+        margin: 0 auto;
+        padding: 0 0 .75em 0;
+        text-align: center;
+
+        display: flex;
+    
+        a {
+            color: var(--white);
+            font-size: 1em;
+            margin: 0;
+            padding: .1em .5em;
+            text-decoration: none;
+            transition-duration: $transitionDuration;
+            transition-property: $transitionProperty;
+            transition-timing-function: $transitionTimingFunction;
+    
+            &:focus,
+            &:hover {
+                background-color: var(--jmOpaqueBlackB);
+                cursor: pointer !important;
+                margin: 0;
+                padding: .1em .5em;
+                text-decoration: none;
+            }
+    
+            &.active {
+                text-decoration: none;
+            }
+        }
+    }
+
+    a.btn {
+        background-color: transparent;
+        border-color: var(--white);
+        color: var(--white);
+        font-size: 1.25em;
+        margin: 0 0 2.5em 0;
+
+        &:focus,
+        &:hover {
+            border-color: var(--white);
+            margin: 0 0 2.5em 0;
+        }
+    }
 }
 
 #skipLinks {
@@ -338,7 +289,7 @@ a.btn {
     }
 }
 
-.navBar {
+#mainNavBar {
     background-color: var(--jmLightNavBackground);
     border-top: 1px solid #333333;
     border-bottom: 1px solid #333333;
@@ -353,34 +304,6 @@ a.btn {
         font-size: 1.5em;
         font-weight: normal;
         margin: 0 0 1.5em 0;
-    }
-
-    nav {
-
-        ul {
-            margin: 0;
-            padding: 0;
-
-            display: flex;
-            align-items: stretch;
-            flex-direction: column;
-            flex-wrap: wrap;
-            justify-content: center;
-
-            li {
-                list-style-type: none;
-                margin: 0 0 .5em 0;
-                padding: 0;
-
-                a.btn {
-                    padding: .5em;
-                    text-align: center;
-
-                    display: flex;
-                }
-
-            }
-        }
     }
 
 }
@@ -651,6 +574,55 @@ a.btn {
 
 }
 
+ol.customCols,
+ul.customCols {
+    background-color: rgba(0, 110, 153, 0.075);
+    border: 1px solid rgba(0, 110, 153, 1);
+    margin: 0 0 1.5em 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    li {
+        list-style-type: none;
+        padding: .5em 1em;
+
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+
+        &:nth-child(even) {
+            background-color: rgba(0, 110, 153, 0.2);
+        }
+
+        span {
+            width: 50%;
+
+            &:nth-child(odd) {
+                padding: 0 1.5em 0 0;
+            }
+        }
+    }
+
+}
+
+ol.customCols,
+ul.customCols {
+    
+    &.v2 {
+        background-color: rgba(75, 0, 130, .075);
+        border: 1px solid rgba(75, 0, 130, 1);
+
+        li {
+
+            &:nth-child(even) {
+                background-color: rgba(75, 0, 130, .2);
+            }
+        }
+    }
+}
+
 .jmHighlight {
     background-color: var(--jmBackDrop-Background);
     border: 1px solid var(--jmBackDrop-Border);
@@ -705,56 +677,6 @@ footer {
     flex-direction: column;
     align-items: center;
 
-    ul {
-        margin: 0 0 1em 0;
-        padding: 0;
-
-        display: flex;
-        align-items: stretch;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        li {
-            list-style-type: none;
-            margin: 0 1em .5em 0;
-            padding: 0;
-
-            &:last-of-type {
-                margin: 0 0 1em 0;
-            }
-
-            a,
-            a:visited {
-                border: 1px solid transparent;
-                color: var(--black2);
-                padding: .5em .5em;
-                text-decoration: none;
-
-                &:hover,
-                &:focus {
-                    background-color: var(--blueDark4rgba2);
-                    border: 1px solid var(--range2);
-                    color: var(--black2);
-                    margin: 0;
-                    padding: .5em .5em;
-                }
-
-                &.active {
-                    border: none;
-                    color: var(--gray6) !important;
-                    cursor: not-allowed;
-                    text-decoration: none;
-
-                    &:hover,
-                    &:focus {
-                        background-color: var(--transparent);
-                    }
-                }
-            }
-        }
-    }
-
     small {
         p {
             padding: 0;
@@ -768,22 +690,6 @@ footer {
 
     #skipLinksAnchor {
         color: var(--black);
-    }
-
-    .navBar {
-        nav {
-            ul {
-                margin: 0 0 1em 0;
-
-                flex-direction: row;
-
-                li {
-                    margin: 0 .5em .5em 0;
-
-                    flex-direction: row;
-                }
-            }
-        }
     }
 
     .jmCard {

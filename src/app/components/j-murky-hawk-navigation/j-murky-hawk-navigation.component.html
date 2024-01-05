@@ -1,0 +1,20 @@
+<nav [class]="_linkType">
+
+    <ul>
+
+        <li *ngFor="let item of navItems" >
+            
+            <a [class]="linkType === 'button' ? 'btn' : '' " 
+                [routerLink]="item.link" 
+                #instance="routerLinkActive"
+                routerLinkActive="active" 
+                [title]="instance.isActive ? activeLinkTitle : '' " 
+                [tabindex]="instance.isActive ? -1 : null"
+                href="javascript:undefined"
+                (click)="linkClick()">{{item.label}}</a>
+            
+        </li>
+
+    </ul>
+
+</nav>

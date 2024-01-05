@@ -1,0 +1,98 @@
+nav.text {
+    
+    ul {
+        margin: 0 0 1em 0;
+        padding: 0;
+
+        display: flex;
+        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        li {
+            list-style-type: none;
+            margin: 0 1em .5em 0;
+            padding: 0;
+
+            &:last-of-type {
+                margin: 0 0 1em 0;
+            }
+
+            a,
+            a:visited {
+                border: 1px solid transparent;
+                color: var(--black2);
+                padding: .5em .5em;
+                text-decoration: none;
+
+                &:hover,
+                &:focus {
+                    background-color: var(--blueDark4rgba2);
+                    border: 1px solid var(--range2);
+                    color: var(--black2);
+                    margin: 0;
+                    padding: .5em .5em;
+                }
+
+                &.active {
+                    border: none;
+                    color: var(--grayLight1) !important;
+                    cursor: not-allowed;
+                    text-decoration: none;
+
+                    &:hover,
+                    &:focus {
+                        background-color: var(--transparent);
+                    }
+                }
+            }
+        }
+    }
+}
+
+nav.button {
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        li {
+            list-style-type: none;
+            margin: 0 0 .5em 0;
+            padding: 0;
+
+            a.btn {
+                padding: .5em;
+                text-align: center;
+
+                display: flex;
+            }
+
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    nav.button,
+    nav.text {
+        ul {
+            margin: 0 0 1em 0;
+
+            flex-direction: row;
+
+            li {
+                margin: 0 .5em .5em 0;
+
+                flex-direction: row;
+            }
+        }
+    }
+}

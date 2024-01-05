@@ -1,50 +1,20 @@
 <div class="jmh">
 
-    <header class="pageHead">
-        <h1>
-            {{title}}
-        </h1>
+    <header id="pageHead">
+        <h1>{{title}}</h1>
         <a class="btn" target="_blank" href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">View Code In GitHub</a>
-        <button id="skipLinks" (click)="skipLinksClick($event)" #skipLinks>Skip Navigation</button>
+        <button id="skipLinks" (click)="skipLinksClick($event)" #skipLinks>{{skipLinksText}}</button>
     </header>
 
-    <div class="navBar">
+    <div id="mainNavBar">
 
         <h2>{{navHeading}}</h2>
-        
-        <nav>
-            <ul>
-                <li>
-                    <a class="btn" routerLink="/accordion-overview" routerLinkActive="active" 
-                        #rla1="routerLinkActive" [title]="rla1.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla1.isActive ? -1 : null">Overview</a>
-                </li>
-                <li>
-                    <a class="btn" routerLink="/accordion-type" routerLinkActive="active" 
-                        #rla2="routerLinkActive" [title]="rla2.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla2.isActive ? -1 : null">Display Types</a>
-                </li>
-                <li>
-                    <a class="btn" routerLink="/accordion-title-transition" routerLinkActive="active" 
-                        #rla3="routerLinkActive" [title]="rla3.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla3.isActive ? -1 : null">Title Transitions</a>
-                </li>
-                <li>
-                    <a class="btn" routerLink="/accordion-title-options" routerLinkActive="active" 
-                        #rla4="routerLinkActive" [title]="rla4.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla4.isActive ? -1 : null">Title Options</a>
-                </li>
-                <li>
-                    <a class="btn" routerLink="/accordion-body-options" routerLinkActive="active" 
-                        #rla5="routerLinkActive" [title]="rla5.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla5.isActive ? -1 : null">Body Options</a>
-                </li>
-                <li>
-                    <a class="btn" routerLink="/accordion-custom" routerLinkActive="active" 
-                        #rla6="routerLinkActive" [title]="rla6.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla6.isActive ? -1 : null">Custom styling</a>
-                </li>
-                <li>
-                    <a class="btn" routerLink="/accordion-output" routerLinkActive="active" 
-                        #rla7="routerLinkActive" [title]="rla7.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla7.isActive ? -1 : null">Output info</a>
-                </li>
-            </ul>
-        </nav>
 
+        <j-murky-hawk-navigation 
+            [navItems]="navLinkData"
+            linkType="button">
+        </j-murky-hawk-navigation>
+        
     </div>
 
     <div id="mainContent" [@JmhRouteAnimation]="routeIdNumber" #mainContent
@@ -52,47 +22,22 @@
             (@JmhRouteAnimation.done)="jmRouteAnimationDone()"
             aria-live="polite" >
 
-        <div id="skipLinksAnchor" tabindex="0" #skipLinksAnchor>Main Content</div>
+        <div id="skipLinksAnchor" tabindex="0" #skipLinksAnchor>{{skipLinksAnchorText}}</div>
         
         <router-outlet (activate)="onActivate()"></router-outlet>
 
     </div>
 
     <footer>
-        <nav>
-            <ul>
-                <li>
-                    <a (click)="scrollToMainContent($event)" routerLink="/accordion-overview" 
-                        routerLinkActive="active" #rla1="routerLinkActive" [title]="rla1.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla1.isActive ? -1 : null">Overview</a>
-                </li>
-                <li>
-                    <a (click)="scrollToMainContent($event)" routerLink="/accordion-type" 
-                        routerLinkActive="active" #rla2="routerLinkActive" [title]="rla2.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla2.isActive ? -1 : null">Display Types</a>
-                </li>
-                <li>
-                    <a (click)="scrollToMainContent($event)" routerLink="/accordion-title-transition" 
-                        routerLinkActive="active" #rla3="routerLinkActive" [title]="rla3.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla3.isActive ? -1 : null">Title Transitions</a>
-                </li>
-                <li>
-                    <a (click)="scrollToMainContent($event)" routerLink="/accordion-title-options" 
-                        routerLinkActive="active" #rla4="routerLinkActive" [title]="rla4.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla4.isActive ? -1 : null">Title Options</a>
-                </li>
-                <li>
-                    <a (click)="scrollToMainContent($event)" routerLink="/accordion-body-options" 
-                        routerLinkActive="active" #rla5="routerLinkActive" [title]="rla5.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla5.isActive ? -1 : null">Body Options</a>
-                </li>
-                <li>
-                    <a (click)="scrollToMainContent($event)" routerLink="/accordion-custom" 
-                        routerLinkActive="active" #rla6="routerLinkActive" [title]="rla6.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla6.isActive ? -1 : null">Custom styling</a>
-                </li>
-                <li>
-                    <a (click)="scrollToMainContent($event)" routerLink="/accordion-output" 
-                        routerLinkActive="active" #rla7="routerLinkActive" [title]="rla7.isActive ? activeLinkTitle : '' " [attr.tabindex]="rla7.isActive ? -1 : null">Output info</a>
-                </li>
-            </ul>
-        </nav>
+        
+        <j-murky-hawk-navigation 
+            [navItems]="navLinkData"
+            linkType="text" 
+            [linkScrollToTop]="true">
+        </j-murky-hawk-navigation>
+
         <small>
-            <p>Accordion and demo use Angular version {{angularVersion}}</p>
+            <p>{{footerNote}}</p>
         </small>
     </footer>
 

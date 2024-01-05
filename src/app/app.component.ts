@@ -1,14 +1,7 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, VERSION, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Event, NavigationEnd, NavigationStart, ParamMap, Router, RouterOutlet, RoutesRecognized, Scroll } from '@angular/router';
-import { Event as NavigationEvent } from '@angular/router';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-
-import { BehaviorSubject, fromEvent, Observable, of, Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { delay, filter, map, mergeMap, pairwise, switchMap } from 'rxjs/operators';
+import { Component, ElementRef, VERSION, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { JmhRouteAnimation } from './app-animations';
-import { ViewportScroller } from '@angular/common';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -23,8 +16,40 @@ export class AppComponent {
 
     public title: string = 'Angular Accordion Component Demo';
     public navHeading: string = 'Accordion Component Options';
+    public skipLinksText: string = 'Skip Navigation';
+    public skipLinksAnchorText: string = 'Main Content Area';
     public angularVersion: string = VERSION.full;
     public activeLinkTitle: string = 'Current page';
+    public footerNote: string = `Accordion and demo use Angular version ${this.angularVersion}`;
+
+    public navLinkData = [{
+        label: 'Overview',
+        link: 'accordion-overview'
+    },
+    {
+        label: 'Display Types',
+        link: 'accordion-type'
+    },
+    {
+        label: 'Title Transitions',
+        link: 'accordion-title-transition'
+    },
+    {
+        label: 'Title Options',
+        link: 'accordion-title-options'
+    },
+    {
+        label: 'Body Options',
+        link: 'accordion-body-options'
+    },
+    {
+        label: 'Custom Styling',
+        link: 'accordion-custom'
+    },
+    {
+        label: 'Output Info',
+        link: 'accordion-output'
+    }]; 
 
     @ViewChild("skipLinksAnchor", {static: false}) skipLinksAnchor!: ElementRef;
     @ViewChild("mainContent", {static: false}) mainContent!: ElementRef;
@@ -37,14 +62,6 @@ export class AppComponent {
     skipLinksClick(event: any) {
         this.skipLinksAnchor.nativeElement.scrollIntoView({ behavior: "smooth", block: 'start' });
         this.skipLinksAnchor.nativeElement.focus({preventScroll: true});
-    }
-
-    scrollToMainContent(event: any) {
-        setTimeout(() => {
-            this.skipLinksAnchor.nativeElement.scrollIntoView({ behavior: "smooth", block: 'start' });
-            this.skipLinksAnchor.nativeElement.focus({preventScroll: true});
-            this.skipLinksAnchor.nativeElement.blur();
-        }, 550);
     }
 
     jmRouteAnimationStart() {
@@ -102,14 +119,6 @@ export class AppComponent {
                     }
 
                     mainContentComponent.setAttribute('style', 'height: ' + mainContentEnterHeight + 'px' );
-
-                    // mainContentComponent.children[2].setAttribute('style', 'position: absolute;');
-                    // mainContentComponent.children[3].setAttribute('style', 'position: absolute;');
-
-                    // setTimeout(() => {
-                    //     mainContentComponent.children[2].removeAttribute('style');
-                    //     mainContentComponent.children[3].removeAttribute('style');
-                    // }, 20000 )
                 }
 
     }
