@@ -68,7 +68,7 @@ export class AppComponent {
     skipLinksButtonCalc() {
         const button = this.skipLinks.nativeElement.getBoundingClientRect();
         const buttonTop = button.top;
-        const buttonShowTop = buttonTop;
+        const buttonShowTop = buttonTop - button.height;
         return buttonShowTop;
     }
 
