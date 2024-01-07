@@ -4,41 +4,35 @@
         <h1>{{title}}</h1>
         <a class="btn" target="_blank" 
             href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">
-            <jm-svg-render src="assets/images/github-icon.svg"></jm-svg-render>View Code In GitHub
+            <jm-svg-render src="assets/images/github-icon.svg"></jm-svg-render>{{githubLabel}}
         </a>
-        <button id="skipLinks" (click)="skipLinksClick($event)" #skipLinks>{{skipLinksText}}</button>
-    </header>
+        </header>
 
     <div id="mainNavBar">
-
+        <button id="skipLinks" #skipLinks
+            (click)="skipLinksClick($event)" 
+            (focus)="skipLinksFocus($event)">{{skipLinksText}}</button>
         <h2>{{navHeading}}</h2>
-
         <j-murky-hawk-navigation 
             [navItems]="navLinkData"
             linkType="button">
         </j-murky-hawk-navigation>
-        
     </div>
 
-    <div id="mainContent" [@JmhRouteAnimation]="routeIdNumber" #mainContent
-            (@JmhRouteAnimation.start)="jmRouteAnimationStart()"
-            (@JmhRouteAnimation.done)="jmRouteAnimationDone()"
-            aria-live="polite" >
-
-        <div id="skipLinksAnchor" tabindex="0" #skipLinksAnchor>{{skipLinksAnchorText}}</div>
-        
-        <router-outlet (activate)="onActivate()"></router-outlet>
-
+    <div id="mainContent" aria-live="polite" tabindex="0" #mainContent 
+            [@JmhRouteAnimation]="routeIdNumber" 
+            (@JmhRouteAnimation.start)="jmRouteAnimationStart($event)"
+            (@JmhRouteAnimation.done)="jmRouteAnimationDone($event)">
+        <router-outlet (activate)="onActivate()" ></router-outlet>
     </div>
 
     <footer>
-        
         <j-murky-hawk-navigation 
             [navItems]="navLinkData"
-            linkType="text" 
-            [linkScrollToTop]="true">
+            linkType="text"
+            [linkScrollTo]="true"
+            linkScrollToId="mainNavBar" >
         </j-murky-hawk-navigation>
-
         <small>
             <p>{{footerNote}}</p>
         </small>

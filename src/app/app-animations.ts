@@ -1,86 +1,109 @@
 import { animate, 
-    animateChild, 
     group, 
     keyframes, 
-    state, 
-    stagger, 
+    sequence, 
     style, 
     transition, 
     trigger, 
     query } from '@angular/animations';
 
-const animationTiming1 = '500ms';
+const delay = 50;
+const animationTiming = 500;
 
 const left = [
-    style({ position: 'relative' }),
     query(':enter, :leave', [
         style({
             position: 'relative',
             top: 0,
-            left: 0,
             width: '100%'
         })
     ], { optional: true }),
     
-    query(':leave', animateChild(), { optional: true }),
     group([
+
         query(':leave', [
-            style({ left: '0%' }), 
-            animate(`${animationTiming1} ease`, keyframes([
-                style({ left: '0%', offset: 0 }),
-                style({ left: '33%', offset: .33, position: 'absolute' }),
-                style({ left: '100%', offset: 1 })
-            ]))
+            /* *NOTE: It's necessary to use sequence() so the position: 'absolute' style isn't applied before the custom page height animation (in app.component.ts) has time to get the height of the :enter and :leave pages when their positons are 'relative'. 
+            This keeps them in the page height calculation. 
+            Applying 'absolue' right away will cause the page height calculation/animation to fail, as well as the appearance of the footer jumping to the top of the main content section until these :enter and :leave animations are complete.
+            */
+            sequence([ // *See *NOTE above
+                style({ left: '0%' }), 
+                animate(`${delay}ms ease-in`, keyframes([
+                    style({ left: '0%', offset: 0 }),
+                    style({ left: '0%', offset: 1 })
+                ])),
+                style({ position: 'absolute'}),
+                animate(`${animationTiming}ms ease-out`, keyframes([
+                    style({ left: '0%', offset: 0 }),
+                    style({ left: '100%', offset: 1 })
+                ]))
+            ])
         ], { optional: true }),
+
         query(':enter', [
-            style({ left: '100%' }), 
-            animate(`${animationTiming1} ease`, keyframes([
-                style({ left: '-100%', offset: 0 }),
-                style({ left: '-65%', offset: .33, position: 'absolute' }),
-                style({ left: '0%', offset: 1 })
-            ]))
+            sequence([ // *See *NOTE above
+                style({ left: '100%' }), 
+                animate(`${delay}ms ease-in`, keyframes([
+                    style({ left: '-100%', offset: 0 }),
+                    style({ left: '-100%', offset: 1 })
+                ])),
+                style({ position: 'absolute' }),
+                animate(`${animationTiming}ms ease-out`, keyframes([
+                    style({ left: '-100%', offset: 0 }),
+                    style({ left: '0%', offset: 1 })
+                ]))
+            ])
         ], { optional: true })
-    ]),
-    query(':enter', animateChild(), { optional: true })
+    ])
     
 ];
 
 const right = [
-    style({ position: 'relative' }),
     query(':enter, :leave', [
         style({
             position: 'relative',
             top: 0,
-            left: 0,
             width: '100%'
         })
     ], { optional: true }),
     
-    query(':leave', animateChild(), { optional: true }),
     group([
+
         query(':leave', [
-            style({ left: '0%' }), 
-            animate(`${animationTiming1} ease`, keyframes([
-                style({ left: '0%', offset: 0 }),
-                style({ left: '-35%', offset: .35, position: 'absolute' }),
-                style({ left: '-100%', offset: 1 })
-            ])),
+            sequence([ // *See *NOTE above
+                style({ left: '0%' }), 
+                animate(`${delay}ms ease-in`, keyframes([
+                    style({ left: '0%', offset: 0 }),
+                    style({ left: '0%', offset: 1 })
+                ])),
+                style({ position: 'absolute' }),
+                animate(`${animationTiming}ms ease-out`, keyframes([
+                    style({ left: '0%', offset: 0 }),
+                    style({ left: '-100%', offset: 1 })
+                ])),
+            ])
         ], { optional: true }),
+
         query(':enter', [
-            style({ left: '-100%' }), 
-            animate(`${animationTiming1} ease`, keyframes([
-                style({ left: '100%', offset: 0 }),
-                style({ left: '65%', offset: .35, position: 'absolute' }),
-                style({ left: '0%', offset: 1 })
-            ]))
+            sequence([ // *See *NOTE above
+                style({ left: '-100%' }), 
+                animate(`${delay}ms ease-in`, keyframes([
+                    style({ left: '100%', offset: 0 }),
+                    style({ left: '100%', offset: 1 }),
+                ])),
+                style({ position: 'absolute' }),
+                animate(`${animationTiming}ms ease-out`, keyframes([
+                    style({ left: '100%', offset: 0 }),
+                    style({ left: '0%', offset: 1 })
+                ]))
+            ])
         ], { optional: true })
-    ]),
-    query(':enter', animateChild(), { optional: true })
+    ])
     
 ];
 
 export const JmhRouteAnimation =
     trigger('JmhRouteAnimation', [
         transition(':increment', right),
-        transition(':decrement', left),
+        transition(':decrement', left)
     ]);
