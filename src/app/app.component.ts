@@ -12,9 +12,11 @@ import { JmhRouteAnimation } from './app-animations';
 })
 export class AppComponent {
 
-    public routeIdNumber!: number;
+    public routeIdNumber: number = NaN;
+    private skipLinksButtonPosition: number = NaN;
 
     public title: string = 'Angular Accordion Component Demo';
+    public githubLabel: string = 'View Code In GitHub';
     public navHeading: string = 'Accordion Component Options';
     public skipLinksText: string = 'Skip Navigation';
     public skipLinksAnchorText: string = 'Main Content Area';
@@ -51,24 +53,46 @@ export class AppComponent {
         link: 'accordion-output'
     }]; 
 
-    @ViewChild("skipLinksAnchor", {static: false}) skipLinksAnchor!: ElementRef;
+    @ViewChild("skipLinks", {static: false}) skipLinks!: ElementRef;
     @ViewChild("mainContent", {static: false}) mainContent!: ElementRef;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router
     ) { }
+    
+    ngAfterViewInit() {
+        this.skipLinksButtonPosition = this.skipLinksButtonCalc();
+    }
+
+    skipLinksButtonCalc() {
+        const button = this.skipLinks.nativeElement.getBoundingClientRect();
+        const buttonTop = button.top;
+        const buttonShowTop = buttonTop;
+        return buttonShowTop;
+    }
 
     skipLinksClick(event: any) {
-        this.skipLinksAnchor.nativeElement.scrollIntoView({ behavior: "smooth", block: 'start' });
-        this.skipLinksAnchor.nativeElement.focus({preventScroll: true});
+        this.mainContent.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.mainContent.nativeElement.focus({preventScroll: true});
     }
 
-    jmRouteAnimationStart() {
-        this.mainContent.nativeElement.children[2] ? this.getMainContentContentSize() : undefined;
+    skipLinksFocus(event: any) {
+        window.scrollTo({
+            top: this.skipLinksButtonPosition,
+            behavior: 'smooth'
+        })
     }
 
-    jmRouteAnimationDone() {
+    jmRouteAnimationStart(event: any) {
+        /* Trying to get the new page (this.mainContent.nativeElement.children[2]) height from ANY of the router events results in an incorrect page height. 
+        No idea why, nothing worked. The only place that I've been able to get the correct height is when the route transition animation starts. 
+        A slight delay in the JmhRouteAnimation will allow the setMainContentSize() method to get the correct page measurements and animate the mainContent area's height smoothly, preventing the footer 'jumping' on router navigation. 
+        I don't like having to use an arbitrary time delay, but it's the only thing that seems to work... */
+        this.mainContent.nativeElement.children[2] ? this.setMainContentSize() : undefined;
+    }
+
+    jmRouteAnimationDone(event: any) {
         this.mainContent.nativeElement.removeAttribute('style');
     }
 
@@ -76,50 +100,16 @@ export class AppComponent {
         this.routeIdNumber = this.route.firstChild!.snapshot.data['routeIdNumber'];
     }
 
-    getMainContentContentSizeInitial() {
+    setMainContentSize() {
 
-        const mainContentComponent = this.mainContent.nativeElement;
+        let mainComponent = this.mainContent.nativeElement;
+        let leaveHeight = mainComponent.children[1].offsetHeight;
+        let enterHeight = mainComponent.children[2].offsetHeight;
 
-        let mainContentLeave = mainContentComponent.children[2];
-        let mainContentLeaveRect = mainContentLeave.getBoundingClientRect();
-        let mainContentLeaveTop = Math.ceil(mainContentLeaveRect.top);
-        let mainContentLeaveBottom = Math.ceil(mainContentLeaveRect.bottom);
-        let mainContentLeaveHeight = mainContentLeaveBottom - mainContentLeaveTop;
-        
-        return mainContentLeaveHeight;
-
-    }
-
-    getMainContentContentSize() {
-
-                let mainContentLeaveHeight = this.getMainContentContentSizeInitial();
-                
-                let mainContentComponent = this.mainContent.nativeElement;
-                let mainContentChildrenSize = mainContentComponent.children.length;
-                
-                if ( mainContentChildrenSize > 3 ) {
-
-                    let mainContentEnter = mainContentComponent.children[3];
-                    let mainContentEnterRect = mainContentEnter.getBoundingClientRect();
-                    let mainContentEnterTop = Math.ceil(mainContentEnterRect.top);
-                    let mainContentEnterBottom = Math.ceil(mainContentEnterRect.bottom);
-                    let mainContentEnterHeight = mainContentEnterBottom - mainContentEnterTop;
-
-                    for ( let i = 0; i < mainContentChildrenSize; i++ ) {
-
-                        let tempMenuItemComponent = mainContentComponent.children[i];
-                        
-                        if ( tempMenuItemComponent.nodeName != 'ROUTER-OUTLET' ) {
-                            
-                            mainContentComponent.setAttribute('style', 'height: ' + mainContentLeaveHeight + 'px');
-                            tempMenuItemComponent.getBoundingClientRect();
-
-                        }
-
-                    }
-
-                    mainContentComponent.setAttribute('style', 'height: ' + mainContentEnterHeight + 'px' );
-                }
+        mainComponent.setAttribute('style', 'height: ' + leaveHeight + 'px');
+        setTimeout(() => {
+            mainComponent.setAttribute('style', 'height: ' + enterHeight + 'px' );
+        });
 
     }
 

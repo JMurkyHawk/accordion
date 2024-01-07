@@ -36,7 +36,7 @@ nav.text {
                 }
 
                 &.active {
-                    border: none;
+                    border: 1px solid var(--transparent);
                     color: var(--grayLight1) !important;
                     cursor: not-allowed;
                     text-decoration: none;
