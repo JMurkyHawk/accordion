@@ -1,5 +1,5 @@
 import { Component, ElementRef, VERSION, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { JmhRouteAnimation } from './app-animations';
 
@@ -23,6 +23,7 @@ export class AppComponent {
     public angularVersion: string = VERSION.full;
     public activeLinkTitle: string = 'Current page';
     public footerNote: string = `Accordion and demo use Angular version ${this.angularVersion}`;
+    public pageTop: string = 'Go to page top';
 
     public navLinkData = [{
         label: 'Overview',
@@ -53,12 +54,12 @@ export class AppComponent {
         link: 'accordion-output'
     }]; 
 
+    @ViewChild("pageHead", {static: false}) pageHead!: ElementRef;
     @ViewChild("skipLinks", {static: false}) skipLinks!: ElementRef;
     @ViewChild("mainContent", {static: false}) mainContent!: ElementRef;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router
+        private route: ActivatedRoute
     ) { }
     
     ngAfterViewInit() {
@@ -102,15 +103,23 @@ export class AppComponent {
 
     setMainContentSize() {
 
-        let mainComponent = this.mainContent.nativeElement;
-        let leaveHeight = mainComponent.children[1].offsetHeight;
-        let enterHeight = mainComponent.children[2].offsetHeight;
+        const mainComponent = this.mainContent.nativeElement;
+        const leaveHeight = mainComponent.children[1].offsetHeight;
+        const enterHeight = mainComponent.children[2].offsetHeight;
 
         mainComponent.setAttribute('style', 'height: ' + leaveHeight + 'px');
         setTimeout(() => {
             mainComponent.setAttribute('style', 'height: ' + enterHeight + 'px' );
         });
 
+    }
+
+    goToPageTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        this.pageHead.nativeElement.querySelector('.btn').focus();
     }
 
 }
