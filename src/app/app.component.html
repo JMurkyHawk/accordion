@@ -1,6 +1,6 @@
 <div class="jmh">
 
-    <header id="pageHead">
+    <header id="pageHead" #pageHead>
         <h1>{{title}}</h1>
         <a class="btn" target="_blank" 
             href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">
@@ -36,6 +36,7 @@
         <small>
             <p>{{footerNote}}</p>
         </small>
+        <button class="goToPageTop" (click)="goToPageTop()">{{pageTop}}</button>
     </footer>
 
 </div>
