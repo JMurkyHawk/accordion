@@ -699,6 +699,7 @@ footer {
     }
 
     .goToPageTop {
+        border-bottom: 0px solid transparent;
         line-height: 0;
         transform: scaleY(0) translateX(-50%);
         transform-origin: bottom;
@@ -711,7 +712,22 @@ footer {
         height: 0;
         bottom: 0;
 
+        &:after {
+            background: var(--blueDark4rgba2);
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            bottom: 0;
+            left: 1px;
+            z-index: -1;
+        }
+
         &:focus {
+            background: var(--jmLightNavBackground);
+            border: 2px solid var(--range2);
+            border-bottom: 0px solid transparent;
             line-height: 1em;
             opacity: 1;
             transform: scaleY(1) translateX(-50%);
