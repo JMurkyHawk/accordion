@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -17,7 +17,6 @@ export class JMurkyHawkSvgRenderComponent implements OnInit {
     @Input() src!: string;
 
     @ViewChild('jmSvgRenderContainer', { static: true }) jmSvgRenderContainer!: ElementRef;
-    @ViewChild('jmSvgRender', {static: false}) jmSvgRender!: ElementRef;
 
     constructor(public http: HttpClient) {}
 

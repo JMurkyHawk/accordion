@@ -61,7 +61,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         }
 
         public set accordionType(value: string) {
-            let validValue = this.provideOpts(value, 'accordionType', ['panel', 'minimal', 'basic']);
+            const validValue = this.provideOpts(value, 'accordionType', ['panel', 'minimal', 'basic']);
             if ( validValue === value ) {
                 this._accordionType = validValue;
             }
@@ -73,7 +73,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         }
 
         public set titleTransition(value: string) {
-            let validValue = this.provideOpts(value, 'titleTransition', ['none', 'full', 'partial']);
+            const validValue = this.provideOpts(value, 'titleTransition', ['none', 'full', 'partial']);
             if ( validValue === value ) {
                 this._titleTransition = validValue;
             }
@@ -86,7 +86,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         }
 
         public set titleAlign(value: string) {
-            let validValue = this.provideOpts(value, 'titleAlign', ['left', 'center', 'right']);
+            const validValue = this.provideOpts(value, 'titleAlign', ['left', 'center', 'right']);
             if ( validValue === value ) {
                 this._titleAlign = validValue;
             }
@@ -99,7 +99,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         }
 
         public set iconAlign(value: string) {
-            let validValue = this.provideOpts(value, 'iconAlign', ['left', 'right']);
+            const validValue = this.provideOpts(value, 'iconAlign', ['left', 'right']);
             if ( validValue === value ) {
                 this._iconAlign = validValue;
             }
@@ -112,7 +112,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         }
 
         public set iconType(value: string) {
-            let validValue = this.provideOpts(value, 'iconType', ['chevron', 'plusMinus']);
+            const validValue = this.provideOpts(value, 'iconType', ['chevron', 'plusMinus']);
             if ( validValue === value ) {
                 this._iconType = validValue;
             }
@@ -125,7 +125,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         }
 
         public set titleTagType(value: string) {
-            let validValue = this.provideOpts(value, 'titleTagType', this.headingTagTypes);
+            const validValue = this.provideOpts(value, 'titleTagType', this.headingTagTypes);
             if ( validValue === value ) {
                 this._titleTagType = validValue;
             }
@@ -140,6 +140,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     public isAccordionOpen: boolean = false;
     public isScrollable: boolean = false;
     public customStyles: string = '';
+    private tagName: string = '';
     private _accordionType: any = 'minimal';
     private _titleTransition: any = 'none';
     private _titleAlign: any = 'left';
@@ -164,7 +165,9 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         'strong', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
     ];
 
-    constructor() {}
+    constructor(elemRef: ElementRef) {
+        this.tagName = elemRef.nativeElement.tagName.toLowerCase();
+    }
 
 
 /*  -------------------------
@@ -173,8 +176,8 @@ export class JMurkyHawkAccordionComponent implements OnInit {
 
     errorMessageProvideOpts(value: string, inputName: string, allowableTypes: Array<string>) {
 
-        let message: string =
-            `'${value}' is not a valid input value for ${inputName} on the <jm-accordion> component. \n` +
+        const message: string =
+            `'${value}' is not a valid input value for ${inputName} on the <${this.tagName}> component. \n` +
             `Valid values for ${inputName} are: ${allowableTypes}`;
 
         console.error(message);
@@ -193,9 +196,9 @@ export class JMurkyHawkAccordionComponent implements OnInit {
 
     errorMessageCustomStylingObj(property: string, capSetElementStr: string, keyList: Array<string>) {
         
-        let message: string = 
+        const message: string = 
             `'${property}' is not a property available to customize on the ` +
-            `<jm-accordion> component via customStyles${capSetElementStr} input. \n` +
+            `<${this.tagName}> component via customStyles${capSetElementStr} input. \n` +
             `Valid key values for customStyles${capSetElementStr}: ${keyList}`;
 
         console.error(message);
@@ -208,7 +211,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         for ( const key in evalObj ) {
 
             let keyList: Array<string>;
-            let capSetElementStr: string = setElement.charAt(0).toUpperCase() + setElement.slice(1);
+            const capSetElementStr: string = setElement.charAt(0).toUpperCase() + setElement.slice(1);
 
             keyList = (setElement === 'title' ? this.stylesTitleProps : this.stylesBodyProps);
 
@@ -265,7 +268,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         if ( this.stylesBody ) {
             // Set custom style options for the accordion body content
             for ( const [key, value] of Object.entries(this.stylesBody) ) {
-                if ( value !== undefined ) {
+                if ( value ) {
                     styleList += this.buildStyleList(key, value, 'body');
                 }
             }
@@ -286,9 +289,9 @@ export class JMurkyHawkAccordionComponent implements OnInit {
             slotElement = this.titleSlotOpen.nativeElement;
         }
 
-        let slotOpenBox = slotElement.getBoundingClientRect();
-        let slotOpenBoxRight = Math.ceil(slotOpenBox.right);
-        let slotOpenBoxLeft = Math.ceil(slotOpenBox.left);
+        const slotOpenBox = slotElement.getBoundingClientRect();
+        const slotOpenBoxRight = Math.ceil(slotOpenBox.right);
+        const slotOpenBoxLeft = Math.ceil(slotOpenBox.left);
         
         return slotOpenBoxRight - slotOpenBoxLeft + 1;
         
