@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, reflectComponentType } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 
 export interface LinkData {
     label: string;
@@ -53,7 +53,7 @@ export class JMurkyHawkNavigationComponent {
     }
 
     scrollToIdValueMessage(value: string) {
-        console.warn(`No element with an id='${value}' could not be found in the document. Please provide a valid element id to the <${this.tagName}> component's 'linkScrollToId' input. \nThe element with an id='${this._linkScrollToId}' will be used instead.`);
+        console.warn(`No element with an id='${value}' could not be found in the document. Please provide a valid element id to the <${this.tagName}> component's 'linkScrollToId' input. \nElement with the id='${this._linkScrollToId}' will be used instead.`);
     }
 
     checkScrollToIdValue(value: string) {;
