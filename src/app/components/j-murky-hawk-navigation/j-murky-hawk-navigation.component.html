@@ -4,7 +4,7 @@
 
         <li *ngFor="let item of navItems" >
             
-            <a [class]="linkType === 'button' ? 'btn' : '' " 
+            <a [class]="linkType === 'button' ? 'btn' : 'link' " 
                 [routerLink]="item.link" 
                 #instance="routerLinkActive"
                 routerLinkActive="active" 
