@@ -148,7 +148,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     private _iconType: any = 'chevron';
     private _titleTagType: any = 'strong';
     // For transitioning the width of changeable text when partial title text change is enabled
-    public slotWidth: number = NaN;
+    public slotWidth: number | undefined = undefined;
     public titleTextSlotChange: string = '';
     
     // Allowable values for inputs with options lists

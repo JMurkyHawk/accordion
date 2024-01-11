@@ -18,9 +18,8 @@ export class JMurkyHawkNavigationComponent {
     public tagName: string = '';
     public activeLink:string = 'routerLinkActive';
     public activeLinkTitle: string = 'Current page';
-    public navLinkData: Array<LinkData> = [{label: 'Please provide link data list', link: '' }]
 
-    @Input() navItems: Array<LinkData> = this.navLinkData;
+    @Input() navItems: Array<LinkData> = [{label: 'Please provide link data list', link: '' }];
     @Input() linkScrollTo: boolean = false;
     @Input() linkScrollDelay: number = 750;
 
