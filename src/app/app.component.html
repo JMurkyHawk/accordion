@@ -6,7 +6,7 @@
             href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">
             <jm-svg-render src="assets/images/github-icon.svg"></jm-svg-render>{{githubLabel}}
         </a>
-        </header>
+    </header>
 
     <div id="mainNavBar">
         <button id="skipLinks" #skipLinks
@@ -15,7 +15,7 @@
         <h2>{{navHeading}}</h2>
         <j-murky-hawk-navigation 
             [navItems]="navLinkData"
-            linkType="button">
+            linkStyle="button">
         </j-murky-hawk-navigation>
     </div>
 
@@ -29,9 +29,9 @@
     <footer>
         <j-murky-hawk-navigation 
             [navItems]="navLinkData"
-            linkType="text"
+            linkStyle="text"
             [linkScrollTo]="true"
-            linkScrollToId="mainNavBar" >
+            linkScrollToId="mainContent" >
         </j-murky-hawk-navigation>
         <small>
             <p>{{footerNote}}</p>
