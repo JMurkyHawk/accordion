@@ -1,10 +1,10 @@
-<nav [class]="_linkType">
+<nav [class]="_linkStyle">
 
     <ul>
 
         <li *ngFor="let item of navItems" >
             
-            <a [class]="linkType === 'button' ? 'btn' : 'link' " 
+            <a [class]="linkStyle === 'button' ? 'btn' : 'link' " 
                 [routerLink]="item.link" 
                 #instance="routerLinkActive"
                 routerLinkActive="active" 

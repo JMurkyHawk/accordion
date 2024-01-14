@@ -12,7 +12,7 @@ export interface LinkData {
 })
 export class JMurkyHawkNavigationComponent {
 
-    public _linkType: string = 'button';
+    public _linkStyle: string = 'button';
     public _linkScrollToId: string = 'mainContent';
 
     public tagName: string = '';
@@ -34,46 +34,64 @@ export class JMurkyHawkNavigationComponent {
 
     @Input() 
         // Set the appearance of the navigation links: 'button' (apply .btn style class) or 'text' (styled text link)
-        public get linkType() {
-            return this._linkType;
+        public get linkStyle() {
+            return this._linkStyle;
         }
 
-        public set linkType(value: string) {
+        public set linkStyle(value: string) {
             let validValues: Array<string> = ['button', 'text'];
-            validValues.includes(value) ? this._linkType = value : this.linkTypeMessage(value, validValues);
+            validValues.includes(value) ? this._linkStyle = value : this.linkStyleMessage(value, validValues);
         }
 
     constructor(elemRef: ElementRef) {
         this.tagName = elemRef.nativeElement.tagName.toLowerCase();
     }
 
-    linkTypeMessage(value: string, validList: Array<string>) {
-        console.warn(`'${value}' is an invalid value for the <${this.tagName}> component's 'linkType' input. Allowed values are: ${validList}`);
+    linkStyleMessage(value: string, validList: Array<string>) {
+        console.warn(`'${value}' is an invalid value for the <${this.tagName}> component's 'linkStyle' input. Allowed values are: ${validList}`);
     }
 
     scrollToIdValueMessage(value: string) {
-        console.warn(`No element with an id='${value}' could not be found in the document. Please provide a valid element id to the <${this.tagName}> component's 'linkScrollToId' input. \nElement with the id='${this._linkScrollToId}' will be used instead.`);
+        console.warn(`Element with an id='${value}' could not be found. Please provide a valid element id to the <${this.tagName}> component's 'linkScrollToId' input. \nElement with the id='${this._linkScrollToId}' will be used instead.`);
     }
 
-    checkScrollToIdValue(value: string) {;
-        if (document.getElementById(value)) {
-            document.getElementById(value)?.setAttribute('tabindex', '0');
+    checkScrollToIdValue(value: string) {
+        const elementRef = document.getElementById(value);
+        
+        if (elementRef) {
+            const elementName = elementRef.tagName.toString().toLowerCase();
+            const doNotModify: Array<string> = ['a', 'button'];
+            const modifyElement = !doNotModify.includes(elementName);
+
+            if (modifyElement) {
+                elementRef.setAttribute('tabindex', '0');
+            }
+
             return value;
+
         } else {
             this.scrollToIdValueMessage(value);
             return this._linkScrollToId;
         }
     }
 
+    // public scrollToElementNode: any;
+
+    // ngAfterViewInit() {
+    //     this.scrollToElementNode = document.getElementById(this.linkScrollToId);
+    // }
+
     linkClick() {
         // Scroll (and move focus) to the top of the main content area when using footer navigation
         const scrollToElementNode = document.getElementById(this.linkScrollToId);
-        setTimeout(() => {
-            if (this.linkScrollTo && scrollToElementNode) {
+        console.log("Is this stupid fucking thing here? " + document.getElementById(this.linkScrollToId)?.tagName);
+        
+        if (this.linkScrollTo && scrollToElementNode) {
+            setTimeout(() => {
                 scrollToElementNode.scrollIntoView({ behavior: "smooth", block: 'start' });
                 scrollToElementNode.focus({preventScroll: true});
-            }
-        }, this.linkScrollDelay);
+            }, this.linkScrollDelay);
+        }
     }
 
 }
