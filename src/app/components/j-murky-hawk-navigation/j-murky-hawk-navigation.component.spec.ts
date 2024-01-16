@@ -24,6 +24,7 @@ describe('JMurkyHawkNavigationComponent', () => {
             link: '/test-link-3'
         }
     ];
+    let scrollToId: string = 'mainNavBar';
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -45,14 +46,12 @@ describe('JMurkyHawkNavigationComponent', () => {
         component.linkStyle = 'text';
         linkButton = fixture.nativeElement.querySelector('a');
         fixture.detectChanges();
-    })
+    });
 
     const createScrollToElement = (element: string, scrollToId: string) => {
         const checkElement = document.getElementById(scrollToId);
         
-        if (checkElement) {
-            checkElement.remove();
-        }
+        if (checkElement) checkElement.remove();
 
         document.body
         .appendChild(document.createElement(element))
@@ -75,9 +74,9 @@ describe('JMurkyHawkNavigationComponent', () => {
     });
 
     it('if linkScrollTo="true", <a> link click should scroll default id element into view', fakeAsync(() => {
-        createScrollToElement('div', 'mainNavBar');
+        createScrollToElement('div', scrollToId);
         component.linkScrollTo = true;
-        component.linkScrollToId = 'mainNavBar';
+        component.linkScrollToId = scrollToId;
         fixture.detectChanges();
 
         const doc = fixture.nativeElement.ownerDocument;
@@ -94,46 +93,43 @@ describe('JMurkyHawkNavigationComponent', () => {
     }));
 
     it('checkScrollToIdValue() should return the PROVIDED id value if element with that id exists in DOM', () => {
-        const scrollToId = 'mainNavBar';
-        createScrollToElement('div', 'mainNavBar');
-
+        createScrollToElement('div', scrollToId);
         component.linkScrollTo = true;
         component.linkScrollToId = scrollToId;
         fixture.detectChanges();
+        
         expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
         expect(component.checkScrollToIdValue(component.linkScrollToId)).toBe(scrollToId);
     });
 
     it('checkScrollToIdValue() should return the DEFAULT id value if element with that id does NOT exist in DOM', () => {
-        const scrollToId = 'id-not-in-dom';
         const defaultIdValue = component.linkScrollToId;
-        createScrollToElement('div', 'mainNavBar');
-
+        createScrollToElement('div', scrollToId);
+        scrollToId = 'id-not-in-dom'; // scrollToId now different than element just created with createScrollToElement()
         component.linkScrollTo = true;
         component.linkScrollToId = scrollToId;
         fixture.detectChanges();
+
         expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
         expect(component.checkScrollToIdValue(component.linkScrollToId)).toBe(defaultIdValue);
     });
 
     it('checkScrollToIdValue() should set id element tabindex="0" if element is NOT <a> or <button>', () => {
-        const scrollToId = 'mainNavBar';
-        createScrollToElement('div', 'mainNavBar');
-
+        createScrollToElement('div', scrollToId);
         component.linkScrollTo = true;
         component.linkScrollToId = scrollToId;
         fixture.detectChanges();
+
         expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
         expect(document.getElementById(component.linkScrollToId)?.getAttribute('tabindex')).toBe('0');
     });
 
     it('checkScrollToIdValue() should NOT add tabindex if element is <a> or <button>', () => {
-        const scrollToId = 'mainNavBar';
-        createScrollToElement('a', 'mainNavBar');
-
+        createScrollToElement('a', scrollToId);
         component.linkScrollTo = true;
         component.linkScrollToId = scrollToId;
         fixture.detectChanges();
+        
         expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
         expect(document.getElementById(component.linkScrollToId)?.hasAttribute('tabindex')).toBe(false);
     });
