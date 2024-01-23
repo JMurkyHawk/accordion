@@ -40,19 +40,24 @@ export class JMurkyHawkNavigationComponent {
 
         public set linkStyle(value: string) {
             let validValues: Array<string> = ['button', 'text'];
-            validValues.includes(value) ? this._linkStyle = value : this.linkStyleMessage(value, validValues);
+            validValues.includes(value) ? this._linkStyle = value : this.handleInvalid(this.linkStyleMessage(value, validValues));
         }
 
-    constructor(elemRef: ElementRef) {
+    constructor( public elemRef: ElementRef ) {
+
         this.tagName = elemRef.nativeElement.tagName.toLowerCase();
+    }
+    
+    handleInvalid(content: string) {
+        console.warn(content);
     }
 
     linkStyleMessage(value: string, validList: Array<string>) {
-        console.warn(`'${value}' is an invalid value for the <${this.tagName}> component's 'linkStyle' input. Allowed values are: ${validList}`);
+        return `'${value}' is an invalid value for the <${this.tagName}> component's 'linkStyle' input. Allowed values are: ${validList}`;
     }
 
     scrollToIdValueMessage(value: string) {
-        console.warn(`Element with an id='${value}' could not be found. Please provide a valid element id to the <${this.tagName}> component's 'linkScrollToId' input. \nElement with the id='${this._linkScrollToId}' will be used instead.`);
+        return `Element with an id='${value}' could not be found. Please provide a valid element id to the <${this.tagName}> component's 'linkScrollToId' input. \nElement with the id='${this._linkScrollToId}' will be used instead.`;
     }
 
     checkScrollToIdValue(value: string) {
@@ -70,13 +75,15 @@ export class JMurkyHawkNavigationComponent {
             return value;
 
         } else {
-            this.scrollToIdValueMessage(value);
+            this.handleInvalid(this.scrollToIdValueMessage(value));
             return this._linkScrollToId;
         }
     }
 
-    linkClick() {
+    linkClick(isActive: boolean) {
         // Scroll (and move focus) to the top of the main content area when using footer navigation
+        if (isActive) return;
+
         const scrollToElementNode = document.getElementById(this.linkScrollToId);
        
         if (this.linkScrollTo && scrollToElementNode) {
