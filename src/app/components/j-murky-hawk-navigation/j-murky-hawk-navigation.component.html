@@ -11,7 +11,7 @@
                 [title]="instance.isActive ? activeLinkTitle : '' " 
                 [tabindex]="instance.isActive ? -1 : null"
                 href="javascript:undefined"
-                (click)="linkClick()">{{item.label}}</a>
+                (click)="linkClick(instance.isActive)">{{item.label}}</a>
             
         </li>
 
