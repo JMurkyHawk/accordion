@@ -12,8 +12,8 @@ import { JmhRouteAnimation } from './app-animations';
 })
 export class AppComponent {
 
-    public routeIdNumber: number = NaN;
-    private skipLinksButtonPosition: number = NaN;
+    public routeIdNumber: number | undefined = undefined;
+    private skipLinksButtonPosition: number | undefined = undefined;
 
     public title: string = 'Angular Accordion Component Demo';
     public githubLabel: string = 'View Code In GitHub';
