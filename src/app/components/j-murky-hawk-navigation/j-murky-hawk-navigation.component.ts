@@ -33,7 +33,7 @@ export class JMurkyHawkNavigationComponent {
         }
 
     @Input() 
-        // Set the appearance of the navigation links: 'button' (apply .btn style class) or 'text' (styled text link)
+        // Set the appearance of the navigation links: 'button' (apply .button style class) or 'text' (styled text link)
         public get linkStyle() {
             return this._linkStyle;
         }

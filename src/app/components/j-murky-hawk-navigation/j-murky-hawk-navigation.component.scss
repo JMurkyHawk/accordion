@@ -1,3 +1,6 @@
+@import '../../themes';
+@import '../../../styles';
+
 nav.text {
     
     ul {
@@ -68,11 +71,39 @@ nav.button {
             margin: 0 0 .5em 0;
             padding: 0;
 
-            a.btn {
+            a.button {
+                background-color: $jmDemoWhite;
+                border: 2px solid $jmDemoColor1;
+                border-radius: 2px;
+                box-shadow: $shadow;
+                color: $jmDemoColor1;
                 padding: .5em;
                 text-align: center;
+                text-decoration: none;
+                transition-duration: $transitionDuration;
+                transition-property: $transitionProperty;
+                transition-timing-function: $transitionTimingFunction;
 
-                display: flex;
+                display: inline-flex;
+                align-items: center;
+                flex-direction: column;
+                min-width: 10em;
+
+                &:focus,
+                &:hover {
+                    background-color: $jmDemoColor1;
+                    border-color: $jmDemoColor1;
+                    color: $jmDemoWhite !important;
+                    margin: 0;
+                }
+
+                &.active {
+                    background-color: var(--grayD);
+                    border-color: #444444;
+                    box-shadow: $shadow2;
+                    color: #444444 !important;
+                    cursor: not-allowed;
+                }
             }
 
         }
