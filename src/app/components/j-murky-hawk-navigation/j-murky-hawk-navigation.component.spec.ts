@@ -1,15 +1,19 @@
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
-import { Router, RouterLinkActive } from '@angular/router';
+import { Router, Routes, RouterLinkActive } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 
 import { JMurkyHawkNavigationComponent } from './j-murky-hawk-navigation.component';
+import { JmhPageAccordionOverviewComponent } from 'src/app/pages/jmh-page-accordion-overview/jmh-page-accordion-overview.component';
 
 describe('JMurkyHawkNavigationComponent', () => {
     let component: JMurkyHawkNavigationComponent;
     let fixture: ComponentFixture<JMurkyHawkNavigationComponent>;
+    let router: Router;
     let debugElement: DebugElement;
     let linkButton: HTMLElement;
+    let scrollToId: string = 'mainNavBar';
     let links: Array<{label: string, link: string}> = [
         {
             label: 'Test link 1',
@@ -24,7 +28,10 @@ describe('JMurkyHawkNavigationComponent', () => {
             link: '/test-link-3'
         }
     ];
-    let scrollToId: string = 'mainNavBar';
+    const routes: Routes = [
+        {path: '', redirectTo: 'accordion-overview', pathMatch: 'full'},
+        {path: 'accordion-overview', component: JmhPageAccordionOverviewComponent}
+    ];
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -32,10 +39,13 @@ describe('JMurkyHawkNavigationComponent', () => {
                 JMurkyHawkNavigationComponent
             ],
             imports: [
-                RouterLinkActive
+                RouterLinkActive,
+                RouterTestingModule.withRoutes(routes)
             ]
         })
         .compileComponents();
+        router = TestBed.inject(Router);
+        spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
     }));
 
     beforeEach(() => {
@@ -43,7 +53,7 @@ describe('JMurkyHawkNavigationComponent', () => {
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
         component.navItems = links;
-        component.linkStyle = 'text';
+        component.linkStyle = 'button';
         linkButton = fixture.nativeElement.querySelector('a');
         fixture.detectChanges();
     });
@@ -60,6 +70,35 @@ describe('JMurkyHawkNavigationComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should go to the accordion overview page when navigating to /accordion-overview', waitForAsync(() => {
+        router.navigate(['/accordion-overview']);
+        expect(router.navigate).toHaveBeenCalledWith(['/accordion-overview']);
+    }));
+
+    it('should render correct number of items according to the number of elements in navItems', () => {
+        // Arrange
+        component.navItems = [];
+        fixture.detectChanges();
+
+        // Act
+        const listLength = Math.floor(Math.random() * 10);
+        for (let i = 0; i < listLength; i++) {
+            const randomName = `Label ${Math.floor(Math.random() * 10)}`;
+            const randomLink = `/${Math.floor(Math.random() * 10)}`;
+            component.navItems.push({'label': randomName, 'link': randomLink});
+        }
+        fixture.detectChanges();
+
+        // Assert
+        const itemEls = fixture.debugElement.queryAll(By.css('li > a'));
+        expect(itemEls.length).toEqual(listLength);
+        itemEls.forEach((itemEl, index) => {
+            expect(itemEl.nativeElement.innerText).toEqual(`${component.navItems[index].label}`);
+            expect(itemEl.nativeElement.getAttribute('class')).toEqual(component.linkStyle);
+            expect(itemEl.nativeElement.getAttribute('href')).toEqual(`${component.navItems[index].link}`);
+        })
     });
 
     it('should execute linkClick() method when <a> link is clicked', () => {
