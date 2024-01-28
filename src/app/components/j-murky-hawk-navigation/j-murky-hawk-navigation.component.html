@@ -4,13 +4,12 @@
 
         <li *ngFor="let item of navItems" >
             
-            <a [class]="linkStyle === 'button' ? 'btn' : 'link' " 
+            <a [class]="linkStyle === 'button' ? 'button' : 'text' " 
                 [routerLink]="item.link" 
                 #instance="routerLinkActive"
                 routerLinkActive="active" 
                 [title]="instance.isActive ? activeLinkTitle : '' " 
                 [tabindex]="instance.isActive ? -1 : null"
-                href="javascript:undefined"
                 (click)="linkClick(instance.isActive)">{{item.label}}</a>
             
         </li>
