@@ -84,7 +84,7 @@ nav.button {
                 transition-property: $transitionProperty;
                 transition-timing-function: $transitionTimingFunction;
 
-                display: inline-flex;
+                display: flex;
                 align-items: center;
                 flex-direction: column;
                 min-width: 10em;
@@ -123,6 +123,10 @@ nav.button {
                 margin: 0 .5em .5em 0;
 
                 flex-direction: row;
+
+                a.button {
+                    display: inline-flex;
+                }
             }
         }
     }
