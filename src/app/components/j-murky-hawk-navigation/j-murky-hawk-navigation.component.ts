@@ -63,8 +63,9 @@ export class JMurkyHawkNavigationComponent {
         }
     }
 
-    constructor( public elemRef: ElementRef ) {
-
+    constructor( 
+        public elemRef: ElementRef 
+    ) {
         this.tagName = elemRef.nativeElement.tagName.toLowerCase();
     }
 

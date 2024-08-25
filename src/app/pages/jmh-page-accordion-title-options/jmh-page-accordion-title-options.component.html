@@ -1,12 +1,14 @@
-<div class="jmCard card2">
+<div class="jmCard">
 
     <h3 class="jmCardTitle" [innerHTML]="title_opts_title"></h3>
 
-    <div class="jmCardContent spacingV2">
+    <div class="jmCardContent">
 
-        <section>
+        <section class="leadIn">
 
             <h4>{{icon_pos_title}}</h4>
+
+            <p>{{icon_pos_description2}}</p>
 
             <div class="jmBackDrop titleCard">
 
@@ -42,13 +44,13 @@
 
             </div>
 
-            <p>{{icon_pos_description2}}</p>
-
         </section>
 
         <section>
 
             <h4>{{icon_type_title}}</h4>
+
+            <p>{{icon_type_description}}</p>
 
             <div class="jmBackDrop titleCard v2">
 
@@ -84,13 +86,13 @@
 
             </div>
 
-            <p>{{icon_type_description}}</p>
-
         </section>
 
         <section>
 
             <h4>{{title_align_title}}</h4>
+
+            <p>{{title_align_description}}</p>
 
             <div class="jmBackDrop titleCard v3">
 
@@ -143,13 +145,27 @@
 
             </div>
 
-            <p>{{title_align_description}}</p>
-
         </section>
 
         <section>
 
             <h4>{{tag_title}}</h4>
+
+            <p class="block" [innerHTML]="tag_description1"></p>
+
+            <p>
+                <span [innerHTML]="tag_description2"></span><br />
+                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code1"></span>
+                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code2"></span>
+                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code3"></span>
+                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code4"></span>
+                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code5"></span>
+                <span class="codeBoxMini2" [innerHTML]="tag_code6"></span>
+            </p>
+
+            <p [innerHTML]="tag_description3"></p>
+
+            <p>{{tag_description2_1}}</p>
 
             <div class="jmBackDrop titleCard v4">
 
@@ -167,22 +183,6 @@
                 </j-murky-hawk-accordion>
 
             </div>
-
-            <p class="block" [innerHTML]="tag_description1"></p>
-
-            <p>
-                <span [innerHTML]="tag_description2"></span><br />
-                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code1"></span>
-                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code2"></span>
-                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code3"></span>
-                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code4"></span>
-                <span class="codeBoxMini2 margin3" [innerHTML]="tag_code5"></span>
-                <span class="codeBoxMini2" [innerHTML]="tag_code6"></span>
-            </p>
-
-            <p [innerHTML]="tag_description3"></p>
-
-            <p>{{tag_description2_1}}</p>
 
         </section>
 
