@@ -79,9 +79,7 @@ export class AppComponent {
 
     constructor(
         private route: ActivatedRoute
-    ) { 
-
-    }
+    ) { }
     
     ngAfterViewInit() {
         this.skipLinksButtonPosition = this.skipLinksButtonCalc();
