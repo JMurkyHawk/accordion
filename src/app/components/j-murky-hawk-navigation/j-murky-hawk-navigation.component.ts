@@ -1,14 +1,20 @@
-import { Component, ElementRef, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 
 export interface LinkData {
-    label: string;
-    link: string;
+    label: string, 
+    link?: string, 
+    dropdown?: boolean, 
+    subLinks?: Array<{
+        label: string, 
+        link: string
+    }>
 }
 
 @Component({
   selector: 'j-murky-hawk-navigation',
   templateUrl: './j-murky-hawk-navigation.component.html',
-  styleUrl: './j-murky-hawk-navigation.component.scss'
+  styleUrl: './j-murky-hawk-navigation.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class JMurkyHawkNavigationComponent {
 
@@ -18,6 +24,9 @@ export class JMurkyHawkNavigationComponent {
     public tagName: string = '';
     public activeLink:string = 'routerLinkActive';
     public activeLinkTitle: string = 'Current page';
+    public emittedId: string = "---";
+    public emittedState: string = "---";
+    private delayValue: number = 125;
 
     @Input() navItems: Array<LinkData> = [{label: 'Please provide link data list', link: '' }];
     @Input() linkScrollTo: boolean = false;
@@ -43,13 +52,44 @@ export class JMurkyHawkNavigationComponent {
             validValues.includes(value) ? this._linkStyle = value : this.handleInvalid(this.linkStyleMessage(value, validValues));
         }
 
+    @ViewChild('navDropdownMenu') navDropdownMenu!: ElementRef;
+    @ViewChild('accordionMenu') accordionMenu!: any;
+
+    @HostListener('keydown.escape', ['$event'])
+    onKeyDown(event: Event) {
+        // Escape key should close the accordion menu
+        if ( this.emittedState === 'opened' ) {
+            this.accordionMenu.jmAccordionToggle();
+        }
+    }
+
     constructor( public elemRef: ElementRef ) {
 
         this.tagName = elemRef.nativeElement.tagName.toLowerCase();
     }
-    
+
     handleInvalid(content: string) {
         console.warn(content);
+    }
+
+    accordionOutputHandler(event: any) {
+        this.emittedId = event.id;
+        this.emittedState = event.open ? 'opened' : 'closed';
+    }
+
+    closeAccordion() {
+        if (this.emittedState === 'opened') {
+            this.accordionMenu.jmAccordionToggle();
+        }
+    }
+
+    accordionMenuItemClick(event: any) {
+        if ( event.target.getAttribute('disabled') !== 'true' ) {
+            setTimeout(() => {
+                this.accordionMenu.jmAccordionToggle();
+                this.navDropdownMenu.nativeElement.getElementsByTagName('button')[0].focus({focusVisible: true});
+            }, this.delayValue);
+        }
     }
 
     linkStyleMessage(value: string, validList: Array<string>) {

@@ -244,6 +244,7 @@ export const jmAccordionBodyAnimation =
                 style({
                     height: 0,
                     opacity: 0,
+                    overflow: 'hidden',
                     paddingTop: 0,
                     paddingBottom: 0
                 }),
@@ -259,6 +260,7 @@ export const jmAccordionBodyAnimation =
                 style({
                     height: '*',
                     opacity: 1,
+                    overflow: 'hidden',
                     paddingTop: '*',
                     paddingBottom: '*'
                 }),

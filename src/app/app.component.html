@@ -1,22 +1,40 @@
 <div class="jmh">
 
-    <header id="pageHead" #pageHead>
-        <h1>{{title}}</h1>
-        <a class="btn" target="_blank" 
-            href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">
-            <jm-svg-render src="assets/images/github-icon.svg"></jm-svg-render>{{githubLabel}}
-        </a>
-    </header>
+    <div id="pageHeadWrapper">
 
-    <div id="mainNavBar">
-        <button id="skipLinks" #skipLinks
-            (click)="skipLinksClick($event)" 
-            (focus)="skipLinksFocus($event)">{{skipLinksText}}</button>
-        <h2>{{navHeading}}</h2>
-        <j-murky-hawk-navigation 
-            [navItems]="navLinkData"
-            linkStyle="button">
-        </j-murky-hawk-navigation>
+        <header id="pageHead" #pageHead>
+
+            <button id="skipLinks" #skipLinks
+                (click)="skipLinksClick($event)" 
+                (focus)="skipLinksFocus($event)">{{skipLinksText}}</button>
+
+            <div class="pageHeadSection1">
+                <a class="logo" 
+                    #logoIcon="routerLinkActive"
+                    routerLink="accordion-overview"
+                    routerLinkActive="active" 
+                    [title]="logoIcon.isActive ? activeLinkTitle : 'Accordion component overview' " 
+                    [tabindex]="logoIcon.isActive ? -1 : null">
+                    <jm-svg-render src="assets/images/logo-jm-color.svg"></jm-svg-render>
+                </a>
+            </div>
+
+            <j-murky-hawk-navigation 
+                navId="topNav"
+                [navItems]="navLinkData"
+                linkStyle="text">
+            </j-murky-hawk-navigation>
+        </header>
+
+        <div id="subHeaderBar">
+            <div id="subHeaderContent">
+                <h2>{{title}}</h2>
+                <a class="gitHubBtn" target="_blank" 
+                    href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">
+                    <jm-svg-render src="assets/images/github-icon.svg"></jm-svg-render>{{githubLabel}}
+                </a>
+        </div>
+
     </div>
 
     <div id="mainContent" aria-live="polite" tabindex="0" #mainContent 
@@ -28,7 +46,7 @@
 
     <footer>
         <j-murky-hawk-navigation 
-            [navItems]="navLinkData"
+            [navItems]="navLinkData2"
             linkStyle="text"
             [linkScrollTo]="true"
             linkScrollToId="mainContent" >

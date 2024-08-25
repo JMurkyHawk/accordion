@@ -4,49 +4,135 @@
 nav.text {
     
     ul {
-        margin: 0 0 1em 0;
+        margin: 0 0 2em 0;
         padding: 0;
 
         display: flex;
         align-items: stretch;
         flex-direction: row;
         flex-wrap: wrap;
+        gap: .25em;
         justify-content: center;
+        row-gap: .5rem;
 
         li {
             list-style-type: none;
-            margin: 0 1em .5em 0;
+            margin: 0;
             padding: 0;
 
-            &:last-of-type {
-                margin: 0 0 1em 0;
-            }
-
             a,
-            a:visited {
-                border: 1px solid transparent;
+            a:visited,
+            button,
+            button:visited {
+                border: 1px solid transparent !important;
+                border-radius: .5rem;
                 color: var(--black2);
-                padding: .5em .5em;
+                line-height: 1.25;
+                padding: 1rem 1rem !important;
                 text-decoration: none;
 
                 &:hover,
                 &:focus {
-                    background-color: var(--blueDark4rgba2);
-                    border: 1px solid var(--range2);
+                    background-color: var(--blueDark4rgba2) !important;
+                    border: 1px solid var(--range2) !important;
                     color: var(--black2);
                     margin: 0;
                     padding: .5em .5em;
                 }
 
                 &.active {
-                    border: 1px solid var(--transparent);
+                    border: 1px solid var(--transparent) !important;
                     color: var(--grayLight1) !important;
                     cursor: not-allowed;
                     text-decoration: none;
 
                     &:hover,
                     &:focus {
-                        background-color: var(--transparent);
+                        background-color: var(--transparent) !important;
+                    }
+                }
+            }
+        }
+    }
+
+    j-murky-hawk-accordion {
+        > div {
+            position: relative;
+
+            .jmAccordionHeader {
+                button {
+                    padding: 0;
+
+                    .jmAccordionHeaderOpenClose {
+                        margin: .25rem 0 0 .75rem !important;
+                    }
+
+                    .jmAccordionHeadText {
+                        min-height: auto !important;
+                    }
+                }
+            }
+        
+            .jmAccordionContent {
+                background: var(--jm-acc-background);
+                border: var(--jm-acc-border);
+                border-radius: .5rem;
+                box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+                color: var(--black2);
+                overflow: visible;
+                z-index: 100;
+                
+                position: absolute;
+                top: 100%;
+        
+                > ul {
+                    margin: 0;
+                    min-width: 20rem;
+                    padding: 0 !important;
+        
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0;
+        
+                    > li {
+                        display: contents;
+        
+                        &:first-of-type {
+                            a {
+                                border-top-right-radius: .5rem;
+                                border-top-left-radius: .5rem;
+                                padding-top: 2rem !important;
+                            }
+                        }
+        
+                        a {
+                            border-radius: 0;
+                            box-sizing: content-box;
+                            padding: 1.5rem 3rem !important;
+                            z-index: 1;
+                            
+                            &:focus,
+                            &:hover {
+                                color: var(--black);
+                                z-index: 10;
+                            }
+
+                            &.active,
+                            &.active:focus,
+                            &.active:hover {
+                                background-color: #efefef !important;
+                                color: #666666 !important;
+                                z-index: 1;
+                            }
+                        }
+        
+                        &:last-of-type {
+                            a {
+                                border-bottom-right-radius: .5rem;
+                                border-bottom-left-radius: .5rem;
+                                padding-bottom: 2rem !important;
+                            }
+                        }
                     }
                 }
             }
@@ -74,7 +160,6 @@ nav.button {
             a.button {
                 background-color: $jmDemoWhite;
                 border: 2px solid $jmDemoColor1;
-                border-radius: 2px;
                 box-shadow: $shadow;
                 color: $jmDemoColor1;
                 padding: .5em;
@@ -115,13 +200,11 @@ nav.button {
     nav.button,
     nav.text {
         ul {
-            margin: 0 0 1em 0;
+            margin: 0 0 2rem 0;
 
             flex-direction: row;
 
             li {
-                margin: 0 .5em .5em 0;
-
                 flex-direction: row;
 
                 a.button {
