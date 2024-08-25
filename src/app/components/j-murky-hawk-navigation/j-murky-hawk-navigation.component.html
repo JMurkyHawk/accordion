@@ -4,13 +4,49 @@
 
         <li *ngFor="let item of navItems" >
             
-            <a [class]="linkStyle === 'button' ? 'button' : 'text' " 
+            <a *ngIf="item.link" 
+                [class]="linkStyle === 'button' ? 'button' : 'text' " 
                 [routerLink]="item.link" 
                 #instance="routerLinkActive"
                 routerLinkActive="active" 
                 [title]="instance.isActive ? activeLinkTitle : '' " 
                 [tabindex]="instance.isActive ? -1 : null"
                 (click)="linkClick(instance.isActive)">{{item.label}}</a>
+
+            <div *ngIf="!item.link"
+                #navDropdownMenu 
+                (clickOutside)="closeAccordion()">
+
+                <j-murky-hawk-accordion 
+                    #accordionMenu
+                    jmFieldId="navDropdown1"
+                    class=""
+                    accordionType="basic"
+                    [titleText]="item.label"
+                    [customStylesTitle]="{
+                        'color': '#ffffff',
+                        'color-ro': '#ededed'
+                    }"
+                    [customStylesBody]="{
+                        'color': '#000000'
+                    }"
+                    [emitInfo]="true"
+                    (clickHeader)="accordionOutputHandler($event)"
+                >
+                    <ul>
+                        <li *ngFor="let subItem of item.subLinks; let lastAccordionMenuItem = last">
+                            <a [routerLink]="subItem.link"
+                                (click)="accordionMenuItemClick($event)"
+                                #instance="routerLinkActive"
+                                routerLinkActive="active" 
+                                attr.disabled="{{instance.isActive}}"
+                                [title]="instance.isActive ? activeLinkTitle : '' " 
+                                [tabindex]="instance.isActive ? -1 : null">{{subItem.label}}</a>
+                        </li>
+                    </ul>
+                </j-murky-hawk-accordion>
+
+            </div>
             
         </li>
 

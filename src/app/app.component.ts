@@ -15,44 +15,63 @@ export class AppComponent {
     public routeIdNumber: number | undefined = undefined;
     private skipLinksButtonPosition: number | undefined = undefined;
 
-    public title: string = 'Angular Accordion Component Demo';
+    public title: string = 'Angular Accordion';
     public githubLabel: string = 'View Code In GitHub';
     public navHeading: string = 'Accordion Component Options';
     public skipLinksText: string = 'Skip Navigation';
     public skipLinksAnchorText: string = 'Main Content Area';
-    public angularVersion: string = VERSION.full;
+
     public activeLinkTitle: string = 'Current page';
+
+    public angularVersion: string = VERSION.full;
     public footerNote: string = `Accordion and demo use Angular version ${this.angularVersion}`;
     public pageTop: string = 'Go to page top';
 
-    public navLinkData = [{
+    public optionLinks = [
+        {
+            label: 'Display Types',
+            link: 'accordion-type'
+        },
+        {
+            label: 'Title Transitions',
+            link: 'accordion-title-transition'
+        },
+        {
+            label: 'Title Options',
+            link: 'accordion-title-options'
+        },
+        {
+            label: 'Body Options',
+            link: 'accordion-body-options'
+        },
+        {
+            label: 'Custom Styling',
+            link: 'accordion-custom'
+        },
+        {
+            label: 'Output Info',
+            link: 'accordion-output'
+        }
+    ];
+
+    public navLinkData = [
+        {
+            label: 'Overview',
+            link: 'accordion-overview'
+        },
+        {
+            label: 'Accordion Features',
+            dropdown: true,
+            subLinks: this.optionLinks
+        }
+    ];
+
+    public navLinkData2 = [{
         label: 'Overview',
         link: 'accordion-overview'
     },
-    {
-        label: 'Display Types',
-        link: 'accordion-type'
-    },
-    {
-        label: 'Title Transitions',
-        link: 'accordion-title-transition'
-    },
-    {
-        label: 'Title Options',
-        link: 'accordion-title-options'
-    },
-    {
-        label: 'Body Options',
-        link: 'accordion-body-options'
-    },
-    {
-        label: 'Custom Styling',
-        link: 'accordion-custom'
-    },
-    {
-        label: 'Output Info',
-        link: 'accordion-output'
-    }]; 
+    ...this.optionLinks
+    ];
 
     @ViewChild("pageHead", {static: false}) pageHead!: ElementRef;
     @ViewChild("skipLinks", {static: false}) skipLinks!: ElementRef;
@@ -60,7 +79,9 @@ export class AppComponent {
 
     constructor(
         private route: ActivatedRoute
-    ) { }
+    ) { 
+
+    }
     
     ngAfterViewInit() {
         this.skipLinksButtonPosition = this.skipLinksButtonCalc();
@@ -80,7 +101,7 @@ export class AppComponent {
 
     skipLinksFocus(event: any) {
         window.scrollTo({
-            top: this.skipLinksButtonPosition,
+            top: 0,
             behavior: 'smooth'
         })
     }
@@ -119,7 +140,7 @@ export class AppComponent {
             top: 0,
             behavior: 'smooth'
         });
-        this.pageHead.nativeElement.querySelector('.btn').focus();
+        this.pageHead.nativeElement.querySelector('#skipLinks').focus();
     }
 
 }

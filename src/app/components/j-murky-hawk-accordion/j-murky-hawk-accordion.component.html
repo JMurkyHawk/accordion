@@ -3,8 +3,7 @@
         'jmMinimal' : accordionType === 'minimal', 
         'jmPanel' : accordionType === 'panel'
     }" 
-    [style]="customStyles" 
-    #componentWrapper>
+    [style]="customStyles">
 
     <div class="jmAccordionHeader"
         [ngClass]="{ 
@@ -17,8 +16,7 @@
         <button id="{{jmFieldId}}" 
                 (click)="jmAccordionToggle()" 
                 [attr.aria-expanded]="isAccordionOpen"
-                attr.aria-controls="{{jmFieldId}}Content"
-                #jmAccordionComponentButton>
+                attr.aria-controls="{{jmFieldId}}Content">
             
             <!-- Title icon options -->
             <div class="jmAccordionHeaderOpenClose">

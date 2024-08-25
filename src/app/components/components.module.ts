@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
+import { ClickOutsideDirective } from '../directives/click-outside.directive';
+
 import { JMurkyHawkAccordionComponent } from './j-murky-hawk-accordion/j-murky-hawk-accordion.component';
 import { JMurkyHawkSvgRenderComponent } from './j-murky-hawk-svg-render/j-murky-hawk-svg-render.component';
 import { JMurkyHawkNavigationComponent } from './j-murky-hawk-navigation/j-murky-hawk-navigation.component';
@@ -16,7 +18,8 @@ import { JMurkyHawkNavigationComponent } from './j-murky-hawk-navigation/j-murky
     imports: [
         CommonModule,
         BrowserAnimationsModule,
-        RouterModule
+        RouterModule,
+        ClickOutsideDirective
     ],
     exports: [
         JMurkyHawkAccordionComponent, 
