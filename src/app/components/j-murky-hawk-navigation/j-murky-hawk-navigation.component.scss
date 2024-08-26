@@ -28,7 +28,7 @@ nav.text {
                 border-radius: .5rem;
                 color: var(--black2);
                 line-height: 1.25;
-                padding: 1rem 1rem !important;
+                padding: .8rem 1.2rem !important;
                 text-decoration: none;
 
                 &:hover,
@@ -83,7 +83,7 @@ nav.text {
                 z-index: 100;
                 
                 position: absolute;
-                top: 100%;
+                top: calc(100% + 2px);
         
                 > ul {
                     margin: 0;
@@ -101,14 +101,14 @@ nav.text {
                             a {
                                 border-top-right-radius: .5rem;
                                 border-top-left-radius: .5rem;
-                                padding-top: 2rem !important;
+                                padding-top: 1.6rem !important;
                             }
                         }
         
                         a {
                             border-radius: 0;
                             box-sizing: content-box;
-                            padding: 1.5rem 3rem !important;
+                            padding: 1.2rem 3.2rem !important;
                             z-index: 1;
                             
                             &:focus,
@@ -120,8 +120,8 @@ nav.text {
                             &.active,
                             &.active:focus,
                             &.active:hover {
-                                background-color: #efefef !important;
-                                color: #666666 !important;
+                                background-color: var(--grayLight2) !important;
+                                color: var(--gray6) !important;
                                 z-index: 1;
                             }
                         }
@@ -130,7 +130,7 @@ nav.text {
                             a {
                                 border-bottom-right-radius: .5rem;
                                 border-bottom-left-radius: .5rem;
-                                padding-bottom: 2rem !important;
+                                padding-bottom: 1.6rem !important;
                             }
                         }
                     }
