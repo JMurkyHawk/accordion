@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: Inter;
+    src: url('./assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
+}
+
+$fontFamilyInter: 'Inter', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+$shadow: 0 2px 2px var(--jmOpaqueBlackB);
+$shadow2: inset 0 2px 2px var(--jmOpaqueBlackB);
+
+$transitionProperty: background-color, border-color, box-shadow, color;
+$transitionTimingFunction: ease;
+$transitionDuration: .25s;
+$transitionDuration2: .5s;
+
+$jmDemoWhite: #ffffff;
+$jmDemoColor1: rgb(21, 31, 94);
+
+$jmGradient1: linear-gradient(145deg, rgba(180,190,255,1) 25%, rgba(255,255,255,1) 75%);
+$jmGradient2: linear-gradient(145deg, var(--blueDark4) 20%, var(--blueDark2) 85%);
+
 html {
     font-family: 'Roboto', Helvetica, sans-serif;
     font-size: 62.5%;
@@ -17,24 +39,5 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Inter', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: $fontFamilyInter;
 }
-
-@font-face {
-    font-family: Inter;
-    src: url('./assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
-}
-
-$shadow: 0 2px 2px var(--jmOpaqueBlackB);
-$shadow2: inset 0 2px 2px var(--jmOpaqueBlackB);
-
-$transitionProperty: background-color, border-color, box-shadow, color;
-$transitionTimingFunction: ease;
-$transitionDuration: .25s;
-$transitionDuration2: .5s;
-
-$jmDemoWhite: #ffffff;
-$jmDemoColor1: rgb(21, 31, 94);
-
-$jmGradient1: linear-gradient(145deg, rgba(180,190,255,1) 25%, rgba(255,255,255,1) 75%);
-$jmGradient2: linear-gradient(145deg, var(--blueDark4) 20%, var(--blueDark2) 85%);

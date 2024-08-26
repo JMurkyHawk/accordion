@@ -7,21 +7,27 @@ html {
 }
 
 h2 {
+    color: var(--gray2);
+    letter-spacing: -.1rem;
+    line-height: 1.1;
     font-size: 2em;
     text-align: center;
 }
 
 h3,
 h4 {
-    font-size: 1.25em;
-    line-height: 1.6em;
+    color: var(--gray2);
+    font-size: 2rem;
+    letter-spacing: -.05rem;
+    line-height: 1.1;
     margin: 0;
     text-align: left;
 }
 
 h5 {
-    font-size: 1.1em;
-    line-height: 1.4em;
+    color: var(--gray2);
+    font-size: 1.6rem;
+    line-height: 1.15;
     margin: 0 0 .5em 0;
     text-align: left;
 }
@@ -48,6 +54,7 @@ a {
 }
 
 p {
+    letter-spacing: -.015rem;
     line-height: 1.5;
     margin: 0;
     padding: 0 0 1.6rem 0;
@@ -227,37 +234,6 @@ ul {
         }
     }
 
-    h1 {
-        color: var(--white);
-        font-size: 2.5em;
-        font-weight: normal;
-        line-height: 1.65em;
-        margin: 0 auto;
-        padding: 0 0 .75em 0;
-        text-align: center;
-
-        display: flex;
-    
-        a {
-            color: var(--white);
-            font-size: 1em;
-            margin: 0;
-            padding: .1em .5em;
-            text-decoration: none;
-            transition-duration: $transitionDuration;
-            transition-property: $transitionProperty;
-            transition-timing-function: $transitionTimingFunction;
-    
-            &:focus,
-            &:hover {
-                background-color: var(--jmOpaqueBlackB);
-                cursor: pointer !important;
-                margin: 0;
-                padding: .1em .5em;
-            }
-        }
-    }
-
     nav.text {
         > ul {
             margin: 0;
@@ -268,14 +244,20 @@ ul {
             gap: 1rem;
 
             > li {
+                // Top level (NOT accordion sub-heading) links and buttons
                 > a,
                 button {
                     color: var(--white);
-                    font-size: 1.6rem;
+                    line-height: 1.1;
 
                     &.active {
                         color: var(--grayD) !important;
                     }
+                }
+
+                a, 
+                button {
+                    font-size: 1.6rem;
                 }
             }
         }
@@ -336,7 +318,6 @@ ul {
 }
 
 #subHeaderBar {
-    border-top: 1px solid #333333;
     border-bottom: 1px solid #333333;
     box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1),
         0 2px 2px rgba(0, 0, 0, .1);
@@ -360,7 +341,7 @@ ul {
         background-repeat: repeat;
         background-size: 175px;
         content: '';
-        opacity: .1;
+        opacity: .125;
         z-index: -1;
 
         position: absolute;
@@ -371,9 +352,10 @@ ul {
     }
 
     h2 {
-        font-size: 3.5rem;
+        font-size: 3.6rem;
         font-weight: 600;
-        line-height: 1.2;
+        letter-spacing: -.2rem;
+        line-height: 1;
         margin: 0 0 0 0;
         text-align: center;
     }
@@ -386,11 +368,13 @@ a.gitHubBtn {
     border-radius: 1rem;
     box-shadow: $shadow;
     color: var(--white);
+    font-family: $fontFamilyInter;
     font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: -.015rem;
+    line-height: 1.2;
     margin: 0;
-    padding: 2rem 3rem;
+    padding: 2rem 2.8rem;
     text-decoration: none;
     transition-duration: $transitionDuration;
     transition-property: $transitionProperty;
@@ -399,8 +383,7 @@ a.gitHubBtn {
     display: inline-flex;
     align-items: center;
     flex-direction: row;
-    gap: 2rem;
-    min-width: 10em;
+    gap: 1.6rem;
 
     &:focus,
     &:hover {
@@ -428,6 +411,7 @@ a.gitHubBtn {
 }
 
 #mainContent {
+    background-color: var(--offWhite);
     overflow: hidden;
     position: relative;
     transition-duration: 500ms; // Match with the page transition speed in app-animations
@@ -453,10 +437,11 @@ a.gitHubBtn {
         border-bottom: 1px solid var(--cardHeadBorder);
         border-radius: 0;
         color: var(--cardHeadText);
-        font-size: 1.5em;
-        font-weight: normal;
+        font-size: 2rem;
+        font-weight: bold;
+        letter-spacing: .025rem;
         margin: 0;
-        padding: .75em 2.25em;
+        padding: 2.4rem 3.2rem;
         text-align: center;
         text-transform: capitalize;
 
@@ -467,10 +452,11 @@ a.gitHubBtn {
 
     .jmCardContent {
         background-color: var(--cardColor);
-        border-radius: 5px;
-        border-top-right-radius: 0;
-        border-top-left-radius: 0;
+        border-radius: 0;
         color: var(--cardText);
+        margin: 0 auto;
+        max-width: calc(58.5rem + 4rem); // To keep line lengths reasonable
+        padding: 3.2rem 2rem;
         transition-duration: $transitionDuration;
         transition-property: background-color, border, color;
         transition-timing-function: $transitionTimingFunction;
@@ -512,33 +498,26 @@ a.gitHubBtn {
         }
 
         > section {
-            padding: 0 2.4rem 4.8rem 2.4rem;
+            padding: 0 0 3.2rem 0;
 
             > h3, 
             > h4 {
                 display: block;
                 font-size: 2.4rem;
-                line-height: 1.25;
+                font-weight: 700;
+                line-height: 1.1;
                 margin: 0 0 1.6rem 0;
-                text-align: center
+                text-align: left;
             }
 
             &.leadIn {
-                padding-top: 4.8rem;
+                // padding-top: 3.2rem;
 
                 h3, 
                 h4 {
                     margin: 0 0 1.6rem 0;
                 }
             }
-            /*
-            &:nth-child(even) {
-                background: rgba(25, 31, 158, .025);
-                border: 1px solid rgba(0, 0, 0, .15);
-                border-right: 0;
-                border-left: 0;
-            }
-            */
         }
 
         > h3:first-of-type,
@@ -547,54 +526,12 @@ a.gitHubBtn {
         }
 
         > strong {
-            margin: 0 0 1em 0;
+            margin: 0 0 1.6rem 0;
         }
 
         > p {
             margin: 0;
-            padding: 0 0 1em 0;
-        }
-
-        &.spacingV2 {
-
-            > section {
-                //border-bottom: 1px solid #999999;
-                margin: 0 0 4em 0;
-                padding: 0 0 2em 0;
-
-                &:last-child {
-                    border-bottom: none;
-                    margin: 0;
-                }
-            }
-
-        }
-
-    }
-
-}
-
-.jmCard.card2 {
-    margin: 0;
-
-    .jmCardTitle {
-        border-radius: 0;
-    }
-
-    .jmCardContent {
-        padding: 0;
-
-        section {
-            margin: 0;
-            padding: 3em 1.5em 2em 1.5em;
-        
-            &:nth-child(even) {
-                //background: rgba(25, 31, 158, .025);
-                //border: 1px solid rgba(0, 0, 0, .15);
-                border-right: 0;
-                border-left: 0;
-            }
-
+            padding: 0 0 1.6rem 0;
         }
 
     }
@@ -608,7 +545,7 @@ a.gitHubBtn {
     display: block;
     margin: 0 0 1.6rem 0;
     overflow: hidden;
-    padding: 1em;
+    padding: 1.6rem;
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
     -webkit-transition-property: background-color, border-color, color;
@@ -632,7 +569,7 @@ a.gitHubBtn {
     > h6 {
         display: block;
         font-size: 1em;
-        margin: 0 0 1em 0;
+        margin: 0 0 1.6rem 0;
         font-weight: normal;
         text-align: center;
     }
@@ -644,10 +581,12 @@ a.gitHubBtn {
         .jmBackDropHead {
             background: var(--range1);
             //background: var(--blueDark4);
-            color: #000000;
+            color: var(--gray2);
             display: block;
+            font-family: $fontFamilyInter;
+            font-weight: 500;
             margin: 0;
-            padding: 1em 2em;
+            padding: 1.2rem 2.4rem;
             text-align: center;
         }
 
@@ -655,7 +594,7 @@ a.gitHubBtn {
             background: var(--range1rgbaContent);
             border: 1px solid var(--jmBackDrop-Border);
             border-top: none;
-            padding: 1em;
+            padding: .8rem 2.4rem;
         }
 
         &.v2 {
@@ -696,7 +635,7 @@ ol.customCols,
 ul.customCols {
     background-color: rgba(0, 110, 153, 0.075);
     border: 1px solid rgba(0, 110, 153, 1);
-    margin: 0 0 1.5em 0;
+    margin: 0 0 2.4rem 0;
     padding: 0;
 
     display: flex;
@@ -704,7 +643,7 @@ ul.customCols {
 
     li {
         list-style-type: none;
-        padding: .5em 1em;
+        padding: .8rem 2rem;
 
         display: flex;
         flex-direction: row;
@@ -718,7 +657,7 @@ ul.customCols {
             width: 50%;
 
             &:nth-child(odd) {
-                padding: 0 1.5em 0 0;
+                padding: 0 2.4rem 0 0;
             }
         }
     }
@@ -754,7 +693,7 @@ ul.customCols {
 .codeBox,
 .codeBoxMini2 {
     background-color: var(--codeBackground);
-    border: 2px solid var(--codeBorder);
+    border: 3px solid var(--codeBorder);
     color: var(--white);
     font-family: 'Source Code Pro', monospace;
     font-size: 1.6rem;
@@ -847,7 +786,17 @@ footer {
     }
 }
 
-/* Larger mobile tablets and desktop, 768px and up */
+/* Tablets and larger phone screens */
+@media screen and (min-width: 480px) and (width < 768px) {
+    .jmCard {
+
+        .jmCardContent {
+            padding: 3.2rem 3.2rem;
+        }
+    }
+}
+
+/* Desktop screens, 768px and up */
 
 @media screen and (min-width: 768px) {
 
@@ -857,7 +806,7 @@ footer {
 
         #pageHead {
             flex-direction: row;
-            gap: 5rem;
+            gap: 4.8rem;
 
             nav.text {
                 > ul {
@@ -868,7 +817,7 @@ footer {
         }
 
         #subHeaderBar {
-            padding: 7.5rem 7.5rem;
+            padding: 8rem 8rem;
 
             display: flex;
             align-items: center;
@@ -882,9 +831,9 @@ footer {
 
                 h2 {
                     font-family:'Inter', Tahoma, Geneva, Verdana, sans-serif;
-                    font-size: 5rem;
+                    font-size: 4.8rem;
                     font-weight: 700;
-                    letter-spacing: -.1rem;
+                    letter-spacing: -.15rem;
                     line-height: 1.1;
                     max-width: 35rem;
                 }
@@ -900,45 +849,44 @@ footer {
 
         & > :nth-child(2),
         & > :nth-child(3) {
-            padding: 10rem 0;
+            padding: 9.6rem 0;
         }
     }
 
     .jmCard {
         border: 1px solid var(--gray6);
-        border-radius: 5px;
+        border-radius: .8rem;
         box-shadow: $shadow;
         box-sizing: content-box;
         margin: 0 auto 0 auto;
+        max-width: calc(53rem + 4.8rem + 4.8rem); // To keep line lengths reasonable
         width: 75%;
-        max-width: 50em;
 
         .jmCardTitle {
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            padding: 2.4rem 7.5rem;
+            border-top-left-radius: .7rem;
+            border-top-right-radius: .7rem;
+            padding: 3.2rem 4.8rem;
+            text-align: left;
         }
 
         .jmCardContent {
+            border-radius: .7rem;
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+            padding: 3.2rem 4.8rem 4.8rem 4.8rem;
 
             > section {
-                //padding: 3.5em 5em;
-                padding: 0 5rem 4.8rem 5rem;
+                padding: 0 0 3.2rem 0;
 
                 &:last-child {
-                    padding-bottom: 4em;
+                    padding-bottom: 0;
                 }
 
                 h4,
                 h5,
                 h6 {
-                    font-size: 2.5rem;
-                    line-height: 1.25;
+                    font-size: 2rem;
                     text-align: left;
-                }
-
-                p:last-child {
-                    padding: 0;
                 }
 
             }
@@ -946,35 +894,18 @@ footer {
         }
     }
 
-    .jmCard.card2 {
-        margin: 0 auto 0 auto;
-    
-        .jmCardContent {
-    
-            section {
-                padding: 2em 3.5em 3.5em 3.5em;
-
-                &:first-of-type {
-                    padding-top: 3em;
-                }
-            }
-    
-        }
-    
-    }
-
     .jmBackDrop {
-        padding: 1.5em 2em;
+        padding: 1.6rem 3.2rem;
 
         &.titleCard {
             padding: 0;
     
             > .jmBackDropHead {
-                padding: 1em 2em;
+                padding: 1.2rem 3.2rem;
             }
     
             > .jmBackDropContent {
-                padding: 1.5em 2em;
+                padding: 1.2rem 3.2rem;
             }
     
         }
@@ -983,9 +914,9 @@ footer {
 
 }
 
-/* Laptop and desktop screens */
+/* Larger laptop and desktop screens */
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
 
     .jmCard {
         margin: 0 auto 0 auto;
@@ -994,7 +925,7 @@ footer {
         .jmCardContent {
 
             > section {
-                padding: 0 10rem 4.8rem 10rem;
+                padding: 0 0 3.2rem 0;
             }
         }
     }
