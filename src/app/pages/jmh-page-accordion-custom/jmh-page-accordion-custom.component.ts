@@ -26,7 +26,7 @@ export class JmhPageAccordionCustomComponent implements OnInit {
     
     public custom_implement_title: string = "Implementing custom styling";
     public custom_implement_sub_title1: string = "Global accordion styling";
-    public custom3_0: string = "This can be done by changing the accordion-specific custom css variables, either in the component's style sheet or the application's global style sheet. "
+    public custom3_0: string = "Styling all accordions globally can be done by changing the accordion-specific custom css variables, either in the component's style sheet or the application's global style sheet. "
         + "This could also be done via inputs on the component instance itself. "
         + "Global accordion styling is best done via css variables. "
     public custom3_1: string = "<strong>Note:</strong>  the border properties use the css shorthand: border-width border-style border-color. "
@@ -83,7 +83,7 @@ export class JmhPageAccordionCustomComponent implements OnInit {
         + "}";
 
     public custom_implement_sub_title2: string = "Individual accordion styling";
-    public custom4_1: string = "To customize individual component instance styling: " 
+    public custom4_1: string = "To use individual component instance custom styling: " 
     public custom4_list: Array<string> = [
         "Provide custom values as an object to the <span class=\"inlineBlock\">&lt;j-murky-hawk-accordion&gt;</span> component. ",
         "Alternately, apply a custom style class to the container, then updating the accordion css variables inside a selector for the custom style class. "

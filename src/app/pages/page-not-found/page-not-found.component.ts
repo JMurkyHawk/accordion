@@ -9,7 +9,7 @@ export class PageNotFoundComponent implements OnInit {
 
     public pageNotFound_Title = "Page Not Found";
 
-    public pageNotFound_Content = "That page doesn't seem to exist.";
+    public pageNotFound_Content = "Sorry, the page you're trying to find doesn't seem to exist.";
 
     constructor() { }
 

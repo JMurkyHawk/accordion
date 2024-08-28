@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class JmhPageAccordionOverviewComponent implements OnInit {
 
     public overview_title: string = "Accordion Component Overview";
-    public overview_content: string = "This is a repo for <i>one</i> of the Angular components I've built. ";
+    public overview_content: string = "This is a small demo app for one of the Angular components I've built. ";
     public overview_content1: string = "While there are other accordion components available on the web, like the Angular Material <a target='_blank' href='https://material.angular.io/components/expansion/examples'>Expansion Panel</a>, the accordion I built also has some additional animation features that I couldn't find anywhere else. ";
     public overview_content2: string = "I wanted an expandable/collapsible component that not only had the ability to animate the content being hidden and shown, but also allowed title text changes to transition in a fluid manner. "
         + "See the samples documented on these pages for options and examples of what this component has available. ";
