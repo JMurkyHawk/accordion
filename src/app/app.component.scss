@@ -2,6 +2,15 @@
 @import 'themes';
 @import '../styles';
 
+$cardPad_Mobile: 2.4rem;
+$cardPad_Tablet: 4.8rem;
+$cardPad_Laptop: 6rem;
+$cardPad_Desktop: 8.5rem;
+
+@function setMaxWidth($addPaddingToWidth: 0) {
+    @return calc($maxLineWidth + ($addPaddingToWidth * 2));
+}
+
 html {
     color: var(--black2);
 }
@@ -26,7 +35,7 @@ h4 {
 
 h5 {
     color: var(--gray2);
-    font-size: 1.6rem;
+    font-size: 2rem;
     line-height: 1.15;
     margin: 0 0 .5em 0;
     text-align: left;
@@ -204,7 +213,7 @@ ul {
             &:focus,
             &:hover {
                 border: 1px solid var(--white);
-                box-shadow: 0 3px 4px rgba(0, 0, 0, .25);
+                box-shadow: 0 0 .8rem rgba(255, 255, 255, .25);
             }
 
             &.active {
@@ -323,7 +332,7 @@ ul {
     border-top: 1px solid var(--gray3);
     box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
     margin: 0;
-    padding: 10rem 2.4rem;
+    padding: 6rem 2.4rem;
     position: relative;
     z-index: 1;
 
@@ -356,7 +365,7 @@ ul {
     h2 {
         font-size: 4.8rem;
         font-weight: 600;
-        letter-spacing: -.2rem;
+        letter-spacing: -.15rem;
         line-height: 1;
         margin: 0 0 0 0;
         text-align: center;
@@ -439,17 +448,23 @@ a.gitHubBtn {
         border-bottom: 1px solid var(--cardHeadBorder);
         border-radius: 0;
         color: var(--cardHeadText);
-        font-size: 2rem;
-        font-weight: bold;
+        font-size: $titleSize;
+        font-weight: $titleWeight;
         letter-spacing: .025rem;
         margin: 0;
-        padding: 2.4rem 3.2rem;
-        text-align: center;
+        padding: 3.2rem $cardPad_Mobile;
+        text-align: left;
         text-transform: capitalize;
 
         transition-duration: $transitionDuration;
         transition-property: background-color, border, color;
         transition-timing-function: $transitionTimingFunction;
+
+        > span {
+            display: block;
+            margin: 0 auto;
+            max-width: $maxLineWidth;
+        }
     }
 
     .jmCardContent {
@@ -457,8 +472,8 @@ a.gitHubBtn {
         border-radius: 0;
         color: var(--cardText);
         margin: 0 auto;
-        max-width: calc(58.5rem + 4rem); // To keep line lengths reasonable
-        padding: 3.2rem 2rem;
+        max-width: $maxLineWidth; // To keep line lengths reasonable
+        padding: 3.2rem $cardPad_Mobile;
         transition-duration: $transitionDuration;
         transition-property: background-color, border, color;
         transition-timing-function: $transitionTimingFunction;
@@ -505,9 +520,10 @@ a.gitHubBtn {
             > h3, 
             > h4 {
                 display: block;
-                font-size: 2.4rem;
-                font-weight: 700;
-                line-height: 1.1;
+                font-size: $titleSize;
+                font-weight: $titleWeight;
+                letter-spacing: -.02rem;
+                line-height: 1.15;
                 margin: 0 0 1.6rem 0;
                 text-align: left;
             }
@@ -518,6 +534,62 @@ a.gitHubBtn {
                 h3, 
                 h4 {
                     margin: 0 0 1.6rem 0;
+                }
+            }
+
+            > p:last-child {
+                padding-bottom: 0;
+            }
+
+            > div:last-child {
+                margin-bottom: 0;
+            }
+
+            j-murky-hawk-accordion.customAccordionA {
+                margin: 0 0 2.7rem 0; // Bottom margin is subtracting a mystery 5px inside .jmAccordionHeadText
+
+                button {
+                    padding: 0 0 0 0 !important;
+                    transition-duration: $transitionDuration;
+                    transition-property: padding;
+                    transition-timing-function: $transitionTimingFunction;
+
+                    .jmAccordionHeadText {
+                        color: var(--gray2);
+                        font-size: $titleSize !important;
+                        font-weight: $titleWeight !important;
+                        line-height: 1.1 !important;
+                        transition-duration: $transitionDuration;
+                        transition-property: color;
+                        transition-timing-function: $transitionTimingFunction;
+                    }
+
+                    &:focus,
+                    &:hover {
+                        .jmAccordionHeadText {
+                            color: var(--gray6);
+                        }
+                    }
+                }
+
+                &:has(.jmAccOpen) {
+                    margin: 0 0 3.2rem 0; // Bottom margin adding back mystery 5px inside .jmAccordionHeadText if open
+                }
+
+                .jmAccOpen {
+                    button {
+                        padding: 0 0 .8rem 0 !important;
+                    }
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .subGroup:last-child {
+                    .codeBox:last-child {
+                        margin-bottom: 0;
+                    }
                 }
             }
         }
@@ -555,13 +627,23 @@ a.gitHubBtn {
     -webkit-transition-timing-function: ease;
     transition-timing-function: ease;
 
+    &.v2 {
+        padding: 2.4rem 3.2rem;
+    }
+
     j-murky-hawk-accordion {
         margin: 0;
     }
 
     &.accordionStack {
-        j-murky-hawk-accordion {
-            margin: inherit;
+        @extend .v2;
+
+        > j-murky-hawk-accordion {
+            margin: 0 0 1.6rem 0;
+        }
+
+        > j-murky-hawk-accordion:last-child {
+            margin: 0;
         }
     }
 
@@ -573,7 +655,11 @@ a.gitHubBtn {
         font-size: 1em;
         margin: 0 0 1.6rem 0;
         font-weight: normal;
-        text-align: center;
+        text-align: left;
+    }
+
+    > p:last-child {
+        padding: 0;
     }
 
     &.titleCard {
@@ -583,10 +669,10 @@ a.gitHubBtn {
         .jmBackDropHead {
             background: var(--range1);
             //background: var(--blueDark4);
-            color: var(--gray2);
+            color: var(--black2);
             display: block;
             font-family: $fontFamilyInter;
-            font-weight: 500;
+            font-weight: 400;
             margin: 0;
             padding: 1.2rem 2.4rem;
             text-align: center;
@@ -790,10 +876,19 @@ footer {
 
 /* Tablets and larger phone screens */
 @media screen and (min-width: 480px) and (width < 768px) {
+
     .jmCard {
 
+        .jmCardTitle {
+            padding: 3.2rem $cardPad_Tablet 3.2rem $cardPad_Tablet;
+        }
+
         .jmCardContent {
-            padding: 3.2rem 3.2rem;
+            padding: 3.2rem $cardPad_Tablet $cardPad_Tablet;
+
+            .jmBackDrop:not(.titleCard) {
+                padding: 1.8rem 3.2rem;
+            }
         }
     }
 }
@@ -825,7 +920,8 @@ footer {
             justify-content: center;
 
             #subHeaderContent {
-                max-width: 62.5rem;
+                max-width: setMaxWidth($cardPad_Laptop);
+                width: calc(75% + ($cardPad_Laptop * 2));
 
                 display: flex;
                 align-items: center;
@@ -836,15 +932,16 @@ footer {
 
                 h2 {
                     font-family:'Inter', Tahoma, Geneva, Verdana, sans-serif;
-                    font-size: 4.8rem;
+                    font-size: 5.2rem;
                     font-weight: 700;
-                    letter-spacing: -.15rem;
-                    line-height: 1.1;
-                    max-width: 35rem;
+
+                    flex: 1 1 30rem;
                 }
 
                 .gitHubBtn {
                     margin: 0;
+
+                    flex: initial;
                 }
             }
         }
@@ -864,13 +961,13 @@ footer {
         box-shadow: $shadow;
         box-sizing: content-box;
         margin: 0 auto 0 auto;
-        max-width: calc(53rem + 4.8rem + 4.8rem); // To keep line lengths reasonable
+        max-width: setMaxWidth($cardPad_Laptop); // To keep line lengths reasonable
         width: 75%;
 
         .jmCardTitle {
             border-top-left-radius: .7rem;
             border-top-right-radius: .7rem;
-            padding: 3.2rem 4.8rem;
+            padding: 3.2rem $cardPad_Laptop;
             text-align: left;
         }
 
@@ -878,20 +975,22 @@ footer {
             border-radius: .7rem;
             border-top-right-radius: 0;
             border-top-left-radius: 0;
-            padding: 3.2rem 4.8rem 4.8rem 4.8rem;
+            margin: initial;
+            padding: 4.2rem $cardPad_Laptop $cardPad_Laptop;
 
             > section {
                 padding: 0 0 3.2rem 0;
 
                 &:last-child {
                     padding-bottom: 0;
-                }
 
-                h4,
-                h5,
-                h6 {
-                    font-size: 2rem;
-                    text-align: left;
+                    & > p:last-child {
+                        padding: 0;
+                    }
+
+                    & > div:last-child {
+                        margin-bottom: 0;
+                    }
                 }
 
             }
@@ -915,6 +1014,10 @@ footer {
     
         }
 
+        &.accordionStack {
+            padding: 2.4rem 3.2rem;
+        }
+
     }
 
 }
@@ -923,14 +1026,33 @@ footer {
 
 @media screen and (min-width: 1200px) {
 
+    #pageHeadWrapper {
+        #subHeaderBar {
+
+            #subHeaderContent {
+                max-width: setMaxWidth($cardPad_Desktop);
+
+                h2 {
+                    flex-basis: 35rem;
+                }
+            }
+        }
+    }
+
     .jmCard {
         margin: 0 auto 0 auto;
-        width: 66%;
+        max-width: setMaxWidth($cardPad_Desktop); // To keep line lengths reasonable
+
+        .jmCardTitle {
+            padding-right: $cardPad_Desktop;
+            padding-left: $cardPad_Desktop;
+        }
 
         .jmCardContent {
+            padding: 4.2rem $cardPad_Desktop $cardPad_Desktop;
 
             > section {
-                padding: 0 0 3.2rem 0;
+                // padding: 0 0 3.2rem 0;
             }
         }
     }

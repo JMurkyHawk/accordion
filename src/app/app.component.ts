@@ -80,9 +80,12 @@ export class AppComponent {
     constructor(
         private route: ActivatedRoute
     ) { }
-    
+    private myString = 'The most basic, bare-bones option. The icon and accordion content animates when ';
+    private myString2 = 'The component has a panel-type look. The icon and accordion content will animate ';
+
     ngAfterViewInit() {
         this.skipLinksButtonPosition = this.skipLinksButtonCalc();
+        console.log(`What's the length: ${this.myString2.length}`);
     }
 
     skipLinksButtonCalc() {

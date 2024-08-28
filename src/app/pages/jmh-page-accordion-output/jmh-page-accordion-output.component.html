@@ -1,6 +1,8 @@
 <div class="jmCard">
 
-    <h3 class="jmCardTitle" [innerHTML]="emit_title"></h3>
+    <h3 class="jmCardTitle">
+        <span [innerHTML]="emit_title"></span>
+    </h3>
 
     <div class="jmCardContent">
 
@@ -15,7 +17,7 @@
 
         <section>
 
-            <div class="jmBackDrop">
+            <div class="jmBackDrop v2">
                 <h4>{{emit_basic_title}}</h4>
                 <p class="preserveWS">{{emit_info1}} <strong>{{emittedId}}</strong></p>
                 <p class="preserveWS">{{emit_info2}} <strong>{{emittedState}}</strong></p>
@@ -25,7 +27,6 @@
 
                 <j-murky-hawk-accordion 
                     [jmFieldId]="emit_id1"
-                    class="jmBackdrop margin2"
                     accordionType="panel"
                     titleTransition="partial"
                     titleTextOpen="Show"
@@ -38,7 +39,6 @@
 
                 <j-murky-hawk-accordion 
                     [jmFieldId]="emit_id2"
-                    class="margin2"
                     accordionType="panel"
                     titleTransition="partial"
                     titleTextOpen="Show"
@@ -51,7 +51,6 @@
 
                 <j-murky-hawk-accordion 
                     [jmFieldId]="emit_id3"
-                    class="margin2"
                     accordionType="panel"
                     titleTransition="partial"
                     titleTextOpen="Show"

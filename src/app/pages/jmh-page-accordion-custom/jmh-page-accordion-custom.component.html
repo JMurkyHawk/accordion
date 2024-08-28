@@ -1,6 +1,8 @@
 <div class="jmCard">
 
-    <h3 class="jmCardTitle" [innerHTML]="custom_title"></h3>
+    <h3 class="jmCardTitle">
+        <span [innerHTML]="custom_title"></span>
+    </h3>
 
     <div class="jmCardContent">
 
@@ -65,7 +67,7 @@
 
             <j-murky-hawk-accordion 
                 jmFieldId="accordionCustom"
-                class="jmBackDrop"
+                class="jmBackDrop v2"
                 accordionType="panel"
                 titleTransition="partial"
                 titleTextOpen="Show"
@@ -94,106 +96,127 @@
 
         <section>
 
-            <h4>{{custom_implement_sub_title1}}</h4>
-            
-            <div class="group">
+            <j-murky-hawk-accordion
+                jmFieldId="customImplementGlobal"
+                class="customAccordionA"
+                accordionType="minimal"
+                titleTagType="h4"
+                [titleText]="custom_implement_sub_title1"
+                [customStylesBody]="{
+                    'color': 'var(--cardText)'
+                }"
+            >
                 
-                <p>{{custom3_0}}</p>
-                <p class="jmHighlight" [innerHTML]="custom3_1"></p>
-                <p class="padding2">{{custom3_1_1}}</p>
-                <ol class="customCols">
-                    <li *ngFor="let key of objectKeys(custom_title_styling)">
-                        <span>{{key}}: </span>
-                        <span>{{custom_title_styling[key]}}</span>
-                    </li>
-                </ol>
-
-                <p class="padding2">{{custom3_2}}</p>
-                <ol class="customCols margin4">
-                    <li *ngFor="let key of objectKeys(custom_content_styling)">
-                        <span>{{key}}: </span>
-                        <span>{{custom_content_styling[key]}}</span>
-                    </li>
-                </ol>
-
-                <div class="subGroup">
+                <div class="group">
                     
-                    <h5>{{custom_implement_sub_title1_2}}</h5>
+                    <p>{{custom3_0}}</p>
+                    <p class="jmHighlight" [innerHTML]="custom3_1"></p>
+                    <p class="padding2">{{custom3_1_1}}</p>
+                    <ol class="customCols">
+                        <li *ngFor="let key of objectKeys(custom_title_styling)">
+                            <span>{{key}}: </span>
+                            <span>{{custom_title_styling[key]}}</span>
+                        </li>
+                    </ol>
 
-                    <p class="padding2" [innerHTML]="custom3_3"></p>
-                    <ul class="customCols v2">
-                        <li *ngFor="let key of custom3_3_list">{{key}}</li>
-                    </ul>
+                    <p class="padding2">{{custom3_2}}</p>
+                    <ol class="customCols margin4">
+                        <li *ngFor="let key of objectKeys(custom_content_styling)">
+                            <span>{{key}}: </span>
+                            <span>{{custom_content_styling[key]}}</span>
+                        </li>
+                    </ol>
 
-                    <p class="padding2">{{custom3_3_2}}</p>
-                    <ul class="customCols v2">
-                        <li *ngFor="let key of custom3_3_list2">{{key}}</li>
-                    </ul>
+                    <div class="subGroup">
+                        
+                        <h5>{{custom_implement_sub_title1_2}}</h5>
 
-                    <p class="padding2" [innerHTML]="custom3_3_3"></p>
-                    <div class="codeBox">
-                        <code>
-                            <pre [innerHTML]="custom3_code"></pre>
-                        </code>
+                        <p class="padding2" [innerHTML]="custom3_3"></p>
+                        <ul class="customCols v2">
+                            <li *ngFor="let key of custom3_3_list">{{key}}</li>
+                        </ul>
+
+                        <p class="padding2">{{custom3_3_2}}</p>
+                        <ul class="customCols v2">
+                            <li *ngFor="let key of custom3_3_list2">{{key}}</li>
+                        </ul>
+
+                        <p class="padding2" [innerHTML]="custom3_3_3"></p>
+                        <div class="codeBox">
+                            <code>
+                                <pre [innerHTML]="custom3_code"></pre>
+                            </code>
+                        </div>
+                    
+                    </div>
+
+                </div>
+            </j-murky-hawk-accordion>
+
+            <j-murky-hawk-accordion
+                jmFieldId="customImplementIndividual"
+                class="customAccordionA"
+                accordionType="minimal"
+                titleTagType="h4"
+                [titleText]="custom_implement_sub_title2"
+                [customStylesBody]="{
+                    'color': 'var(--cardText)'
+                }"
+            >
+
+                <div class="group">
+
+                    <p class="padding2">{{custom4_1}}</p>
+                    <ol class="margin1">
+                        <li *ngFor="let key of custom4_list" [innerHTML]="key"></li>
+                    </ol>
+
+                    <div class="subGroup">
+
+                        <h5>{{custom_implement_heading_title}}</h5>
+
+                        <p class="padding2" [innerHTML]="custom_single_acc_title_desc"></p>
+                        <p class="jmHighlight" [innerHTML]="custom_single_acc_title_desc2"></p>
+                        <ul class="customCols">
+                            <li *ngFor="let key of objectKeys(custom_single_acc_title_props)">
+                                <span>{{key}}: </span> 
+                                <span>{{custom_single_acc_title_props[key]}}</span>
+                            </li>
+                        </ul>
+
+                        <p class="padding2">Custom title styling example: </p>
+                        <div class="codeBox">
+                            <code>
+                                <pre [innerHTML]="custom_single_acc_title_code"></pre>
+                            </code>
+                        </div>
+
+                    </div>
+
+                    <div class="subGroup">
+
+                        <h5>{{custom_implement_body_title}}</h5>
+
+                        <p class="padding2" [innerHTML]="custom_single_acc_body_desc"></p>
+                        <ul class="customCols">
+                            <li *ngFor="let key of objectKeys(custom_single_acc_body_props)">
+                                <span>{{key}}: </span>
+                                <span>{{custom_single_acc_body_props[key]}}</span>
+                            </li>
+                        </ul>
+
+                        <p class="padding2">Custom body styling example: </p>
+                        <div class="codeBox noMargin">
+                            <code>
+                                <pre [innerHTML]="custom_single_acc_body_code"></pre>
+                            </code>
+                        </div>
+
                     </div>
                 
                 </div>
 
-            </div>
-
-            <h4>{{custom_implement_sub_title2}}</h4>
-
-            <div class="group">
-
-                <p class="padding2">{{custom4_1}}</p>
-                <ol class="margin1">
-                    <li *ngFor="let key of custom4_list" [innerHTML]="key"></li>
-                </ol>
-
-                <div class="subGroup">
-
-                    <h5>{{custom_implement_heading_title}}</h5>
-
-                    <p class="padding2" [innerHTML]="custom_single_acc_title_desc"></p>
-                    <p class="jmHighlight" [innerHTML]="custom_single_acc_title_desc2"></p>
-                    <ul class="customCols">
-                        <li *ngFor="let key of objectKeys(custom_single_acc_title_props)">
-                            <span>{{key}}: </span> 
-                            <span>{{custom_single_acc_title_props[key]}}</span>
-                        </li>
-                    </ul>
-
-                    <p class="padding2">Custom title styling example: </p>
-                    <div class="codeBox">
-                        <code>
-                            <pre [innerHTML]="custom_single_acc_title_code"></pre>
-                        </code>
-                    </div>
-
-                </div>
-
-                <div class="subGroup">
-
-                    <h5>{{custom_implement_body_title}}</h5>
-
-                    <p class="padding2" [innerHTML]="custom_single_acc_body_desc"></p>
-                    <ul class="customCols">
-                        <li *ngFor="let key of objectKeys(custom_single_acc_body_props)">
-                            <span>{{key}}: </span>
-                            <span>{{custom_single_acc_body_props[key]}}</span>
-                        </li>
-                    </ul>
-
-                    <p class="padding2">Custom body styling example: </p>
-                    <div class="codeBox noMargin">
-                        <code>
-                            <pre [innerHTML]="custom_single_acc_body_code"></pre>
-                        </code>
-                    </div>
-
-                </div>
-            
-            </div>
+            </j-murky-hawk-accordion>
 
         </section>
 

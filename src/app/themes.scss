@@ -23,7 +23,8 @@
     --blue6: #eceeff;
     --blueDark: #151f5e;
     --blueDark2: #191f9e;
-    --blueDark4: #006EFD;
+    --blueDark3: #0b47ae;
+    --blueDark4: #0b6ddf;
     --blueDark4rgba: rgba(0, 110, 253, .025);
     --blueDark4rgba2: rgba(0, 110, 253, .1);
     --blueLight: #00ddff;
@@ -59,7 +60,7 @@
     // Card colors
     --cardHeadBorder: var(--grayC);
     --cardHeadColor: var(--blueDark4);
-    --cardHeadColor2: linear-gradient(145deg, var(--blueDark4) 20%, var(--blueDark2) 85%);
+    --cardHeadColor2: linear-gradient(145deg, var(--blueDark4) 20%, var(--blueDark) 85%);
     --cardHeadText: var(--offWhite2);
     --cardColor: var(--offWhite2);
     --cardText: var(--gray2);
@@ -76,9 +77,9 @@
         --jm-acc-head-background: var(--transparent);
         --jm-acc-head-background-ro: var(--transparent);
         --jm-acc-head-border: 2px solid var(--black);
-        --jm-acc-head-border-ro: 2px solid var(--gray5);
+        --jm-acc-head-border-ro: 2px solid var(--gray6);
         --jm-acc-head-color: var(--black);
-        --jm-acc-head-color-ro: var(--gray5);
+        --jm-acc-head-color-ro: var(--gray6);
 
         --jm-acc-background: var(--white);
         --jm-acc-border: 1px solid var(--black);
