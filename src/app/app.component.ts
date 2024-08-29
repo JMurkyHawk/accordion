@@ -144,4 +144,26 @@ export class AppComponent {
         this.pageHead.nativeElement.querySelector('#skipLinks').focus();
     }
 
+    public testClickContent: boolean = false;
+    
+    public testClick(event: any) {
+        this.testClickContent = !this.testClickContent;
+    }
+
+    public custom_single_acc_title_code: string = 
+        "&lt;<span class=\'color1\'>j-murky-hawk-accordion</span> <br />"
+        + "    <span class=\'color2\'>jmFieldId</span>=<span class=\'color7\'>\"accordionCustomTitle\"</span> <br />"
+        + "    <span class=\'color2\'>titleText</span>=<span class=\'color7\'>\"Sample title text\"</span> <br />"
+        + "    <span class=\'color2\'>accordionType</span>=<span class=\'color7\'>\"panel\"</span> <br />"
+        + "    [<span class=\'color2\'>customStylesTitle</span>]=<span class='color7'>\"{ <br />"
+        + "        'background' : '#cc0031', <br />"
+        + "        'background-ro' : '#ffffff', <br />"
+        + "        'border' : '3px solid #cc0031', <br />" 
+        + "        'border-ro' : '3px solid #cc0031', <br />" 
+        + "        'color' : '#ffffff', <br />"
+        + "        'color-ro' : '#770031' <br />"
+        + "    }\"</span>&gt; <br />"
+        + "    &lt;<span class='color1'>p</span>&gt;Sample Accordion Content</span>&lt;/<span class=\'color1'\>p</span>&gt; <br />"
+        + "&lt;/<span class='color1'>j-murky-hawk-accordion</span>&gt;";
+
 }

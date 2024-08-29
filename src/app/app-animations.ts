@@ -11,6 +11,10 @@ const delay = 50;
 const animationTiming = 500;
 
 const left = [
+    style({ 
+        overflow: 'hidden' 
+    }),
+
     query(':enter, :leave', [
         style({
             position: 'relative',
@@ -59,6 +63,10 @@ const left = [
 ];
 
 const right = [
+    style({ 
+        overflow: 'hidden' 
+    }),
+
     query(':enter, :leave', [
         style({
             position: 'relative',
