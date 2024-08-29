@@ -423,7 +423,7 @@ a.gitHubBtn {
 
 #mainContent {
     background-color: var(--offWhite);
-    overflow: hidden;
+    // overflow: auto;
     position: relative;
     transition-duration: 500ms; // Match with the page transition speed in app-animations
     transition-property: height;
@@ -452,7 +452,7 @@ a.gitHubBtn {
         font-weight: $titleWeight;
         letter-spacing: .025rem;
         margin: 0;
-        padding: 3.2rem $cardPad_Mobile;
+        padding: 3.2rem 0;
         text-align: left;
         text-transform: capitalize;
 
@@ -461,22 +461,27 @@ a.gitHubBtn {
         transition-timing-function: $transitionTimingFunction;
 
         > span {
+            box-sizing: border-box; // Set to border-box for children overflow (codeBox) to work on smaller screens
             display: block;
             margin: 0 auto;
-            max-width: $maxLineWidth;
+            max-width: setMaxWidth($cardPad_Mobile);
+            padding: 0 $cardPad_Mobile;
+            width: 100%; // Set to 100% for children overflow (codeBox) to work on smaller screens
         }
     }
 
     .jmCardContent {
         background-color: var(--cardColor);
         border-radius: 0;
+        box-sizing: border-box;  // Set to border-box for children overflow (codeBox) to work on smaller screens
         color: var(--cardText);
         margin: 0 auto;
-        max-width: $maxLineWidth; // To keep line lengths reasonable
+        max-width: setMaxWidth($cardPad_Mobile); // To keep line lengths reasonable
         padding: 3.2rem $cardPad_Mobile;
         transition-duration: $transitionDuration;
         transition-property: background-color, border, color;
         transition-timing-function: $transitionTimingFunction;
+        width: 100%; // Set to 100% for children overflow (codeBox) to work on smaller screens
 
         j-murky-hawk-accordion {
             display: block;
@@ -724,6 +729,7 @@ ul.customCols {
     background-color: rgba(0, 110, 153, 0.075);
     border: 1px solid rgba(0, 110, 153, 1);
     margin: 0 0 2.4rem 0;
+    overflow: auto;
     padding: 0;
 
     display: flex;
@@ -735,18 +741,15 @@ ul.customCols {
 
         display: flex;
         flex-direction: row;
-        flex: 1 1 auto;
+        gap: 2.4rem;
 
         &:nth-child(even) {
             background-color: rgba(0, 110, 153, 0.2);
         }
 
         span {
+            flex: 1 1 0;
             width: 50%;
-
-            &:nth-child(odd) {
-                padding: 0 2.4rem 0 0;
-            }
         }
     }
 
@@ -790,9 +793,16 @@ ul.customCols {
     overflow: auto;
     padding: 1.6rem 2.4rem;
 
-    code pre,
-    code pre {
-        margin: 0;
+    > span {
+        display: block;
+    }
+
+    code {
+
+        &,
+        pre {
+            margin: 0;
+        }
     }
 
 }
@@ -877,10 +887,20 @@ footer {
 /* Tablets and larger phone screens */
 @media screen and (min-width: 480px) and (width < 768px) {
 
+    #pageHeadWrapper {
+        #subHeaderBar {
+            padding: 7rem $cardPad_Tablet;
+        }
+    }
+
     .jmCard {
 
         .jmCardTitle {
-            padding: 3.2rem $cardPad_Tablet 3.2rem $cardPad_Tablet;
+            padding: 3.2rem 0;
+            
+            > span {
+                padding: 0 $cardPad_Tablet;
+            }
         }
 
         .jmCardContent {
@@ -967,16 +987,24 @@ footer {
         .jmCardTitle {
             border-top-left-radius: .7rem;
             border-top-right-radius: .7rem;
-            padding: 3.2rem $cardPad_Laptop;
+            padding: 3.2rem 0;
             text-align: left;
+
+            > span {
+                padding: 0 $cardPad_Laptop;
+                max-width: 100%;
+                width: auto;
+            }
         }
 
         .jmCardContent {
             border-radius: .7rem;
             border-top-right-radius: 0;
             border-top-left-radius: 0;
+            box-sizing: content-box; // Resetting to content-box for card layout to work on larger screens
             margin: initial;
             padding: 4.2rem $cardPad_Laptop $cardPad_Laptop;
+            width: auto; // Resetting to auto for card layout to work on larger screens
 
             > section {
                 padding: 0 0 3.2rem 0;
@@ -1044,8 +1072,10 @@ footer {
         max-width: setMaxWidth($cardPad_Desktop); // To keep line lengths reasonable
 
         .jmCardTitle {
-            padding-right: $cardPad_Desktop;
-            padding-left: $cardPad_Desktop;
+
+            > span {
+                padding: 0 $cardPad_Desktop;
+            }
         }
 
         .jmCardContent {
