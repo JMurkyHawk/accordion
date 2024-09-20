@@ -1,14 +1,37 @@
-import { Component, ElementRef, VERSION, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, ElementRef, VERSION, ViewChild, ViewEncapsulation, WritableSignal,
+    computed, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription, fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
-import { JmhRouteAnimation } from './app-animations';
+import { JmhRouteAnimation, buttonDrawerHideShowAnimation } from './app-animations';
+
+import { JMurkyHawkDrawerComponent } from './components/j-murky-hawk-drawer/j-murky-hawk-drawer.component';
+import { NavigationService } from './services/navigation.service';
+
+export interface XyPosition {
+    x: string,
+    y: string
+}
+
+export interface DrawerButtonInfo {
+    borderRadius: string, 
+    iconLineHeight: string,
+    iconLineSpacing: string, 
+    iconLineSpeed: string,
+    size: string, 
+    xyPosition: XyPosition
+}
 
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    animations: [ JmhRouteAnimation ]
+    animations: [ 
+        JmhRouteAnimation,
+        buttonDrawerHideShowAnimation
+     ]
 })
 export class AppComponent {
 
@@ -73,19 +96,234 @@ export class AppComponent {
     ...this.optionLinks
     ];
 
-    @ViewChild("pageHead", {static: false}) pageHead!: ElementRef;
+    public screenSize: WritableSignal<string> = signal<string>('20vw');
+    private screenSizeList = {
+        small: '100vw', 
+        medium: '75vw', 
+        large: '50vw', 
+        xlarge: '33vw'
+    };
+    public showDesktopNav: WritableSignal<boolean> = signal<boolean>(true);
+    public buttonDrawerHideShow: WritableSignal<boolean> = signal<boolean>(false);
+    public buttonDrawerPosition: WritableSignal<string> = signal<string>('left');
+    public buttonDrawerHideShowAnimate = computed(() => {
+        return `${this.buttonDrawerPosition()}_${this.buttonDrawerHideShow()}`;
+    });
+    public drawerSpeed = '.35s';
+    public isDrawerButtonPositionInside: WritableSignal<boolean> = signal<boolean>(true);
+    public drawerButtonInfo: WritableSignal<DrawerButtonInfo> = signal<DrawerButtonInfo>({ 
+        borderRadius: '.5rem', 
+        iconLineHeight: '.5rem',
+        iconLineSpacing: '.75rem', 
+        iconLineSpeed: '.35s',
+        size: '3.8rem', 
+        xyPosition: { 
+            x: '2rem', 
+            y: '2rem'
+        }
+    });
+    
+    private windowResizeSubscription$: any;
+    private windowScrollSubscription$: any;
+
+    @ViewChild("pageHead", {static: false, read: ElementRef}) pageHead!: ElementRef;
     @ViewChild("skipLinks", {static: false}) skipLinks!: ElementRef;
     @ViewChild("mainContent", {static: false}) mainContent!: ElementRef;
+    @ViewChild('jmDrawerComp', {read: JMurkyHawkDrawerComponent}) jmDrawerComp!: JMurkyHawkDrawerComponent;
+    @ViewChild('jmDrawer', { read: ElementRef }) jmDrawer!: ElementRef;
 
     constructor(
-        private route: ActivatedRoute
-    ) { }
+        private route: ActivatedRoute,
+        private navigationService: NavigationService
+    ) { 
+        this.windowResizeSubscription$ =
+            fromEvent(window, 'resize')
+            .pipe(debounceTime(250))
+            .subscribe((event) => {
+                this.screenSize.set( this.getScreenSize() );
+                this.buttonDrawerHideShowAnimate();
+                
+                this.showDesktopNav.set(
+                    this.screenSizeList.small !== this.screenSize() && this.screenSizeList.medium !== this.screenSize() ? true : false
+                );
+
+                if ( this.screenSize() === this.screenSizeList.xlarge ) {
+                    this.windowScrollDrawerButton();
+                    this.drawerButtonOptionsWindowSize(this.screenSizeList.xlarge);
+                }
+
+                if ( this.screenSize() === this.screenSizeList.large ) {
+                    this.windowScrollDrawerButton();
+                    this.drawerButtonOptionsWindowSize(this.screenSizeList.large);
+                }
+
+                if ( this.screenSize() === this.screenSizeList.medium ) {
+                    this.buttonDrawerHideShow.set(true);
+                    this.drawerButtonOptionsWindowSize(this.screenSizeList.medium);
+                }
+
+                if ( this.screenSize() === this.screenSizeList.small ) {
+                    this.buttonDrawerHideShow.set(true);
+                    this.drawerButtonOptionsWindowSize(this.screenSizeList.small);
+                }
+
+                this.determineDrawerButtonPosition();
+            });
+
+        this.windowScrollSubscription$ =
+            fromEvent(window, 'scroll')
+            .pipe(debounceTime(250))
+            .subscribe((event) => {
+                if ( this.screenSize() === this.screenSizeList.large || this.screenSize() === this.screenSizeList.xlarge ) {
+                    this.windowScrollDrawerButton();
+                } else {
+                    this.buttonDrawerHideShow.set(true);
+                }
+            });
+    }
+
     private myString = 'The most basic, bare-bones option. The icon and accordion content animates when ';
-    private myString2 = 'The component has a panel-type look. The icon and accordion content will animate ';
+
+    drawerButtonOptions(data: any) {
+
+        this.drawerButtonInfo.update((values: any) => {
+            let newDrawerButtonInfoObj = {...values};
+            for ( const [key, value] of Object.entries(data)) {
+                newDrawerButtonInfoObj[key] = value;
+            };
+            
+            return newDrawerButtonInfoObj;
+        });
+    }
+
+    drawerButtonOptionsWindowSize(windowSize: string) {
+        if (windowSize === this.screenSizeList.small) {
+            this.drawerButtonOptions({
+                iconLineHeight: '.25rem',
+                iconLineSpacing: '.6rem',
+                size: '3.2rem', 
+                xyPosition: { 
+                    x: '.4rem', 
+                    y: '1.6rem' 
+                }
+            });
+        }
+
+        if (windowSize === this.screenSizeList.medium) {
+            this.drawerButtonOptions({
+                iconLineHeight: '.25rem',
+                iconLineSpacing: '.6rem',
+                size: '3.2rem', 
+                xyPosition: { 
+                    x: '.8rem', 
+                    y: '1.6rem' 
+                }
+            });
+        }
+
+        if (windowSize === this.screenSizeList.large) {
+            this.drawerButtonOptions({
+                iconLineHeight: '.35rem',
+                iconLineSpacing: '.75rem',
+                size: '4rem', 
+                xyPosition: { 
+                    x: '1.2rem', 
+                    y: '1.2rem' 
+                }
+            });
+        }
+
+        if (windowSize === this.screenSizeList.xlarge) {
+            this.drawerButtonOptions({
+                iconLineHeight: '.35rem',
+                iconLineSpacing: '.75rem',
+                size: '4rem', 
+                xyPosition: { 
+                    x: '1.6rem', 
+                    y: '1.2rem' 
+                }
+            });
+        }
+    }
+    
+    windowScrollDrawerButton() {
+        let elementToCompare = this.pageHead.nativeElement.getBoundingClientRect();
+        let heightToCompare = elementToCompare.bottom - elementToCompare.top;
+        
+        if ( window.scrollY > heightToCompare ) {
+            this.buttonDrawerHideShow.set(true);
+        } else {
+            this.buttonDrawerHideShow.set(false);
+            setTimeout(() => {
+                // If drawer is hidden on screen size change, remove the canDocScrollWhenOpen overflow style on doc body
+                document.body.style.removeProperty('overflow');
+            });
+        }
+    }
+
+    determineDrawerButtonPosition() {
+        // Toggle button inside drawer on smallest screen size range
+        if ( this.screenSize() === this.screenSizeList.small ) { 
+            this.isDrawerButtonPositionInside.set(true);
+        } 
+        
+        // Toggle button outside drawer on other screen sizes
+        if ( this.screenSize() !== this.screenSizeList.small ) {
+            this.isDrawerButtonPositionInside.set(false);
+        }
+    }
+
+    getScreenSize() {
+        if (window.innerWidth < 480) {
+            return this.screenSizeList.small;
+        }
+        if (window.innerWidth >= 480 && (window.innerWidth < 768)) {
+            return this.screenSizeList.medium;
+        }
+        if (window.innerWidth >= 768 && (window.innerWidth < 1200)) {
+            return this.screenSizeList.large;
+        }
+        if (window.innerWidth >= 1200) {
+            return this.screenSizeList.xlarge;
+        }
+        return this.screenSizeList.small;
+    }
+
+    showTopNav() {
+        if (this.screenSizeList.small !== this.screenSize() && this.screenSizeList.medium !== this.screenSize()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // private isClickedNavItemActive?: Subscription;
+    public getClickedNavItemInfo$?: Subscription;
+    
+    ngOnInit() {
+        this.screenSize.set(this.getScreenSize());
+        this.showDesktopNav.set(this.showTopNav());
+        this.drawerButtonOptionsWindowSize(this.getScreenSize());
+    }
 
     ngAfterViewInit() {
         this.skipLinksButtonPosition = this.skipLinksButtonCalc();
-        console.log(`What's the length: ${this.myString2.length}`);
+
+        this.getClickedNavItemInfo$ = this.navigationService.clickedItemInfo$.subscribe(value => {
+            if (this.jmDrawer.nativeElement.contains(document.getElementById(value.clickedId)) && !value.isActive) {
+                this.jmDrawerComp.drawerButtonClick();
+            }
+        });
+
+        if (this.getScreenSize() === this.screenSizeList.large || this.getScreenSize() === this.screenSizeList.xlarge) {
+            this.windowScrollDrawerButton();
+        } else {
+            this.buttonDrawerHideShow.set(true);
+        }
+
+        // this.screenSize.set(this.getScreenSize());
+        // console.log(`this.screenSize(): ${this.screenSize()}`);
+        this.determineDrawerButtonPosition();
     }
 
     skipLinksButtonCalc() {
@@ -143,11 +381,12 @@ export class AppComponent {
         });
         this.pageHead.nativeElement.querySelector('#skipLinks').focus();
     }
-
-    public testClickContent: boolean = false;
     
-    public testClick(event: any) {
-        this.testClickContent = !this.testClickContent;
+    ngOnDestroy() {
+        // this.isClickedNavItemActive?.unsubscribe();
+        this.getClickedNavItemInfo$?.unsubscribe();
+        this.windowResizeSubscription$.unsubscribe();
+        this.windowScrollSubscription$.unsubscribe();
     }
 
     public custom_single_acc_title_code: string = 

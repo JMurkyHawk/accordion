@@ -7,12 +7,14 @@
     --gray4: #444444;
     --gray5: #555555;
     --gray6: #666666;
+    --gray7: #777777;
     --grayA: #aaaaaa;
+    --grayB: #bbbbbb;
     --grayC: #cccccc;
     --grayD: #dddddd;
     --grayE: #eeeeee;
     --grayLight1: #6f6f6f;
-    --grayLight2: #eeeeee;
+    --grayLight2: #e6e6e6;
     --offWhite: #fafafa;
     --offWhite2: #f8f8f8;
     --white: #ffffff;
@@ -26,7 +28,7 @@
     --blueDark3: #0b47ae;
     --blueDark4: #0b6ddf;
     --blueDark4rgba: rgba(0, 110, 253, .025);
-    --blueDark4rgba2: rgba(0, 110, 253, .1);
+    --blueDark4rgba2: rgba(0, 110, 253, .125);
     --blueLight: #00ddff;
 
     --orange1: #f1995b;
@@ -54,13 +56,12 @@
 
     --jmLightNavBackground: #f0f0f0;
 
-    --jmOpaqueBlackA: rgba(0, 0, 0, .05);
-    --jmOpaqueBlackB: rgba(0, 0, 0, .1);
+    --jmOpaqueBlackA: rgba(0, 0, 0, .075);
+    --jmOpaqueBlackB: rgba(0, 0, 0, .125);
 
     // Card colors
     --cardHeadBorder: var(--grayC);
     --cardHeadColor: var(--blueDark4);
-    --cardHeadColor2: linear-gradient(145deg, var(--blueDark4) 20%, var(--blueDark) 85%);
     --cardHeadText: var(--offWhite2);
     --cardColor: var(--offWhite2);
     --cardText: var(--gray2);

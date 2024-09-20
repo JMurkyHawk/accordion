@@ -1,17 +1,18 @@
-<nav [class]="_linkStyle">
+<nav [class]="linkStyle">
 
     <ul>
 
-        <li *ngFor="let item of navItems" >
+        <li *ngFor="let item of navItems; let i = index;" >
             
             <a *ngIf="item.link" 
                 [class]="linkStyle === 'button' ? 'button' : 'text' " 
                 [routerLink]="item.link" 
+                [attr.id]="listId ? listId + i : null"
                 #instance="routerLinkActive"
                 routerLinkActive="active" 
                 [title]="instance.isActive ? activeLinkTitle : '' " 
                 [tabindex]="instance.isActive ? -1 : null"
-                (click)="linkClick(instance.isActive)">{{item.label}}</a>
+                (click)="linkClick(instance, listId + i)">{{item.label}}</a>
 
             <div *ngIf="!item.link"
                 #navDropdownMenu 
@@ -34,9 +35,10 @@
                     (clickHeader)="accordionOutputHandler($event)"
                 >
                     <ul>
-                        <li *ngFor="let subItem of item.subLinks; let lastAccordionMenuItem = last">
+                        <li *ngFor="let subItem of item.subLinks; let lastAccordionMenuItem = last; let i = index;">
                             <a [routerLink]="subItem.link"
                                 (click)="accordionMenuItemClick($event)"
+                                [attr.id]="listId ? listId + i : null"
                                 #instance="routerLinkActive"
                                 routerLinkActive="active" 
                                 attr.disabled="{{instance.isActive}}"

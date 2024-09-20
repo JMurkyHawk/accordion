@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 
+import { JMurkyHawkDrawerComponent } from './components/j-murky-hawk-drawer/j-murky-hawk-drawer.component';
+
 @NgModule({
     declarations: [
         AppComponent
@@ -20,6 +22,7 @@ import { PagesModule } from './pages/pages.module';
         ComponentsModule,
         PagesModule,
         HttpClientModule,
+        JMurkyHawkDrawerComponent
     ],
     providers: [
         

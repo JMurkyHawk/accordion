@@ -1,14 +1,13 @@
-import { animate, 
-    group, 
-    keyframes, 
-    sequence, 
-    style, 
-    transition, 
-    trigger, 
-    query } from '@angular/animations';
+import { animate, animateChild, group, keyframes, sequence, state, style, transition, trigger, query } from '@angular/animations';
 
 const delay = 50;
 const animationTiming = 500;
+const buttonHideShowTiming = 250;
+const buttonXPosition = '1.6rem';
+const buttonWidth = '3.2rem';
+
+let hamburgerLineSpacing = '.75rem';
+let hamburgerLineHeight = '.25rem';
 
 const left = [
     style({ 
@@ -110,8 +109,142 @@ const right = [
     
 ];
 
+const buttonRight = [
+    transition('void => right', [
+        query('.jmDrawerButtonWrapper', [
+            style({ 
+                right: 'calc( -{{buttonWidth}} - {{buttonXPosition}} )', 
+                position: 'fixed', 
+                left: 'auto'
+            }),
+            group([
+                animate('{{buttonHideShowTiming}} linear', style({
+                    right: '{{buttonXPosition}}', 
+                    left: 'auto'
+                })),
+                query('@drawerButtonIcon', [
+                    animateChild()
+                ])
+            ])
+        ])
+    ], { params: {buttonHideShowTiming: buttonHideShowTiming, buttonWidth: buttonWidth, buttonXPosition: buttonXPosition} }),
+    
+    transition('right => void', [
+        query('.jmDrawerButtonWrapper', [
+            style({ 
+                right: '{{buttonXPosition}}', 
+                position: 'fixed', 
+                left: 'auto'
+            }),
+            group([
+                animate('{{buttonHideShowTiming}} linear', style({
+                    right: 'calc( -{{buttonWidth}} - {{buttonXPosition}} )', 
+                    left: 'auto'
+                })),
+                query('.menuIconTop', [
+                    style({
+                        bottom: '{{buttonLineSpacing}}',
+                        height: '{{buttonHeight}}'
+                    })
+                ]),
+                query('.menuIconMiddle', [
+                    style({
+                        height: '{{buttonHeight}}',
+                        opacity: '1'
+                    })
+                ]),
+                query('.menuIconBottom', [
+                    style({
+                        height: '{{buttonHeight}}',
+                        top: '{{buttonLineSpacing}}'
+                    })
+                ])
+            ])
+        ])
+    ], { params: {
+            buttonHideShowTiming: buttonHideShowTiming, 
+            buttonWidth: buttonWidth, 
+            buttonXPosition: buttonXPosition, 
+            buttonLineSpacing: hamburgerLineSpacing, 
+            buttonHeight: hamburgerLineHeight
+        }}
+    ),
+
+];
+
+const buttonLeft = [
+    transition('void => left', [
+        query('.jmDrawerButtonWrapper', [
+            style({ 
+                left: 'calc( -{{buttonWidth}} - {{buttonXPosition}} )', 
+                position: 'fixed', 
+                right: 'auto'
+            }),
+            group([
+                animate('{{buttonHideShowTiming}} linear', style({
+                    left: '{{buttonXPosition}}', 
+                    right: 'auto'
+                })),
+                query('@drawerButtonIcon', [
+                    animateChild()
+                ])
+            ])
+        ])
+    ], { params: {buttonHideShowTiming: buttonHideShowTiming, buttonWidth: buttonWidth, buttonXPosition: buttonXPosition} }),
+    
+    transition('left => void', [
+        query('.jmDrawerButtonWrapper', [
+            style({ 
+                left: '{{buttonXPosition}}', 
+                position: 'fixed', 
+                right: 'auto'
+            }),
+            group([
+                animate('{{buttonHideShowTiming}} linear', style({
+                    left: 'calc( -{{buttonWidth}} - {{buttonXPosition}} )', 
+                    right: 'auto'
+                })),
+                query('.menuIconTop', [
+                    style({
+                        bottom: '{{buttonLineSpacing}}',
+                        height: '{{buttonHeight}}'
+                    })
+                ]),
+                query('.menuIconMiddle', [
+                    style({
+                        height: '{{buttonHeight}}',
+                        opacity: '1'
+                    })
+                ]),
+                query('.menuIconBottom', [
+                    style({
+                        height: '{{buttonHeight}}',
+                        top: '{{buttonLineSpacing}}'
+                    })
+                ])
+            ])
+        ])
+    ], { params: {
+            buttonHideShowTiming: buttonHideShowTiming, 
+            buttonWidth: buttonWidth, 
+            buttonXPosition: buttonXPosition, 
+            buttonLineSpacing: hamburgerLineSpacing, 
+            buttonHeight: hamburgerLineHeight
+        }}
+    )
+
+];
+
+const buttonDrawerHideShow = [
+    ...buttonRight,
+    ...buttonLeft
+]
+
 export const JmhRouteAnimation =
     trigger('JmhRouteAnimation', [
         transition(':increment', right),
         transition(':decrement', left)
     ]);
+
+export const buttonDrawerHideShowAnimation = 
+    trigger('buttonDrawerHideShow', buttonDrawerHideShow);
