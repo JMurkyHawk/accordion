@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 export interface LinkData {
     label: string, 
@@ -8,6 +9,11 @@ export interface LinkData {
         label: string, 
         link: string
     }>
+};
+
+export interface NavigationData {
+    instance: string;
+    // isActive: boolean;
 }
 
 @Component({
@@ -18,7 +24,7 @@ export interface LinkData {
 })
 export class JMurkyHawkNavigationComponent {
 
-    public _linkStyle: string = 'button';
+    private _linkStyle: string = 'button';
     public _linkScrollToId: string = 'mainContent';
 
     public tagName: string = '';
@@ -31,6 +37,7 @@ export class JMurkyHawkNavigationComponent {
     @Input() navItems: Array<LinkData> = [{label: 'Please provide link data list', link: '' }];
     @Input() linkScrollTo: boolean = false;
     @Input() linkScrollDelay: number = 750;
+    @Input() listId: string = ''; // To add a unique id (listId + index) to each <a> tag - otherwise, no id will be added
 
     @Input()
         // Check the provided element ID exists. If so, allow provided value. If not, use default.
@@ -52,6 +59,8 @@ export class JMurkyHawkNavigationComponent {
             validValues.includes(value) ? this._linkStyle = value : this.handleInvalid(this.linkStyleMessage(value, validValues));
         }
 
+    @Output() clickSubItem: EventEmitter<NavigationData> = new EventEmitter<NavigationData>();
+
     @ViewChild('navDropdownMenu') navDropdownMenu!: ElementRef;
     @ViewChild('accordionMenu') accordionMenu!: any;
 
@@ -64,9 +73,14 @@ export class JMurkyHawkNavigationComponent {
     }
 
     constructor( 
-        public elemRef: ElementRef 
+        public elemRef: ElementRef,
+        public navigationService: NavigationService
     ) {
         this.tagName = elemRef.nativeElement.tagName.toLowerCase();
+    }
+
+    ngOnInit() {
+        // let isItemActive = this.navigationService.isActiveItemSelected$.subscribe();
     }
 
     handleInvalid(content: string) {
@@ -91,6 +105,12 @@ export class JMurkyHawkNavigationComponent {
                 this.navDropdownMenu.nativeElement.getElementsByTagName('button')[0].focus({focusVisible: true});
             }, this.delayValue);
         }
+    }
+
+    emitNavItemInfo(instance: any) {
+        console.log(`instance: ${Object.entries(instance)}`);
+        console.log(`test the instance: ${JSON.stringify(instance.element)}`);
+        this.clickSubItem.emit({'instance': instance});
     }
 
     linkStyleMessage(value: string, validList: Array<string>) {
@@ -121,13 +141,19 @@ export class JMurkyHawkNavigationComponent {
         }
     }
 
-    linkClick(isActive: boolean) {
+    linkClick(instance: any, clickedId: string) {
+        // this.navigationService.isActiveItem(instance);
+        this.navigationService.navItemInfo(instance, clickedId);
+
         // Scroll (and move focus) to the top of the main content area when using footer navigation
-        if (isActive) return;
+        if (instance.isActive) return;
 
         const scrollToElementNode = document.getElementById(this.linkScrollToId);
-       
-        if (this.linkScrollTo && scrollToElementNode) {
+
+        let isElementScrolledPast = document.getElementById('subHeaderBar')?.getBoundingClientRect().bottom;
+
+        // Should clicking the link scroll to the scrollToElementNode page position
+        if (this.linkScrollTo && scrollToElementNode && ( isElementScrolledPast! < 0 )) {
             setTimeout(() => {
                 scrollToElementNode.scrollIntoView({ behavior: "smooth", block: 'start' });
                 scrollToElementNode.focus({preventScroll: true});

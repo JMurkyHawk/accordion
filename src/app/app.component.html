@@ -8,18 +8,58 @@
                 (click)="skipLinksClick($event)" 
                 (focus)="skipLinksFocus($event)">{{skipLinksText}}</button>
 
+            <j-murky-hawk-drawer 
+                #jmDrawer
+                #jmDrawerComp
+                *ngIf="buttonDrawerHideShow()"
+                [@buttonDrawerHideShow]="{ 
+                    value: buttonDrawerPosition(),
+                    params: {
+                        buttonHideShowTiming: '250ms', 
+                        buttonWidth: drawerButtonInfo().size, 
+                        buttonXPosition: drawerButtonInfo().xyPosition.x,
+                        height: drawerButtonInfo().iconLineHeight,
+                        lineSpacing: drawerButtonInfo().iconLineSpacing
+                    } 
+                }"
+                [isDrawerButtonPositionInside]="isDrawerButtonPositionInside()"
+                [drawerPosition]="buttonDrawerPosition()"
+                [drawerSpeed]="drawerSpeed"
+                [drawerWidth]="screenSize()"
+                [drawerButtonAlign]="buttonDrawerPosition()"
+                [drawerButtonInfo]="drawerButtonInfo()"
+                drawerPageOverlayOpacity=".5"
+                [canDocScrollWhenOpen]="false" >
+
+                    <h1>Accordion Features</h1>
+
+                    <j-murky-hawk-navigation 
+                        navId="drawerNav"
+                        listId="drawerNav"
+                        [navItems]="navLinkData2"
+                        linkStyle="text"
+                        [linkScrollTo]="true"
+                        linkScrollToId="mainContent" >
+                    </j-murky-hawk-navigation>
+
+            </j-murky-hawk-drawer>
+
             <div class="pageHeadSection1">
-                <a class="logo" 
-                    #logoIcon="routerLinkActive"
+                <a #logoIcon="routerLinkActive"
                     routerLink="accordion-overview"
                     routerLinkActive="active" 
                     [title]="logoIcon.isActive ? activeLinkTitle : 'Accordion component overview' " 
                     [tabindex]="logoIcon.isActive ? -1 : null">
-                    <jm-svg-render src="assets/images/logo-jm-color.svg"></jm-svg-render>
+                    <span class="logo">
+                        <jm-svg-render src="assets/images/logo-jm-color.svg"></jm-svg-render>
+                    </span>
+
+                    <h1 *ngIf="!showDesktopNav()">JMurkyHawk</h1>
                 </a>
             </div>
 
             <j-murky-hawk-navigation 
+                *ngIf="showDesktopNav()"
                 navId="topNav"
                 [navItems]="navLinkData"
                 linkStyle="text">

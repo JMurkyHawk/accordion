@@ -11,6 +11,15 @@ $cardPad_Desktop: 8.5rem;
     @return calc($maxLineWidth + ($addPaddingToWidth * 2));
 }
 
+@mixin pageTitle {
+    font-size: 3.6rem;
+    font-weight: 700;
+    letter-spacing: -.15rem;
+    line-height: 1;
+    margin: 0 0 0 0;
+    text-align: center;
+}
+
 html {
     color: var(--black2);
 }
@@ -174,6 +183,78 @@ ul {
     justify-content: center;
 
     .pageHeadSection1 {
+        color: var(--white);
+
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+
+        h1, 
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        a {
+            color: var(--white);
+            text-decoration: none;
+
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            gap: 1rem;
+
+            &:focus,
+            &:hover {
+                background-color: transparent;
+
+                .logo {
+                    border: 1px solid var(--white);
+                    box-shadow: 0 0 .8rem rgba(255, 255, 255, .25);
+                }
+            }
+
+            &.active {
+                color: var(--grayD);
+                cursor: default;
+
+                &:focus, 
+                &:hover {
+                    .logo {
+                        border: 1px solid transparent;
+                        box-shadow: none;
+                    }
+                }
+
+                .logo {
+                    box-shadow: 0 0 0 transparent;
+
+                    &::before {
+                        border: 1px solid var(--grayD);
+                    }
+
+                    &:focus,
+                    &:hover {
+                        background-color: none;
+                        border: 1px solid transparent;
+                        cursor: not-allowed;
+                    }
+
+                    jm-svg-render svg {
+                        use {
+                            opacity: 0;
+                        }
+
+                        path {
+                            fill: var(--grayD) !important;
+                            stroke: var(--grayD) !important;
+                        }
+                    }
+                }
+            }
+        }
 
         .logo {
             background: transparent;
@@ -187,6 +268,8 @@ ul {
 
             height: 2.5em;
             width: 2.5em;
+
+            display: flex;
             
             jm-svg-render svg {
                 use {
@@ -215,32 +298,6 @@ ul {
                 border: 1px solid var(--white);
                 box-shadow: 0 0 .8rem rgba(255, 255, 255, .25);
             }
-
-            &.active {
-                box-shadow: 0 0 0 transparent;
-
-                &::before {
-                    border: 1px solid var(--grayD);
-                }
-
-                &:focus,
-                &:hover {
-                    background-color: none;
-                    border: 1px solid transparent;
-                    cursor: not-allowed;
-                }
-
-                jm-svg-render svg {
-                    use {
-                        opacity: 0;
-                    }
-
-                    path {
-                        fill: var(--grayD) !important;
-                        stroke: var(--grayD) !important;
-                    }
-                }
-            }
         }
     }
 
@@ -268,6 +325,67 @@ ul {
                 a, 
                 button {
                     font-size: 1.6rem;
+                }
+            }
+        }
+    }
+}
+
+#pageHeadWrapper #pageHead j-murky-hawk-drawer {
+    position: absolute;
+
+    .jmDrawerButton {
+        box-shadow: $shadow;
+
+        &.jmDrawerShow {
+            box-shadow: none;
+
+            &:focus,
+            &:hover {
+                background-color: var(--blue3);
+                border: 1px solid var(--range2) !important;
+                box-shadow: none;
+            }
+        }
+    }
+
+    h1 {
+        @include pageTitle;
+        padding: 2rem calc(3.8rem + 3.2rem) 3rem 2rem;
+        text-align: left;
+    }
+
+    j-murky-hawk-navigation nav.text {
+        ul {
+            display: flex;
+            align-items: stretch;
+            flex-direction: column;
+            gap: 0;
+
+            li {
+                border-bottom: 1px solid var(--grayC);
+                padding-left: 2px;
+                padding-right: 2px;
+
+                flex: 2 1 auto;
+
+                &:last-of-type {
+                    border-bottom: none;
+                }
+
+                a {
+                    border-radius: 0;
+                    color: var(--black2);
+                    display: block;
+                    padding: 2rem 2rem !important;
+
+                    &.active,
+                    &.active:focus,
+                    &.active:hover {
+                        background-color: var(--jmOpaqueBlackB) !important;
+                        color: var(--gray5) !important;
+                        margin: 0 -2px;
+                    }
                 }
             }
         }
@@ -353,7 +471,7 @@ ul {
         background-repeat: repeat;
         background-size: 175px;
         content: '';
-        opacity: .125;
+        opacity: .1;
         z-index: -1;
 
         position: absolute;
@@ -364,12 +482,7 @@ ul {
     }
 
     h2 {
-        font-size: 3.6rem;
-        font-weight: 700;
-        letter-spacing: -.15rem;
-        line-height: 1;
-        margin: 0 0 0 0;
-        text-align: center;
+        @include pageTitle;
     }
 
 }
@@ -424,7 +537,6 @@ a.gitHubBtn {
 
 #mainContent {
     background-color: var(--offWhite);
-    // overflow: auto;
     position: relative;
     transition-duration: 500ms; // Match with the page transition speed in app-animations
     transition-property: height;
@@ -1010,7 +1122,7 @@ footer {
             border-top-left-radius: 0;
             box-sizing: content-box; // Resetting to content-box for card layout to work on larger screens
             margin: initial;
-            padding: 4.2rem $cardPad_Laptop $cardPad_Laptop;
+            padding: 3.2rem $cardPad_Laptop $cardPad_Laptop;
             width: auto; // Resetting to auto for card layout to work on larger screens
 
             > section {

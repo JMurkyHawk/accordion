@@ -1,0 +1,106 @@
+ <div class="jmDrawerWrap" 
+        [ngClass]="{
+            'jmDrawerShow' : drawerShow(),
+            'jmDrawerButtonInside' : isDrawerButtonPositionInside,
+            'jmDrawerButtonOutside' : !isDrawerButtonPositionInside
+        }">
+
+    <div class="jmDrawerButtonWrapper"
+            [class]="drawerPosition" 
+            [ngStyle]="{
+                'left': drawerButtonXYLeft(),
+                'right': drawerButtonXYRight(),
+                'top': drawerButtonInfo.xyPosition.y
+            }"
+            #jmDrawerButtonWrapper
+            [@drawerButtonPosition]="{
+                value: getDrawerButtonAnimateInfo(),
+                params: {
+                    speed: drawerSpeed,
+                    width: drawerButtonInfo.size,
+                    xInit: drawerButtonInfo.xyPosition.x,
+                    xOpen: drawerWidth
+                }
+            }">
+            
+        <button class="jmDrawerButton" 
+                [ngClass]="{
+                    'jmDrawerShow' : drawerShow()
+                }"
+                [ngStyle]="{
+                    'height': drawerButtonInfo.size,
+                    'width': drawerButtonInfo.size
+                }"
+                [attr.title]="drawerShow() ? 'Close menu' : 'Open menu'"
+                (click)="drawerButtonClick()"
+                #jmDrawerButton>
+
+            <div class="menuIcon" [ngStyle]="{ 'height': drawerButtonInfo.iconLineHeight }">
+                <div class="menuIconTop" 
+                    [ngStyle]="{ 'bottom': drawerButtonInfo.iconLineSpacing, 'height': drawerButtonInfo.iconLineHeight }"
+                    [@drawerButtonIcon]="{
+                        value: drawerShow() ? 'menuIconTop' : 'hamburgerTop', 
+                        params: {speed: drawerButtonInfo.iconLineSpeed, height: drawerButtonInfo.iconLineHeight, hamburgerLineSpacing: drawerButtonInfo.iconLineSpacing}}">
+                </div>
+                <div class="menuIconMiddle" 
+                    [ngStyle]="{ 'height': drawerButtonInfo.iconLineHeight }"
+                    [@drawerButtonIcon]="{
+                        value: drawerShow() ? 'menuIconMiddle' : 'hamburgerMiddle', 
+                        params: {speed: drawerButtonInfo.iconLineSpeed, height: drawerButtonInfo.iconLineHeight, hamburgerLineSpacing: drawerButtonInfo.iconLineSpacing}}">
+                </div>
+                <div class="menuIconBottom" 
+                    [ngStyle]="{ 'top': drawerButtonInfo.iconLineSpacing, 'height': drawerButtonInfo.iconLineHeight }"
+                    [@drawerButtonIcon]="{
+                        value: drawerShow() ? 'menuIconBottom' : 'hamburgerBottom', 
+                        params: {speed: drawerButtonInfo.iconLineSpeed, height: drawerButtonInfo.iconLineHeight, hamburgerLineSpacing: drawerButtonInfo.iconLineSpacing}}">
+                </div>
+            </div>
+        </button>
+    </div>
+
+    <div class="jmDrawer" 
+        *ngIf="drawerShow()"
+        [ngStyle]="{width: drawerWidth}"
+        [@drawerOpenClose]="{
+            value: drawerPosition, 
+            params: {
+                width: drawerWidth, 
+                speed: drawerSpeed
+            }
+        }" >
+        <ng-content></ng-content>
+    </div>
+
+    <div class="drawerBackgroundEffect"
+        *ngIf="drawerShow()"
+        [ngStyle]="{width: drawerWidth}"
+        [@drawerOpenClose]="{
+            value: drawerPosition, 
+            params: {
+                width: drawerWidth, 
+                speed: drawerSpeed
+            }
+        }">
+    </div>
+
+    <div class="jmDrawerOverlay" 
+        [class]="drawerPosition"
+        [ngStyle]="{
+            'clip-path': createOverlayCutout()
+        }"
+        *ngIf="drawerShow()" 
+        #jmDrawerOverlay
+        (click)="overlayClick($event)"
+        [@drawerPageOverlayAnimate]="{
+            value: drawerPosition,
+            params: {
+                background: drawerPageOverlayBackground,
+                opacity: drawerPageOverlayOpacity,
+                speed: drawerSpeed,
+                width: drawerWidth
+            }
+        }">
+
+    </div>
+
+</div>

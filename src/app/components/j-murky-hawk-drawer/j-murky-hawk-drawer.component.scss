@@ -1,0 +1,190 @@
+@import '../../../styles.scss';
+
+$menuSize: 33vw;
+$menuButtonSize: 3.8rem;
+$menuButtonPadding: 15%;
+$menuButtonPosition: 1.4rem;
+
+:host {
+    --jmDrawerBackground: rgba(255, 255, 255, .875);
+    --jmDrawerBoxShadow: .25rem 0 .75rem rgba(0, 0, 0, .5);
+    --jmDrawerColor: var(--black2);
+    --jmDrawerButtonPosTop: 1rem;
+    --jmDrawerButtonBorder: 1px solid var(--black2);
+    --jmDrawerButtonBorderRadius: .5rem;
+    --jmDrawerButtonColor: #ffffff;
+    --jmDrawerButtonColorRO: var(--blue3);
+    --jmDrawerButtonIconLineHeight: .25rem;
+    --jmDrawerButtonIconLineSpacing: .6rem;
+    --jmDrawerSpeed: .25s;
+    --jmDrawerButtonCssTiming: .15s;
+    --jmDrawerPageOverlayOpacity: .5;
+}
+
+.jmDrawerWrap {
+    position: relative;
+    z-index: 10000;
+
+    &.jmDrawerShow {
+        .jmDrawer {
+            // box-shadow: var(--jmDrawerBoxShadow);
+        }
+    }
+
+    .jmDrawer {
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+        box-sizing: border-box;
+        color: var(--jmDrawerColor);
+        overflow: auto;
+        transition-duration: var(--jmDrawerSpeed);
+        transition-property: box-shadow;
+        transition-timing-function: $transitionTimingFunction;
+        // width: $menuSize;
+        z-index: 9999;
+    
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .drawerBackgroundEffect {
+        backdrop-filter: blur(.75rem);
+        background-color: var(--jmDrawerBackground);
+        content: '';
+        z-index: 9998;
+
+        position: fixed;
+        // position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.jmDrawerButtonWrapper {
+    border-radius: .5rem;
+    z-index: 10000;
+
+    position: fixed;
+
+    &.right {
+        &:has(.jmDrawerShow) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .jmDrawerButton.jmDrawerShow {
+            border-right-color: transparent;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    &.left {
+        &:has(.jmDrawerShow) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .jmDrawerButton.jmDrawerShow {
+            border-left-color: transparent;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
+    .jmDrawerButton {
+        backdrop-filter: blur(0.75rem);
+        background-color: var(--jmDrawerButtonColor);
+        border: var(--jmDrawerButtonBorder);
+        border-radius: var(--jmDrawerButtonBorderRadius);
+        cursor: pointer;
+        overflow: hidden;
+        padding: $menuButtonPadding;
+        position: relative;
+        transition-duration: var(--jmDrawerButtonCssTiming);
+        transition-property: background-color, border, margin, padding;
+        transition-timing-function: linear;
+        z-index: 10000;
+
+        height: $menuButtonSize;
+        width: $menuButtonSize;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .menuIcon {
+            position: relative;
+            transform-origin: center;
+
+            // height: var(--jmDrawerButtonIconLineHeight);
+            width: 100%;
+
+            .menuIconTop,
+            .menuIconMiddle,
+            .menuIconBottom {
+                background-color: var(--black2);
+                border-radius: .125rem;
+                transform-origin: center;
+                
+                position: absolute;
+                left: 0;
+                
+                width: 100%;
+            }
+        }
+
+        &:focus,
+        &:hover {
+            background-color: var(--jmDrawerButtonColorRO);
+        }
+
+        &.jmDrawerShow {
+            background-color: var(--jmDrawerBackground);
+            border: none;
+            box-shadow: none;
+        }
+    }
+}
+
+.jmDrawerButtonInside {
+    &.jmDrawerShow {
+        .jmDrawerButtonWrapper {
+            background: transparent;
+            box-shadow: none;
+
+            .jmDrawerButton {
+                border: transparent;
+                background: transparent;
+                border-radius: .5rem;
+                box-shadow: none !important;
+            }
+        }
+    }
+}
+
+.jmDrawerButtonOutside {
+    .jmDrawerOverlay {
+        &.right {
+            transform: rotateY(180deg);
+        }
+    }
+}
+
+.jmDrawerOverlay {
+    opacity: .75;
+    transition-property: background-color, clip-path, opacity;
+    transition-timing-function: $transitionTimingFunction;
+    z-index: 9996;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
