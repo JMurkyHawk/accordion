@@ -197,6 +197,15 @@ ul {
             margin: 0;
         }
 
+        > button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+            text-transform: capitalize;
+        }
+
         a {
             color: var(--white);
             text-decoration: none;
@@ -449,7 +458,9 @@ ul {
     border-bottom: 1px solid var(--gray3);
     border-top: 1px solid var(--gray3);
     box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
     margin: 0;
+    min-height: 66vh;
     padding: 6rem 2.4rem;
     position: relative;
     z-index: 1;
@@ -1053,6 +1064,7 @@ footer {
         }
 
         #subHeaderBar {
+            min-height: 30vh;
             padding: 8rem 8rem;
 
             display: flex;
