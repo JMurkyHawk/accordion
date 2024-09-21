@@ -19,42 +19,42 @@ const routes: Routes = [
     {
         path: 'accordion-overview',
         component: JmhPageAccordionOverviewComponent,
-        data: { routeIdNumber: 0 }
+        data: { routeIdNumber: 0, pageTitle: 'Overview' }
     },
     {
         path: 'accordion-type',
         component: JmhPageAccordionTypeComponent,
-        data: { routeIdNumber: 1 }
+        data: { routeIdNumber: 1, pageTitle: 'Display type' }
     },
     {
         path: 'accordion-title-transition',
         component: JmhPageAccordionTitleTransitionsComponent,
-        data: { routeIdNumber: 2 }
+        data: { routeIdNumber: 2, pageTitle: 'Title transitions' }
     },
     {
         path: 'accordion-title-options',
         component: JmhPageAccordionTitleOptionsComponent,
-        data: { routeIdNumber: 3 }
+        data: { routeIdNumber: 3, pageTitle: 'Title options' }
     },
     {
         path: 'accordion-body-options',
         component: JmhPageAccordionBodyOptionsComponent,
-        data: { routeIdNumber: 4 }
+        data: { routeIdNumber: 4, pageTitle: 'Body options' }
     },
     {
         path: 'accordion-custom',
         component: JmhPageAccordionCustomComponent,
-        data: { routeIdNumber: 5 }
+        data: { routeIdNumber: 5, pageTitle: 'Custom Styling' }
     },
     {
         path: 'accordion-output',
         component: JmhPageAccordionOutputComponent,
-        data: { routeIdNumber: 6 }
+        data: { routeIdNumber: 6, pageTitle: 'Output Info' }
     },
     {
         path: '**',
         component: PageNotFoundComponent,
-        data: { routeIdNumber: 10 }
+        data: { routeIdNumber: 10, pageTitle: 'Page not found' }
     }
 ];
 

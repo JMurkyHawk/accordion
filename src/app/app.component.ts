@@ -36,6 +36,7 @@ export interface DrawerButtonInfo {
 export class AppComponent {
 
     public routeIdNumber: number | undefined = undefined;
+    public routeTitle: string | undefined = undefined;
     private skipLinksButtonPosition: number | undefined = undefined;
 
     public title: string = 'Angular Accordion';
@@ -115,7 +116,7 @@ export class AppComponent {
         borderRadius: '.5rem', 
         iconLineHeight: '.5rem',
         iconLineSpacing: '.75rem', 
-        iconLineSpeed: '.35s',
+        iconLineSpeed: '.5s',
         size: '3.8rem', 
         xyPosition: { 
             x: '2rem', 
@@ -359,6 +360,7 @@ export class AppComponent {
 
     onActivate() {
         this.routeIdNumber = this.route.firstChild!.snapshot.data['routeIdNumber'];
+        this.routeTitle = this.route.firstChild!.snapshot.data['pageTitle'];
     }
 
     setMainContentSize() {

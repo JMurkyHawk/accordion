@@ -60,28 +60,6 @@ export class JMurkyHawkDrawerComponent {
         size: '5rem', 
         xyPosition: { x: '2rem', y: '2rem' }
     };
-
-    // @Input()
-    //     public get drawerButtonInfo() {
-    //         return this._drawerButtonInfo;
-    //     }
-
-    //     public set drawerButtonInfo(objData: any) {
-    //         let returnObj  = {...objData};
-    //         // Object.keys(objData).forEach((item: any) => {
-    //         //     this._drawerButtonInfo2[item] = objData[item]
-    //         // });
-    //         for ( const [key, value] of Object.entries(objData) ) {
-    //             // if (key) {
-    //             //     Object.returnObj = value;
-    //             // }
-                
-    //             returnObj[key] = value;
-    //         }
-
-    //         this._drawerButtonInfo = {...returnObj};
-    //         console.log(`this._drawerButtonInfo: ${JSON.stringify(this._drawerButtonInfo)}`);
-    //     }
     
     @Input() drawerButtonSize = '3.8rem';
     @Input() drawerButtonBorderRadius: string = '.5rem';
@@ -250,11 +228,11 @@ export class JMurkyHawkDrawerComponent {
             `${btnSize - (btnRadius / 2.75)} ${btnTop} ` +
             `${btnSize - btnRadius} ${btnTop}`;
 
-        let pathLeftButtonPositionV2 = `M0 0 H3000 V${windowHeight} H0 ` + 
+        let pathButtonCutout = `M0 0 H3000 V${windowHeight} H0 ` + 
             `V${btnBottom} H${btnSize - btnRadius} C${curveBottom} ` + 
             `V${btnTop + btnRadius} C${curveTop} H0 z`;
 
-        return `clip-path: path("${pathLeftButtonPositionV2}");`
+        return `clip-path: path("${pathButtonCutout}");`
     }
 
     removeLetters(str: string) {

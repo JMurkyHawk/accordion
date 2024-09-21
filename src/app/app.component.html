@@ -53,9 +53,11 @@
                     <span class="logo">
                         <jm-svg-render src="assets/images/logo-jm-color.svg"></jm-svg-render>
                     </span>
-
-                    <h1 *ngIf="!showDesktopNav()">JMurkyHawk</h1>
                 </a>
+                <button (click)="skipLinksClick($event)" 
+                    title="Scroll to main content">
+                    <h1 [innerHTML]="routeTitle" *ngIf="!showDesktopNav()"></h1>
+                </button>
             </div>
 
             <j-murky-hawk-navigation 
