@@ -7,11 +7,8 @@ import { ComponentsModule } from '../components.module';
 
 import { drawerButtonIconAnimation,
     drawerButtonPositionAnimation,
-    drawerButtonPositionInsideAnimation,
     drawerOpenCloseAnimation,
-    drawerPageOverlayAnimation,
-    drawerPageOverlayRightAnimation,
-    drawerPageOverlayLeftAnimation} from './j-murky-hawk-drawer-animations.component';
+    drawerPageOverlayAnimation} from './j-murky-hawk-drawer-animations.component';
 
 export interface DrawerButtonXY {
     x: string,
@@ -39,11 +36,8 @@ export interface DrawerButtonOptions {
     animations: [
         drawerButtonIconAnimation,
         drawerButtonPositionAnimation,
-        drawerButtonPositionInsideAnimation,
         drawerOpenCloseAnimation,
-        drawerPageOverlayAnimation,
-        drawerPageOverlayRightAnimation,
-        drawerPageOverlayLeftAnimation
+        drawerPageOverlayAnimation
     ]
 })
 

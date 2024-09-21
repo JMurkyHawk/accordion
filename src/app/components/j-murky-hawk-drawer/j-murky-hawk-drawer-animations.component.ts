@@ -10,8 +10,8 @@ let xPositionDefault = '.5rem';
 let buttonWidthDefault = '3.8rem';
 
 const drawerButtonIcon = [
-    // Drawer toggle button inner icon hamburger <=> close animation
-    // Button 'opened' state ('x' formation)
+    // Drawer toggle button inner icon: hamburger <=> close animation
+    // Button on drawer 'opened' state ('x' formation)
     state('menuIconTop', style({
         bottom: '0', height: '{{height}}', transform: 'rotate(45deg)'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
@@ -22,6 +22,7 @@ const drawerButtonIcon = [
         top: '0', height: '{{height}}', transform: 'rotate(-45deg)'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
 
+    // Button on drawer 'closed' state
     state('hamburgerTop', style({
         bottom: '{{hamburgerLineSpacing}}', height: '{{height}}'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
@@ -32,7 +33,7 @@ const drawerButtonIcon = [
         top: '{{hamburgerLineSpacing}}', height: '{{height}}'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
 
-    // Drawer closed button state (hamburger) to drawer opened button state (x)
+    // Drawer 'closed' button state (hamburger) to drawer 'opened' button state (x)
     transition('hamburgerTop => menuIconTop', [
         animate(`{{speed}} linear`, keyframes([
             style({ bottom: '{{hamburgerLineSpacing}}', transform: 'rotate(0deg)', offset: 0 }),
@@ -54,7 +55,7 @@ const drawerButtonIcon = [
         ])),
     ], { params: { speed: defaultDrawerAnimateTime, hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
 
-    // Drawer opened button state (x) to drawer closed button state (hamburger)
+    // Drawer 'opened' button state (x) to drawer 'closed' button state (hamburger)
     transition('menuIconTop => hamburgerTop', [
         animate(`{{speed}} linear`, keyframes([
             style({ bottom: '0', transform: 'rotate(45deg)', offset: 0 }),
@@ -79,7 +80,7 @@ const drawerButtonIcon = [
 ];
 
 const drawerButtonPositionRight = [
-    // Drawer right show animation
+    // Drawer button 'right' show animation
     transition('* => right', [
         style({ left: 'auto', right: '{{xInit}}' }),
         group([
@@ -90,13 +91,13 @@ const drawerButtonPositionRight = [
         ])
     ], { params: { speed: defaultDrawerAnimateTime, xInit: xPositionDefault, xOpen: defaultDrawerWidth } }),
 
-    // Drawer right styling when animation is complete
+    // Drawer button 'right' styling when animation is complete
     state('right', style({
         left: 'auto',
         right: '{{xOpen}}'
     }), { params: { speed: defaultDrawerAnimateTime, xInit: xPositionDefault, xOpen: defaultDrawerWidth }}),
 
-    // Drawer right hide animation
+    // Drawer button 'right' hide animation
     transition('right => *', [
         style({ left: 'auto',  right: '{{xOpen}}' }),
         group([
@@ -109,7 +110,7 @@ const drawerButtonPositionRight = [
 ]
 
 const drawerButtonPositionLeft = [
-    // Drawer left show animation
+    // Drawer button 'left' show animation
     transition('* => left', [
         style({ left: '{{xInit}}', right: 'auto' }),
         group([
@@ -120,13 +121,13 @@ const drawerButtonPositionLeft = [
         ])
     ], { params: { speed: defaultDrawerAnimateTime, xInit: xPositionDefault, xOpen: defaultDrawerWidth } }),
 
-    // Drawer left styling when animation is complete
+    // Drawer button 'left' styling when animation is complete
     state('left', style({
         left: '{{xOpen}}',
         right: 'auto'
     }), { params: { speed: defaultDrawerAnimateTime, xInit: xPositionDefault, xOpen: defaultDrawerWidth } }),
 
-    // Drawer left hide animation
+    // Drawer button 'left' hide animation
     transition('left => *', [
         style({ left: '{{xOpen}}',  right: 'auto' }),
         group([
@@ -138,13 +139,8 @@ const drawerButtonPositionLeft = [
     ], { params: { speed: defaultDrawerAnimateTime, xInit: xPositionDefault, xOpen: defaultDrawerWidth } })
 ];
 
-// const drawerButtonPosition = [
-//     ...drawerButtonPositionRight,
-//     ...drawerButtonPositionLeft
-// ];
-
 const drawerButtonPositionRightInside = [
-    // Drawer right show animation
+    // Drawer button 'right' and inside drawer show animation
     transition('* => right_inside', [
         style({ left: 'auto', right: 'calc( {{xInit}} )' }),
         group([
@@ -155,13 +151,13 @@ const drawerButtonPositionRightInside = [
         ])
     ], { params: { speed: defaultDrawerAnimateTime, width: buttonWidthDefault, xInit: xPositionDefault, xOpen: defaultDrawerWidth } }),
 
-    // Drawer right styling when animation is complete
+    // Drawer button 'right' and inside drawer styling when animation is complete
     state('right_inside', style({
         left: 'auto',
         right: 'calc( {{xOpen}} - {{width}} - {{xInit}} )'
     }), { params: { speed: defaultDrawerAnimateTime, width: buttonWidthDefault, xInit: xPositionDefault, xOpen: defaultDrawerWidth }}),
 
-    // Drawer right hide animation
+    // Drawer button 'right' and inside drawer hide animation
     transition('right_inside => *', [
         style({ left: 'auto',  right: 'calc( {{xOpen}} - {{width}} - {{xInit}} )' }),
         group([
@@ -174,7 +170,7 @@ const drawerButtonPositionRightInside = [
 ]
 
 const drawerButtonPositionLeftInside = [
-    // Drawer left show animation
+    // Drawer button 'left' and inside drawer show animation
     transition('* => left_inside', [
         style({ left: 'calc( {{xInit}} )', right: 'auto' }),
         group([
@@ -185,13 +181,13 @@ const drawerButtonPositionLeftInside = [
         ])
     ], { params: { speed: defaultDrawerAnimateTime, width: buttonWidthDefault, xInit: xPositionDefault, xOpen: defaultDrawerWidth } }),
 
-    // Drawer left styling when animation is complete
+    // Drawer button 'left' and inside drawer styling when animation is complete
     state('left_inside', style({
         left: 'calc( {{xOpen}} - {{width}} - {{xInit}} )',
         right: 'auto'
     }), { params: { speed: defaultDrawerAnimateTime, width: buttonWidthDefault, xInit: xPositionDefault, xOpen: defaultDrawerWidth } }),
 
-    // Drawer left hide animation
+    // Drawer button 'left' and inside drawer hide animation
     transition('left_inside => *', [
         style({ left: 'calc( {{xOpen}} - {{width}} - {{xInit}} )',  right: 'auto' }),
         group([
@@ -209,11 +205,6 @@ const drawerButtonPosition = [
     ...drawerButtonPositionRightInside,
     ...drawerButtonPositionLeftInside
 ];
-
-const drawerButtonPositionInside = [
-    ...drawerButtonPositionRightInside,
-    ...drawerButtonPositionLeftInside
-]
 
 const drawerAnimateLeft = [
     // Drawer left show initial styling
@@ -329,17 +320,8 @@ export const drawerButtonIconAnimation =
 export const drawerButtonPositionAnimation = 
     trigger('drawerButtonPosition', drawerButtonPosition);
 
-export const drawerButtonPositionInsideAnimation = 
-    trigger('drawerButtonPositionInside', drawerButtonPositionInside);
-
 export const drawerOpenCloseAnimation = 
     trigger('drawerOpenClose', drawerOpenClose);
 
 export const drawerPageOverlayAnimation = 
     trigger('drawerPageOverlayAnimate', drawerPageOverlayAnimate);
-
-export const drawerPageOverlayRightAnimation = 
-    trigger('drawerPageOverlayRightAnimate', drawerPageOverlayRightAnimate);
-
-export const drawerPageOverlayLeftAnimation = 
-    trigger('drawerPageOverlayLeftAnimate', drawerPageOverlayLeftAnimate);
