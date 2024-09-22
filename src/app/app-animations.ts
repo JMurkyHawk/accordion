@@ -5,9 +5,8 @@ const animationTiming = 500;
 const buttonHideShowTiming = 250;
 const buttonXPosition = '1.6rem';
 const buttonWidth = '3.2rem';
-
-let hamburgerLineSpacing = '.75rem';
-let hamburgerLineHeight = '.25rem';
+const hamburgerLineHeight = '.3rem';
+const hamburgerLineSpacing = '.7rem';
 
 const left = [
     style({ 
@@ -143,8 +142,8 @@ const buttonRight = [
                 })),
                 query('.menuIconTop', [
                     style({
-                        bottom: '{{buttonLineSpacing}}',
-                        height: '{{buttonHeight}}'
+                        height: '{{buttonHeight}}',
+                        transform: 'translateY(-{{buttonLineSpacing}})'
                     })
                 ]),
                 query('.menuIconMiddle', [
@@ -156,7 +155,7 @@ const buttonRight = [
                 query('.menuIconBottom', [
                     style({
                         height: '{{buttonHeight}}',
-                        top: '{{buttonLineSpacing}}'
+                        transform: 'translateY({{buttonLineSpacing}})'
                     })
                 ])
             ])
@@ -206,8 +205,8 @@ const buttonLeft = [
                 })),
                 query('.menuIconTop', [
                     style({
-                        bottom: '{{buttonLineSpacing}}',
-                        height: '{{buttonHeight}}'
+                        height: '{{buttonHeight}}',
+                        transform: 'translateY(-{{buttonLineSpacing}})'
                     })
                 ]),
                 query('.menuIconMiddle', [
@@ -219,7 +218,7 @@ const buttonLeft = [
                 query('.menuIconBottom', [
                     style({
                         height: '{{buttonHeight}}',
-                        top: '{{buttonLineSpacing}}'
+                        transform: 'translateY({{buttonLineSpacing}})'
                     })
                 ])
             ])

@@ -48,8 +48,8 @@ export class JMurkyHawkDrawerComponent {
     @Input() drawerWidth: string = '50vw';
     @Input() drawerButtonInfo = { 
         borderRadius: '.5rem', 
-        iconLineHeight: '.5rem',
-        iconLineSpacing: '.75rem', 
+        iconLineHeight: '3px',
+        iconLineSpacing: '7px', 
         iconLineSpeed: '.5s',
         size: '5rem', 
         xyPosition: { x: '2rem', y: '2rem' }

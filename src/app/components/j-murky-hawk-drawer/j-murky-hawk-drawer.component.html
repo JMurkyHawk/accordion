@@ -37,7 +37,7 @@
 
             <div class="menuIcon" [ngStyle]="{ 'height': drawerButtonInfo.iconLineHeight }">
                 <div class="menuIconTop" 
-                    [ngStyle]="{ 'bottom': drawerButtonInfo.iconLineSpacing, 'height': drawerButtonInfo.iconLineHeight }"
+                    [ngStyle]="{ 'height': drawerButtonInfo.iconLineHeight }"
                     [@drawerButtonIcon]="{
                         value: drawerShow() ? 'menuIconTop' : 'hamburgerTop', 
                         params: {speed: drawerButtonInfo.iconLineSpeed, height: drawerButtonInfo.iconLineHeight, hamburgerLineSpacing: drawerButtonInfo.iconLineSpacing}}">
@@ -49,7 +49,7 @@
                         params: {speed: drawerButtonInfo.iconLineSpeed, height: drawerButtonInfo.iconLineHeight, hamburgerLineSpacing: drawerButtonInfo.iconLineSpacing}}">
                 </div>
                 <div class="menuIconBottom" 
-                    [ngStyle]="{ 'top': drawerButtonInfo.iconLineSpacing, 'height': drawerButtonInfo.iconLineHeight }"
+                    [ngStyle]="{ 'height': drawerButtonInfo.iconLineHeight }"
                     [@drawerButtonIcon]="{
                         value: drawerShow() ? 'menuIconBottom' : 'hamburgerBottom', 
                         params: {speed: drawerButtonInfo.iconLineSpeed, height: drawerButtonInfo.iconLineHeight, hamburgerLineSpacing: drawerButtonInfo.iconLineSpacing}}">

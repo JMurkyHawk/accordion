@@ -188,7 +188,7 @@ ul {
         display: flex;
         align-items: center;
         flex-direction: row;
-        gap: 1rem;
+        gap: 1.5rem;
 
         h1, 
         h2 {
@@ -206,8 +206,10 @@ ul {
             text-transform: capitalize;
         }
 
-        a {
+        a,
+        button {
             color: var(--white);
+            cursor: pointer;
             text-decoration: none;
 
             display: flex;
@@ -275,8 +277,8 @@ ul {
             transition-property: border, border-width, box-shadow;
             transition-timing-function: $transitionTimingFunction;
 
-            height: 2.5em;
-            width: 2.5em;
+            height: 3.2em;
+            width: 3.2em;
 
             display: flex;
             

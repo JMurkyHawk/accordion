@@ -13,32 +13,32 @@ const drawerButtonIcon = [
     // Drawer toggle button inner icon: hamburger <=> close animation
     // Button on drawer 'opened' state ('x' formation)
     state('menuIconTop', style({
-        bottom: '0', height: '{{height}}', transform: 'rotate(45deg)'
+        height: '{{height}}', transform: 'rotate(45deg) translateY(0)'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
     state('menuIconMiddle', style({
         height: '{{height}}', opacity: '0'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
     state('menuIconBottom', style({
-        top: '0', height: '{{height}}', transform: 'rotate(-45deg)'
+        height: '{{height}}', transform: 'rotate(-45deg) translateY(0)'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
 
     // Button on drawer 'closed' state
     state('hamburgerTop', style({
-        bottom: '{{hamburgerLineSpacing}}', height: '{{height}}'
+        height: '{{height}}', transform: 'translateY(-{{hamburgerLineSpacing}})'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
     state('hamburgerMiddle', style({
         height: '{{height}}', opacity: '1'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
     state('hamburgerBottom', style({
-        top: '{{hamburgerLineSpacing}}', height: '{{height}}'
+        height: '{{height}}', transform: 'translateY({{hamburgerLineSpacing}})'
     }), { params: { hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
 
     // Drawer 'closed' button state (hamburger) to drawer 'opened' button state (x)
     transition('hamburgerTop => menuIconTop', [
         animate(`{{speed}} linear`, keyframes([
-            style({ bottom: '{{hamburgerLineSpacing}}', transform: 'rotate(0deg)', offset: 0 }),
-            style({ bottom: '0', transform: 'rotate(0deg)', offset: .33 }),
-            style({ bottom: '0', transform: 'rotate(45deg)', offset: 1 })
+            style({ transform: 'rotate(0deg) translateY(-{{hamburgerLineSpacing}})', offset: 0 }),
+            style({ transform: 'rotate(0deg) translateY(0)', offset: .33 }),
+            style({ transform: 'rotate(45deg) translateY(0)', offset: 1 })
         ]))
     ], { params: { speed: defaultDrawerAnimateTime, hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
     transition('hamburgerMiddle => menuIconMiddle', [
@@ -49,18 +49,18 @@ const drawerButtonIcon = [
     ], { params: { speed: defaultDrawerAnimateTime, hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
     transition('hamburgerBottom => menuIconBottom', [
         animate(`{{speed}} linear`, keyframes([
-            style({ top: '{{hamburgerLineSpacing}}', transform: 'rotate(0deg)', offset: 0 }),
-            style({ top: '0', transform: 'rotate(0deg)', offset: .33 }),
-            style({ top: '0', transform: 'rotate(-45deg)', offset: 1 })
+            style({ transform: 'rotate(0deg) translateY({{hamburgerLineSpacing}})', offset: 0 }),
+            style({ transform: 'rotate(0deg) translateY(0)', offset: .33 }),
+            style({ transform: 'rotate(-45deg) translateY(0)', offset: 1 })
         ])),
     ], { params: { speed: defaultDrawerAnimateTime, hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
 
     // Drawer 'opened' button state (x) to drawer 'closed' button state (hamburger)
     transition('menuIconTop => hamburgerTop', [
         animate(`{{speed}} linear`, keyframes([
-            style({ bottom: '0', transform: 'rotate(45deg)', offset: 0 }),
-            style({ bottom: '0', transform: 'rotate(0deg)', offset: .66 }),
-            style({ bottom: '{{hamburgerLineSpacing}}', transform: 'rotate(0deg)', offset: 1 })
+            style({ transform: 'rotate(45deg) translateY(0)', offset: 0 }),
+            style({ transform: 'rotate(0deg) translateY(0)', offset: .66 }),
+            style({ transform: 'rotate(0deg) translateY(-{{hamburgerLineSpacing}})', offset: 1 })
         ])),
     ], { params: { speed: defaultDrawerAnimateTime, hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
     transition('menuIconMiddle => hamburgerMiddle', [
@@ -72,9 +72,9 @@ const drawerButtonIcon = [
     ], { params: { speed: defaultDrawerAnimateTime, hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }}),
     transition('menuIconBottom => hamburgerBottom', [
         animate(`{{speed}} linear`, keyframes([
-            style({ top: '0', transform: 'rotate(-45deg)', offset: 0 }),
-            style({ top: '0', transform: 'rotate(0deg)', offset: .66 }),
-            style({ top: '{{hamburgerLineSpacing}}', transform: 'rotate(0deg)', offset: 1 })
+            style({ transform: 'rotate(-45deg) translateY(0)', offset: 0 }),
+            style({ transform: 'rotate(0deg) translateY(0)', offset: .66 }),
+            style({ transform: 'rotate(0deg) translateY({{hamburgerLineSpacing}})', offset: 1 })
         ])),
     ], { params: { speed: defaultDrawerAnimateTime, hamburgerLineSpacing: hamburgerLineSpacing, height: hamburgerLineHeight }})
 ];

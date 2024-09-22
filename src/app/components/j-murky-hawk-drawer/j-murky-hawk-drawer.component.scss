@@ -66,6 +66,8 @@ $menuButtonPosition: 1.4rem;
 
 .jmDrawerButtonWrapper {
     border-radius: .5rem;
+    height: $menuButtonSize; // Css height on wrapper prevents temp extreme button resize on quick, repeated drawer open/close
+    width: $menuButtonSize; // Css width on wrapper prevents temp extreme button resize on quick, repeated drawer open/close
     z-index: 10000;
 
     position: fixed;
@@ -146,8 +148,13 @@ $menuButtonPosition: 1.4rem;
 
         &.jmDrawerShow {
             background-color: var(--jmDrawerBackground);
-            border: none;
+            border: 1px solid var(--jmDrawerBackground);
             box-shadow: none;
+
+            &:focus,
+            &:hover {
+                border: 1px solid var(--jmDrawerButtonColorRO);
+            }
         }
     }
 }
@@ -159,7 +166,7 @@ $menuButtonPosition: 1.4rem;
             box-shadow: none;
 
             .jmDrawerButton {
-                border: transparent;
+                border: 1px solid transparent;
                 background: transparent;
                 border-radius: .5rem;
                 box-shadow: none !important;
