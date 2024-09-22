@@ -110,13 +110,13 @@ export class AppComponent {
     public buttonDrawerHideShowAnimate = computed(() => {
         return `${this.buttonDrawerPosition()}_${this.buttonDrawerHideShow()}`;
     });
-    public drawerSpeed = '.35s';
+    public drawerSpeed = '.4s';
     public isDrawerButtonPositionInside: WritableSignal<boolean> = signal<boolean>(true);
     public drawerButtonInfo: WritableSignal<DrawerButtonInfo> = signal<DrawerButtonInfo>({ 
         borderRadius: '.5rem', 
-        iconLineHeight: '.5rem',
-        iconLineSpacing: '.75rem', 
-        iconLineSpeed: '.5s',
+        iconLineHeight: '.3rem',
+        iconLineSpacing: '.7rem', 
+        iconLineSpeed: '.4s',
         size: '3.8rem', 
         xyPosition: { 
             x: '2rem', 
@@ -200,9 +200,9 @@ export class AppComponent {
     drawerButtonOptionsWindowSize(windowSize: string) {
         if (windowSize === this.screenSizeList.small) {
             this.drawerButtonOptions({
-                iconLineHeight: '.25rem',
-                iconLineSpacing: '.6rem',
                 size: '3.2rem', 
+                iconLineHeight: '.25rem',
+                iconLineSpacing: '.6rem', 
                 xyPosition: { 
                     x: '.4rem', 
                     y: '1.6rem' 
@@ -212,9 +212,9 @@ export class AppComponent {
 
         if (windowSize === this.screenSizeList.medium) {
             this.drawerButtonOptions({
+                size: '3.6rem', 
                 iconLineHeight: '.25rem',
-                iconLineSpacing: '.6rem',
-                size: '3.2rem', 
+                iconLineSpacing: '.6rem', 
                 xyPosition: { 
                     x: '.8rem', 
                     y: '1.6rem' 
@@ -224,8 +224,6 @@ export class AppComponent {
 
         if (windowSize === this.screenSizeList.large) {
             this.drawerButtonOptions({
-                iconLineHeight: '.35rem',
-                iconLineSpacing: '.75rem',
                 size: '4rem', 
                 xyPosition: { 
                     x: '1.2rem', 
@@ -236,8 +234,6 @@ export class AppComponent {
 
         if (windowSize === this.screenSizeList.xlarge) {
             this.drawerButtonOptions({
-                iconLineHeight: '.35rem',
-                iconLineSpacing: '.75rem',
                 size: '4rem', 
                 xyPosition: { 
                     x: '1.6rem', 

@@ -45,17 +45,11 @@
             </j-murky-hawk-drawer>
 
             <div class="pageHeadSection1">
-                <a #logoIcon="routerLinkActive"
-                    routerLink="accordion-overview"
-                    routerLinkActive="active" 
-                    [title]="logoIcon.isActive ? activeLinkTitle : 'Accordion component overview' " 
-                    [tabindex]="logoIcon.isActive ? -1 : null">
+                <button (click)="skipLinksClick($event)" 
+                    title="Scroll to main content" >
                     <span class="logo">
                         <jm-svg-render src="assets/images/logo-jm-color.svg"></jm-svg-render>
                     </span>
-                </a>
-                <button (click)="skipLinksClick($event)" 
-                    title="Scroll to main content">
                     <h1 [innerHTML]="routeTitle" *ngIf="!showDesktopNav()"></h1>
                 </button>
             </div>
