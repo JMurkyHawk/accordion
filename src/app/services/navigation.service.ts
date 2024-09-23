@@ -15,16 +15,12 @@ export class NavigationService {
     constructor() { }
 
     isActiveItem(data: any) {
-        console.log(`what's data? ${data}`);
         this._isActiveItemSelected.next(data.isActive);
     }
 
     navItemInfo(item: any, clickedId: string) {
-        console.log(`From the service, navIemInfo(), 'item' is: ${Object.entries(item)}`);
-        console.log(`Also in the service, is this the active link? ${item.isActive}`);
         item.clickedId = clickedId;
         this._clickedItemInfo.next(item);
-        // this.isActiveItem(item);
     }
 
 }
