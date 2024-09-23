@@ -123,7 +123,7 @@ const buttonRight = [
                 })),
                 query('@drawerButtonIcon', [
                     animateChild()
-                ])
+                ], { optional: true })
             ])
         ])
     ], { params: {buttonHideShowTiming: buttonHideShowTiming, buttonWidth: buttonWidth, buttonXPosition: buttonXPosition} }),
@@ -186,7 +186,7 @@ const buttonLeft = [
                 })),
                 query('@drawerButtonIcon', [
                     animateChild()
-                ])
+                ], { optional: true })
             ])
         ])
     ], { params: {buttonHideShowTiming: buttonHideShowTiming, buttonWidth: buttonWidth, buttonXPosition: buttonXPosition} }),

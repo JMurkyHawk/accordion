@@ -1,9 +1,10 @@
- <div class="jmDrawerWrap" 
-        [ngClass]="{
-            'jmDrawerShow' : drawerShow(),
-            'jmDrawerButtonInside' : isDrawerButtonPositionInside,
-            'jmDrawerButtonOutside' : !isDrawerButtonPositionInside
-        }">
+ <div #jmDrawer
+    class="jmDrawerWrap" 
+    [ngClass]="{
+        'jmDrawerShow' : drawerShow(),
+        'jmDrawerButtonInside' : isDrawerButtonPositionInside,
+        'jmDrawerButtonOutside' : !isDrawerButtonPositionInside
+    }">
 
     <div class="jmDrawerButtonWrapper"
             [class]="drawerPosition" 
