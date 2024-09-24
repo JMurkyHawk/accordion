@@ -258,6 +258,10 @@ export class JMurkyHawkDrawerComponent {
             }
         }
     }
+
+    jmDrawerClickFocus() {
+        this.drawerFocusableItems()[0].focus();
+    }
     /*-------------------------
         END Drawer focus trap  
     ---------------------------*/
@@ -301,7 +305,7 @@ export class JMurkyHawkDrawerComponent {
         let btnRadius: any = this.returnUnitlessValue(this.drawerButtonInfo.borderRadius);
         let btnTop = this.returnUnitlessValue(this.drawerButtonInfo.xyPosition.y);
 
-        // (btnRadius / 2.75) = closest that bezier curve can get to a perfect quarter cirle
+        // (btnRadius / 2.75) = closest that bezier curve can get to a perfect cirle
         let curveBottom = `${btnSize - (btnRadius / 2.75)} ${btnBottom} ` +
             `${btnSize} ${btnBottom - (btnRadius / 2.75)} ` +
             `${btnSize} ${btnBottom - btnRadius}`;
