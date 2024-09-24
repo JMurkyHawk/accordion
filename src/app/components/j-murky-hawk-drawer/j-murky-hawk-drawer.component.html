@@ -6,35 +6,38 @@
         'jmDrawerButtonOutside' : !isDrawerButtonPositionInside
     }">
 
-    <div class="jmDrawerButtonWrapper"
-            [class]="drawerPosition" 
-            [ngStyle]="{
-                'left': drawerButtonXYLeft(),
-                'right': drawerButtonXYRight(),
-                'top': drawerButtonInfo.xyPosition.y
-            }"
-            #jmDrawerButtonWrapper
-            [@drawerButtonPosition]="{
-                value: getDrawerButtonAnimateInfo(),
-                params: {
-                    speed: drawerSpeed,
-                    width: drawerButtonInfo.size,
-                    xInit: drawerButtonInfo.xyPosition.x,
-                    xOpen: drawerWidth
-                }
-            }">
+    <div #jmDrawerButtonWrapper
+        class="jmDrawerButtonWrapper"
+        [class]="drawerPosition" 
+        [ngStyle]="{
+            'left': drawerButtonXYLeft(),
+            'right': drawerButtonXYRight(),
+            'top': drawerButtonInfo.xyPosition.y
+        }"
+        [@drawerButtonPosition]="{
+            value: getDrawerButtonAnimateInfo(),
+            params: {
+                speed: drawerSpeed,
+                width: drawerButtonInfo.size,
+                xInit: drawerButtonInfo.xyPosition.x,
+                xOpen: drawerWidth
+            }
+        }">
             
-        <button class="jmDrawerButton" 
-                [ngClass]="{
-                    'jmDrawerShow' : drawerShow()
-                }"
-                [ngStyle]="{
-                    'height': drawerButtonInfo.size,
-                    'width': drawerButtonInfo.size
-                }"
-                [attr.title]="drawerShow() ? 'Close menu' : 'Open menu'"
-                (click)="drawerButtonClick()"
-                #jmDrawerButton>
+        <button #jmDrawerButton 
+            id="jmDrawerButton"
+            class="jmDrawerButton" 
+            [ngClass]="{
+                'jmDrawerShow' : drawerShow()
+            }"
+            [ngStyle]="{
+                'height': drawerButtonInfo.size,
+                'width': drawerButtonInfo.size
+            }"
+            (click)="drawerButtonClick()"
+            [attr.title]="drawerShow() ? 'Close menu' : 'Open menu'"
+            [attr.aria-expanded]="drawerShow()"
+            aria-controls="jmDrawerContent">
 
             <div class="menuIcon" [ngStyle]="{ 'height': drawerButtonInfo.iconLineHeight }">
                 <div class="menuIconTop" 
@@ -59,8 +62,11 @@
         </button>
     </div>
 
-    <div class="jmDrawer" 
-        *ngIf="drawerShow()"
+    <div *ngIf="drawerShow()"
+        id="jmDrawerContent" 
+        class="jmDrawer" 
+        (click)="jmDrawerClickFocus()"
+        aria-labelledby="jmDrawerButton"
         [ngStyle]="{width: drawerWidth}"
         [@drawerOpenClose]="{
             value: drawerPosition, 
@@ -72,8 +78,8 @@
         <ng-content></ng-content>
     </div>
 
-    <div class="drawerBackgroundEffect"
-        *ngIf="drawerShow()"
+    <div *ngIf="drawerShow()"
+        class="drawerBackgroundEffect"
         [ngStyle]="{width: drawerWidth}"
         [@drawerOpenClose]="{
             value: drawerPosition, 
@@ -84,13 +90,13 @@
         }">
     </div>
 
-    <div class="jmDrawerOverlay" 
+    <div *ngIf="drawerShow()" 
+        #jmDrawerOverlay
+        class="jmDrawerOverlay" 
         [class]="drawerPosition"
         [ngStyle]="{
             'clip-path': createOverlayCutout()
         }"
-        *ngIf="drawerShow()" 
-        #jmDrawerOverlay
         (click)="overlayClick($event)"
         [@drawerPageOverlayAnimate]="{
             value: drawerPosition,
