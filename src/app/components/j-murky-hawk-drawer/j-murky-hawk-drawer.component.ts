@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, Renderer2, Signal, ViewChild, WritableSignal, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fromEvent } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 
 import { drawerButtonIconAnimation,
     drawerButtonPositionAnimation,
@@ -94,16 +94,6 @@ export class JMurkyHawkDrawerComponent {
             this.drawerButtonClick();
         }
     }
-    
-    @HostListener('keydown.shift.tab', ['$event'])
-    @HostListener('keydown.tab', ['$event']) 
-    onKeyDownV2(e: any) {
-        if ( e.shiftKey && e.key === 'Tab' ) {
-            this.jmFocusTrap('Shift Tab', e);
-        } else if ( e.key === 'Tab' ) {
-            this.jmFocusTrap('Tab', e);
-        }
-    }
 
     public drawerShow: WritableSignal<boolean> = signal<boolean>(false);
     public screenSize: WritableSignal<string> = signal<string>('');
@@ -130,12 +120,47 @@ export class JMurkyHawkDrawerComponent {
     public buttonPosition = this.jmDrawerButtonWrapper?.nativeElement.style.cssText;
     
     private windowResizeSubscription$: any;
+    private windowFocusSubscription$: any;
+    private windowTabSubscription$: any;
+    private windowTabShiftSubscription$: any;
 
     constructor(
         private elementRef: ElementRef,
         private renderer: Renderer2
     ) {
         this.tagName = elementRef.nativeElement.tagName.toLowerCase();
+
+        this.windowFocusSubscription$ = 
+            fromEvent(window, 'focus')
+            .subscribe(() => {
+                if ( this.drawerShow() && this.isFocusOutsideDrawer() ) {
+                    this.drawerFocusableItems()[0].focus();
+                } 
+            });
+
+        this.windowTabShiftSubscription$ = 
+            fromEvent<KeyboardEvent>(window, 'keydown')
+            .pipe(
+                filter(e => e.shiftKey),
+                filter(e => e.key === 'Tab')
+            )
+            .subscribe((event) => {
+                if ( this.drawerShow() ) {
+                    this.jmFocusTrap('Shift Tab', event);
+                }
+            }); 
+            
+        this.windowTabSubscription$ = 
+            fromEvent<KeyboardEvent>(window, 'keydown')
+            .pipe(
+                filter((e: any) => !e.shiftKey),
+                filter((e: any) => e.key === 'Tab')
+            )
+            .subscribe((event) => {
+                if ( this.drawerShow() ) {
+                    this.jmFocusTrap('Tab', event);
+                }
+            })
 
         this.windowResizeSubscription$ =
             fromEvent(window, 'resize')
@@ -214,9 +239,13 @@ export class JMurkyHawkDrawerComponent {
         return document.activeElement === element ? true : false;
     }
 
+    isFocusOutsideDrawer() {
+        return !Object.values(this.drawerFocusableItems()).includes(document.activeElement);
+    }
+
     jmDrawerGetFocusableItems() {
         const focusableElements = this.jmDrawer?.nativeElement.querySelectorAll(
-            'a, button, input'
+            'a, button, input, [tabindex]'
         );
 
         const focusableElementsArray = Array.from(focusableElements)
@@ -235,9 +264,14 @@ export class JMurkyHawkDrawerComponent {
         const isLastFocused = this.isFocused(itemLast);
         const isLastDisabled = () => itemLast.getAttribute('tabindex') === '-1' || itemLast.getAttribute('disabled') ? true : false;
         const noDefault = () => event.preventDefault();
-
+        
         if ( key === 'Shift Tab' ) {
-            if (is1Focused) { 
+            if ( this.isFocusOutsideDrawer() ) {
+                noDefault();
+                isLastDisabled() ? 
+                    itemPreLast.focus() : 
+                    itemLast.focus();
+            } else if (is1Focused) { 
                 noDefault();
                 isLastDisabled() ? 
                     itemPreLast.focus() : 
@@ -246,8 +280,10 @@ export class JMurkyHawkDrawerComponent {
         }
 
         if ( key === 'Tab' ) {
-            if (isLastFocused) { 
-                noDefault(); 
+            if ( this.isFocusOutsideDrawer() ) {
+                item1.focus();
+            } else if (isLastFocused) { 
+                noDefault();
                 // Since the first focusable item is always the drawer's toggle button, which always needs to be enabled, no need to check if it's disabled 
                 item1.focus();
             } else if (isPreLastFocused) {
@@ -257,10 +293,6 @@ export class JMurkyHawkDrawerComponent {
                     itemLast.focus();
             }
         }
-    }
-
-    jmDrawerClickFocus() {
-        this.drawerFocusableItems()[0].focus();
     }
     /*-------------------------
         END Drawer focus trap  
@@ -389,5 +421,8 @@ export class JMurkyHawkDrawerComponent {
 
     ngOnDestroy() {
         this.windowResizeSubscription$.unsubscribe();
+        this.windowTabSubscription$.unsubscribe();
+        this.windowTabShiftSubscription$.unsubscribe();
+        this.windowFocusSubscription$.unsubscribe();
     }
 }
