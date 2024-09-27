@@ -205,7 +205,7 @@ export class AppComponent {
                 iconLineSpacing: '.6rem', 
                 xyPosition: { 
                     x: '.4rem', 
-                    y: '1.6rem' 
+                    y: '1.8rem' 
                 }
             });
         }
@@ -216,7 +216,7 @@ export class AppComponent {
                 iconLineHeight: '.25rem',
                 iconLineSpacing: '.6rem', 
                 xyPosition: { 
-                    x: '.8rem', 
+                    x: '.6rem', 
                     y: '1.6rem' 
                 }
             });
