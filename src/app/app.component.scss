@@ -2,7 +2,7 @@
 @import 'themes';
 @import '../styles';
 
-$cardPad_Mobile: 2.4rem;
+$cardPad_Mobile: 4.2rem;
 $cardPad_Tablet: 4.8rem;
 $cardPad_Laptop: 6rem;
 $cardPad_Desktop: 8.5rem;
@@ -15,11 +15,12 @@ $cardPad_Desktop: 8.5rem;
     background: linear-gradient(145deg, var(--blueDark2) 20%, var(--blueDark) 85%);
     background-clip: text;
     color: transparent;
-    font-size: 3.6rem;
+    font-size: 4.2rem;
     font-weight: 700;
     letter-spacing: -.15rem;
     line-height: 1;
     margin: 0 0 0 0;
+    padding: .75rem 0;
     text-align: center;
 }
 
@@ -1020,10 +1021,10 @@ footer {
         #subHeaderBar {
             padding: 7rem $cardPad_Tablet;
 
-            gap: 2.8rem;
+            gap: 2.4rem;
 
             h2 {
-                font-size: 4rem;
+                font-size: 4.2rem;
             }
         }
     }
