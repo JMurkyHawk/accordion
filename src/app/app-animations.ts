@@ -123,7 +123,7 @@ const buttonRight = [
                 })),
                 query('@drawerButtonIcon', [
                     animateChild()
-                ], { optional: true })
+                ])
             ])
         ])
     ], { params: {buttonHideShowTiming: buttonHideShowTiming, buttonWidth: buttonWidth, buttonXPosition: buttonXPosition} }),
@@ -186,7 +186,7 @@ const buttonLeft = [
                 })),
                 query('@drawerButtonIcon', [
                     animateChild()
-                ], { optional: true })
+                ])
             ])
         ])
     ], { params: {buttonHideShowTiming: buttonHideShowTiming, buttonWidth: buttonWidth, buttonXPosition: buttonXPosition} }),
@@ -237,6 +237,21 @@ const buttonLeft = [
 const buttonDrawerHideShow = [
     ...buttonRight,
     ...buttonLeft
+];
+
+const fadeInOut = [
+    transition(':enter', [
+        style({ opacity: '0' }), 
+        animate('{{animationTiming}}ms linear', style({ 
+            opacity: '1'
+        }))
+    ], { params: { animationTiming: animationTiming } }),
+    transition(':leave', [
+        style({ opacity: '1' }), 
+        animate('{{animationTiming}}ms linear', style({ 
+            opacity: '0'
+        }))
+    ], { params: { animationTiming: animationTiming } })
 ]
 
 export const JmhRouteAnimation =
@@ -247,3 +262,6 @@ export const JmhRouteAnimation =
 
 export const buttonDrawerHideShowAnimation = 
     trigger('buttonDrawerHideShow', buttonDrawerHideShow);
+
+export const fadeInOutAnimation = 
+    trigger('fadeInOut', fadeInOut);

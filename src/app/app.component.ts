@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { JmhRouteAnimation, buttonDrawerHideShowAnimation } from './app-animations';
+import { JmhRouteAnimation, buttonDrawerHideShowAnimation, fadeInOutAnimation } from './app-animations';
 
 import { JMurkyHawkDrawerComponent } from './components/j-murky-hawk-drawer/j-murky-hawk-drawer.component';
 import { NavigationService } from './services/navigation.service';
@@ -30,7 +30,8 @@ export interface DrawerButtonInfo {
     styleUrls: ['./app.component.scss'],
     animations: [ 
         JmhRouteAnimation,
-        buttonDrawerHideShowAnimation
+        buttonDrawerHideShowAnimation,
+        fadeInOutAnimation
      ]
 })
 export class AppComponent {
@@ -97,20 +98,28 @@ export class AppComponent {
     ...this.optionLinks
     ];
 
-    public screenSize: WritableSignal<string> = signal<string>('20vw');
-    private screenSizeList = {
+    private screenBreakpoints: { [key: string] : number } = {
+        // 'smallest' will be any screen size less than the lowest value below 
+        medium: 480,
+        large: 768,
+        xlarge: 1200
+    };
+
+    private drawerWidthList: { [key: string] : string } = {
         small: '100vw', 
         medium: '75vw', 
         large: '50vw', 
         xlarge: '33vw'
     };
+
+    public drawerSize: WritableSignal<string> = signal<string>('20vw');
+    public showSubHeadContentIndicator: WritableSignal<boolean> = signal<boolean>(true);
     public showDesktopNav: WritableSignal<boolean> = signal<boolean>(true);
     public buttonDrawerHideShow: WritableSignal<boolean> = signal<boolean>(false);
     public buttonDrawerPosition: WritableSignal<string> = signal<string>('left');
     public buttonDrawerHideShowAnimate = computed(() => {
         return `${this.buttonDrawerPosition()}_${this.buttonDrawerHideShow()}`;
     });
-    public drawerSpeed = '.4s';
     public isDrawerButtonPositionInside: WritableSignal<boolean> = signal<boolean>(true);
     public drawerButtonInfo: WritableSignal<DrawerButtonInfo> = signal<DrawerButtonInfo>({ 
         borderRadius: '.5rem', 
@@ -123,9 +132,10 @@ export class AppComponent {
             y: '2rem'
         }
     });
-    
-    private windowResizeSubscription$: any;
-    private windowScrollSubscription$: any;
+
+    private windowResizeSubscription$: Subscription;
+    private windowScrollSubscription$: Subscription;
+    private getClickedNavItemInfoSubscription$?: Subscription;
 
     @ViewChild("pageHead", {static: false, read: ElementRef}) pageHead!: ElementRef;
     @ViewChild("skipLinks", {static: false}) skipLinks!: ElementRef;
@@ -141,31 +151,40 @@ export class AppComponent {
             fromEvent(window, 'resize')
             .pipe(debounceTime(250))
             .subscribe((event) => {
-                this.screenSize.set( this.getScreenSize() );
+
+                this.drawerSize.set( this.getDrawerSize() );
                 this.buttonDrawerHideShowAnimate();
                 
                 this.showDesktopNav.set(
-                    this.screenSizeList.small !== this.screenSize() && this.screenSizeList.medium !== this.screenSize() ? true : false
+                    !this.isScreenSize(['smallest']) && !this.isScreenSize(['medium']) ? true : false
                 );
 
-                if ( this.screenSize() === this.screenSizeList.xlarge ) {
+                if ( this.isScreenSize(['xlarge']) ) {
                     this.windowScrollDrawerButton();
-                    this.drawerButtonOptionsWindowSize(this.screenSizeList.xlarge);
+                    this.setDrawerButtonOptionsForWindowSize();
+                    this.showSubHeadContentIndicator.set(false);
                 }
 
-                if ( this.screenSize() === this.screenSizeList.large ) {
+                if ( this.isScreenSize(['large']) ) {
                     this.windowScrollDrawerButton();
-                    this.drawerButtonOptionsWindowSize(this.screenSizeList.large);
+                    this.setDrawerButtonOptionsForWindowSize();
+                    this.showSubHeadContentIndicator.set(false);
                 }
 
-                if ( this.screenSize() === this.screenSizeList.medium ) {
+                if ( this.isScreenSize(['medium']) ) {
                     this.buttonDrawerHideShow.set(true);
-                    this.drawerButtonOptionsWindowSize(this.screenSizeList.medium);
+                    this.setDrawerButtonOptionsForWindowSize();
+                    this.isWindowScrolledPast() ?
+                        this.showSubHeadContentIndicator.set(true) :
+                        this.showSubHeadContentIndicator.set(false);
                 }
 
-                if ( this.screenSize() === this.screenSizeList.small ) {
+                if ( this.isScreenSize(['smallest']) ) {
                     this.buttonDrawerHideShow.set(true);
-                    this.drawerButtonOptionsWindowSize(this.screenSizeList.small);
+                    this.setDrawerButtonOptionsForWindowSize();
+                    this.isWindowScrolledPast() ?
+                        this.showSubHeadContentIndicator.set(true) :
+                        this.showSubHeadContentIndicator.set(false);
                 }
 
                 this.determineDrawerButtonPosition();
@@ -175,18 +194,119 @@ export class AppComponent {
             fromEvent(window, 'scroll')
             .pipe(debounceTime(250))
             .subscribe((event) => {
-                if ( this.screenSize() === this.screenSizeList.large || this.screenSize() === this.screenSizeList.xlarge ) {
+                /* Hide/show the drawer toggle button on screen scroll position 
+                    (Hide on larger screens when top header is visible) */
+                if ( this.isScreenSize(['large', 'xlarge']) ) {
                     this.windowScrollDrawerButton();
                 } else {
                     this.buttonDrawerHideShow.set(true);
                 }
+
+                // Hide/show scroll to main content indicator arrow in the subHeaderBar section
+                if ( this.isScreenSize(['smallest', 'medium']) && this.isWindowScrolledPast() ) {
+                    this.showSubHeadContentIndicator.set(true) 
+                } else {
+                    this.showSubHeadContentIndicator.set(false);
+                }
             });
     }
+    
+    ngOnInit() {
+        this.drawerSize.set(this.getDrawerSize());
+        this.showDesktopNav.set(this.showTopNav());
 
-    private myString = 'The most basic, bare-bones option. The icon and accordion content animates when ';
+        this.setDrawerButtonOptionsForWindowSize();
+
+        this.isScreenSize(['large', 'xlarge']) ?
+            this.showSubHeadContentIndicator.set(false) : 
+            this.showSubHeadContentIndicator.set(true);
+    }
+
+    ngAfterViewInit() {
+        this.skipLinksButtonPosition = this.skipLinksButtonCalc();
+
+        this.getClickedNavItemInfoSubscription$ = this.navigationService.clickedItemInfo$.subscribe(value => {
+            if (this.jmDrawer.nativeElement.contains(document.getElementById(value.clickedId)) && !value.isActive) {
+                this.jmDrawerComp.drawerButtonClick();
+            }
+        });
+
+        if ( this.isScreenSize(['large', 'xlarge']) ) {
+            this.windowScrollDrawerButton();
+        } else {
+            this.buttonDrawerHideShow.set(true);
+        }
+
+        this.determineDrawerButtonPosition();
+    }
+
+    getScreenSize() {
+        /* Using this method to get the screen size name from one of the name/size values provided in this.screenBreakpoints.
+        Since this isn't componentized, it should be fine to just keep the screenBreakpoints object manually sorted 
+        from smallest to largest. If that changes, then sorting should be added to this method. */
+        let screenSizeValue: string = 'large';
+        let index = 0;
+        const screenSize = window.innerWidth;
+        const breakPoints = this.screenBreakpoints;
+        const bpValues = Object.values(breakPoints);
+        const bpKeys = Object.keys(breakPoints);
+
+        for ( const [key, value] of Object.entries(breakPoints) ) {
+
+            // If screen size is less than the smallest (first) size provided in screenBreakpoints object, set 'smallest'
+            if ( screenSize < bpValues[0]) {
+                screenSizeValue = 'smallest';
+                break;
+            }
+
+            // If screen size is or falls between a value (A) and the next value (B) in screenBreakpoints object, set value (A)
+            if ( screenSize >= bpValues[index] && screenSize < bpValues[index + 1] ) {
+                screenSizeValue = bpKeys[index];
+                break;
+            }
+
+            // If screen size is greater than the largest (last) size provided in screenBreakpoints object, set that size
+            if ( screenSize > bpValues[bpValues.length - 1] ) {
+                screenSizeValue = bpKeys[bpValues.length - 1];
+                break;
+            }
+
+            index++;
+        }
+
+        return screenSizeValue;
+    }
+
+    isScreenSize(data: Array<string> ) {
+        // Is the screen size equal to one of the values provided in the data[] array? Returns true or false
+        let checkMyData: boolean = false;
+
+        data.forEach((item) => {
+            if ( this.getScreenSize() === item ) {
+                checkMyData = true;
+            }
+        });
+
+        return checkMyData;
+    }
+
+    getDrawerSize() {
+        if ( this.isScreenSize(['smallest']) ) {
+            return this.drawerWidthList.small;
+        }
+        if ( this.isScreenSize(['medium']) ) {
+            return this.drawerWidthList.medium;
+        }
+        if ( this.isScreenSize(['large']) ) {
+            return this.drawerWidthList.large;
+        }
+        if ( this.isScreenSize(['xlarge']) ) {
+            return this.drawerWidthList.xlarge;
+        }
+        return this.drawerWidthList.small;
+    }
 
     drawerButtonOptions(data: any) {
-
         this.drawerButtonInfo.update((values: any) => {
             let newDrawerButtonInfoObj = {...values};
             for ( const [key, value] of Object.entries(data)) {
@@ -197,8 +317,8 @@ export class AppComponent {
         });
     }
 
-    drawerButtonOptionsWindowSize(windowSize: string) {
-        if (windowSize === this.screenSizeList.small) {
+    setDrawerButtonOptionsForWindowSize() {
+        if ( this.isScreenSize(['smallest']) ) {
             this.drawerButtonOptions({
                 size: '3.2rem', 
                 iconLineHeight: '.25rem',
@@ -210,7 +330,7 @@ export class AppComponent {
             });
         }
 
-        if (windowSize === this.screenSizeList.medium) {
+        if ( this.isScreenSize(['medium']) ) {
             this.drawerButtonOptions({
                 size: '3.6rem', 
                 iconLineHeight: '.25rem',
@@ -222,9 +342,11 @@ export class AppComponent {
             });
         }
 
-        if (windowSize === this.screenSizeList.large) {
+        if ( this.isScreenSize(['large']) ) {
             this.drawerButtonOptions({
                 size: '4rem', 
+                iconLineHeight: '.3rem',
+                iconLineSpacing: '.7rem', 
                 xyPosition: { 
                     x: '1.2rem', 
                     y: '1.2rem' 
@@ -232,9 +354,11 @@ export class AppComponent {
             });
         }
 
-        if (windowSize === this.screenSizeList.xlarge) {
+        if ( this.isScreenSize(['xlarge']) ) {
             this.drawerButtonOptions({
                 size: '4rem', 
+                iconLineHeight: '.3rem',
+                iconLineSpacing: '.7rem', 
                 xyPosition: { 
                     x: '1.6rem', 
                     y: '1.2rem' 
@@ -242,6 +366,12 @@ export class AppComponent {
             });
         }
     }
+
+    isWindowScrolledPast(element?: any) {
+        // Default check for the bottom position of the #pageHead element, but allow other element's position to be provided
+        let item = element ? element : this.pageHead.nativeElement.offsetHeight;
+        return window.scrollY < item ? true : false;
+    };
     
     windowScrollDrawerButton() {
         let elementToCompare = this.pageHead.nativeElement.getBoundingClientRect();
@@ -260,67 +390,22 @@ export class AppComponent {
 
     determineDrawerButtonPosition() {
         // Toggle button inside drawer on smallest screen size range
-        if ( this.screenSize() === this.screenSizeList.small ) { 
+        if ( this.isScreenSize(['smallest']) ) { 
             this.isDrawerButtonPositionInside.set(true);
         } 
         
-        // Toggle button outside drawer on other screen sizes
-        if ( this.screenSize() !== this.screenSizeList.small ) {
+        // Toggle button outside drawer on other (not smallest) screen sizes
+        if ( !this.isScreenSize(['smallest']) ) {
             this.isDrawerButtonPositionInside.set(false);
         }
     }
 
-    getScreenSize() {
-        if (window.innerWidth < 480) {
-            return this.screenSizeList.small;
-        }
-        if (window.innerWidth >= 480 && (window.innerWidth < 768)) {
-            return this.screenSizeList.medium;
-        }
-        if (window.innerWidth >= 768 && (window.innerWidth < 1200)) {
-            return this.screenSizeList.large;
-        }
-        if (window.innerWidth >= 1200) {
-            return this.screenSizeList.xlarge;
-        }
-        return this.screenSizeList.small;
-    }
-
     showTopNav() {
-        if (this.screenSizeList.small !== this.screenSize() && this.screenSizeList.medium !== this.screenSize()) {
+        if ( this.isScreenSize(['large', 'xlarge']) ) {
             return true;
         } else {
             return false;
         }
-    }
-
-    // private isClickedNavItemActive?: Subscription;
-    public getClickedNavItemInfo$?: Subscription;
-    
-    ngOnInit() {
-        this.screenSize.set(this.getScreenSize());
-        this.showDesktopNav.set(this.showTopNav());
-        this.drawerButtonOptionsWindowSize(this.getScreenSize());
-    }
-
-    ngAfterViewInit() {
-        this.skipLinksButtonPosition = this.skipLinksButtonCalc();
-
-        this.getClickedNavItemInfo$ = this.navigationService.clickedItemInfo$.subscribe(value => {
-            if (this.jmDrawer.nativeElement.contains(document.getElementById(value.clickedId)) && !value.isActive) {
-                this.jmDrawerComp.drawerButtonClick();
-            }
-        });
-
-        if (this.getScreenSize() === this.screenSizeList.large || this.getScreenSize() === this.screenSizeList.xlarge) {
-            this.windowScrollDrawerButton();
-        } else {
-            this.buttonDrawerHideShow.set(true);
-        }
-
-        // this.screenSize.set(this.getScreenSize());
-        // console.log(`this.screenSize(): ${this.screenSize()}`);
-        this.determineDrawerButtonPosition();
     }
 
     skipLinksButtonCalc() {
@@ -339,7 +424,7 @@ export class AppComponent {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
-        })
+        });
     }
 
     jmRouteAnimationStart(event: any) {
@@ -360,7 +445,6 @@ export class AppComponent {
     }
 
     setMainContentSize() {
-
         const mainComponent = this.mainContent.nativeElement;
         const leaveHeight = mainComponent.children[1].offsetHeight;
         const enterHeight = mainComponent.children[2].offsetHeight;
@@ -369,7 +453,6 @@ export class AppComponent {
         setTimeout(() => {
             mainComponent.setAttribute('style', 'height: ' + enterHeight + 'px' );
         });
-
     }
 
     goToPageTop() {
@@ -381,26 +464,9 @@ export class AppComponent {
     }
     
     ngOnDestroy() {
-        // this.isClickedNavItemActive?.unsubscribe();
-        this.getClickedNavItemInfo$?.unsubscribe();
         this.windowResizeSubscription$.unsubscribe();
         this.windowScrollSubscription$.unsubscribe();
+        this.getClickedNavItemInfoSubscription$?.unsubscribe();
     }
-
-    public custom_single_acc_title_code: string = 
-        "&lt;<span class=\'color1\'>j-murky-hawk-accordion</span> <br />"
-        + "    <span class=\'color2\'>jmFieldId</span>=<span class=\'color7\'>\"accordionCustomTitle\"</span> <br />"
-        + "    <span class=\'color2\'>titleText</span>=<span class=\'color7\'>\"Sample title text\"</span> <br />"
-        + "    <span class=\'color2\'>accordionType</span>=<span class=\'color7\'>\"panel\"</span> <br />"
-        + "    [<span class=\'color2\'>customStylesTitle</span>]=<span class='color7'>\"{ <br />"
-        + "        'background' : '#cc0031', <br />"
-        + "        'background-ro' : '#ffffff', <br />"
-        + "        'border' : '3px solid #cc0031', <br />" 
-        + "        'border-ro' : '3px solid #cc0031', <br />" 
-        + "        'color' : '#ffffff', <br />"
-        + "        'color-ro' : '#770031' <br />"
-        + "    }\"</span>&gt; <br />"
-        + "    &lt;<span class='color1'>p</span>&gt;Sample Accordion Content</span>&lt;/<span class=\'color1'\>p</span>&gt; <br />"
-        + "&lt;/<span class='color1'>j-murky-hawk-accordion</span>&gt;";
 
 }
