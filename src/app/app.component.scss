@@ -163,7 +163,7 @@ ul {
 }
 
 #pageHeadWrapper {
-    min-height: 33vh; 
+    min-height: 100svh; 
 
     display: flex;
     flex-direction: column;
@@ -466,7 +466,6 @@ ul {
     box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
     box-sizing: border-box;
     margin: 0;
-    min-height: 66vh;
     padding: 6rem 2.4rem;
     position: relative;
     z-index: 1;
@@ -486,9 +485,9 @@ ul {
         background-color: var(--jmLightNavBackground);
         background-image: url(../assets/images/hash-v2.svg);
         background-repeat: repeat;
-        background-size: 125px;
+        background-size: 135px;
         content: '';
-        opacity: .085;
+        opacity: .09;
         z-index: -1;
 
         position: absolute;
@@ -500,6 +499,56 @@ ul {
 
     h2 {
         @include pageTitle;
+    }
+
+    .jmArrow {
+        background: none;
+        border: none;
+        cursor: pointer;
+        height: 5rem;
+        transform: scale(.75);
+
+        position: absolute;
+        bottom: 1rem;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        &:focus,
+        &:hover {
+            &::before,
+            &::after {
+                background-color: rgba(0, 0, 0, .75);
+            }
+        }
+
+        &::before,
+        &::after {
+            background-color: rgba(0, 0, 0, .25);
+            border-radius: 1rem;
+            content: '';
+            display: block;
+            transition: .25s background-color linear;
+
+            height: .75rem;
+            width: 5rem;
+        }
+
+        &::before {
+            border-top-right-radius: 0;
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            margin-bottom: .5rem;
+            margin-left: -1.35rem;
+            transform: rotate(-45deg);
+            width: 4.25rem;
+        }
     }
 
 }
@@ -515,7 +564,7 @@ a.gitHubBtn {
     font-weight: 500;
     letter-spacing: -.015rem;
     line-height: 1.2;
-    margin: 0;
+    margin: 0 0 5rem 0;
     padding: 2rem 2.8rem;
     text-decoration: none;
     transition-duration: $transitionDuration;
@@ -1055,6 +1104,7 @@ footer {
 
     #pageHeadWrapper {
         height: auto;
+        min-height: auto;
         flex-direction: column;
 
         #pageHead {

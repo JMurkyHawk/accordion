@@ -24,11 +24,11 @@
                 }"
                 [isDrawerButtonPositionInside]="isDrawerButtonPositionInside()"
                 [drawerPosition]="buttonDrawerPosition()"
-                [drawerSpeed]="drawerSpeed"
-                [drawerWidth]="screenSize()"
+                [drawerSpeed]="'.4s'"
+                [drawerWidth]="drawerSize()"
                 [drawerButtonAlign]="buttonDrawerPosition()"
                 [drawerButtonInfo]="drawerButtonInfo()"
-                drawerPageOverlayOpacity=".5"
+                drawerPageOverlayOpacity=".6"
                 [canDocScrollWhenOpen]="false" >
 
                     <h1>Accordion Features</h1>
@@ -69,6 +69,16 @@
                     href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">
                     <jm-svg-render src="assets/images/github-icon.svg"></jm-svg-render>{{githubLabel}}
                 </a>
+                <button class="jmArrow" 
+                    *ngIf="showSubHeadContentIndicator()"
+                    (click)="skipLinksClick($event)" 
+                    title="Scroll to main content"
+                    [@fadeInOut]="{ 
+                        value: showSubHeadContentIndicator(),
+                        params: {
+                            animationTiming: '200'
+                        } 
+                    }"></button>
             </div>
         </div>
 
