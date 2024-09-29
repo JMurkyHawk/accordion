@@ -137,9 +137,9 @@ export class AppComponent {
     private windowScrollSubscription$: Subscription;
     private getClickedNavItemInfoSubscription$?: Subscription;
 
-    @ViewChild("pageHead", {static: false, read: ElementRef}) pageHead!: ElementRef;
-    @ViewChild("skipLinks", {static: false}) skipLinks!: ElementRef;
-    @ViewChild("mainContent", {static: false}) mainContent!: ElementRef;
+    @ViewChild('pageHead', {static: false, read: ElementRef}) pageHead!: ElementRef;
+    @ViewChild('skipLinks', {static: false}) skipLinks!: ElementRef;
+    @ViewChild('mainContent', {static: false}) mainContent!: ElementRef;
     @ViewChild('jmDrawerComp', {read: JMurkyHawkDrawerComponent}) jmDrawerComp!: JMurkyHawkDrawerComponent;
     @ViewChild('jmDrawer', { read: ElementRef }) jmDrawer!: ElementRef;
 

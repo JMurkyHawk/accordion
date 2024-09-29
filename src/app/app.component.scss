@@ -163,7 +163,7 @@ ul {
 }
 
 #pageHeadWrapper {
-    min-height: 100svh; 
+    min-height: 100svh; // Apparently, mobile chrome adds the top browser bar height when using vh
 
     display: flex;
     flex-direction: column;
@@ -506,7 +506,7 @@ ul {
         border: none;
         cursor: pointer;
         height: 5rem;
-        transform: scale(.75);
+        transform: scale(.66);
 
         position: absolute;
         bottom: 1rem;
@@ -520,13 +520,13 @@ ul {
         &:hover {
             &::before,
             &::after {
-                background-color: rgba(0, 0, 0, .75);
+                background-color: rgba(0, 0, 0, .5);
             }
         }
 
         &::before,
         &::after {
-            background-color: rgba(0, 0, 0, .25);
+            background-color: rgba(0, 0, 0, .2);
             border-radius: 1rem;
             content: '';
             display: block;
@@ -564,7 +564,7 @@ a.gitHubBtn {
     font-weight: 500;
     letter-spacing: -.015rem;
     line-height: 1.2;
-    margin: 0 0 5rem 0;
+    margin: 0 0 6.5rem 0;
     padding: 2rem 2.8rem;
     text-decoration: none;
     transition-duration: $transitionDuration;
