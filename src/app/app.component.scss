@@ -1013,8 +1013,24 @@ footer {
     flex-direction: column;
     align-items: center;
 
-    nav.text {
-        margin-bottom: 4rem;
+    j-murky-hawk-navigation {
+        display: contents;
+
+        nav.text {
+            display: contents;
+            margin-bottom: 4rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            ul {
+                width: 100%;
+
+                display: grid;
+                grid-template-columns: 100%;
+            }
+        }
     }
 
     small {
@@ -1093,6 +1109,18 @@ footer {
 
             .jmBackDrop:not(.titleCard) {
                 padding: 1.8rem 3.2rem;
+            }
+        }
+    }
+
+    footer {
+        j-murky-hawk-navigation {
+            nav.text {
+                width: 100%;
+
+                ul {
+                    grid-template-columns: 33% 33%;
+                }
             }
         }
     }
@@ -1233,6 +1261,17 @@ footer {
             padding: 2.4rem 3.2rem;
         }
 
+    }
+
+    footer {
+        j-murky-hawk-navigation {
+            nav.text {
+                ul {
+                    display: flex;
+                    flex-direction: row;
+                }
+            }
+        }
     }
 
 }
