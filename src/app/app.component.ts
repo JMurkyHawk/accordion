@@ -226,7 +226,10 @@ export class AppComponent {
         this.skipLinksButtonPosition = this.skipLinksButtonCalc();
 
         this.getClickedNavItemInfoSubscription$ = this.navigationService.clickedItemInfo$.subscribe(value => {
-            if (this.jmDrawer.nativeElement.contains(document.getElementById(value.clickedId)) && !value.isActive) {
+            if (this.jmDrawer && 
+                this.jmDrawer.nativeElement.contains(document.getElementById(value.clickedId)) && 
+                !value.isActive
+                ) {
                 this.jmDrawerComp.drawerButtonClick();
             }
         });
