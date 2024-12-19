@@ -125,7 +125,7 @@ const buttonRight = [
                     animateChild()
                 ])
             ])
-        ])
+        ], { optional: true })
     ], { params: {buttonHideShowTiming: buttonHideShowTiming, buttonWidth: buttonWidth, buttonXPosition: buttonXPosition} }),
     
     transition('right => void', [
@@ -159,7 +159,7 @@ const buttonRight = [
                     })
                 ])
             ])
-        ])
+        ], { optional: true })
     ], { params: {
             buttonHideShowTiming: buttonHideShowTiming, 
             buttonWidth: buttonWidth, 
@@ -188,7 +188,7 @@ const buttonLeft = [
                     animateChild()
                 ])
             ])
-        ])
+        ], { optional: true})
     ], { params: {buttonHideShowTiming: buttonHideShowTiming, buttonWidth: buttonWidth, buttonXPosition: buttonXPosition} }),
     
     transition('left => void', [
@@ -222,7 +222,7 @@ const buttonLeft = [
                     })
                 ])
             ])
-        ])
+        ], { optional: true })
     ], { params: {
             buttonHideShowTiming: buttonHideShowTiming, 
             buttonWidth: buttonWidth, 

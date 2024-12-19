@@ -37,6 +37,7 @@ export class JMurkyHawkNavigationComponent {
     @Input() navItems: Array<LinkData> = [{label: 'Please provide link data list', link: '' }];
     @Input() linkScrollTo: boolean = false;
     @Input() linkScrollDelay: number = 750;
+    @Input() linkScrollToIfPastId: string = 'subHeaderBar';
     @Input() listId: string = ''; // To add a unique id (listId + index) to each <a> tag - otherwise, no id will be added
 
     @Input()
@@ -141,19 +142,25 @@ export class JMurkyHawkNavigationComponent {
         }
     }
 
+    // Is window scrolled past element with id name provided to linkScrollToIfPastId
+    isScrolledPast = (elementId: string) => {
+        if (elementId !== null && document.getElementById(elementId) !== undefined) {
+            return document.getElementById(elementId)?.getBoundingClientRect().bottom! < 0;
+        } else {
+            return true;
+        }
+    }
+
     linkClick(instance: any, clickedId: string) {
+        if (instance.isActive) return;
         // this.navigationService.isActiveItem(instance);
         this.navigationService.navItemInfo(instance, clickedId);
 
         // Scroll (and move focus) to the top of the main content area when using footer navigation
-        if (instance.isActive) return;
-
         const scrollToElementNode = document.getElementById(this.linkScrollToId);
 
-        let isElementScrolledPast = document.getElementById('subHeaderBar')?.getBoundingClientRect().bottom;
-
         // Should clicking the link scroll to the scrollToElementNode page position
-        if (this.linkScrollTo && scrollToElementNode && ( isElementScrolledPast! < 0 )) {
+        if (this.linkScrollTo && scrollToElementNode && this.isScrolledPast(this.linkScrollToIfPastId) ) {
             setTimeout(() => {
                 scrollToElementNode.scrollIntoView({ behavior: "smooth", block: 'start' });
                 scrollToElementNode.focus({preventScroll: true});
