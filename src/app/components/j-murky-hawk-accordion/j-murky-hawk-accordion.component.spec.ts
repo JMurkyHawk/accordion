@@ -51,7 +51,7 @@ describe('JMurkyHawkAccordionComponent', () => {
         btn.triggerEventHandler('click', null);
         expect(component.jmAccordionToggle).toHaveBeenCalled();
 
-        component.isAccordionOpen = false;
+        fixture.componentRef.setInput('isAccordionOpen', false);
         component.jmAccordionToggle();
         fixture.whenStable().then(() => {
             expect(component.isAccordionOpen).toBeTrue();
@@ -63,7 +63,7 @@ describe('JMurkyHawkAccordionComponent', () => {
     });
 
     it('should show the accordion\'s body content when the component initially renders, if isOpenByDefault is true', () => {
-        component.isOpenByDefault = true;
+        fixture.componentRef.setInput('isOpenByDefault', true);
         component.checkIsOpenByDefault();
         expect(component.isAccordionOpen).toBeTrue();
     });
@@ -77,14 +77,16 @@ describe('JMurkyHawkAccordionComponent', () => {
     });
 
     it('initial title text for the CLOSE state when using full-text transition', () => {
-        component.titleTextClosed = "Closed state using full text title transition";
+        fixture.componentRef.setInput('titleTextClosed', "Closed state using full text title transition");
+        /* TODO: Replace direct data input changes (component.titleTextClosed = "Closed..."; line above) with the fixture.setInput() method:
+        fixture.componentRef.setInput('titleTextClosed', 'Closed state using full text title transition'); */
         component.ngOnInit();
         fixture.detectChanges();
         expect(accordionHeader.textContent).toContain(component.titleText);
     });
 
     it('new title text for OPEN state when using full-text transition', () => {
-        component.titleTextOpen = "Open state using full text title transition";
+        fixture.componentRef.setInput('titleTextOpen', "Open state using full text title transition");
         component.ngOnInit();
         component.jmAccordionToggle();
         fixture.detectChanges();
@@ -120,10 +122,11 @@ describe('JMurkyHawkAccordionComponent', () => {
          * So... I'll just call component.jmAccordionHeaderActivated(), then manually change titleTextSlotChange. 
          */
 
-        component.titleTextOpen = "Open ";
-        component.titleTextClosed = "Close ";
+        fixture.componentRef.setInput('titleTextOpen', "Open ");
+        fixture.componentRef.setInput('titleTextClosed', "Close ");
+        // fixture.componentRef.setInput('titleTextSlotChange', component.titleTextOpen);
         component.titleTextSlotChange = component.titleTextOpen;
-        component.titleText = "test text content";
+        fixture.componentRef.setInput('titleText', "test text content");
 
         component.ngOnInit();
         expect(component.titleTextSlotChange + component.titleText )
@@ -146,7 +149,7 @@ describe('JMurkyHawkAccordionComponent', () => {
     });
 
     it('should apply specified height on accordion body in open state when value is provided to customHeight input', () => {
-        component.customHeight = '200px';
+        fixture.componentRef.setInput('customHeight', '200px');
         component.jmAccordionToggle();
         fixture.whenStable().then(() => {
             expect(accordionBody.style.height).toBe(component.customHeight);
@@ -155,70 +158,70 @@ describe('JMurkyHawkAccordionComponent', () => {
     
     it('should use default value if accordionType is empty', () => {
         const checkAccordionType = spyOnProperty(component, 'accordionType', 'set');
-        component.accordionType = '';
+        fixture.componentRef.setInput('accordionType', '');
         expect(checkAccordionType).toHaveBeenCalledWith('');
         expect(component.accordionType).toBe('minimal');
     });
 
     it('should use default value if accordionType is not: basic, minimal, or panel', () => {
         const checkAccordionType = spyOnProperty(component, 'accordionType', 'set');
-        component.accordionType = 'circle';
+        fixture.componentRef.setInput('accordionType', 'circle');
         expect(checkAccordionType).toHaveBeenCalledWith('circle');
         expect(component.accordionType).toBe('minimal');
     });
 
     it('should use default value if titleAlign is empty', () => {
         const checkTitleAlign = spyOnProperty(component, 'titleAlign', 'set');
-        component.titleAlign = '';
+        fixture.componentRef.setInput('titleAlign', '');
         expect(checkTitleAlign).toHaveBeenCalledWith('');
         expect(component.titleAlign).toBe('left');
     });
 
     it('should use default value if titleAlign is is not: left, center, or right', () => {
         const checkTitleAlign = spyOnProperty(component, 'titleAlign', 'set');
-        component.titleAlign = 'top';
+        fixture.componentRef.setInput('titleAlign', 'top');
         expect(checkTitleAlign).toHaveBeenCalledWith('top');
         expect(component.titleAlign).toBe('left');
     });
 
     it('should use default value if iconAlign is empty', () => {
         const checkIconAlign = spyOnProperty(component, 'iconAlign', 'set');
-        component.iconAlign = '';
+        fixture.componentRef.setInput('iconAlign', '');
         expect(checkIconAlign).toHaveBeenCalledWith('');
         expect(component.iconAlign).toBe('right');
     });
 
     it('should use default value if iconAlign is not: left or right', () => {
         const checkIconAlign = spyOnProperty(component, 'iconAlign', 'set');
-        component.iconAlign = 'north';
+        fixture.componentRef.setInput('iconAlign', 'north');
         expect(checkIconAlign).toHaveBeenCalledWith('north');
         expect(component.iconAlign).toBe('right');
     });
 
     it('should use default value if iconType is empty', () => {
         const checkIconType = spyOnProperty(component, 'iconType', 'set');
-        component.iconType = '';
+        fixture.componentRef.setInput('iconType', '');
         expect(checkIconType).toHaveBeenCalledWith('');
         expect(component.iconType).toBe('chevron');
     });
 
     it('should use default value if iconType is not: chevron or plusMinus', () => {
         const checkIconType = spyOnProperty(component, 'iconType', 'set');
-        component.iconType = 'star';
+        fixture.componentRef.setInput('iconType', 'star');
         expect(checkIconType).toHaveBeenCalledWith('star');
         expect(component.iconType).toBe('chevron');
     });
 
     it('should use default value if titleTagType is empty', () => {
         const checkTitleTagType = spyOnProperty(component, 'titleTagType', 'set');
-        component.titleTagType = '';
+        fixture.componentRef.setInput('titleTagType', '');
         expect(checkTitleTagType).toHaveBeenCalledWith('');
         expect(component.titleTagType).toBe('strong');
     });
 
     it('should use default value if titleTagType is not: strong, h1, h2, h3, h4, h5, or h6', () => {
         const checkTitleTagType = spyOnProperty(component, 'titleTagType', 'set');
-        component.titleTagType = 'm80';
+        fixture.componentRef.setInput('titleTagType', 'm80');
         expect(checkTitleTagType).toHaveBeenCalledWith('m80');
         expect(component.titleTagType).toBe('strong');
     });
@@ -226,7 +229,7 @@ describe('JMurkyHawkAccordionComponent', () => {
     it('should use reject value if customStylesTitle has a value not from the defined list: '
         + 'background, background-ro, border, border-ro, color, color-ro', () => {
         const checkCustomStylesTitle = spyOnProperty(component, 'customStylesTitle', 'set');
-        component.customStylesTitle = {'a':'b'};
+        fixture.componentRef.setInput('customStylesTitle', {'a':'b'});
         expect(checkCustomStylesTitle).toHaveBeenCalledWith({'a':'b'});
         expect(component.customStylesTitle).toEqual({});
     });
@@ -234,7 +237,7 @@ describe('JMurkyHawkAccordionComponent', () => {
     it('should use reject value if customStylesBody has a value not from the defined list: '
         + 'background, border, color', () => {
         const checkCustomStylesBody = spyOnProperty(component, 'customStylesBody', 'set');
-        component.customStylesBody = {'x':'y'};
+        fixture.componentRef.setInput('customStylesBody', {'x':'y'});
         expect(checkCustomStylesBody).toHaveBeenCalledWith({'x':'y'});
         expect(component.customStylesBody).toEqual({});
     });

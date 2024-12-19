@@ -13,7 +13,7 @@ describe('JMurkyHawkNavigationComponent', () => {
     let router: Router;
     let debugElement: DebugElement;
     let linkButton: HTMLElement;
-    let scrollToId: string = 'mainNavBar';
+    let scrollToId: string = 'mainContent';
     let links: Array<{label: string, link: string}> = [
         {
             label: 'Test link 1',
@@ -79,7 +79,7 @@ describe('JMurkyHawkNavigationComponent', () => {
 
     it('should render correct number of items according to the number of elements in navItems', () => {
         // Arrange
-        component.navItems = [];
+        fixture.componentRef.setInput('navItems', []);
         fixture.detectChanges();
 
         // Act
@@ -114,27 +114,28 @@ describe('JMurkyHawkNavigationComponent', () => {
 
     it('if linkScrollTo="true", <a> link click should scroll default id element into view', fakeAsync(() => {
         createScrollToElement('div', scrollToId);
-        component.linkScrollTo = true;
-        component.linkScrollToId = scrollToId;
+        fixture.componentRef.setInput('linkScrollTo', true);
+        fixture.componentRef.setInput('linkScrollToId', scrollToId);
+        fixture.componentRef.setInput('linkScrollToIfPastId', null);
         fixture.detectChanges();
 
         const doc = fixture.nativeElement.ownerDocument;
         const getScrollToElement = doc.getElementById(component.linkScrollToId);
         expect(getScrollToElement).toBeTruthy;
         
-        const btn = fixture.debugElement.query(By.css('a'));
+        const btn = fixture.debugElement.query(By.css('li:last-child a'));
         expect(btn).toBeTruthy;
 
-        spyOn(getScrollToElement, 'scrollIntoView').and.callThrough();
+        const scrollToSpy = spyOn(getScrollToElement, 'scrollIntoView').and.callThrough();
         btn.triggerEventHandler('click', null);
         tick(component.linkScrollDelay);
-        expect(getScrollToElement.scrollIntoView).toHaveBeenCalled();
+        expect(scrollToSpy).toHaveBeenCalled();
     }));
 
     it('checkScrollToIdValue() should return the PROVIDED id value if element with that id exists in DOM', () => {
         createScrollToElement('div', scrollToId);
-        component.linkScrollTo = true;
-        component.linkScrollToId = scrollToId;
+        fixture.componentRef.setInput('linkScrollTo', true);
+        fixture.componentRef.setInput('linkScrollToId', scrollToId);
         fixture.detectChanges();
         
         expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
@@ -145,8 +146,8 @@ describe('JMurkyHawkNavigationComponent', () => {
         const defaultIdValue = component.linkScrollToId;
         createScrollToElement('div', scrollToId);
         scrollToId = 'id-not-in-dom'; // scrollToId now different than element just created with createScrollToElement()
-        component.linkScrollTo = true;
-        component.linkScrollToId = scrollToId;
+        fixture.componentRef.setInput('linkScrollTo', true);
+        fixture.componentRef.setInput('linkScrollToId', scrollToId);
         fixture.detectChanges();
 
         expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
@@ -155,8 +156,8 @@ describe('JMurkyHawkNavigationComponent', () => {
 
     it('checkScrollToIdValue() should set id element tabindex="0" if element is NOT <a> or <button>', () => {
         createScrollToElement('div', scrollToId);
-        component.linkScrollTo = true;
-        component.linkScrollToId = scrollToId;
+        fixture.componentRef.setInput('linkScrollTo', true);
+        fixture.componentRef.setInput('linkScrollToId', scrollToId);
         fixture.detectChanges();
 
         expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
@@ -165,8 +166,8 @@ describe('JMurkyHawkNavigationComponent', () => {
 
     it('checkScrollToIdValue() should NOT add tabindex if element is <a> or <button>', () => {
         createScrollToElement('a', scrollToId);
-        component.linkScrollTo = true;
-        component.linkScrollToId = scrollToId;
+        fixture.componentRef.setInput('linkScrollTo', true);
+        fixture.componentRef.setInput('linkScrollToId', scrollToId);
         fixture.detectChanges();
         
         expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
