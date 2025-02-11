@@ -388,16 +388,16 @@ export class JMurkyHawkDrawerComponent {
     drawerButtonMove() {
         if (this.drawerShow() && this.drawerPosition === 'left') {
             this.setDrawerButtonLR(this.drawerWidth, 'auto');
-            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `0 ${this.drawerButtonBorderRadius} ${this.drawerButtonBorderRadius} 0 `);
+            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `0 ${this.drawerButtonInfo.borderRadius} ${this.drawerButtonInfo.borderRadius} 0 `);
         }
 
         if (this.drawerShow() && this.drawerPosition === 'right') {
             this.setDrawerButtonLR('auto', this.drawerWidth);
-            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${this.drawerButtonBorderRadius} 0 0 ${this.drawerButtonBorderRadius}`);
+            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${this.drawerButtonInfo.borderRadius} 0 0 ${this.drawerButtonInfo.borderRadius}`);
         }
         
         if (!this.drawerShow()) {
-            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${this.drawerButtonBorderRadius}`);
+            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${this.drawerButtonInfo.borderRadius}`);
         }
     }
 

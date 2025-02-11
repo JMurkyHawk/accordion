@@ -78,8 +78,6 @@ describe('JMurkyHawkAccordionComponent', () => {
 
     it('initial title text for the CLOSE state when using full-text transition', () => {
         fixture.componentRef.setInput('titleTextClosed', "Closed state using full text title transition");
-        /* TODO: Replace direct data input changes (component.titleTextClosed = "Closed..."; line above) with the fixture.setInput() method:
-        fixture.componentRef.setInput('titleTextClosed', 'Closed state using full text title transition'); */
         component.ngOnInit();
         fixture.detectChanges();
         expect(accordionHeader.textContent).toContain(component.titleText);

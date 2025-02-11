@@ -142,7 +142,7 @@ export class JMurkyHawkNavigationComponent {
         }
     }
 
-    // Is window scrolled past element with id name provided to linkScrollToIfPastId
+    // Is window scrolled past element with id provided to linkScrollToIfPastId input?
     isScrolledPast = (elementId: string) => {
         if (elementId !== null && document.getElementById(elementId) !== undefined) {
             return document.getElementById(elementId)?.getBoundingClientRect().bottom! < 0;
