@@ -12,7 +12,8 @@ $cardPad_Desktop: 8.5rem;
 }
 
 @mixin pageTitle {
-    background: linear-gradient(145deg, var(--blueDark2) 20%, var(--blueDark) 85%);
+    background-image: linear-gradient(90deg, var(--blueDark2) 25%, var(--blueDark) 85%);
+    -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     font-size: 4.2rem;
@@ -477,8 +478,12 @@ ul {
     gap: 2.4rem;
     justify-content: center;
 
-    #subHeaderContent {
+    > div {
         display: contents;
+    }
+
+    h2 {
+        @include pageTitle;
     }
 
     &:after {
@@ -495,10 +500,6 @@ ul {
         right: 0;
         bottom: 0;
         left: 0;
-    }
-
-    h2 {
-        @include pageTitle;
     }
 
     .jmArrow {
@@ -1154,7 +1155,7 @@ footer {
             display: flex;
             justify-content: center;
 
-            #subHeaderContent {
+            > div {
                 max-width: setMaxWidth($cardPad_Laptop);
                 width: calc(75% + ($cardPad_Laptop * 2));
 
@@ -1283,7 +1284,7 @@ footer {
     #pageHeadWrapper {
         #subHeaderBar {
 
-            #subHeaderContent {
+            > div {
                 max-width: setMaxWidth($cardPad_Desktop);
 
                 h2 {
