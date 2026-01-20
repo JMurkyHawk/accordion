@@ -50,7 +50,10 @@
                     <span class="logo">
                         <jm-svg-render src="assets/images/logo-jm-color.svg"></jm-svg-render>
                     </span>
-                    <h1 [innerHTML]="routeTitle" *ngIf="!showDesktopNav()"></h1>
+                    <h1 
+                        [innerHTML]="routeTitle" 
+                        [ngClass]="{'hideMe' : showDesktopNav()}">
+                    </h1>
                 </button>
             </div>
 
