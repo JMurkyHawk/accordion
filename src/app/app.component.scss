@@ -25,6 +25,15 @@ $cardPad_Desktop: 8.5rem;
     text-align: center;
 }
 
+.hideMe {
+    display: inline-block;
+    // height: 0px;
+    opacity: 0;
+
+    position: absolute;
+    left: -1000%;
+}
+
 html {
     color: var(--black2);
 }
