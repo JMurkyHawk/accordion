@@ -35,7 +35,7 @@
                 'width': drawerButtonInfo.size
             }"
             (click)="drawerButtonClick()"
-            [attr.title]="drawerShow() ? 'Close menu' : 'Open menu'"
+            [attr.title]="drawerShow() ? drawerButtonInfo.altTextHide : drawerButtonInfo.altTextShow"
             [attr.aria-expanded]="drawerShow()"
             aria-controls="jmDrawerContent">
 
