@@ -15,6 +15,8 @@ export interface XyPosition {
 }
 
 export interface DrawerButtonInfo {
+    altTextHide: string,
+    altTextShow: string,
     borderRadius: string, 
     iconLineHeight: string,
     iconLineSpacing: string, 
@@ -122,6 +124,8 @@ export class AppComponent {
     });
     public isDrawerButtonPositionInside: WritableSignal<boolean> = signal<boolean>(true);
     public drawerButtonInfo: WritableSignal<DrawerButtonInfo> = signal<DrawerButtonInfo>({ 
+        altTextHide: 'Hide navigation menu sidebar',
+        altTextShow: 'Show navigation menu in sidebar',
         borderRadius: '.5rem', 
         iconLineHeight: '.3rem',
         iconLineSpacing: '.7rem', 
