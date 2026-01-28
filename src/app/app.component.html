@@ -8,42 +8,6 @@
                 (click)="skipLinksClick($event)" 
                 (focus)="skipLinksFocus($event)">{{skipLinksText}}</button>
 
-            <j-murky-hawk-drawer 
-                #jmDrawer
-                #jmDrawerComp
-                *ngIf="buttonDrawerHideShow()"
-                [@buttonDrawerHideShow]="{ 
-                    value: buttonDrawerPosition(),
-                    params: {
-                        buttonHideShowTiming: '250ms', 
-                        buttonWidth: drawerButtonInfo().size, 
-                        buttonXPosition: drawerButtonInfo().xyPosition.x,
-                        height: drawerButtonInfo().iconLineHeight,
-                        lineSpacing: drawerButtonInfo().iconLineSpacing
-                    } 
-                }"
-                [isDrawerButtonPositionInside]="isDrawerButtonPositionInside()"
-                [drawerPosition]="buttonDrawerPosition()"
-                [drawerSpeed]="'.4s'"
-                [drawerWidth]="drawerSize()"
-                [drawerButtonAlign]="buttonDrawerPosition()"
-                [drawerButtonInfo]="drawerButtonInfo()"
-                drawerPageOverlayOpacity=".6"
-                [canDocScrollWhenOpen]="false" >
-
-                    <h1>Accordion Features</h1>
-
-                    <j-murky-hawk-navigation 
-                        navId="drawerNav"
-                        listId="drawerNav"
-                        [navItems]="navLinkData2"
-                        linkStyle="text"
-                        [linkScrollTo]="true"
-                        linkScrollToId="mainContent" >
-                    </j-murky-hawk-navigation>
-
-            </j-murky-hawk-drawer>
-
             <div class="pageHeadSection1">
                 <button (click)="skipLinksClick($event)" 
                     title="Scroll to main content" >
@@ -84,6 +48,41 @@
                         } 
                     }"></button>
             </div>
+            <j-murky-hawk-drawer 
+                #jmDrawer
+                #jmDrawerComp
+                *ngIf="buttonDrawerHideShow()"
+                [@buttonDrawerHideShow]="{ 
+                    value: buttonDrawerPosition(),
+                    params: {
+                        buttonHideShowTiming: '250ms', 
+                        buttonWidth: drawerButtonInfo().size, 
+                        buttonXPosition: drawerButtonInfo().xyPosition.x,
+                        height: drawerButtonInfo().iconLineHeight,
+                        lineSpacing: drawerButtonInfo().iconLineSpacing
+                    } 
+                }"
+                [isDrawerButtonPositionInside]="isDrawerButtonPositionInside()"
+                [drawerPosition]="buttonDrawerPosition()"
+                [drawerSpeed]="'.4s'"
+                [drawerWidth]="drawerSize()"
+                [drawerButtonAlign]="buttonDrawerPosition()"
+                [drawerButtonInfo]="drawerButtonInfo()"
+                drawerPageOverlayOpacity=".6"
+                [canDocScrollWhenOpen]="false" >
+
+                    <h1>Accordion Features</h1>
+
+                    <j-murky-hawk-navigation 
+                        navId="drawerNav"
+                        listId="drawerNav"
+                        [navItems]="navLinkData2"
+                        linkStyle="text"
+                        [linkScrollTo]="true"
+                        linkScrollToId="mainContent" >
+                    </j-murky-hawk-navigation>
+
+            </j-murky-hawk-drawer>
         </div>
 
     </div>
