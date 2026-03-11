@@ -91,7 +91,7 @@
             [@JmhRouteAnimation]="routeIdNumber" 
             (@JmhRouteAnimation.start)="jmRouteAnimationStart($event)"
             (@JmhRouteAnimation.done)="jmRouteAnimationDone($event)">
-        <router-outlet (activate)="onActivate()" ></router-outlet>
+        <router-outlet (activate)="onActivate($event)" ></router-outlet>
     </div>
 
     <footer>

@@ -23,4 +23,9 @@ export class NavigationService {
         this._clickedItemInfo.next(item);
     }
 
+    scrollTo(element: any) {
+        element.parentElement.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        element.focus({preventScroll: true});
+    }
+
 }

@@ -657,6 +657,11 @@ a.gitHubBtn {
             padding: 0 $cardPad_Mobile;
             width: 100%; // Set to 100% for children overflow (codeBox) to work on smaller screens
         }
+
+        &:focus,
+        &:hover {
+            z-index: 1;
+        }
     }
 
     .jmCardContent {

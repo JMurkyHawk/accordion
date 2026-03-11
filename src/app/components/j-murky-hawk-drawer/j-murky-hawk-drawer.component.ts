@@ -46,8 +46,8 @@ export class JMurkyHawkDrawerComponent {
     @Input() drawerSpeed: string = '.5s';
     @Input() drawerWidth: string = '50vw';
     @Input() drawerButtonInfo = { 
-        altTextShow: 'Open drawer',
         altTextHide: 'Close drawer',
+        altTextShow: 'Open drawer',
         borderRadius: '.5rem', 
         iconLineHeight: '3px',
         iconLineSpacing: '7px', 
