@@ -421,10 +421,11 @@ export class AppComponent {
         const buttonShowTop = buttonTop - button.height;
         return buttonShowTop;
     }
+    
+    public subPageHeading: any;
 
     skipLinksClick(event: any) {
-        this.mainContent.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        this.mainContent.nativeElement.focus({preventScroll: true});
+        this.subPageHeading.skipLinksScroll(this.subPageHeading);
     }
 
     skipLinksFocus(event: any) {
@@ -446,9 +447,10 @@ export class AppComponent {
         this.mainContent.nativeElement.removeAttribute('style');
     }
 
-    onActivate() {
+    onActivate(element: any) {
         this.routeIdNumber = this.route.firstChild!.snapshot.data['routeIdNumber'];
         this.routeTitle = this.route.firstChild!.snapshot.data['pageTitle'];
+        this.subPageHeading = element;
     }
 
     setMainContentSize() {

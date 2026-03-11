@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-jmh-page-accordion-custom',
@@ -141,9 +142,15 @@ export class JmhPageAccordionCustomComponent implements OnInit {
         + "    &lt;<span class='color1'>p</span>&gt;Sample Accordion Content</span>&lt;/<span class=\'color1'\>p</span>&gt; <br />"
         + "&lt;/<span class=\'color1\'>j-murky-hawk-accordion</span>&gt;";
 
-  constructor() { }
+    @ViewChild('pageHeading', {static: false}) pageHeading!: ElementRef;
 
-  ngOnInit() {
-  }
+    constructor(private navigationService: NavigationService) { }
+
+    ngOnInit() {
+    }
+
+    skipLinksScroll() {
+        this.navigationService.scrollTo(this.pageHeading.nativeElement)
+    }
 
 }

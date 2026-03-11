@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-jmh-page-accordion-type',
@@ -54,11 +55,15 @@ export class JmhPageAccordionTypeComponent implements OnInit {
     public title_change_type_header3: string = "accordion with partial title change content";
     public title_change_type_content: string = "Content for accordion with additional options";
 
-    @ViewChild('skipLinksAnchor', {static: false}) skipLinksAnchor!: ElementRef;
+    @ViewChild('pageHeading', {static: false}) pageHeading!: ElementRef;
 
-    constructor() { }
+    constructor(private navigationService: NavigationService) { }
 
     ngOnInit(): void {
+    }
+
+    skipLinksScroll() {
+        this.navigationService.scrollTo(this.pageHeading.nativeElement)
     }
 
 }

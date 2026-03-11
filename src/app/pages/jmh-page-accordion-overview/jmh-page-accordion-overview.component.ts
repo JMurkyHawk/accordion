@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
     selector: 'app-jmh-page-accordion-overview',
@@ -19,9 +20,15 @@ export class JmhPageAccordionOverviewComponent implements OnInit {
     public default_header: string = "default accordion example";
     public default_content: string = "Default accordion content";
 
-    constructor() { }
+    @ViewChild('pageHeading', {static: false}) pageHeading!: ElementRef;
+
+    constructor(public navigationService: NavigationService) { }
 
     ngOnInit() {
+    }
+
+    skipLinksScroll() {
+        this.navigationService.scrollTo(this.pageHeading.nativeElement)
     }
 
 }

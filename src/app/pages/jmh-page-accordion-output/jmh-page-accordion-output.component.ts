@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-jmh-page-accordion-output',
@@ -33,11 +34,17 @@ export class JmhPageAccordionOutputComponent {
     public emit_header_3: string = "content for accordion with id of " + this.emit_id3;
     public emit_content_3: string = "Accordion with id of accordion-3 body content.";
 
-    constructor () {}
+    @ViewChild('pageHeading', {static: false}) pageHeading!: ElementRef;
+
+    constructor (private navigationService: NavigationService) {}
 
     getAccordionInfo(event: any) {
         this.emittedObj = JSON.stringify(event, null, 4);
         this.emittedId = event.id;
         this.emittedState = event.open ? 'open' : 'closed';
+    }
+
+    skipLinksScroll() {
+        this.navigationService.scrollTo(this.pageHeading.nativeElement)
     }
 }

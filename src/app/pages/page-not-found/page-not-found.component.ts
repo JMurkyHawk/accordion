@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-page-not-found',
@@ -11,9 +12,15 @@ export class PageNotFoundComponent implements OnInit {
 
     public pageNotFound_Content = "Sorry, the page you're trying to find doesn't seem to exist.";
 
-    constructor() { }
+    @ViewChild('pageHeading', {static: false}) pageHeading!: ElementRef;
+
+    constructor(private navigationService: NavigationService) { }
 
     ngOnInit() {
+    }
+
+    skipLinksScroll() {
+        this.navigationService.scrollTo(this.pageHeading.nativeElement)
     }
 
 }

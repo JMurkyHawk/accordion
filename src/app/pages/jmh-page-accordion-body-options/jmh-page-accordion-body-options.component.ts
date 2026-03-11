@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-jmh-page-accordion-body-options',
@@ -25,9 +26,15 @@ export class JmhPageAccordionBodyOptionsComponent implements OnInit {
         + "<p>Additional content for scrolling.</p> "
         + "<p>Additional content for scrolling.</p> ";
     
-    constructor() { }
+    @ViewChild('pageHeading', {static: false}) pageHeading!: ElementRef;
+    
+    constructor(private navigationService: NavigationService) { }
 
     ngOnInit(): void {
+    }
+
+    skipLinksScroll() {
+        this.navigationService.scrollTo(this.pageHeading.nativeElement)
     }
 
 }

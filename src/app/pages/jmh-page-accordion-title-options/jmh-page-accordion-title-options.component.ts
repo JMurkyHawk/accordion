@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-jmh-page-accordion-title-options',
@@ -71,9 +72,15 @@ export class JmhPageAccordionTitleOptionsComponent implements OnInit {
         + "This is something that will be helpful for users that require assistive technology like screenreaders.";
     public tag_description3: string = "To use a heading type other than <span class='codeBoxMini2'>&lt;<span class='color1'>strong</span>&gt;</span>, select one of the html heading types listed above and assign it to the 'titleTagType' input. ";
     
-    constructor() { }
+    @ViewChild('pageHeading', {static: false}) pageHeading!: ElementRef;
+
+    constructor(private navigationService: NavigationService) { }
 
     ngOnInit(): void {
+    }
+
+    skipLinksScroll() {
+        this.navigationService.scrollTo(this.pageHeading.nativeElement)
     }
 
 }
