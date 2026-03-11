@@ -252,8 +252,14 @@ export class JMurkyHawkDrawerComponent {
             'a, button, input, [tabindex]'
         );
 
+        console.log(`focusableElements: ${focusableElements}`)
+
         const focusableElementsArray = Array.from(focusableElements)
             .filter( (el: any) => !el.disabled);
+
+        focusableElementsArray.map((item) => {
+            console.log(`item: ${item}`)      
+        })
 
         return focusableElementsArray;
     }
@@ -284,6 +290,7 @@ export class JMurkyHawkDrawerComponent {
         }
 
         if ( key === 'Tab' ) {
+            console.log(`tab pressed, focused element: ${document.activeElement?.outerHTML}`)
             if ( this.isFocusOutsideDrawer() ) {
                 item1.focus();
             } else if (isLastFocused) { 
