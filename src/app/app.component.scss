@@ -658,8 +658,8 @@ a.gitHubBtn {
             width: 100%; // Set to 100% for children overflow (codeBox) to work on smaller screens
         }
 
-        &:focus,
-        &:hover {
+        &:focus {
+            outline: 3px solid var(--blueDark);
             z-index: 1;
         }
     }
