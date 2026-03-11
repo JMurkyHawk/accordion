@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-jmh-page-accordion-type',
@@ -53,6 +53,8 @@ export class JmhPageAccordionTypeComponent implements OnInit {
     public title_change_type_header2: string = "Hide";
     public title_change_type_header3: string = "accordion with partial title change content";
     public title_change_type_content: string = "Content for accordion with additional options";
+
+    @ViewChild('skipLinksAnchor', {static: false}) skipLinksAnchor!: ElementRef;
 
     constructor() { }
 
