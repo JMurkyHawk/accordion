@@ -290,7 +290,6 @@ export class JMurkyHawkDrawerComponent {
         }
 
         if ( key === 'Tab' ) {
-            console.log(`tab pressed, focused element: ${document.activeElement?.outerHTML}`)
             if ( this.isFocusOutsideDrawer() ) {
                 item1.focus();
             } else if (isLastFocused) { 
