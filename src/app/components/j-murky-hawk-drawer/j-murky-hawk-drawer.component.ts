@@ -252,14 +252,8 @@ export class JMurkyHawkDrawerComponent {
             'a, button, input, [tabindex]'
         );
 
-        console.log(`focusableElements: ${focusableElements}`)
-
         const focusableElementsArray = Array.from(focusableElements)
             .filter( (el: any) => !el.disabled);
-
-        focusableElementsArray.map((item) => {
-            console.log(`item: ${item}`)      
-        })
 
         return focusableElementsArray;
     }
