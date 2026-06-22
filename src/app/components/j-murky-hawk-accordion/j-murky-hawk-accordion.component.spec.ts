@@ -1,11 +1,12 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { JMurkyHawkAccordionComponent } from './j-murky-hawk-accordion.component';
 import { JMurkyHawkSvgRenderComponent } from '../j-murky-hawk-svg-render/j-murky-hawk-svg-render.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('JMurkyHawkAccordionComponent', () => {
     let component: JMurkyHawkAccordionComponent;
@@ -17,15 +18,13 @@ describe('JMurkyHawkAccordionComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                BrowserAnimationsModule,
-                HttpClientTestingModule
-            ],
-            declarations: [ 
-                JMurkyHawkAccordionComponent,
-                JMurkyHawkSvgRenderComponent
-            ]
-        })
+    declarations: [
+        JMurkyHawkAccordionComponent,
+        JMurkyHawkSvgRenderComponent
+    ],
+    imports: [BrowserAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
         .compileComponents();
     }));
 
@@ -52,20 +51,22 @@ describe('JMurkyHawkAccordionComponent', () => {
         expect(component.jmAccordionToggle).toHaveBeenCalled();
 
         fixture.componentRef.setInput('isAccordionOpen', false);
-        component.jmAccordionToggle();
+        // component.jmAccordionToggle();
         fixture.whenStable().then(() => {
-            expect(component.isAccordionOpen).toBeTrue();
-        });
-        component.jmAccordionToggle();
-        fixture.whenStable().then(() => {
-            expect(component.isAccordionOpen).toBeFalse();
+            component.jmAccordionToggle();
+        }).then(() => {
+            expect(component.isAccordionOpen).toBe(true);
+        }).then(() => {
+            component.jmAccordionToggle();
+        }).then(() => {
+            expect(component.isAccordionOpen).toBe(false);
         });
     });
 
     it('should show the accordion\'s body content when the component initially renders, if isOpenByDefault is true', () => {
         fixture.componentRef.setInput('isOpenByDefault', true);
         component.checkIsOpenByDefault();
-        expect(component.isAccordionOpen).toBeTrue();
+        expect(component.isAccordionOpen).toBe(true);
     });
 
     it('should have an id value', () => {
