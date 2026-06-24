@@ -1,5 +1,5 @@
-@import '../../themes';
-@import '../../../styles';
+@use '../../themes';
+@use '../../../styles';
 
 nav.text {
     
@@ -158,16 +158,16 @@ nav.button {
             padding: 0;
 
             a.button {
-                background-color: $jmDemoWhite;
-                border: 2px solid $jmDemoColor1;
-                box-shadow: $shadow;
-                color: $jmDemoColor1;
+                background-color: styles.$jmDemoWhite;
+                border: 2px solid styles.$jmDemoColor1;
+                box-shadow: styles.$shadow;
+                color: styles.$jmDemoColor1;
                 padding: .5em;
                 text-align: center;
                 text-decoration: none;
-                transition-duration: $transitionDuration;
-                transition-property: $transitionProperty;
-                transition-timing-function: $transitionTimingFunction;
+                transition-duration: styles.$transitionDuration;
+                transition-property: styles.$transitionProperty;
+                transition-timing-function: styles.$transitionTimingFunction;
 
                 display: flex;
                 align-items: center;
@@ -176,16 +176,16 @@ nav.button {
 
                 &:focus,
                 &:hover {
-                    background-color: $jmDemoColor1;
-                    border-color: $jmDemoColor1;
-                    color: $jmDemoWhite !important;
+                    background-color: styles.$jmDemoColor1;
+                    border-color: styles.$jmDemoColor1;
+                    color: styles.$jmDemoWhite !important;
                     margin: 0;
                 }
 
                 &.active {
                     background-color: var(--grayD);
                     border-color: #444444;
-                    box-shadow: $shadow2;
+                    box-shadow: styles.$shadow2;
                     color: #444444 !important;
                     cursor: not-allowed;
                 }
