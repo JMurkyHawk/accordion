@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
     selector: 'jm-svg-render',
     templateUrl: './j-murky-hawk-svg-render.component.html',
     styleUrls: ['./j-murky-hawk-svg-render.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 
 export class JMurkyHawkSvgRenderComponent implements OnInit {

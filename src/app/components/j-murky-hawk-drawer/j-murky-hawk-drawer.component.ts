@@ -27,7 +27,7 @@ export interface DrawerButtonOptions {
 @Component({
     selector: 'j-murky-hawk-drawer',
     standalone: true,
-    imports: [ 
+    imports: [
         CommonModule
     ],
     templateUrl: './j-murky-hawk-drawer.component.html',

@@ -2,9 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
-  selector: 'app-jmh-page-accordion-output',
-  templateUrl: './jmh-page-accordion-output.component.html',
-  styleUrl: './jmh-page-accordion-output.component.scss'
+    selector: 'app-jmh-page-accordion-output',
+    templateUrl: './jmh-page-accordion-output.component.html',
+    styleUrl: './jmh-page-accordion-output.component.scss',
+    standalone: false
 })
 export class JmhPageAccordionOutputComponent {
 

@@ -2,9 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
-  selector: 'app-jmh-page-accordion-title-transitions',
-  templateUrl: './jmh-page-accordion-title-transitions.component.html',
-  styleUrls: ['./jmh-page-accordion-title-transitions.component.scss']
+    selector: 'app-jmh-page-accordion-title-transitions',
+    templateUrl: './jmh-page-accordion-title-transitions.component.html',
+    styleUrls: ['./jmh-page-accordion-title-transitions.component.scss'],
+    standalone: false
 })
 export class JmhPageAccordionTitleTransitionsComponent implements OnInit {
 

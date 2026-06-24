@@ -17,10 +17,11 @@ export interface NavigationData {
 }
 
 @Component({
-  selector: 'j-murky-hawk-navigation',
-  templateUrl: './j-murky-hawk-navigation.component.html',
-  styleUrl: './j-murky-hawk-navigation.component.scss',
-  encapsulation: ViewEncapsulation.None
+    selector: 'j-murky-hawk-navigation',
+    templateUrl: './j-murky-hawk-navigation.component.html',
+    styleUrl: './j-murky-hawk-navigation.component.scss',
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class JMurkyHawkNavigationComponent {
 

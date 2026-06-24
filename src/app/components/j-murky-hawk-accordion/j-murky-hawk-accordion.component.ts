@@ -19,9 +19,10 @@ export interface AccordionData {
         jmAccordionIconAnimation,
         jmAccordionIconAnimation2,
         jmAccordionTitleAnimation,
-        jmAccordionTitleSlotAnimation, 
+        jmAccordionTitleSlotAnimation,
         jmAccordionBodyAnimation
     ],
+    standalone: false
 })
 
 export class JMurkyHawkAccordionComponent implements OnInit {

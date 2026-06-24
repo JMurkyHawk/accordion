@@ -2,9 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
-  selector: 'app-jmh-page-accordion-type',
-  templateUrl: './jmh-page-accordion-type.component.html',
-  styleUrls: ['./jmh-page-accordion-type.component.scss']
+    selector: 'app-jmh-page-accordion-type',
+    templateUrl: './jmh-page-accordion-type.component.html',
+    styleUrls: ['./jmh-page-accordion-type.component.scss'],
+    standalone: false
 })
 export class JmhPageAccordionTypeComponent implements OnInit {
 

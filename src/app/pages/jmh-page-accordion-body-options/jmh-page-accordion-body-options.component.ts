@@ -2,9 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
-  selector: 'app-jmh-page-accordion-body-options',
-  templateUrl: './jmh-page-accordion-body-options.component.html',
-  styleUrls: ['./jmh-page-accordion-body-options.component.scss']
+    selector: 'app-jmh-page-accordion-body-options',
+    templateUrl: './jmh-page-accordion-body-options.component.html',
+    styleUrls: ['./jmh-page-accordion-body-options.component.scss'],
+    standalone: false
 })
 export class JmhPageAccordionBodyOptionsComponent implements OnInit {
 
