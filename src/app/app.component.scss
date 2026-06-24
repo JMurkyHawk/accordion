@@ -1,6 +1,6 @@
 
-@import 'themes';
-@import '../styles';
+@use 'themes';
+@use '../styles';
 
 $cardPad_Mobile: 4.2rem;
 $cardPad_Tablet: 4.8rem;
@@ -8,7 +8,7 @@ $cardPad_Laptop: 6rem;
 $cardPad_Desktop: 8.5rem;
 
 @function setMaxWidth($addPaddingToWidth: 0) {
-    @return calc($maxLineWidth + ($addPaddingToWidth * 2));
+    @return calc(styles.$maxLineWidth + ($addPaddingToWidth * 2));
 }
 
 @mixin pageTitle {
@@ -67,9 +67,9 @@ h5 {
 a {
     color: #0000ff;
     display: inline-block;
-    transition-duration: $transitionDuration;
-    transition-property: $transitionProperty, margin, padding;
-    transition-timing-function: $transitionTimingFunction;
+    transition-duration: styles.$transitionDuration;
+    transition-property: styles.$transitionProperty, margin, padding;
+    transition-timing-function: styles.$transitionTimingFunction;
     
     &:active,
     &:focus,
@@ -184,7 +184,7 @@ ul {
 }
 
 #pageHead {
-    background: $jmGradient2;
+    background: styles.$jmGradient2;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
     margin: 0 auto;
     padding: .75em 3em .75em 3em;
@@ -287,9 +287,9 @@ ul {
             border-radius: 50%;
             box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
             position: relative;
-            transition-duration: $transitionDuration;
+            transition-duration: styles.$transitionDuration;
             transition-property: border, border-width, box-shadow;
-            transition-timing-function: $transitionTimingFunction;
+            transition-timing-function: styles.$transitionTimingFunction;
 
             height: 3.2em;
             width: 3.2em;
@@ -301,9 +301,9 @@ ul {
                     display: none;
                     transform: rotate(-115deg);
                     transform-origin: center;
-                    transition-duration: $transitionDuration2;
+                    transition-duration: styles.$transitionDuration2;
                     transition-property: box-shadow, opacity;
-                    transition-timing-function: $transitionTimingFunction;
+                    transition-timing-function: styles.$transitionTimingFunction;
                 }
             }
 
@@ -360,7 +360,7 @@ ul {
     position: absolute;
 
     .jmDrawerButton {
-        box-shadow: $shadow;
+        box-shadow: styles.$shadow;
 
         &.jmDrawerShow {
             box-shadow: none;
@@ -432,9 +432,9 @@ ul {
     line-height: 1em;
     opacity: 0;
     padding: .75em 1em;
-    transition-duration: $transitionDuration;
+    transition-duration: styles.$transitionDuration;
     transition-property: background-color, border-color, color, opacity, top, right, bottom, left;
-    transition-timing-function: $transitionTimingFunction;
+    transition-timing-function: styles.$transitionTimingFunction;
     z-index: -1;
 
     position: absolute;
@@ -567,9 +567,9 @@ a.gitHubBtn {
     background-color: var(--blueDark);
     border: .3rem solid var(--blueDark);
     border-radius: 1rem;
-    box-shadow: $shadow;
+    box-shadow: styles.$shadow;
     color: var(--white);
-    font-family: $fontFamilyInter;
+    font-family: styles.$fontFamilyInter;
     font-size: 2rem;
     font-weight: 500;
     letter-spacing: -.015rem;
@@ -577,9 +577,9 @@ a.gitHubBtn {
     margin: 0 0 6.5rem 0;
     padding: 2rem 2.8rem;
     text-decoration: none;
-    transition-duration: $transitionDuration;
-    transition-property: $transitionProperty;
-    transition-timing-function: $transitionTimingFunction;
+    transition-duration: styles.$transitionDuration;
+    transition-property: styles.$transitionProperty;
+    transition-timing-function: styles.$transitionTimingFunction;
 
     display: inline-flex;
     align-items: center;
@@ -603,9 +603,9 @@ a.gitHubBtn {
 
         .iconSvgFill {
             fill: var(--white);
-            transition-duration: $transitionDuration;
+            transition-duration: styles.$transitionDuration;
             transition-property: fill;
-            transition-timing-function: $transitionTimingFunction;
+            transition-timing-function: styles.$transitionTimingFunction;
         }
     }
 
@@ -616,7 +616,7 @@ a.gitHubBtn {
     position: relative;
     transition-duration: 500ms; // Match with the page transition speed in app-animations
     transition-property: height;
-    transition-timing-function: $transitionTimingFunction;
+    transition-timing-function: styles.$transitionTimingFunction;
 
     display: flex;
     flex-direction: column;
@@ -637,17 +637,17 @@ a.gitHubBtn {
         border-bottom: 1px solid var(--cardHeadBorder);
         border-radius: 0;
         color: var(--cardHeadText);
-        font-size: $titleSize;
-        font-weight: $titleWeight;
+        font-size: styles.$titleSize;
+        font-weight: styles.$titleWeight;
         letter-spacing: .025rem;
         margin: 0;
         padding: 3.2rem 0;
         text-align: left;
         text-transform: capitalize;
 
-        transition-duration: $transitionDuration;
+        transition-duration: styles.$transitionDuration;
         transition-property: background-color, border, color;
-        transition-timing-function: $transitionTimingFunction;
+        transition-timing-function: styles.$transitionTimingFunction;
 
         > span {
             box-sizing: border-box; // Set to border-box for children overflow (codeBox) to work on smaller screens
@@ -672,9 +672,9 @@ a.gitHubBtn {
         margin: 0 auto;
         max-width: setMaxWidth($cardPad_Mobile); // To keep line lengths reasonable
         padding: 3.2rem $cardPad_Mobile;
-        transition-duration: $transitionDuration;
+        transition-duration: styles.$transitionDuration;
         transition-property: background-color, border, color;
-        transition-timing-function: $transitionTimingFunction;
+        transition-timing-function: styles.$transitionTimingFunction;
         width: 100%; // Set to 100% for children overflow (codeBox) to work on smaller screens
 
         j-murky-hawk-accordion {
@@ -719,8 +719,8 @@ a.gitHubBtn {
             > h3, 
             > h4 {
                 display: block;
-                font-size: $titleSize;
-                font-weight: $titleWeight;
+                font-size: styles.$titleSize;
+                font-weight: styles.$titleWeight;
                 letter-spacing: -.02rem;
                 line-height: 1.15;
                 margin: 0 0 1.6rem 0;
@@ -749,18 +749,18 @@ a.gitHubBtn {
 
                 button {
                     padding: 0 0 0 0 !important;
-                    transition-duration: $transitionDuration;
+                    transition-duration: styles.$transitionDuration;
                     transition-property: padding;
-                    transition-timing-function: $transitionTimingFunction;
+                    transition-timing-function: styles.$transitionTimingFunction;
 
                     .jmAccordionHeadText {
                         color: var(--gray2);
-                        font-size: $titleSize !important;
-                        font-weight: $titleWeight !important;
+                        font-size: styles.$titleSize !important;
+                        font-weight: styles.$titleWeight !important;
                         line-height: 1.1 !important;
-                        transition-duration: $transitionDuration;
+                        transition-duration: styles.$transitionDuration;
                         transition-property: color;
-                        transition-timing-function: $transitionTimingFunction;
+                        transition-timing-function: styles.$transitionTimingFunction;
                     }
 
                     &:focus,
@@ -870,7 +870,7 @@ a.gitHubBtn {
             //background: var(--blueDark4);
             color: var(--black2);
             display: block;
-            font-family: $fontFamilyInter;
+            font-family: styles.$fontFamilyInter;
             font-weight: 400;
             margin: 0;
             padding: 1.2rem 2.4rem;
@@ -1059,9 +1059,9 @@ footer {
         line-height: 0;
         transform: scaleY(0) translateX(-50%);
         transform-origin: bottom;
-        transition-duration: $transitionDuration;
+        transition-duration: styles.$transitionDuration;
         transition-property: height, line-height, opacity, transform;
-        transition-timing-function: $transitionTimingFunction;
+        transition-timing-function: styles.$transitionTimingFunction;
         z-index: 0;
         
         opacity: 0;
@@ -1208,7 +1208,7 @@ footer {
     .jmCard {
         border: 1px solid var(--gray6);
         border-radius: .8rem;
-        box-shadow: $shadow;
+        box-shadow: styles.$shadow;
         box-sizing: content-box;
         margin: 0 auto 0 auto;
         max-width: setMaxWidth($cardPad_Laptop); // To keep line lengths reasonable
