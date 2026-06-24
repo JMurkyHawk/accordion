@@ -4,7 +4,8 @@ import { NavigationService } from 'src/app/services/navigation.service';
 @Component({
     selector: 'app-jmh-page-accordion-overview',
     templateUrl: './jmh-page-accordion-overview.component.html',
-    styleUrls: ['./jmh-page-accordion-overview.component.scss']
+    styleUrls: ['./jmh-page-accordion-overview.component.scss'],
+    standalone: false
 })
 export class JmhPageAccordionOverviewComponent implements OnInit {
 

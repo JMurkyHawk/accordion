@@ -30,11 +30,12 @@ export interface DrawerButtonInfo {
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    animations: [ 
+    animations: [
         JmhRouteAnimation,
         buttonDrawerHideShowAnimation,
         fadeInOutAnimation
-     ]
+    ],
+    standalone: false
 })
 export class AppComponent {
 
