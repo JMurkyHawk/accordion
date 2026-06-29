@@ -1,29 +1,30 @@
 <nav [class]="linkStyle">
 
-    <ul>
+  <ul>
 
-        <li *ngFor="let item of navItems; let i = index;" >
-            
-            <a *ngIf="item.link" 
-                [class]="linkStyle === 'button' ? 'button' : 'text' " 
-                [routerLink]="item.link" 
-                [attr.id]="listId ? listId + i : null"
-                #instance="routerLinkActive"
-                routerLinkActive="active" 
-                [title]="instance.isActive ? activeLinkTitle : '' " 
-                [tabindex]="instance.isActive ? -1 : null"
-                (click)="linkClick(instance, listId + i)">{{item.label}}</a>
-
-            <div *ngIf="!item.link"
-                #navDropdownMenu 
-                (clickOutside)="closeAccordion()">
-
-                <j-murky-hawk-accordion 
-                    #accordionMenu
-                    jmFieldId="navDropdown1"
-                    class=""
-                    accordionType="basic"
-                    [titleText]="item.label"
+    @for (item of navItems; track item; let i = $index) {
+      <li >
+        @if (item.link) {
+          <a
+            [class]="linkStyle === 'button' ? 'button' : 'text' "
+            [routerLink]="item.link"
+            [attr.id]="listId ? listId + i : null"
+            #instance="routerLinkActive"
+            routerLinkActive="active"
+            [title]="instance.isActive ? activeLinkTitle : '' "
+            [tabindex]="instance.isActive ? -1 : null"
+          (click)="linkClick(instance, listId + i)">{{item.label}}</a>
+        }
+        @if (!item.link) {
+          <div
+            #navDropdownMenu
+            (clickOutside)="closeAccordion()">
+            <j-murky-hawk-accordion
+              #accordionMenu
+              jmFieldId="navDropdown1"
+              class=""
+              accordionType="basic"
+              [titleText]="item.label"
                     [customStylesTitle]="{
                         'color': '#ffffff',
                         'color-ro': '#ededed'
@@ -31,27 +32,29 @@
                     [customStylesBody]="{
                         'color': '#000000'
                     }"
-                    [emitInfo]="true"
-                    (clickHeader)="accordionOutputHandler($event)"
-                >
-                    <ul>
-                        <li *ngFor="let subItem of item.subLinks; let lastAccordionMenuItem = last; let i = index;">
-                            <a [routerLink]="subItem.link"
-                                (click)="accordionMenuItemClick($event)"
-                                [attr.id]="listId ? listId + i : null"
-                                #instance="routerLinkActive"
-                                routerLinkActive="active" 
-                                attr.disabled="{{instance.isActive}}"
-                                [title]="instance.isActive ? activeLinkTitle : '' " 
-                                [tabindex]="instance.isActive ? -1 : null">{{subItem.label}}</a>
-                        </li>
-                    </ul>
-                </j-murky-hawk-accordion>
+              [emitInfo]="true"
+              (clickHeader)="accordionOutputHandler($event)"
+              >
+              <ul>
+                @for (subItem of item.subLinks; track subItem; let lastAccordionMenuItem = $last; let i = $index) {
+                  <li>
+                    <a [routerLink]="subItem.link"
+                      (click)="accordionMenuItemClick($event)"
+                      [attr.id]="listId ? listId + i : null"
+                      #instance="routerLinkActive"
+                      routerLinkActive="active"
+                      attr.disabled="{{instance.isActive}}"
+                      [title]="instance.isActive ? activeLinkTitle : '' "
+                    [tabindex]="instance.isActive ? -1 : null">{{subItem.label}}</a>
+                  </li>
+                }
+              </ul>
+            </j-murky-hawk-accordion>
+          </div>
+        }
+      </li>
+    }
 
-            </div>
-            
-        </li>
-
-    </ul>
+  </ul>
 
 </nav>

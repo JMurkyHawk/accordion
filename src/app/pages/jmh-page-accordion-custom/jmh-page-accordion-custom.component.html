@@ -1,78 +1,78 @@
 <div class="jmCard">
 
-    <h3 class="jmCardTitle" #pageHeading tabindex="0">
-        <span [innerHTML]="custom_title"></span>
-    </h3>
+  <h3 class="jmCardTitle" #pageHeading tabindex="0">
+    <span [innerHTML]="custom_title"></span>
+  </h3>
 
-    <div class="jmCardContent">
+  <div class="jmCardContent">
 
-        <section class="leadIn">
+    <section class="leadIn">
 
-            <h4>{{custom0}}</h4>
+      <h4>{{custom0}}</h4>
 
-            <p class="noMargin">{{custom}}</p>
+      <p class="noMargin">{{custom}}</p>
 
-        </section>
+    </section>
 
-        <section>
+    <section>
 
-            <h4>{{custom_basic_title}}</h4>
-            
-            <j-murky-hawk-accordion 
-                jmFieldId="accordionCustom"
-                class="jmBackDrop"
-                accordionType="basic"
-                titleTransition="partial"
-                titleTextOpen="Show"
-                titleTextClosed="Hide"
-                [titleText]="custom_header"
-                [customStylesTitle]="{'color': '#cc0031', 'color-ro' : '#770031'}"
-                [customStylesBody]="{'color' : '#cc0031'}" >
-                    <p>{{custom_content}}</p>
-            </j-murky-hawk-accordion>
+      <h4>{{custom_basic_title}}</h4>
 
-            <p>{{custom1}}</p>
+      <j-murky-hawk-accordion
+        jmFieldId="accordionCustom"
+        class="jmBackDrop"
+        accordionType="basic"
+        titleTransition="partial"
+        titleTextOpen="Show"
+        titleTextClosed="Hide"
+        [titleText]="custom_header"
+        [customStylesTitle]="{'color': '#cc0031', 'color-ro' : '#770031'}"
+        [customStylesBody]="{'color' : '#cc0031'}" >
+        <p>{{custom_content}}</p>
+      </j-murky-hawk-accordion>
 
-        </section>
+      <p>{{custom1}}</p>
 
-        <section>
+    </section>
 
-            <h4>{{custom_minimal_title}}</h4>
+    <section>
 
-            <j-murky-hawk-accordion 
-                jmFieldId="accordionCustom"
-                class="jmBackDrop"
-                accordionType="minimal"
-                titleTransition="partial"
-                titleTextOpen="Show"
-                titleTextClosed="Hide"
-                [titleText]="custom_header"
+      <h4>{{custom_minimal_title}}</h4>
+
+      <j-murky-hawk-accordion
+        jmFieldId="accordionCustom"
+        class="jmBackDrop"
+        accordionType="minimal"
+        titleTransition="partial"
+        titleTextOpen="Show"
+        titleTextClosed="Hide"
+        [titleText]="custom_header"
                 [customStylesTitle]="{
                     'border' : '4px solid #cc0031', 
                     'border-ro' : '4px solid #770031', 
                     'color' : '#cc0031', 
                     'color-ro' : '#770031' 
                 }"
-                [customStylesBody]="{'color' : '#cc0031'}" >
-                    <p>{{custom_content}}</p>
-            </j-murky-hawk-accordion>
+        [customStylesBody]="{'color' : '#cc0031'}" >
+        <p>{{custom_content}}</p>
+      </j-murky-hawk-accordion>
 
-            <p>{{custom1_1}}</p>
+      <p>{{custom1_1}}</p>
 
-        </section>
+    </section>
 
-        <section>
+    <section>
 
-            <h4>{{custom_panel_title}}</h4>
+      <h4>{{custom_panel_title}}</h4>
 
-            <j-murky-hawk-accordion 
-                jmFieldId="accordionCustom"
-                class="jmBackDrop v2"
-                accordionType="panel"
-                titleTransition="partial"
-                titleTextOpen="Show"
-                titleTextClosed="Hide"
-                [titleText]="custom_header"
+      <j-murky-hawk-accordion
+        jmFieldId="accordionCustom"
+        class="jmBackDrop v2"
+        accordionType="panel"
+        titleTransition="partial"
+        titleTextOpen="Show"
+        titleTextClosed="Hide"
+        [titleText]="custom_header"
                 [customStylesTitle]="{
                     'background' : '#cc0031',
                     'background-ro' : '#ffffff',
@@ -86,141 +86,155 @@
                     'border' : '3px solid #cc0031',
                     'color' : '#770031'
                 }" >
-                    <p>{{custom_content}}</p>
-            </j-murky-hawk-accordion>
+        <p>{{custom_content}}</p>
+      </j-murky-hawk-accordion>
 
-            <p>{{custom1_2}}</p>
-            <p>{{custom2}}</p>
+      <p>{{custom1_2}}</p>
+      <p>{{custom2}}</p>
 
-        </section>
+    </section>
 
-        <section>
+    <section>
 
-            <j-murky-hawk-accordion
-                jmFieldId="customImplementGlobal"
-                class="customAccordionA"
-                accordionType="minimal"
-                titleTagType="h4"
-                [titleText]="custom_implement_sub_title1"
+      <j-murky-hawk-accordion
+        jmFieldId="customImplementGlobal"
+        class="customAccordionA"
+        accordionType="minimal"
+        titleTagType="h4"
+        [titleText]="custom_implement_sub_title1"
                 [customStylesBody]="{
                     'color': 'var(--cardText)'
                 }"
-            >
-                
-                <div class="group">
-                    
-                    <p>{{custom3_0}}</p>
-                    <p class="jmHighlight" [innerHTML]="custom3_1"></p>
-                    <p class="padding2">{{custom3_1_1}}</p>
-                    <ol class="customCols">
-                        <li *ngFor="let key of objectKeys(custom_title_styling)">
-                            <span>{{key}}: </span>
-                            <span>{{custom_title_styling[key]}}</span>
-                        </li>
-                    </ol>
+        >
 
-                    <p class="padding2">{{custom3_2}}</p>
-                    <ol class="customCols margin4">
-                        <li *ngFor="let key of objectKeys(custom_content_styling)">
-                            <span>{{key}}: </span>
-                            <span>{{custom_content_styling[key]}}</span>
-                        </li>
-                    </ol>
+        <div class="group">
 
-                    <div class="subGroup">
-                        
-                        <h5>{{custom_implement_sub_title1_2}}</h5>
+          <p>{{custom3_0}}</p>
+          <p class="jmHighlight" [innerHTML]="custom3_1"></p>
+          <p class="padding2">{{custom3_1_1}}</p>
+          <ol class="customCols">
+            @for (key of objectKeys(custom_title_styling); track key) {
+              <li>
+                <span>{{key}}: </span>
+                <span>{{custom_title_styling[key]}}</span>
+              </li>
+            }
+          </ol>
 
-                        <p class="padding2" [innerHTML]="custom3_3"></p>
-                        <ul class="customCols v2">
-                            <li *ngFor="let key of custom3_3_list">{{key}}</li>
-                        </ul>
+          <p class="padding2">{{custom3_2}}</p>
+          <ol class="customCols margin4">
+            @for (key of objectKeys(custom_content_styling); track key) {
+              <li>
+                <span>{{key}}: </span>
+                <span>{{custom_content_styling[key]}}</span>
+              </li>
+            }
+          </ol>
 
-                        <p class="padding2">{{custom3_3_2}}</p>
-                        <ul class="customCols v2">
-                            <li *ngFor="let key of custom3_3_list2">{{key}}</li>
-                        </ul>
+          <div class="subGroup">
 
-                        <p class="padding2" [innerHTML]="custom3_3_3"></p>
-                        <div class="codeBox">
-                            <code>
-                                <pre [innerHTML]="custom3_code"></pre>
-                            </code>
-                        </div>
-                    
-                    </div>
+            <h5>{{custom_implement_sub_title1_2}}</h5>
 
-                </div>
-            </j-murky-hawk-accordion>
+            <p class="padding2" [innerHTML]="custom3_3"></p>
+            <ul class="customCols v2">
+              @for (key of custom3_3_list; track key) {
+                <li>{{key}}</li>
+              }
+            </ul>
 
-            <j-murky-hawk-accordion
-                jmFieldId="customImplementIndividual"
-                class="customAccordionA"
-                accordionType="minimal"
-                titleTagType="h4"
-                [titleText]="custom_implement_sub_title2"
+            <p class="padding2">{{custom3_3_2}}</p>
+            <ul class="customCols v2">
+              @for (key of custom3_3_list2; track key) {
+                <li>{{key}}</li>
+              }
+            </ul>
+
+            <p class="padding2" [innerHTML]="custom3_3_3"></p>
+            <div class="codeBox">
+              <code>
+                <pre [innerHTML]="custom3_code"></pre>
+              </code>
+            </div>
+
+          </div>
+
+        </div>
+      </j-murky-hawk-accordion>
+
+      <j-murky-hawk-accordion
+        jmFieldId="customImplementIndividual"
+        class="customAccordionA"
+        accordionType="minimal"
+        titleTagType="h4"
+        [titleText]="custom_implement_sub_title2"
                 [customStylesBody]="{
                     'color': 'var(--cardText)'
                 }"
-            >
+        >
 
-                <div class="group">
+        <div class="group">
 
-                    <p class="padding2">{{custom4_1}}</p>
-                    <ol class="margin1">
-                        <li *ngFor="let key of custom4_list" [innerHTML]="key"></li>
-                    </ol>
+          <p class="padding2">{{custom4_1}}</p>
+          <ol class="margin1">
+            @for (key of custom4_list; track key) {
+              <li [innerHTML]="key"></li>
+            }
+          </ol>
 
-                    <div class="subGroup">
+          <div class="subGroup">
 
-                        <h5>{{custom_implement_heading_title}}</h5>
+            <h5>{{custom_implement_heading_title}}</h5>
 
-                        <p class="padding2" [innerHTML]="custom_single_acc_title_desc"></p>
-                        <p class="jmHighlight" [innerHTML]="custom_single_acc_title_desc2"></p>
-                        <ul class="customCols">
-                            <li *ngFor="let key of objectKeys(custom_single_acc_title_props)">
-                                <span>{{key}}: </span> 
-                                <span>{{custom_single_acc_title_props[key]}}</span>
-                            </li>
-                        </ul>
+            <p class="padding2" [innerHTML]="custom_single_acc_title_desc"></p>
+            <p class="jmHighlight" [innerHTML]="custom_single_acc_title_desc2"></p>
+            <ul class="customCols">
+              @for (key of objectKeys(custom_single_acc_title_props); track key) {
+                <li>
+                  <span>{{key}}: </span>
+                  <span>{{custom_single_acc_title_props[key]}}</span>
+                </li>
+              }
+            </ul>
 
-                        <p class="padding2">Custom title styling example: </p>
-                        <div class="codeBox">
-                            <code>
-                                <pre [innerHTML]="custom_single_acc_title_code"></pre>
-                            </code>
-                        </div>
+            <p class="padding2">Custom title styling example: </p>
+            <div class="codeBox">
+              <code>
+                <pre [innerHTML]="custom_single_acc_title_code"></pre>
+              </code>
+            </div>
 
-                    </div>
+          </div>
 
-                    <div class="subGroup">
+          <div class="subGroup">
 
-                        <h5>{{custom_implement_body_title}}</h5>
+            <h5>{{custom_implement_body_title}}</h5>
 
-                        <p class="padding2" [innerHTML]="custom_single_acc_body_desc"></p>
-                        <ul class="customCols">
-                            <li *ngFor="let key of objectKeys(custom_single_acc_body_props)">
-                                <span>{{key}}: </span>
-                                <span>{{custom_single_acc_body_props[key]}}</span>
-                            </li>
-                        </ul>
+            <p class="padding2" [innerHTML]="custom_single_acc_body_desc"></p>
+            <ul class="customCols">
+              @for (key of objectKeys(custom_single_acc_body_props); track key) {
+                <li>
+                  <span>{{key}}: </span>
+                  <span>{{custom_single_acc_body_props[key]}}</span>
+                </li>
+              }
+            </ul>
 
-                        <p class="padding2">Custom body styling example: </p>
-                        <div class="codeBox noMargin">
-                            <code>
-                                <pre [innerHTML]="custom_single_acc_body_code"></pre>
-                            </code>
-                        </div>
+            <p class="padding2">Custom body styling example: </p>
+            <div class="codeBox noMargin">
+              <code>
+                <pre [innerHTML]="custom_single_acc_body_code"></pre>
+              </code>
+            </div>
 
-                    </div>
-                
-                </div>
+          </div>
 
-            </j-murky-hawk-accordion>
+        </div>
 
-        </section>
+      </j-murky-hawk-accordion>
 
-    </div>
+    </section>
+
+  </div>
 
 </div>
 

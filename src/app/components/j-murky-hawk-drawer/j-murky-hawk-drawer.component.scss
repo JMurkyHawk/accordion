@@ -1,4 +1,4 @@
-@import '../../../styles.scss';
+@use '../../../styles.scss';
 
 $menuSize: 33vw;
 $menuButtonSize: 3.8rem;
@@ -38,7 +38,7 @@ $menuButtonPosition: 1.4rem;
         overflow: auto;
         transition-duration: var(--jmDrawerSpeed);
         transition-property: box-shadow;
-        transition-timing-function: $transitionTimingFunction;
+        transition-timing-function: styles.$transitionTimingFunction;
         // width: $menuSize;
         z-index: 9999;
     
@@ -186,7 +186,7 @@ $menuButtonPosition: 1.4rem;
 .jmDrawerOverlay {
     opacity: .75;
     transition-property: background-color, clip-path, opacity;
-    transition-timing-function: $transitionTimingFunction;
+    transition-timing-function: styles.$transitionTimingFunction;
     z-index: 9996;
 
     position: fixed;

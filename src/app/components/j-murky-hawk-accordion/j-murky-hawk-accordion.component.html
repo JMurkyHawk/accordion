@@ -3,117 +3,143 @@
         'jmMinimal' : accordionType === 'minimal', 
         'jmPanel' : accordionType === 'panel'
     }" 
-    [style]="customStyles">
+  [style]="customStyles">
 
-    <div class="jmAccordionHeader"
+  <div class="jmAccordionHeader"
         [ngClass]="{ 
             'iconAlignRight' : iconAlign === 'right', 
             'iconAlignLeft' : iconAlign === 'left', 
             'textAlignCenter' : titleAlign === 'center', 
             'textAlignRight': titleAlign === 'right' 
         }">
-            
-        <button id="{{jmFieldId}}" 
-                (click)="jmAccordionToggle()" 
-                [attr.aria-expanded]="isAccordionOpen"
-                attr.aria-controls="{{jmFieldId}}Content">
-            
-            <!-- Title icon options -->
-            <div class="jmAccordionHeaderOpenClose">
-                <span *ngIf="iconType === 'plusMinus'" [@jmAccordionIconAnimation]="!isAccordionOpen ? 'open' : 'close' ">
-                    <jm-svg-render class="plusLine" src="assets/images/icon-minus.svg"></jm-svg-render>
-                </span>
-                <span *ngIf="iconType === 'plusMinus'">
-                    <jm-svg-render src="assets/images/icon-minus.svg"></jm-svg-render>
-                </span>
-                <span *ngIf="iconType === 'chevron'" [@jmAccordionIconAnimation2]="isAccordionOpen ? 'open' : 'close' ">
-                    <jm-svg-render src="assets/images/icon-arrow-pointer.svg"></jm-svg-render>
-                </span>
-            </div>
 
-            <!-- Title tag type options -->
-            <strong *ngIf="titleTagType === 'strong'" class="jmAccordionHeadText">
-                <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
-            </strong>
+    <button id="{{jmFieldId}}"
+      (click)="jmAccordionToggle()"
+      [attr.aria-expanded]="isAccordionOpen"
+      attr.aria-controls="{{jmFieldId}}Content">
 
-            <h1 *ngIf="titleTagType === 'h1'" class="jmAccordionHeadText">
-                <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
-            </h1>
+      <!-- Title icon options -->
+      <div class="jmAccordionHeaderOpenClose">
+        @if (iconType === 'plusMinus') {
+          <span [@jmAccordionIconAnimation]="!isAccordionOpen ? 'open' : 'close' ">
+            <jm-svg-render class="plusLine" src="assets/images/icon-minus.svg"></jm-svg-render>
+          </span>
+        }
+        @if (iconType === 'plusMinus') {
+          <span>
+            <jm-svg-render src="assets/images/icon-minus.svg"></jm-svg-render>
+          </span>
+        }
+        @if (iconType === 'chevron') {
+          <span [@jmAccordionIconAnimation2]="isAccordionOpen ? 'open' : 'close' ">
+            <jm-svg-render src="assets/images/icon-arrow-pointer.svg"></jm-svg-render>
+          </span>
+        }
+      </div>
 
-            <h2 *ngIf="titleTagType === 'h2'" class="jmAccordionHeadText">
-                <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
-            </h2>
+      <!-- Title tag type options -->
+      @if (titleTagType === 'strong') {
+        <strong class="jmAccordionHeadText">
+          <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
+        </strong>
+      }
 
-            <h3 *ngIf="titleTagType === 'h3'" class="jmAccordionHeadText">
-                <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
-            </h3>
+      @if (titleTagType === 'h1') {
+        <h1 class="jmAccordionHeadText">
+          <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
+        </h1>
+      }
 
-            <h4 *ngIf="titleTagType === 'h4'" class="jmAccordionHeadText">
-                <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
-            </h4>
+      @if (titleTagType === 'h2') {
+        <h2 class="jmAccordionHeadText">
+          <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
+        </h2>
+      }
 
-            <h5 *ngIf="titleTagType === 'h5'" class="jmAccordionHeadText">
-                <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
-            </h5>
+      @if (titleTagType === 'h3') {
+        <h3 class="jmAccordionHeadText">
+          <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
+        </h3>
+      }
 
-            <h6 *ngIf="titleTagType === 'h6'" class="jmAccordionHeadText">
-                <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
-            </h6>
-            
-            <!-- Title tag content -->
-            <ng-template #accordionHeadContent>
-                
-                <!-- Default/unchanging title text -->
-                <div *ngIf="titleTransition === 'none' || !titleTransition" [innerHTML]="titleText"></div>
-                
-                <!-- Partial title text change -->
-                <div *ngIf="titleTransition === 'partial'" class="titleTextSlot" >
+      @if (titleTagType === 'h4') {
+        <h4 class="jmAccordionHeadText">
+          <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
+        </h4>
+      }
 
-                    <span [style.width.px]="slotWidth" class="slotChangeContainer" >
-                        
-                        <span *ngIf="isAccordionOpen" class="slot1"
-                            [@jmAccordionTitleAnimationSlot]="isAccordionOpen ? 'close' : 'open'" 
-                            [innerHTML]="titleTextSlotChange + ' ' " #titleSlotOpen></span>
+      @if (titleTagType === 'h5') {
+        <h5 class="jmAccordionHeadText">
+          <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
+        </h5>
+      }
 
-                        <span *ngIf="!isAccordionOpen" class="slot2"
-                            [@jmAccordionTitleAnimationSlot]="isAccordionOpen ? 'close' : 'open'" 
-                            [innerHTML]="titleTextSlotChange + ' ' " #titleSlotClose></span>
+      @if (titleTagType === 'h6') {
+        <h6 class="jmAccordionHeadText">
+          <ng-container *ngTemplateOutlet="accordionHeadContent"></ng-container>
+        </h6>
+      }
 
-                    </span>
+      <!-- Title tag content -->
+      <ng-template #accordionHeadContent>
 
-                    <span [innerHTML]="titleText" class="titleTextSlotConst"></span>
+        <!-- Default/unchanging title text -->
+        @if (titleTransition === 'none' || !titleTransition) {
+          <div [innerHTML]="titleText"></div>
+        }
 
-                </div>
+        <!-- Partial title text change -->
+        @if (titleTransition === 'partial') {
+          <div class="titleTextSlot" >
+            <span [style.width.px]="slotWidth" class="slotChangeContainer" >
+              @if (isAccordionOpen) {
+                <span class="slot1"
+                  [@jmAccordionTitleAnimationSlot]="isAccordionOpen ? 'close' : 'open'"
+                [innerHTML]="titleTextSlotChange + ' ' " #titleSlotOpen></span>
+              }
+              @if (!isAccordionOpen) {
+                <span class="slot2"
+                  [@jmAccordionTitleAnimationSlot]="isAccordionOpen ? 'close' : 'open'"
+                [innerHTML]="titleTextSlotChange + ' ' " #titleSlotClose></span>
+              }
+            </span>
+            <span [innerHTML]="titleText" class="titleTextSlotConst"></span>
+          </div>
+        }
 
-                <!-- Full title text change -->
-                <div *ngIf="titleTransition === 'full' && isAccordionOpen" [innerHTML]="titleText"
-                    [@jmAccordionTitleAnimation]="titleText === titleTextOpen ? 'open2' : 'close2' "></div>
+        <!-- Full title text change -->
+        @if (titleTransition === 'full' && isAccordionOpen) {
+          <div [innerHTML]="titleText"
+          [@jmAccordionTitleAnimation]="titleText === titleTextOpen ? 'open2' : 'close2' "></div>
+        }
 
-                <div *ngIf="titleTransition === 'full' && !isAccordionOpen" [innerHTML]="titleText"
-                    [@jmAccordionTitleAnimation]="titleText === titleTextClosed ? 'close2' : 'open2' " ></div>
-                
-            </ng-template>
-            
-        </button>
+        @if (titleTransition === 'full' && !isAccordionOpen) {
+          <div [innerHTML]="titleText"
+          [@jmAccordionTitleAnimation]="titleText === titleTextClosed ? 'close2' : 'open2' " ></div>
+        }
 
-    </div>
+      </ng-template>
 
-    <!-- Accordion content -->
-    <div *ngIf="isAccordionOpen" 
-        id="{{jmFieldId}}Content" 
-        class="jmAccordionContent" 
+    </button>
+
+  </div>
+
+  <!-- Accordion content -->
+  @if (isAccordionOpen) {
+    <div
+      id="{{jmFieldId}}Content"
+      class="jmAccordionContent"
         [ngClass]="{
             'jmAccOpen' : isAccordionOpen, 
             'jmMinimal' : accordionType === 'minimal',
             'addScroll' : isScrollable
         }"
-        attr.aria-labelledby="{{jmFieldId}}"
-        [style.height]="customHeight"
-        #jmAccordionContent
-        [@jmAccordionBodyAnimation] >
-
-        <ng-content></ng-content>
-
+      attr.aria-labelledby="{{jmFieldId}}"
+      [style.height]="customHeight"
+      #jmAccordionContent
+      [@jmAccordionBodyAnimation] >
+      <ng-content></ng-content>
     </div>
+  }
 
 </div>
