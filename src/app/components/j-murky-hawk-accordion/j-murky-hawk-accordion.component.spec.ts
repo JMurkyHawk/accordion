@@ -70,18 +70,18 @@ describe('JMurkyHawkAccordionComponent', () => {
     });
 
     it('should have an id value', () => {
-        expect(component.jmFieldId).toBeDefined();
+        expect(component.jmFieldId()).toBeDefined();
     });
 
     it('should have a default title text value', () => {
-        expect(accordionHeader.textContent).toContain(component.titleText);
+        expect(accordionHeader.textContent).toContain(component.titleText());
     });
 
     it('initial title text for the CLOSE state when using full-text transition', () => {
         fixture.componentRef.setInput('titleTextClosed', "Closed state using full text title transition");
         component.ngOnInit();
         fixture.detectChanges();
-        expect(accordionHeader.textContent).toContain(component.titleText);
+        expect(accordionHeader.textContent).toContain(component.titleText());
     });
 
     it('new title text for OPEN state when using full-text transition', () => {
@@ -89,7 +89,7 @@ describe('JMurkyHawkAccordionComponent', () => {
         component.ngOnInit();
         component.jmAccordionToggle();
         fixture.detectChanges();
-        expect(accordionHeader.textContent).toBe(component.titleText);
+        expect(accordionHeader.textContent).toBe(component.titleText());
 
     });
 
@@ -124,26 +124,26 @@ describe('JMurkyHawkAccordionComponent', () => {
         fixture.componentRef.setInput('titleTextOpen', "Open ");
         fixture.componentRef.setInput('titleTextClosed', "Close ");
         // fixture.componentRef.setInput('titleTextSlotChange', component.titleTextOpen);
-        component.titleTextSlotChange = component.titleTextOpen;
+        component.titleTextSlotChange = component.titleTextOpen();
         fixture.componentRef.setInput('titleText', "test text content");
 
         component.ngOnInit();
         expect(component.titleTextSlotChange + component.titleText )
-            .toBe(component.titleTextOpen + component.titleText);
+            .toBe(component.titleTextOpen() + component.titleText);
 
         spyOn(component, 'jmAccordionToggle');
         component.jmAccordionToggle();
-        component.titleTextSlotChange = component.titleTextClosed;
+        component.titleTextSlotChange = component.titleTextClosed();
         expect(component.jmAccordionToggle).toHaveBeenCalled();
         fixture.detectChanges();
         expect(component.titleTextSlotChange + component.titleText )
-            .toBe(component.titleTextClosed + component.titleText);
+            .toBe(component.titleTextClosed() + component.titleText);
 
         component.jmAccordionToggle();
-        component.titleTextSlotChange = component.titleTextOpen;
+        component.titleTextSlotChange = component.titleTextOpen();
         fixture.detectChanges();
         expect(component.titleTextSlotChange + component.titleText )
-            .toBe(component.titleTextOpen + component.titleText);
+            .toBe(component.titleTextOpen() + component.titleText);
 
     });
 
@@ -151,78 +151,58 @@ describe('JMurkyHawkAccordionComponent', () => {
         fixture.componentRef.setInput('customHeight', '200px');
         component.jmAccordionToggle();
         fixture.whenStable().then(() => {
-            expect(accordionBody.style.height).toBe(component.customHeight);
+            expect(accordionBody.style.height).toBe(component.customHeight());
         });
     });
     
     it('should use default value if accordionType is empty', () => {
-        const checkAccordionType = spyOnProperty(component, 'accordionType', 'set');
         fixture.componentRef.setInput('accordionType', '');
-        expect(checkAccordionType).toHaveBeenCalledWith('');
-        expect(component.accordionType).toBe('minimal');
+        expect(component.accordionType()).toBe('minimal');
     });
 
     it('should use default value if accordionType is not: basic, minimal, or panel', () => {
-        const checkAccordionType = spyOnProperty(component, 'accordionType', 'set');
         fixture.componentRef.setInput('accordionType', 'circle');
-        expect(checkAccordionType).toHaveBeenCalledWith('circle');
-        expect(component.accordionType).toBe('minimal');
+        expect(component.accordionType()).toBe('minimal');
     });
 
     it('should use default value if titleAlign is empty', () => {
-        const checkTitleAlign = spyOnProperty(component, 'titleAlign', 'set');
         fixture.componentRef.setInput('titleAlign', '');
-        expect(checkTitleAlign).toHaveBeenCalledWith('');
-        expect(component.titleAlign).toBe('left');
+        expect(component.titleAlign()).toBe('left');
     });
 
     it('should use default value if titleAlign is is not: left, center, or right', () => {
-        const checkTitleAlign = spyOnProperty(component, 'titleAlign', 'set');
         fixture.componentRef.setInput('titleAlign', 'top');
-        expect(checkTitleAlign).toHaveBeenCalledWith('top');
-        expect(component.titleAlign).toBe('left');
+        expect(component.titleAlign()).toBe('left');
     });
 
     it('should use default value if iconAlign is empty', () => {
-        const checkIconAlign = spyOnProperty(component, 'iconAlign', 'set');
         fixture.componentRef.setInput('iconAlign', '');
-        expect(checkIconAlign).toHaveBeenCalledWith('');
-        expect(component.iconAlign).toBe('right');
+        expect(component.iconAlign()).toBe('left');
     });
 
     it('should use default value if iconAlign is not: left or right', () => {
-        const checkIconAlign = spyOnProperty(component, 'iconAlign', 'set');
         fixture.componentRef.setInput('iconAlign', 'north');
-        expect(checkIconAlign).toHaveBeenCalledWith('north');
-        expect(component.iconAlign).toBe('right');
+        expect(component.iconAlign()).toBe('left');
     });
 
     it('should use default value if iconType is empty', () => {
-        const checkIconType = spyOnProperty(component, 'iconType', 'set');
         fixture.componentRef.setInput('iconType', '');
-        expect(checkIconType).toHaveBeenCalledWith('');
-        expect(component.iconType).toBe('chevron');
+        expect(component.iconType()).toBe('chevron');
     });
 
     it('should use default value if iconType is not: chevron or plusMinus', () => {
-        const checkIconType = spyOnProperty(component, 'iconType', 'set');
         fixture.componentRef.setInput('iconType', 'star');
-        expect(checkIconType).toHaveBeenCalledWith('star');
-        expect(component.iconType).toBe('chevron');
+        expect(component.iconType()).toBe('chevron');
     });
 
     it('should use default value if titleTagType is empty', () => {
-        const checkTitleTagType = spyOnProperty(component, 'titleTagType', 'set');
         fixture.componentRef.setInput('titleTagType', '');
-        expect(checkTitleTagType).toHaveBeenCalledWith('');
-        expect(component.titleTagType).toBe('strong');
+        expect(component.titleTagType()).toBe('strong');
     });
 
     it('should use default value if titleTagType is not: strong, h1, h2, h3, h4, h5, or h6', () => {
-        const checkTitleTagType = spyOnProperty(component, 'titleTagType', 'set');
-        fixture.componentRef.setInput('titleTagType', 'm80');
-        expect(checkTitleTagType).toHaveBeenCalledWith('m80');
-        expect(component.titleTagType).toBe('strong');
+        fixture.componentRef.setInput('titleTagType', 'div');
+        expect(component.titleTagType()).toBe('strong');
     });
 
     it('should use reject value if customStylesTitle has a value not from the defined list: '
@@ -253,7 +233,7 @@ describe('JMurkyHawkAccordionComponent', () => {
 
         fixture.whenStable().then(() => {
             expect(component.clickHeader.emit).toHaveBeenCalledWith({
-                'id': component.jmFieldId, 
+                'id': component.jmFieldId(), 
                 'open': component.isAccordionOpen
             });
         });

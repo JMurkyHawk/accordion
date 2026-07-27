@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from '../components/components.module';
 
+import { JMurkyHawkAccordionComponent } from '../components/j-murky-hawk-accordion/j-murky-hawk-accordion.component';
+
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { JmhPageAccordionOverviewComponent } from './jmh-page-accordion-overview/jmh-page-accordion-overview.component';
 import { JmhPageAccordionCustomComponent } from './jmh-page-accordion-custom/jmh-page-accordion-custom.component';

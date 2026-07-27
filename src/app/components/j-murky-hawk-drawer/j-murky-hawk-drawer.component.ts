@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, Renderer2, Signal, ViewChild, WritableSignal, computed, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, Renderer2, Signal, ViewChild, WritableSignal, computed, signal, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fromEvent } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -42,25 +42,25 @@ export interface DrawerButtonOptions {
 
 export class JMurkyHawkDrawerComponent {
 
-    @Input() drawerBackground: string = 'rgba(255, 255, 255, .9)';
-    @Input() drawerSpeed: string = '.5s';
-    @Input() drawerWidth: string = '50vw';
-    @Input() drawerButtonInfo = { 
-        altTextHide: 'Close drawer',
-        altTextShow: 'Open drawer',
-        borderRadius: '.5rem', 
-        iconLineHeight: '3px',
-        iconLineSpacing: '7px', 
-        iconLineSpeed: '.5s',
-        size: '5rem', 
-        xyPosition: { x: '2rem', y: '2rem' }
-    };
+    readonly drawerBackground = input<string>('rgba(255, 255, 255, .9)');
+    readonly drawerSpeed = input<string>('.5s');
+    readonly drawerWidth = input<string>('50vw');
+    readonly drawerButtonInfo = input({
+    altTextHide: 'Close drawer',
+    altTextShow: 'Open drawer',
+    borderRadius: '.5rem',
+    iconLineHeight: '3px',
+    iconLineSpacing: '7px',
+    iconLineSpeed: '.5s',
+    size: '5rem',
+    xyPosition: { x: '2rem', y: '2rem' }
+});
     
-    @Input() drawerButtonBorderRadius: string = '.5rem';
-    @Input() isDrawerButtonPositionInside: boolean = false;
-    @Input() drawerPageOverlayBackground: string = '#000000';
-    @Input() drawerPageOverlayOpacity: string = '.75';
-    @Input() canDocScrollWhenOpen: boolean = false;
+    readonly drawerButtonBorderRadius = input<string>('.5rem');
+    readonly isDrawerButtonPositionInside = input<boolean>(false);
+    readonly drawerPageOverlayBackground = input<string>('#000000');
+    readonly drawerPageOverlayOpacity = input<string>('.75');
+    readonly canDocScrollWhenOpen = input<boolean>(false);
 
     @Input() 
         public get drawerButtonAlign() {
@@ -107,11 +107,12 @@ export class JMurkyHawkDrawerComponent {
     public getDrawerButtonAnimateInfo = computed(() => {
         let drawerButtonPosition: string = '';
 
-        if (this.drawerShow() && !this.isDrawerButtonPositionInside) { 
+        const isDrawerButtonPositionInside = this.isDrawerButtonPositionInside();
+        if (this.drawerShow() && !isDrawerButtonPositionInside) { 
             drawerButtonPosition = this.drawerPosition; 
         } 
 
-        if (this.drawerShow() && this.isDrawerButtonPositionInside) {
+        if (this.drawerShow() && isDrawerButtonPositionInside) {
             drawerButtonPosition = this.drawerPosition + '_inside';
         }
         
@@ -171,25 +172,28 @@ export class JMurkyHawkDrawerComponent {
             .pipe(debounceTime(250))
             .subscribe((event) => {
 
+                const drawerButtonInfo = this.drawerButtonInfo();
                 if ( !this.drawerShow() && this.drawerPosition === 'left' ) { 
-                    this.setDrawerButtonLR(this.drawerButtonInfo.xyPosition.x, 'auto');
+                    this.setDrawerButtonLR(drawerButtonInfo.xyPosition.x, 'auto');
                 }
 
                 if ( !this.drawerShow() && this.drawerPosition === 'right' ) { 
-                    this.setDrawerButtonLR('auto', this.drawerButtonInfo.xyPosition.x);
+                    this.setDrawerButtonLR('auto', drawerButtonInfo.xyPosition.x);
                 }
 
                 // Re-position drawer button immediately on window resize
-                if ( this.drawerShow() && !this.isDrawerButtonPositionInside ) {
+                const isDrawerButtonPositionInside = this.isDrawerButtonPositionInside();
+                const drawerWidth = this.drawerWidth();
+                if ( this.drawerShow() && !isDrawerButtonPositionInside ) {
                     if ( this.drawerPosition === 'left') {
-                        this.setDrawerButtonLR(this.drawerWidth, 'auto');
+                        this.setDrawerButtonLR(drawerWidth, 'auto');
                     } else if ( this.drawerPosition === 'right' ) {
-                        this.setDrawerButtonLR('auto', this.drawerWidth);
+                        this.setDrawerButtonLR('auto', drawerWidth);
                     }
                 } 
                 
-                if ( this.drawerShow() && this.isDrawerButtonPositionInside ) {
-                    let calculatedPosition = `calc(${this.drawerWidth} - (${this.drawerButtonInfo.size} + ${this.drawerButtonInfo.xyPosition.x}))`;
+                if ( this.drawerShow() && isDrawerButtonPositionInside ) {
+                    let calculatedPosition = `calc(${drawerWidth} - (${drawerButtonInfo.size} + ${drawerButtonInfo.xyPosition.x}))`;
 
                     if ( this.drawerPosition === 'left') {
                         this.setDrawerButtonLR(calculatedPosition, 'auto');
@@ -199,11 +203,11 @@ export class JMurkyHawkDrawerComponent {
                 }
                 
                 setTimeout(() => {
-                    if ( this.drawerShow() && !this.isDrawerButtonPositionInside ) { 
+                    if ( this.drawerShow() && !this.isDrawerButtonPositionInside() ) { 
                         this.jmDrawerOverlay.nativeElement.style.cssText = `${this.createOverlayCutout()}` +
-                            `background: ${this.drawerPageOverlayBackground}; ` +
-                            `opacity: ${this.drawerPageOverlayOpacity}; ` +
-                            `width': ${this.drawerWidth};`;
+                            `background: ${this.drawerPageOverlayBackground()}; ` +
+                            `opacity: ${this.drawerPageOverlayOpacity()}; ` +
+                            `width': ${this.drawerWidth()};`;
                     }
                 }, 0);
                 
@@ -212,7 +216,7 @@ export class JMurkyHawkDrawerComponent {
 
     ngOnInit() {
         this.setDrawerButtonAlign();
-        this.setComponentCssVariable('jmDrawerSpeed', this.drawerSpeed);
+        this.setComponentCssVariable('jmDrawerSpeed', this.drawerSpeed());
     }
 
     ngAfterViewInit() {
@@ -336,10 +340,10 @@ export class JMurkyHawkDrawerComponent {
 
     createOverlayCutout() {
         let windowHeight = document.documentElement.offsetHeight;
-        let btnSize: any = this.returnUnitlessValue(this.drawerButtonInfo.size);
-        let btnBottom: number = this.returnUnitlessValue(this.drawerButtonInfo.size) + this.returnUnitlessValue(this.drawerButtonInfo.xyPosition.y);
-        let btnRadius: any = this.returnUnitlessValue(this.drawerButtonInfo.borderRadius);
-        let btnTop = this.returnUnitlessValue(this.drawerButtonInfo.xyPosition.y);
+        let btnSize: any = this.returnUnitlessValue(this.drawerButtonInfo().size);
+        let btnBottom: number = this.returnUnitlessValue(this.drawerButtonInfo().size) + this.returnUnitlessValue(this.drawerButtonInfo().xyPosition.y);
+        let btnRadius: any = this.returnUnitlessValue(this.drawerButtonInfo().borderRadius);
+        let btnTop = this.returnUnitlessValue(this.drawerButtonInfo().xyPosition.y);
 
         // (btnRadius / 2.75) = closest that bezier curve can get to a perfect cirle
         let curveBottom = `${btnSize - (btnRadius / 2.75)} ${btnBottom} ` +
@@ -361,7 +365,7 @@ export class JMurkyHawkDrawerComponent {
     -------------------------------------------------------------*/
 
     removeDocumentScroll() {
-        !this.canDocScrollWhenOpen && this.drawerShow() ? 
+        !this.canDocScrollWhenOpen() && this.drawerShow() ? 
             this.renderer.setStyle(document.body, 'overflow', 'hidden') : 
             this.renderer.removeStyle(document.body, 'overflow');
     }
@@ -377,12 +381,13 @@ export class JMurkyHawkDrawerComponent {
 
     setDrawerButtonAlign() {
         setTimeout(() => {
+            const drawerButtonInfo = this.drawerButtonInfo();
             if ( !this.drawerShow() && this.drawerPosition === 'left' ) {
-                    this.setDrawerButtonLR(this.drawerButtonInfo.xyPosition.x, 'auto');
+                    this.setDrawerButtonLR(drawerButtonInfo.xyPosition.x, 'auto');
             }
 
             if ( !this.drawerShow() && this.drawerPosition === 'right' ) {
-                    this.setDrawerButtonLR('auto', this.drawerButtonInfo.xyPosition.x);
+                    this.setDrawerButtonLR('auto', drawerButtonInfo.xyPosition.x);
             }
         }, 0);
 
@@ -390,28 +395,30 @@ export class JMurkyHawkDrawerComponent {
     }
 
     drawerButtonMove() {
+        const drawerButtonInfo = this.drawerButtonInfo();
+        const drawerWidth = this.drawerWidth();
         if (this.drawerShow() && this.drawerPosition === 'left') {
-            this.setDrawerButtonLR(this.drawerWidth, 'auto');
-            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `0 ${this.drawerButtonInfo.borderRadius} ${this.drawerButtonInfo.borderRadius} 0 `);
+            this.setDrawerButtonLR(drawerWidth, 'auto');
+            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `0 ${drawerButtonInfo.borderRadius} ${drawerButtonInfo.borderRadius} 0 `);
         }
 
         if (this.drawerShow() && this.drawerPosition === 'right') {
-            this.setDrawerButtonLR('auto', this.drawerWidth);
-            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${this.drawerButtonInfo.borderRadius} 0 0 ${this.drawerButtonInfo.borderRadius}`);
+            this.setDrawerButtonLR('auto', drawerWidth);
+            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${drawerButtonInfo.borderRadius} 0 0 ${drawerButtonInfo.borderRadius}`);
         }
         
         if (!this.drawerShow()) {
-            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${this.drawerButtonInfo.borderRadius}`);
+            this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${drawerButtonInfo.borderRadius}`);
         }
     }
 
     drawerButtonClick() {
         this.drawerShow.set(!this.drawerShow());
-        this.setComponentCssVariable('jmDrawerPageOverlayOpacity', this.drawerPageOverlayOpacity);
+        this.setComponentCssVariable('jmDrawerPageOverlayOpacity', this.drawerPageOverlayOpacity());
         this.removeDocumentScroll();
         setTimeout(() => {
             this.setDrawerButtonAlign();
-            if ( this.drawerShow() && !this.isDrawerButtonPositionInside ) { 
+            if ( this.drawerShow() && !this.isDrawerButtonPositionInside() ) { 
                 this.jmDrawerOverlay.nativeElement.style.cssText = `${this.createOverlayCutout()}`; 
             }
             this.drawerShow() ? this.drawerFocusableItems.set(this.jmDrawerGetFocusableItems()) : '';

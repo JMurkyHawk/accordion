@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, ViewEncapsulation, input } from '@angular/core';
 import { NavigationService } from 'src/app/services/navigation.service';
 
 export interface LinkData {
@@ -36,19 +36,26 @@ export class JMurkyHawkNavigationComponent {
     private delayValue: number = 125;
 
     @Input() navItems: Array<LinkData> = [{label: 'Please provide link data list', link: '' }];
-    @Input() linkScrollTo: boolean = false;
-    @Input() linkScrollDelay: number = 750;
-    @Input() linkScrollToIfPastId: string = 'subHeaderBar';
+    readonly linkScrollTo = input<boolean>(false);
+    readonly linkScrollDelay = input<number>(750);
+    readonly linkScrollToIfPastId = input<string>('subHeaderBar');
     @Input() listId: string = ''; // To add a unique id (listId + index) to each <a> tag - otherwise, no id will be added
 
-    @Input()
-        // Check the provided element ID exists. If so, allow provided value. If not, use default.
-        public get linkScrollToId() {
+    // @Input()
+    //     // Check the provided element ID exists. If so, allow provided value. If not, use default.
+    //     public get linkScrollToId() {
+    //         return this._linkScrollToId;
+    //     }
+    //     public set linkScrollToId(value: string) {
+    //         this._linkScrollToId = this.checkScrollToIdValue(value);
+    //     }
+    public linkScrollToId = input<string, string>('', {
+        transform: (value: string) => {
+            this._linkScrollToId = this.checkScrollToIdValue(value);
+
             return this._linkScrollToId;
         }
-        public set linkScrollToId(value: string) {
-            this._linkScrollToId = this.checkScrollToIdValue(value);
-        }
+    })
 
     @Input() 
         // Set the appearance of the navigation links: 'button' (apply .button style class) or 'text' (styled text link)
@@ -158,14 +165,14 @@ export class JMurkyHawkNavigationComponent {
         this.navigationService.navItemInfo(instance, clickedId);
 
         // Scroll (and move focus) to the top of the main content area when using footer navigation
-        const scrollToElementNode = document.getElementById(this.linkScrollToId);
+        const scrollToElementNode = document.getElementById(this.linkScrollToId());
 
         // Should clicking the link scroll to the scrollToElementNode page position
-        if (this.linkScrollTo && scrollToElementNode && this.isScrolledPast(this.linkScrollToIfPastId) ) {
+        if (this.linkScrollTo() && scrollToElementNode && this.isScrolledPast(this.linkScrollToIfPastId()) ) {
             setTimeout(() => {
                 scrollToElementNode.scrollIntoView({ behavior: "smooth", block: 'start' });
                 scrollToElementNode.focus({preventScroll: true});
-            }, this.linkScrollDelay);
+            }, this.linkScrollDelay());
         }
     }
 
