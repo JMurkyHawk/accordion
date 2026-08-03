@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, input, model, output, viewChild } from '@angular/core';
 
 import { jmAccordionIconAnimation,
         jmAccordionIconAnimation2,
@@ -27,127 +27,90 @@ export interface AccordionData {
 
 export class JMurkyHawkAccordionComponent implements OnInit {
 
-    @Input() jmFieldId: string = '';
-    @Input() titleText: string = 'Hide/Show Content';
-    @Input() titleTextOpen: string = ''; 
-    @Input() titleTextClosed: string = ''; 
-    @Input() isOpenByDefault: boolean = false;
-    @Input() customHeight: string = '';
-    @Input() emitInfo: boolean = false;
+    readonly jmFieldId = input<string>('');
+    readonly isOpenByDefault = input<boolean>(false);
+    readonly customHeight = input<string>('');
+    readonly emitInfo = input<boolean>(false);
+    public titleText = model<string>('Hide/Show Content');
+    public titleTextOpen = model<string>(''); 
+    public titleTextClosed = model<string>(''); 
 
-    @Input() 
-        // Provide custom accordion styling for title as object. See getCustomStylingObj() for more info
-        public get customStylesTitle() {
+    // BEGIN Getter/Setters as Signals
+    public customStylesTitle = input<{[key: string]: string}, {[key: string]: string}>({}, {
+        transform: (values) => {
+            this.getCustomStylingObj(values, 'title');
+
             return this.stylesTitle;
         }
-
-        public set customStylesTitle(values: {[key: string] : string}) {
-            this.getCustomStylingObj(values, 'title');
-        }
+    });
     
-    @Input() 
-        // Provide custom accordion styling for body as object. See getCustomStylingObj() for more info
-        public get customStylesBody() {
+    public customStylesBody = input<{[key: string]: string}, {[key: string]: string}>({}, {
+        transform: (values) => {
+            this.getCustomStylingObj(values, 'body');
+
             return this.stylesBody;
         }
+    });
 
-        public set customStylesBody(values: {[key: string] : string}) {
-            this.getCustomStylingObj(values, 'body');
-        }
-
-    @Input() 
-        // Set accordion type: panel (box style), minimal (underline style), or basic (text/icon only)
-        public get accordionType() {
-            return this._accordionType;
-        }
-
-        public set accordionType(value: string) {
+    public accordionType = input<string, string>('minimal', {
+        transform: (value: string) => {
             const validValue = this.provideOpts(value, 'accordionType', ['panel', 'minimal', 'basic']);
-            if ( validValue === value ) {
-                this._accordionType = validValue;
-            }
-        }
 
-    @Input()
-        public get titleTransition() {
-            return this._titleTransition;
+            return validValue === value ? validValue : 'minimal';
         }
+    });
 
-        public set titleTransition(value: string) {
+    public titleTransition = input<string, string>('none', {
+        transform: (value: string) => {
             const validValue = this.provideOpts(value, 'titleTransition', ['none', 'full', 'partial']);
-            if ( validValue === value ) {
-                this._titleTransition = validValue;
-            }
+            
+            return validValue === value ? validValue : 'none';
         }
+    });
 
-    @Input() 
-        // Align clickable header button text
-        public get titleAlign() {
-            return this._titleAlign;
-        }
-
-        public set titleAlign(value: string) {
+    public titleAlign = input<string, string>('left', {
+        transform: (value: string) => {
             const validValue = this.provideOpts(value, 'titleAlign', ['left', 'center', 'right']);
-            if ( validValue === value ) {
-                this._titleAlign = validValue;
-            }
-        }
 
-    @Input()
-        // Align clickable header button icon
-        public get iconAlign() {
-            return this._iconAlign;
+            return validValue === value ? validValue : 'left';
         }
+    });
 
-        public set iconAlign(value: string) {
+    public iconAlign = input<string, string>('right', {
+        transform: (value: string) => {
             const validValue = this.provideOpts(value, 'iconAlign', ['left', 'right']);
-            if ( validValue === value ) {
-                this._iconAlign = validValue;
-            }
-        }
 
-    @Input() 
-        // Change clickable header button icon svg images
-        public get iconType() {
-            return this._iconType;
+            return validValue === value ? validValue : 'right';
         }
+    });
 
-        public set iconType(value: string) {
+    public iconType = input<string, string>('chevron', {
+        transform: (value: string) => {
             const validValue = this.provideOpts(value, 'iconType', ['chevron', 'plusMinus']);
-            if ( validValue === value ) {
-                this._iconType = validValue;
-            }
-        }
 
-    @Input() 
-        // Change clickable header html tag type
-        public get titleTagType() {
-            return this._titleTagType;
+            return validValue === value ? validValue : 'chevron';
         }
+    });
 
-        public set titleTagType(value: string) {
+    public titleTagType = input<string, string>('strong', {
+        transform: (value: string) => {
             const validValue = this.provideOpts(value, 'titleTagType', this.headingTagTypes);
-            if ( validValue === value ) {
-                this._titleTagType = validValue;
-            }
+
+            return validValue === value ? validValue : 'strong';
         }
+    });
+    // END Getter/Setters as Signals
 
-    @Output() clickHeader: EventEmitter<AccordionData> = new EventEmitter<AccordionData>(); 
+    public readonly clickHeader = output<AccordionData>();
 
-    @ViewChild('titleSlotOpen', {static: false}) titleSlotOpen!: ElementRef;
-    @ViewChild('titleSlotClose', {static: false}) titleSlotClose!: ElementRef;
+    private titleSlotOpen = viewChild<ElementRef>('titleSlotOpen');
+    private titleSlotClose = viewChild<ElementRef>('titleSlotClose');
     
     // Provide default accordion options
     public isAccordionOpen: boolean = false;
     public isScrollable: boolean = false;
     public customStyles: string = '';
-    private tagName: string = '';
-    private _accordionType: any = 'minimal';
-    private _titleTransition: any = 'none';
-    private _titleAlign: any = 'left';
-    private _iconAlign: any = 'right';
-    private _iconType: any = 'chevron';
-    private _titleTagType: any = 'strong';
+
     // For transitioning the width of changeable text when partial title text change is enabled
     public slotWidth: number | undefined = undefined;
     public titleTextSlotChange: string = '';
@@ -166,8 +129,8 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         'strong', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
     ];
 
-    constructor(elemRef: ElementRef) {
-        this.tagName = elemRef.nativeElement.tagName.toLowerCase();
+    constructor() {
+        
     }
 
 
@@ -178,7 +141,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     errorMessageProvideOpts(value: string, inputName: string, allowableTypes: Array<string>) {
 
         const message: string =
-            `'${value}' is not a valid input value for ${inputName} on the <${this.tagName}> component. \n` +
+            `'${value}' is not a valid input value for ${inputName} on the <${this.constructor.name}> component. \n` +
             `Valid values for ${inputName} are: ${allowableTypes}`;
 
         console.error(message);
@@ -199,7 +162,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         
         const message: string = 
             `'${property}' is not a property available to customize on the ` +
-            `<${this.tagName}> component via customStyles${capSetElementStr} input. \n` +
+            `<${this.constructor.name}> component via customStyles${capSetElementStr} input. \n` +
             `Valid key values for customStyles${capSetElementStr}: ${keyList}`;
 
         console.error(message);
@@ -207,7 +170,8 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     }
 
     getCustomStylingObj(evalObj: { [key: string] : string }, setElement: string) {
-        // To make setting multiple custom styles for component title and body more concise, options can be set as a group via customStylesTitle and customStylesBody. Allowable properties that can be used are set from the stylesTitleProps and stylesBodyProps arrays.
+        // To make setting multiple custom styles for component title and body more concise, options can be set as a group via customStylesTitle and customStylesBody. 
+        // Allowable properties that can be used are set from the stylesTitleProps and stylesBodyProps arrays.
         
         for ( const key in evalObj ) {
 
@@ -285,9 +249,9 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         let slotElement: any;
 
         if ( slotOpenClose === 'close' ) {
-            slotElement = this.titleSlotClose.nativeElement;
+            slotElement = this.titleSlotClose()?.nativeElement;
         } else {
-            slotElement = this.titleSlotOpen.nativeElement;
+            slotElement = this.titleSlotOpen()?.nativeElement;
         }
 
         const slotOpenBox = slotElement.getBoundingClientRect();
@@ -302,9 +266,9 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         
         setTimeout(() => {
 
-            if ( this.titleSlotOpen ) {
+            if ( this.titleSlotOpen() ) {
                 this.slotWidth = this.calculateSlotWidth('open');
-            } else if ( this.titleSlotClose ) {
+            } else if ( this.titleSlotClose() ) {
                 this.slotWidth = this.calculateSlotWidth('close');
             }
 
@@ -315,31 +279,31 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     updateAccordionTitle() {
 
         // If accordion title text for opened or closed state is provided, replace titleText with that
-        if ( this._titleTransition === 'full' ) {
-            this.titleText = this.isAccordionOpen ? this.titleTextClosed : this.titleTextOpen;
+        if ( this.titleTransition() === 'full' ) {
+            this.titleText.set(this.isAccordionOpen ? this.titleTextClosed() : this.titleTextOpen());
         }
 
         // If accordion partial title text opened or closed state transition is provided, replace partial title with that
-        if ( this._titleTransition === 'partial' ) {
-            this.titleTextSlotChange = this.isAccordionOpen ? this.titleTextClosed : this.titleTextOpen;
+        if ( this.titleTransition() === 'partial' ) {
+            this.titleTextSlotChange = this.isAccordionOpen ? this.titleTextClosed() : this.titleTextOpen();
         }
 
     }
 
     emitComponentInfo() {
-        this.clickHeader.emit({'id': this.jmFieldId, 'open': this.isAccordionOpen});
+        this.clickHeader.emit({'id': this.jmFieldId(), 'open': this.isAccordionOpen});
     }
     
     isScrollableCheck() {
         // If a custom height is set via this.customHeight and the accordion body content is
         // rendered, add style class to allow the accordion body content to scroll
-        return this.customHeight && this.isAccordionOpen ? true : false;
+        return this.customHeight() && this.isAccordionOpen ? true : false;
     }
 
     checkIsOpenByDefault() {
         //  isOpenByDefault is used to set the default display state of the accordion component's content. If this.isOpenByDefault is set to true, the accordion will be expanded when the component is initally rendered. checkIsOpenByDefault() checks this variable's value and sets the component state accoringly.
 
-        if (this.isOpenByDefault) {
+        if (this.isOpenByDefault()) {
             this.isAccordionOpen = true;
             this.updateAccordionTitle();
         } else {
@@ -353,7 +317,7 @@ export class JMurkyHawkAccordionComponent implements OnInit {
 
         this.isAccordionOpen = !this.isAccordionOpen;
 
-        if ( this.emitInfo ) {
+        if ( this.emitInfo() ) {
             this.emitComponentInfo();
         }
 

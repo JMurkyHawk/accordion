@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostListener, input, output, ViewChild, viewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationService } from 'src/app/services/navigation.service';
+import { JMurkyHawkAccordionComponent } from '../j-murky-hawk-accordion/j-murky-hawk-accordion.component';
 
 export interface LinkData {
     label: string, 
@@ -21,12 +22,12 @@ export interface NavigationData {
     templateUrl: './j-murky-hawk-navigation.component.html',
     styleUrl: './j-murky-hawk-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
+    host: {
+        '(document:keydown.escape)': 'onKeyDown()'
+    }
 })
 export class JMurkyHawkNavigationComponent {
-
-    private _linkStyle: string = 'button';
-    public _linkScrollToId: string = 'mainContent';
 
     public tagName: string = '';
     public activeLink:string = 'routerLinkActive';
@@ -34,43 +35,49 @@ export class JMurkyHawkNavigationComponent {
     public emittedId: string = "---";
     public emittedState: string = "---";
     private delayValue: number = 125;
+    public _linkScrollToId: string = 'mainContent';
 
-    @Input() navItems: Array<LinkData> = [{label: 'Please provide link data list', link: '' }];
-    @Input() linkScrollTo: boolean = false;
-    @Input() linkScrollDelay: number = 750;
-    @Input() linkScrollToIfPastId: string = 'subHeaderBar';
-    @Input() listId: string = ''; // To add a unique id (listId + index) to each <a> tag - otherwise, no id will be added
+    public linkScrollToId = input<string, string>('', {
+        transform: (value: string) => {
+            this._linkScrollToId = this.checkScrollToIdValue(value);
 
-    @Input()
-        // Check the provided element ID exists. If so, allow provided value. If not, use default.
-        public get linkScrollToId() {
             return this._linkScrollToId;
         }
-        public set linkScrollToId(value: string) {
-            this._linkScrollToId = this.checkScrollToIdValue(value);
+    })
+
+    public linkStyle = input<string, string>('button', {
+        transform: (value: string) => {
+            const validValues: Array<string> = ['button', 'text'];
+            
+            if (validValues.includes(value)) {
+                return value;
+            }
+    
+            // Handle the invalid state (side-effect)
+            this.handleInvalid(this.linkStyleMessage(value, validValues));
+            
+            // Return a fallback value (e.g., the current default) so the signal remains safe
+            return 'button';
         }
+    });
 
-    @Input() 
-        // Set the appearance of the navigation links: 'button' (apply .button style class) or 'text' (styled text link)
-        public get linkStyle() {
-            return this._linkStyle;
-        }
+    public listId = input<string>(''); // To add a unique id (listId + index) to each <a> tag - otherwise, no id will be added
+    public navItems = input<Array<LinkData>>([
+        { label: 'Please provide link data list', link: '' }
+    ]);
+    readonly linkScrollTo = input<boolean>(false);
+    readonly linkScrollDelay = input<number>(750);
+    readonly linkScrollToIfPastId = input<string>('subHeaderBar');
 
-        public set linkStyle(value: string) {
-            let validValues: Array<string> = ['button', 'text'];
-            validValues.includes(value) ? this._linkStyle = value : this.handleInvalid(this.linkStyleMessage(value, validValues));
-        }
+    public readonly clickSubItem = output<NavigationData>();
 
-    @Output() clickSubItem: EventEmitter<NavigationData> = new EventEmitter<NavigationData>();
+    readonly navDropdownMenu = viewChild<ElementRef<HTMLElement>>('navDropdownMenu');
+    readonly accordionMenu = viewChild(JMurkyHawkAccordionComponent);
 
-    @ViewChild('navDropdownMenu') navDropdownMenu!: ElementRef;
-    @ViewChild('accordionMenu') accordionMenu!: any;
-
-    @HostListener('keydown.escape', ['$event'])
-    onKeyDown(event: Event) {
+    onKeyDown() {
         // Escape key should close the accordion menu
         if ( this.emittedState === 'opened' ) {
-            this.accordionMenu.jmAccordionToggle();
+            this.accordionMenu()?.jmAccordionToggle();
         }
     }
 
@@ -82,7 +89,7 @@ export class JMurkyHawkNavigationComponent {
     }
 
     ngOnInit() {
-        // let isItemActive = this.navigationService.isActiveItemSelected$.subscribe();
+        
     }
 
     handleInvalid(content: string) {
@@ -96,22 +103,22 @@ export class JMurkyHawkNavigationComponent {
 
     closeAccordion() {
         if (this.emittedState === 'opened') {
-            this.accordionMenu.jmAccordionToggle();
+            this.accordionMenu()?.jmAccordionToggle();
         }
     }
 
     accordionMenuItemClick(event: any) {
         if ( event.target.getAttribute('disabled') !== 'true' ) {
             setTimeout(() => {
-                this.accordionMenu.jmAccordionToggle();
-                this.navDropdownMenu.nativeElement.getElementsByTagName('button')[0].focus({focusVisible: true});
+                this.accordionMenu()?.jmAccordionToggle();
+                this.navDropdownMenu()?.nativeElement.getElementsByTagName('button')[0].focus({focusVisible: true} as any);
             }, this.delayValue);
         }
     }
 
     emitNavItemInfo(instance: any) {
-        console.log(`instance: ${Object.entries(instance)}`);
-        console.log(`test the instance: ${JSON.stringify(instance.element)}`);
+        // console.log(`instance: ${Object.entries(instance)}`);
+        // console.log(`test the instance: ${JSON.stringify(instance.element)}`);
         this.clickSubItem.emit({'instance': instance});
     }
 
@@ -158,14 +165,14 @@ export class JMurkyHawkNavigationComponent {
         this.navigationService.navItemInfo(instance, clickedId);
 
         // Scroll (and move focus) to the top of the main content area when using footer navigation
-        const scrollToElementNode = document.getElementById(this.linkScrollToId);
+        const scrollToElementNode = document.getElementById(this.linkScrollToId());
 
         // Should clicking the link scroll to the scrollToElementNode page position
-        if (this.linkScrollTo && scrollToElementNode && this.isScrolledPast(this.linkScrollToIfPastId) ) {
+        if (this.linkScrollTo() && scrollToElementNode && this.isScrolledPast(this.linkScrollToIfPastId()) ) {
             setTimeout(() => {
                 scrollToElementNode.scrollIntoView({ behavior: "smooth", block: 'start' });
                 scrollToElementNode.focus({preventScroll: true});
-            }, this.linkScrollDelay);
+            }, this.linkScrollDelay());
         }
     }
 
