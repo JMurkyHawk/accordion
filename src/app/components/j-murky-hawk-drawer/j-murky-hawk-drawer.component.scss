@@ -39,7 +39,7 @@ $menuButtonPosition: 1.4rem;
         transition-duration: var(--jmDrawerSpeed);
         transition-property: box-shadow;
         transition-timing-function: styles.$transitionTimingFunction;
-        // width: $menuSize;
+        // width: styles.$menuSize;
         z-index: 9999;
     
         position: fixed;
