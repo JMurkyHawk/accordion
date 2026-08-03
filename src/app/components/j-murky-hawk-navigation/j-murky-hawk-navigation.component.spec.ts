@@ -52,8 +52,8 @@ describe('JMurkyHawkNavigationComponent', () => {
         fixture = TestBed.createComponent(JMurkyHawkNavigationComponent);
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
-        component.navItems = links;
-        component.linkStyle = 'button';
+        // component.navItems = links;
+        fixture.componentRef.setInput('navItems', links);
         linkButton = fixture.nativeElement.querySelector('a');
         fixture.detectChanges();
     });
@@ -87,7 +87,10 @@ describe('JMurkyHawkNavigationComponent', () => {
         for (let i = 0; i < listLength; i++) {
             const randomName = `Label ${Math.floor(Math.random() * 10)}`;
             const randomLink = `/${Math.floor(Math.random() * 10)}`;
-            component.navItems.push({'label': randomName, 'link': randomLink});
+            fixture.componentRef.setInput('navItems', [
+                ...component.navItems(),
+                {'label': randomName, 'link': randomLink}
+            ])
         }
         fixture.detectChanges();
 
@@ -95,9 +98,9 @@ describe('JMurkyHawkNavigationComponent', () => {
         const itemEls = fixture.debugElement.queryAll(By.css('li > a'));
         expect(itemEls.length).toEqual(listLength);
         itemEls.forEach((itemEl, index) => {
-            expect(itemEl.nativeElement.innerText).toEqual(`${component.navItems[index].label}`);
-            expect(itemEl.nativeElement.getAttribute('class')).toEqual(component.linkStyle);
-            expect(itemEl.nativeElement.getAttribute('href')).toEqual(`${component.navItems[index].link}`);
+            expect(itemEl.nativeElement.innerText).toEqual(`${component.navItems()[index].label}`);
+            expect(itemEl.nativeElement.getAttribute('class')).toEqual(component.linkStyle());
+            expect(itemEl.nativeElement.getAttribute('href')).toEqual(`${component.navItems()[index].link}`);
         })
     });
 
@@ -107,7 +110,7 @@ describe('JMurkyHawkNavigationComponent', () => {
         let btn = fixture.debugElement.query(By.css('a'));
         expect(btn).toBeTruthy;
         
-        btn.triggerEventHandler('click', null);
+        btn.triggerEventHandler('click', { a: 0, preventDefault: () => {} });
         fixture.detectChanges();
         expect(component.linkClick).toHaveBeenCalled();
     });
@@ -120,15 +123,15 @@ describe('JMurkyHawkNavigationComponent', () => {
         fixture.detectChanges();
 
         const doc = fixture.nativeElement.ownerDocument;
-        const getScrollToElement = doc.getElementById(component.linkScrollToId);
-        expect(getScrollToElement).toBeTruthy;
+        const getScrollToElement = doc.getElementById(component.linkScrollToId());
+        expect(getScrollToElement).toBeTruthy();
         
         const btn = fixture.debugElement.query(By.css('li:last-child a'));
-        expect(btn).toBeTruthy;
+        expect(btn).toBeTruthy();
 
         const scrollToSpy = spyOn(getScrollToElement, 'scrollIntoView').and.callThrough();
-        btn.triggerEventHandler('click', null);
-        tick(component.linkScrollDelay);
+        btn.triggerEventHandler('click', { a: 0, preventDefault: () => {} });
+        tick(component.linkScrollDelay());
         expect(scrollToSpy).toHaveBeenCalled();
     }));
 
@@ -138,20 +141,20 @@ describe('JMurkyHawkNavigationComponent', () => {
         fixture.componentRef.setInput('linkScrollToId', scrollToId);
         fixture.detectChanges();
         
-        expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
-        expect(component.checkScrollToIdValue(component.linkScrollToId)).toBe(scrollToId);
+        expect(document.getElementById(component.linkScrollToId())).toBeTruthy;
+        expect(component.checkScrollToIdValue(component.linkScrollToId())).toBe(scrollToId);
     });
 
     it('checkScrollToIdValue() should return the DEFAULT id value if element with that id does NOT exist in DOM', () => {
-        const defaultIdValue = component.linkScrollToId;
+        const defaultIdValue = component._linkScrollToId;
         createScrollToElement('div', scrollToId);
         scrollToId = 'id-not-in-dom'; // scrollToId now different than element just created with createScrollToElement()
         fixture.componentRef.setInput('linkScrollTo', true);
         fixture.componentRef.setInput('linkScrollToId', scrollToId);
         fixture.detectChanges();
 
-        expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
-        expect(component.checkScrollToIdValue(component.linkScrollToId)).toBe(defaultIdValue);
+        expect(document.getElementById(component.linkScrollToId())).toBeTruthy;
+        expect(component.checkScrollToIdValue(component.linkScrollToId())).toBe(defaultIdValue);
     });
 
     it('checkScrollToIdValue() should set id element tabindex="0" if element is NOT <a> or <button>', () => {
@@ -160,8 +163,8 @@ describe('JMurkyHawkNavigationComponent', () => {
         fixture.componentRef.setInput('linkScrollToId', scrollToId);
         fixture.detectChanges();
 
-        expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
-        expect(document.getElementById(component.linkScrollToId)?.getAttribute('tabindex')).toBe('0');
+        expect(document.getElementById(component.linkScrollToId())).toBeTruthy;
+        expect(document.getElementById(component.linkScrollToId())?.getAttribute('tabindex')).toBe('0');
     });
 
     it('checkScrollToIdValue() should NOT add tabindex if element is <a> or <button>', () => {
@@ -170,8 +173,8 @@ describe('JMurkyHawkNavigationComponent', () => {
         fixture.componentRef.setInput('linkScrollToId', scrollToId);
         fixture.detectChanges();
         
-        expect(document.getElementById(component.linkScrollToId)).toBeTruthy;
-        expect(document.getElementById(component.linkScrollToId)?.hasAttribute('tabindex')).toBe(false);
+        expect(document.getElementById(component.linkScrollToId())).toBeTruthy;
+        expect(document.getElementById(component.linkScrollToId())?.hasAttribute('tabindex')).toBe(false);
     });
 
 });

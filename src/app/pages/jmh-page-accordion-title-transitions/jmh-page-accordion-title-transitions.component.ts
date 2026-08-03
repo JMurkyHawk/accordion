@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, viewChild } from '@angular/core';
 import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class JmhPageAccordionTitleTransitionsComponent implements OnInit {
     public partial_header3: string = "partial title change content";
     public partial_content: string = "Content for partial accordion title transition";
 
-    @ViewChild('pageHeading', {static: false}) pageHeading!: ElementRef;
+    private pageHeading = viewChild<ElementRef>('pageHeading');
 
     constructor(private navigationService: NavigationService) { }
 
@@ -34,7 +34,7 @@ export class JmhPageAccordionTitleTransitionsComponent implements OnInit {
     }
 
     skipLinksScroll() {
-        this.navigationService.scrollTo(this.pageHeading.nativeElement)
+        this.navigationService.scrollTo(this.pageHeading()?.nativeElement)
     }
 
 }

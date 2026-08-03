@@ -8,113 +8,115 @@
 
         <section class="leadIn">
 
-            <h4>{{type_title_2}}</h4>
+        <h4>{{type_title_2}}</h4>
 
-            <p>{{type_content1}}</p>
+        <p>{{type_content1}}</p>
 
-            <p>{{type_content1_1}}</p>
+        <p>{{type_content1_1}}</p>
 
         </section>
 
         <section>
 
-            <h4>{{type_basic_title}}</h4>
+        <h4>{{type_basic_title}}</h4>
 
-            <div class="jmBackDrop">
+        <div class="jmBackDrop">
 
-                <j-murky-hawk-accordion 
-                    jmFieldId="accordionBasic"
-                    titleText="Basic accordion type"
-                    accordionType="basic" >
-                        <p>{{basic_content}}</p>
-                </j-murky-hawk-accordion>
+            <j-murky-hawk-accordion
+                jmFieldId="accordionBasic"
+                titleText="Basic accordion type"
+                accordionType="basic" >
+                    <p>{{basic_content}}</p>
+            </j-murky-hawk-accordion>
 
-            </div>
+        </div>
 
-            <p>{{type_basic_content1}}</p>
-            <p>{{type_basic_content2}}</p>
-
-        </section>
-
-
-        <section>
-
-            <h4>{{type_minimal_title}}</h4>
-
-            <div class="jmBackDrop">
-
-                <j-murky-hawk-accordion 
-                    jmFieldId="accordionMinimalist"
-                    titleText="Minimalist accordion type"
-                    accordionType="minimal" >
-                        <p>{{minimal_content}}</p>
-                </j-murky-hawk-accordion>
-
-            </div>
-
-            <p>{{type_minimal_content1}}</p>
-            <p>{{type_minimal_content2}}</p>
+        <p>{{type_basic_content1}}</p>
+        <p>{{type_basic_content2}}</p>
 
         </section>
 
 
         <section>
 
-            <h4>{{type_panel_title}}</h4>
+        <h4>{{type_minimal_title}}</h4>
 
-            <div class="jmBackDrop">
+        <div class="jmBackDrop">
 
-                <j-murky-hawk-accordion 
-                    jmFieldId="accordionPanel"
-                    titleText="Panel accordion type"
-                    accordionType="panel"
-                    [customStylesTitle]="{
-                        'background' : '#ffffff',
-                        'background-ro' : '#151f5e',
-                        'border' : '1px solid #151f5e', 
-                        'border-ro' : '1px solid #151f5e', 
-                        'color' : '#151f5e', 
-                        'color-ro' : '#ffffff' 
-                    }"
-                    [customStylesBody]="{
-                        'border' : '1px solid #000000'
-                    }" >
-                        <p>{{panel_content}}</p>
-                </j-murky-hawk-accordion>
+            <j-murky-hawk-accordion
+                jmFieldId="accordionMinimalist"
+                titleText="Minimalist accordion type"
+                accordionType="minimal" >
+                    <p>{{minimal_content}}</p>
+            </j-murky-hawk-accordion>
 
-            </div>
+        </div>
 
-            <p>{{type_panel_content1}}</p>
-            <p>{{type_panel_content2}}</p>
+        <p>{{type_minimal_content1}}</p>
+        <p>{{type_minimal_content2}}</p>
 
         </section>
 
 
         <section>
 
-            <h4>{{type_title2}}</h4>
+        <h4>{{type_panel_title}}</h4>
 
-            <p class="margin3">{{type_content2}}</p>
+        <div class="jmBackDrop">
 
-            <ul>
-                <li *ngFor="let item of type_li">{{item}}</li>
-            </ul>
+            <j-murky-hawk-accordion
+                jmFieldId="accordionPanel"
+                titleText="Panel accordion type"
+                accordionType="panel"
+                [customStylesTitle]="{
+                    'background' : '#ffffff',
+                    'background-ro' : '#151f5e',
+                    'border' : '1px solid #151f5e', 
+                    'border-ro' : '1px solid #151f5e', 
+                    'color' : '#151f5e', 
+                    'color-ro' : '#ffffff' 
+                }"
+                [customStylesBody]="{
+                    'border' : '1px solid #000000'
+                }" >
+                    <p>{{panel_content}}</p>
+            </j-murky-hawk-accordion>
 
-            <div class="jmBackDrop">
+        </div>
 
-                <j-murky-hawk-accordion 
-                    jmFieldId="accordionTypeOptions"
-                    accordionType="minimal"
-                    titleTransition="partial"
-                    titleTextOpen="{{title_change_type_header1}}"
-                    titleTextClosed="{{title_change_type_header2}}"
-                    titleText="{{title_change_type_header3}}"
-                    iconType="plusMinus"
-                    iconAlign="left" >
-                        <p>{{title_change_type_content}}</p>
-                </j-murky-hawk-accordion>
+        <p>{{type_panel_content1}}</p>
+        <p>{{type_panel_content2}}</p>
 
-            </div>
+        </section>
+
+
+        <section>
+
+        <h4>{{type_title2}}</h4>
+
+        <p class="margin3">{{type_content2}}</p>
+
+        <ul>
+            @for (item of type_li; track item) {
+                <li>{{item}}</li>
+            }
+        </ul>
+
+        <div class="jmBackDrop">
+
+            <j-murky-hawk-accordion
+                jmFieldId="accordionTypeOptions"
+                accordionType="minimal"
+                titleTransition="partial"
+                titleTextOpen="{{title_change_type_header1}}"
+                titleTextClosed="{{title_change_type_header2}}"
+                titleText="{{title_change_type_header3}}"
+                iconType="plusMinus"
+                iconAlign="left" >
+                <p>{{title_change_type_content}}</p>
+            </j-murky-hawk-accordion>
+
+        </div>
 
         </section>
 

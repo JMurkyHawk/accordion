@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, VERSION, ViewChild, ViewEncapsulation, WritableSignal,
+import { Component, ElementRef, VERSION, viewChild, ViewEncapsulation, WritableSignal,
     computed, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
@@ -41,7 +41,6 @@ export class AppComponent {
 
     public routeIdNumber: number | undefined = undefined;
     public routeTitle: string | undefined = undefined;
-    private skipLinksButtonPosition: number | undefined = undefined;
 
     public title: string = 'Angular Accordion';
     public githubLabel: string = 'View Code In GitHub';
@@ -138,15 +137,14 @@ export class AppComponent {
         }
     });
 
+    private pageHead = viewChild<ElementRef>('pageHead');
+    private mainContent = viewChild<ElementRef>('mainContent');
+    private jmDrawer = viewChild<ElementRef>('jmDrawer');
+    private jmDrawerComp = viewChild(JMurkyHawkDrawerComponent);
+
     private windowResizeSubscription$: Subscription;
     private windowScrollSubscription$: Subscription;
     private getClickedNavItemInfoSubscription$?: Subscription;
-
-    @ViewChild('pageHead', {static: false, read: ElementRef}) pageHead!: ElementRef;
-    @ViewChild('skipLinks', {static: false}) skipLinks!: ElementRef;
-    @ViewChild('mainContent', {static: false}) mainContent!: ElementRef;
-    @ViewChild('jmDrawerComp', {read: JMurkyHawkDrawerComponent}) jmDrawerComp!: JMurkyHawkDrawerComponent;
-    @ViewChild('jmDrawer', { read: ElementRef }) jmDrawer!: ElementRef;
 
     constructor(
         private route: ActivatedRoute,
@@ -228,14 +226,13 @@ export class AppComponent {
     }
 
     ngAfterViewInit() {
-        this.skipLinksButtonPosition = this.skipLinksButtonCalc();
 
         this.getClickedNavItemInfoSubscription$ = this.navigationService.clickedItemInfo$.subscribe(value => {
             if (this.jmDrawer && 
-                this.jmDrawer.nativeElement.contains(document.getElementById(value.clickedId)) && 
+                this.jmDrawer()?.nativeElement.contains(document.getElementById(value.clickedId)) && 
                 !value.isActive
                 ) {
-                this.jmDrawerComp.drawerButtonClick();
+                this.jmDrawerComp()?.drawerButtonClick();
             }
         });
 
@@ -377,12 +374,12 @@ export class AppComponent {
 
     isWindowScrolledPast(element?: any) {
         // Default check for the bottom position of the #pageHead element, but allow other element's position to be provided
-        let item = element ? element : this.pageHead.nativeElement.offsetHeight;
+        let item = element ? element : this.pageHead()?.nativeElement.offsetHeight;
         return window.scrollY < item ? true : false;
     };
     
     windowScrollDrawerButton() {
-        let elementToCompare = this.pageHead.nativeElement.getBoundingClientRect();
+        let elementToCompare = this.pageHead()?.nativeElement.getBoundingClientRect();
         let heightToCompare = elementToCompare.bottom - elementToCompare.top;
         
         if ( window.scrollY > heightToCompare ) {
@@ -415,13 +412,6 @@ export class AppComponent {
             return false;
         }
     }
-
-    skipLinksButtonCalc() {
-        const button = this.skipLinks.nativeElement.getBoundingClientRect();
-        const buttonTop = button.top;
-        const buttonShowTop = buttonTop - button.height;
-        return buttonShowTop;
-    }
     
     public subPageHeading: any;
 
@@ -441,11 +431,11 @@ export class AppComponent {
         No idea why, nothing worked. The only place that I've been able to get the correct height is when the route transition animation starts. 
         A slight delay in the JmhRouteAnimation will allow the setMainContentSize() method to get the correct page measurements and animate the mainContent area's height smoothly, preventing the footer 'jumping' on router navigation. 
         I don't like having to use an arbitrary time delay, but it's the only thing that seems to work... */
-        this.mainContent.nativeElement.children[2] ? this.setMainContentSize() : undefined;
+        this.mainContent()?.nativeElement.children[2] ? this.setMainContentSize() : undefined;
     }
 
     jmRouteAnimationDone(event: any) {
-        this.mainContent.nativeElement.removeAttribute('style');
+        this.mainContent()?.nativeElement.removeAttribute('style');
     }
 
     onActivate(element: any) {
@@ -455,7 +445,7 @@ export class AppComponent {
     }
 
     setMainContentSize() {
-        const mainComponent = this.mainContent.nativeElement;
+        const mainComponent = this.mainContent()?.nativeElement;
         const leaveHeight = mainComponent.children[1].offsetHeight;
         const enterHeight = mainComponent.children[2].offsetHeight;
 
@@ -470,7 +460,7 @@ export class AppComponent {
             top: 0,
             behavior: 'smooth'
         });
-        this.pageHead.nativeElement.querySelector('#skipLinks').focus();
+        this.pageHead()?.nativeElement.querySelector('#skipLinks').focus();
     }
     
     ngOnDestroy() {
