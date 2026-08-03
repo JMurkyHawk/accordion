@@ -139,7 +139,7 @@ export class AppComponent {
 
     private pageHead = viewChild<ElementRef>('pageHead');
     private mainContent = viewChild<ElementRef>('mainContent');
-    private jmDrawer = viewChild<ElementRef>('jmDrawer');
+    private jmDrawer = viewChild('jmDrawer', {read: ElementRef});
     private jmDrawerComp = viewChild(JMurkyHawkDrawerComponent);
 
     private windowResizeSubscription$: Subscription;
