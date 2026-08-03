@@ -1,26 +1,25 @@
-<nav [class]="linkStyle">
+<nav [class]="linkStyle()">
 
   <ul>
 
-    @for (item of navItems; track item; let i = $index) {
+    @for (item of navItems(); track item; let i = $index) {
       <li >
         @if (item.link) {
           <a
-            [class]="linkStyle === 'button' ? 'button' : 'text' "
+            [class]="linkStyle() === 'button' ? 'button' : 'text' "
             [routerLink]="item.link"
-            [attr.id]="listId ? listId + i : null"
+            [attr.id]="listId() ? listId() + i : null"
             #instance="routerLinkActive"
             routerLinkActive="active"
             [title]="instance.isActive ? activeLinkTitle : '' "
             [tabindex]="instance.isActive ? -1 : null"
-          (click)="linkClick(instance, listId + i)">{{item.label}}</a>
+            (click)="linkClick(instance, listId() + i)">{{item.label}}</a>
         }
         @if (!item.link) {
           <div
             #navDropdownMenu
             (clickOutside)="closeAccordion()">
             <j-murky-hawk-accordion
-              #accordionMenu
               jmFieldId="navDropdown1"
               class=""
               accordionType="basic"
@@ -40,7 +39,7 @@
                   <li>
                     <a [routerLink]="subItem.link"
                       (click)="accordionMenuItemClick($event)"
-                      [attr.id]="listId ? listId + i : null"
+                      [attr.id]="listId() ? listId() + i : null"
                       #instance="routerLinkActive"
                       routerLinkActive="active"
                       attr.disabled="{{instance.isActive}}"

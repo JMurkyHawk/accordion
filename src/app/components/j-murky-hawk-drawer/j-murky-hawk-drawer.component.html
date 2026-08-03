@@ -8,7 +8,7 @@
 
     <div #jmDrawerButtonWrapper
         class="jmDrawerButtonWrapper"
-        [class]="drawerPosition"
+        [class]="drawerPosition()"
         [ngStyle]="{
             'left': drawerButtonXYLeft(),
             'right': drawerButtonXYRight(),
@@ -70,7 +70,7 @@
         tabindex="-1"
         [ngStyle]="{width: drawerWidth()}"
         [@drawerOpenClose]="{
-            value: drawerPosition, 
+            value: drawerPosition(), 
             params: {
                 width: drawerWidth(), 
                 speed: drawerSpeed()
@@ -85,7 +85,7 @@
         class="drawerBackgroundEffect"
         [ngStyle]="{width: drawerWidth()}"
         [@drawerOpenClose]="{
-            value: drawerPosition, 
+            value: drawerPosition(), 
             params: {
                 width: drawerWidth(), 
                 speed: drawerSpeed()
@@ -98,13 +98,13 @@
     <div
         #jmDrawerOverlay
         class="jmDrawerOverlay"
-        [class]="drawerPosition"
+        [class]="drawerPosition()"
         [ngStyle]="{
             'clip-path': createOverlayCutout()
         }"
         (click)="overlayClick($event)"
         [@drawerPageOverlayAnimate]="{
-            value: drawerPosition,
+            value: drawerPosition(),
             params: {
                 background: drawerPageOverlayBackground(),
                 opacity: drawerPageOverlayOpacity(),

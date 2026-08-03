@@ -18,13 +18,18 @@ describe('JMurkyHawkAccordionComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-    declarations: [
-        JMurkyHawkAccordionComponent,
-        JMurkyHawkSvgRenderComponent
-    ],
-    imports: [BrowserAnimationsModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-})
+            declarations: [
+                JMurkyHawkAccordionComponent,
+                JMurkyHawkSvgRenderComponent
+            ],
+            imports: [
+                BrowserAnimationsModule
+            ],
+            providers: [
+                provideHttpClient(withInterceptorsFromDi()), 
+                provideHttpClientTesting()
+            ]
+        })
         .compileComponents();
     }));
 
@@ -78,19 +83,23 @@ describe('JMurkyHawkAccordionComponent', () => {
     });
 
     it('initial title text for the CLOSE state when using full-text transition', () => {
+        // 1. Pass the signal input value
         fixture.componentRef.setInput('titleTextClosed', "Closed state using full text title transition");
-        component.ngOnInit();
+        // 3. Process the changes and update the DOM
         fixture.detectChanges();
+        // 4. Assert
         expect(accordionHeader.textContent).toContain(component.titleText());
     });
 
     it('new title text for OPEN state when using full-text transition', () => {
+        // 1. Pass the signal input value
         fixture.componentRef.setInput('titleTextOpen', "Open state using full text title transition");
-        component.ngOnInit();
+        // 2. Trigger event handler
         component.jmAccordionToggle();
+        // 3. Process the changes and update the DOM
         fixture.detectChanges();
+        // 4. Assert
         expect(accordionHeader.textContent).toBe(component.titleText());
-
     });
 
     it('new partial title text along with static main title text, provided for partial title transition option', () => {
@@ -177,12 +186,12 @@ describe('JMurkyHawkAccordionComponent', () => {
 
     it('should use default value if iconAlign is empty', () => {
         fixture.componentRef.setInput('iconAlign', '');
-        expect(component.iconAlign()).toBe('left');
+        expect(component.iconAlign()).toBe('right');
     });
 
     it('should use default value if iconAlign is not: left or right', () => {
         fixture.componentRef.setInput('iconAlign', 'north');
-        expect(component.iconAlign()).toBe('left');
+        expect(component.iconAlign()).toBe('right');
     });
 
     it('should use default value if iconType is empty', () => {
@@ -207,23 +216,20 @@ describe('JMurkyHawkAccordionComponent', () => {
 
     it('should use reject value if customStylesTitle has a value not from the defined list: '
         + 'background, background-ro, border, border-ro, color, color-ro', () => {
-        const checkCustomStylesTitle = spyOnProperty(component, 'customStylesTitle', 'set');
         fixture.componentRef.setInput('customStylesTitle', {'a':'b'});
-        expect(checkCustomStylesTitle).toHaveBeenCalledWith({'a':'b'});
-        expect(component.customStylesTitle).toEqual({});
+        fixture.detectChanges();
+        expect(component.customStylesTitle()).toEqual({});
     });
 
     it('should use reject value if customStylesBody has a value not from the defined list: '
         + 'background, border, color', () => {
-        const checkCustomStylesBody = spyOnProperty(component, 'customStylesBody', 'set');
         fixture.componentRef.setInput('customStylesBody', {'x':'y'});
-        expect(checkCustomStylesBody).toHaveBeenCalledWith({'x':'y'});
-        expect(component.customStylesBody).toEqual({});
+        fixture.detectChanges();
+        expect(component.customStylesBody()).toEqual({});
     });
 
     it('should emit on click', () => {
         // Spy on event emitter
-        const component = fixture.componentInstance;
         spyOn(component.clickHeader, 'emit').and.callThrough();
 
         // Trigger the click

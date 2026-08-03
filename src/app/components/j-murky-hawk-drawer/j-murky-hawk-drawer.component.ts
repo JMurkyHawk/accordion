@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, Renderer2, Signal, ViewChild, WritableSignal, computed, signal, input } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, Signal, ViewChild, WritableSignal, computed, input, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fromEvent } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -37,7 +37,10 @@ export interface DrawerButtonOptions {
         drawerButtonPositionAnimation,
         drawerOpenCloseAnimation,
         drawerPageOverlayAnimation
-    ]
+    ],
+    host: {
+        '(document:keydown.escape)': 'onKeyDown()'
+    }
 })
 
 export class JMurkyHawkDrawerComponent {
@@ -46,15 +49,15 @@ export class JMurkyHawkDrawerComponent {
     readonly drawerSpeed = input<string>('.5s');
     readonly drawerWidth = input<string>('50vw');
     readonly drawerButtonInfo = input({
-    altTextHide: 'Close drawer',
-    altTextShow: 'Open drawer',
-    borderRadius: '.5rem',
-    iconLineHeight: '3px',
-    iconLineSpacing: '7px',
-    iconLineSpeed: '.5s',
-    size: '5rem',
-    xyPosition: { x: '2rem', y: '2rem' }
-});
+        altTextHide: 'Close drawer',
+        altTextShow: 'Open drawer',
+        borderRadius: '.5rem',
+        iconLineHeight: '3px',
+        iconLineSpacing: '7px',
+        iconLineSpeed: '.5s',
+        size: '5rem',
+        xyPosition: { x: '2rem', y: '2rem' }
+    });
     
     readonly drawerButtonBorderRadius = input<string>('.5rem');
     readonly isDrawerButtonPositionInside = input<boolean>(false);
@@ -62,39 +65,30 @@ export class JMurkyHawkDrawerComponent {
     readonly drawerPageOverlayOpacity = input<string>('.75');
     readonly canDocScrollWhenOpen = input<boolean>(false);
 
-    @Input() 
-        public get drawerButtonAlign() {
-            return this._drawerButtonAlign;
-        }
-
-        public set drawerButtonAlign(value: string) {
+    public drawerButtonAlign = input<string, string>('left', {
+        transform: (value: string) => {
             const validValue = this.provideOpts(value, 'drawerButtonAlign', ['right', 'left']);
-            if ( validValue === value ) {
-                this._drawerButtonAlign = validValue;
-            }
-        }
 
-    @Input() 
-        public get drawerPosition() {
-            return this._drawerPosition;
+            return validValue === value ? validValue : 'left';
         }
+    });
 
-        public set drawerPosition(value: string) {
+    public drawerPosition = input<string, string>('left', {
+        transform: (value: string) => {
             const validValue = this.provideOpts(value, 'drawerPosition', ['right', 'left']);
-            if ( validValue === value ) {
-                this._drawerPosition = validValue;
-            }
+
+            return validValue === value ? validValue : 'left';
         }
+    });
 
-    @ViewChild('jmDrawer') jmDrawer!: ElementRef;
-    @ViewChild('jmDrawerButton') jmDrawerButton!: ElementRef;
-    @ViewChild('jmDrawerButtonWrapper') jmDrawerButtonWrapper!: ElementRef;
-    @ViewChild('jmDrawerOverlay') jmDrawerOverlay!: ElementRef;
+    private jmDrawer = viewChild<ElementRef>('jmDrawer');
+    private jmDrawerButton = viewChild<ElementRef>('jmDrawerButton');
+    private jmDrawerButtonWrapper = viewChild<ElementRef>('jmDrawerButtonWrapper');
+    private jmDrawerOverlay = viewChild<ElementRef>('jmDrawerOverlay');
 
-    @HostListener('document:keydown.escape', ['$event'])
-    onKeyDown(e: any) {
+    onKeyDown() {
         // Escape key should close the drawer menu
-        if ( e.key === 'Escape' && this.drawerShow() ) {
+        if ( this.drawerShow() ) {
             this.drawerButtonClick();
         }
     }
@@ -109,7 +103,7 @@ export class JMurkyHawkDrawerComponent {
 
         const isDrawerButtonPositionInside = this.isDrawerButtonPositionInside();
         if (this.drawerShow() && !isDrawerButtonPositionInside) { 
-            drawerButtonPosition = this.drawerPosition; 
+            drawerButtonPosition = this.drawerPosition(); 
         } 
 
         if (this.drawerShow() && isDrawerButtonPositionInside) {
@@ -122,7 +116,7 @@ export class JMurkyHawkDrawerComponent {
     private _drawerButtonAlign: string = 'left';
     private _drawerPosition: string = 'left';
     private tagName: string = '';
-    public buttonPosition = this.jmDrawerButtonWrapper?.nativeElement.style.cssText;
+    public buttonPosition = this.jmDrawerButtonWrapper()?.nativeElement.style.cssText;
     
     private windowResizeSubscription$: any;
     private windowFocusSubscription$: any;
@@ -173,11 +167,11 @@ export class JMurkyHawkDrawerComponent {
             .subscribe((event) => {
 
                 const drawerButtonInfo = this.drawerButtonInfo();
-                if ( !this.drawerShow() && this.drawerPosition === 'left' ) { 
+                if ( !this.drawerShow() && this.drawerPosition() === 'left' ) { 
                     this.setDrawerButtonLR(drawerButtonInfo.xyPosition.x, 'auto');
                 }
 
-                if ( !this.drawerShow() && this.drawerPosition === 'right' ) { 
+                if ( !this.drawerShow() && this.drawerPosition() === 'right' ) { 
                     this.setDrawerButtonLR('auto', drawerButtonInfo.xyPosition.x);
                 }
 
@@ -185,9 +179,9 @@ export class JMurkyHawkDrawerComponent {
                 const isDrawerButtonPositionInside = this.isDrawerButtonPositionInside();
                 const drawerWidth = this.drawerWidth();
                 if ( this.drawerShow() && !isDrawerButtonPositionInside ) {
-                    if ( this.drawerPosition === 'left') {
+                    if ( this.drawerPosition() === 'left') {
                         this.setDrawerButtonLR(drawerWidth, 'auto');
-                    } else if ( this.drawerPosition === 'right' ) {
+                    } else if ( this.drawerPosition() === 'right' ) {
                         this.setDrawerButtonLR('auto', drawerWidth);
                     }
                 } 
@@ -195,19 +189,23 @@ export class JMurkyHawkDrawerComponent {
                 if ( this.drawerShow() && isDrawerButtonPositionInside ) {
                     let calculatedPosition = `calc(${drawerWidth} - (${drawerButtonInfo.size} + ${drawerButtonInfo.xyPosition.x}))`;
 
-                    if ( this.drawerPosition === 'left') {
+                    if ( this.drawerPosition() === 'left') {
                         this.setDrawerButtonLR(calculatedPosition, 'auto');
-                    } else if ( this.drawerPosition === 'right' ) {
+                    } else if ( this.drawerPosition() === 'right' ) {
                         this.setDrawerButtonLR('auto', calculatedPosition);
                     }
                 }
                 
                 setTimeout(() => {
                     if ( this.drawerShow() && !this.isDrawerButtonPositionInside() ) { 
-                        this.jmDrawerOverlay.nativeElement.style.cssText = `${this.createOverlayCutout()}` +
-                            `background: ${this.drawerPageOverlayBackground()}; ` +
-                            `opacity: ${this.drawerPageOverlayOpacity()}; ` +
-                            `width': ${this.drawerWidth()};`;
+                        const overlay = this.jmDrawerOverlay();
+
+                        if (overlay) {
+                            overlay.nativeElement.style.cssText = `${this.createOverlayCutout()}` +
+                                `background: ${this.drawerPageOverlayBackground()}; ` +
+                                `opacity: ${this.drawerPageOverlayOpacity()}; ` +
+                                `width': ${this.drawerWidth()};`;
+                        }
                     }
                 }, 0);
                 
@@ -252,7 +250,7 @@ export class JMurkyHawkDrawerComponent {
     }
 
     jmDrawerGetFocusableItems() {
-        const focusableElements = this.jmDrawer?.nativeElement.querySelectorAll(
+        const focusableElements = this.jmDrawer()?.nativeElement.querySelectorAll(
             'a, button, input, [tabindex]'
         );
 
@@ -382,11 +380,11 @@ export class JMurkyHawkDrawerComponent {
     setDrawerButtonAlign() {
         setTimeout(() => {
             const drawerButtonInfo = this.drawerButtonInfo();
-            if ( !this.drawerShow() && this.drawerPosition === 'left' ) {
+            if ( !this.drawerShow() && this.drawerPosition() === 'left' ) {
                     this.setDrawerButtonLR(drawerButtonInfo.xyPosition.x, 'auto');
             }
 
-            if ( !this.drawerShow() && this.drawerPosition === 'right' ) {
+            if ( !this.drawerShow() && this.drawerPosition() === 'right' ) {
                     this.setDrawerButtonLR('auto', drawerButtonInfo.xyPosition.x);
             }
         }, 0);
@@ -397,12 +395,12 @@ export class JMurkyHawkDrawerComponent {
     drawerButtonMove() {
         const drawerButtonInfo = this.drawerButtonInfo();
         const drawerWidth = this.drawerWidth();
-        if (this.drawerShow() && this.drawerPosition === 'left') {
+        if (this.drawerShow() && this.drawerPosition() === 'left') {
             this.setDrawerButtonLR(drawerWidth, 'auto');
             this.setComponentCssVariable('jmDrawerButtonBorderRadius', `0 ${drawerButtonInfo.borderRadius} ${drawerButtonInfo.borderRadius} 0 `);
         }
 
-        if (this.drawerShow() && this.drawerPosition === 'right') {
+        if (this.drawerShow() && this.drawerPosition() === 'right') {
             this.setDrawerButtonLR('auto', drawerWidth);
             this.setComponentCssVariable('jmDrawerButtonBorderRadius', `${drawerButtonInfo.borderRadius} 0 0 ${drawerButtonInfo.borderRadius}`);
         }
@@ -419,11 +417,15 @@ export class JMurkyHawkDrawerComponent {
         setTimeout(() => {
             this.setDrawerButtonAlign();
             if ( this.drawerShow() && !this.isDrawerButtonPositionInside() ) { 
-                this.jmDrawerOverlay.nativeElement.style.cssText = `${this.createOverlayCutout()}`; 
+                const overlay = this.jmDrawerOverlay();
+
+                if (overlay) {
+                    overlay.nativeElement.style.cssText = `${this.createOverlayCutout()}`; 
+                }
             }
             this.drawerShow() ? this.drawerFocusableItems.set(this.jmDrawerGetFocusableItems()) : '';
         }, 0);
-        this.jmDrawerButton.nativeElement.focus();
+        this.jmDrawerButton()?.nativeElement.focus();
     }
 
     overlayClick(event: Event) {

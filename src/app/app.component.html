@@ -1,110 +1,110 @@
 <div class="jmh">
 
-  <div id="pageHeadWrapper">
+    <div id="pageHeadWrapper">
 
-    <header id="pageHead" #pageHead>
+        <header id="pageHead" #pageHead>
 
-      <button id="skipLinks" #skipLinks
-        (click)="skipLinksClick($event)"
-      (focus)="skipLinksFocus($event)">{{skipLinksText}}</button>
+            <button id="skipLinks" 
+                (click)="skipLinksClick($event)"
+                (focus)="skipLinksFocus($event)">{{skipLinksText}}</button>
 
-      <div class="pageHeadSection1">
-        <button (click)="skipLinksClick($event)"
-          title="Scroll to main content" >
-          <span class="logo">
-            <jm-svg-render src="assets/images/logo-jm-color.svg"></jm-svg-render>
-          </span>
-          <h1
-            [innerHTML]="routeTitle"
-            [ngClass]="{'hideMe' : showDesktopNav()}">
-          </h1>
-        </button>
-      </div>
+            <div class="pageHeadSection1">
+                <button 
+                    (click)="skipLinksClick($event)" 
+                    title="Scroll to main content" >
+                    <span class="logo">
+                        <jm-svg-render src="assets/images/logo-jm-color.svg"></jm-svg-render>
+                    </span>
+                    <h1
+                        [innerHTML]="routeTitle"
+                        [ngClass]="{'hideMe' : showDesktopNav()}">
+                    </h1>
+                </button>
+            </div>
 
-      @if (showDesktopNav()) {
-        <j-murky-hawk-navigation
-          navId="topNav"
-          [navItems]="navLinkData"
-          linkStyle="text"
-          linkScrollToIfPastId="null" >
-        </j-murky-hawk-navigation>
-      }
-    </header>
+            @if (showDesktopNav()) {
+                <j-murky-hawk-navigation
+                    navId="topNav"
+                    [navItems]="navLinkData"
+                    linkStyle="text"
+                    linkScrollToIfPastId="null" >
+                </j-murky-hawk-navigation>
+            }
+        </header>
 
-    <div id="subHeaderBar">
-      <div>
-        <h2>{{title}}</h2>
-        <a class="gitHubBtn" target="_blank"
-          href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">
-          <jm-svg-render src="assets/images/github-icon.svg"></jm-svg-render>{{githubLabel}}
-        </a>
-        @if (showSubHeadContentIndicator()) {
-          <button class="jmArrow"
-            (click)="skipLinksClick($event)"
-            title="Scroll to main content"
-                    [@fadeInOut]="{ 
-                        value: showSubHeadContentIndicator(),
+        <div id="subHeaderBar">
+            <div>
+                <h2>{{title}}</h2>
+                <a class="gitHubBtn" target="_blank"
+                    href="https://github.com/JMurkyHawk/accordion/tree/master/src/app/components/j-murky-hawk-accordion">
+                    <jm-svg-render src="assets/images/github-icon.svg"></jm-svg-render>{{githubLabel}}
+                </a>
+                @if (showSubHeadContentIndicator()) {
+                    <button class="jmArrow"
+                        (click)="skipLinksClick($event)"
+                        title="Scroll to main content"
+                        [@fadeInOut]="{ 
+                            value: showSubHeadContentIndicator(),
+                            params: {
+                                animationTiming: '200'
+                            } 
+                        }"></button>
+                }
+            </div>
+            @if (buttonDrawerHideShow()) {
+                <j-murky-hawk-drawer
+                    #jmDrawer
+                    [@buttonDrawerHideShow]="{ 
+                        value: buttonDrawerPosition(),
                         params: {
-                            animationTiming: '200'
+                            buttonHideShowTiming: '250ms', 
+                            buttonWidth: drawerButtonInfo().size, 
+                            buttonXPosition: drawerButtonInfo().xyPosition.x,
+                            height: drawerButtonInfo().iconLineHeight,
+                            lineSpacing: drawerButtonInfo().iconLineSpacing
                         } 
-                    }"></button>
-      }
+                    }"
+                    [isDrawerButtonPositionInside]="isDrawerButtonPositionInside()"
+                    [drawerPosition]="buttonDrawerPosition()"
+                    [drawerSpeed]="'.4s'"
+                    [drawerWidth]="drawerSize()"
+                    [drawerButtonAlign]="buttonDrawerPosition()"
+                    [drawerButtonInfo]="drawerButtonInfo()"
+                    drawerPageOverlayOpacity=".6"
+                    [canDocScrollWhenOpen]="false" >
+                        <h1>Accordion Features</h1>
+                        <j-murky-hawk-navigation
+                            navId="drawerNav"
+                            listId="drawerNav"
+                            [navItems]="navLinkData2"
+                            linkStyle="text"
+                            [linkScrollTo]="true"
+                            linkScrollToId="mainContent" >
+                        </j-murky-hawk-navigation>
+                </j-murky-hawk-drawer>
+            }
+        </div>
+
     </div>
-    @if (buttonDrawerHideShow()) {
-      <j-murky-hawk-drawer
-        #jmDrawer
-        #jmDrawerComp
-                [@buttonDrawerHideShow]="{ 
-                    value: buttonDrawerPosition(),
-                    params: {
-                        buttonHideShowTiming: '250ms', 
-                        buttonWidth: drawerButtonInfo().size, 
-                        buttonXPosition: drawerButtonInfo().xyPosition.x,
-                        height: drawerButtonInfo().iconLineHeight,
-                        lineSpacing: drawerButtonInfo().iconLineSpacing
-                    } 
-                }"
-      [isDrawerButtonPositionInside]="isDrawerButtonPositionInside()"
-      [drawerPosition]="buttonDrawerPosition()"
-      [drawerSpeed]="'.4s'"
-      [drawerWidth]="drawerSize()"
-      [drawerButtonAlign]="buttonDrawerPosition()"
-      [drawerButtonInfo]="drawerButtonInfo()"
-      drawerPageOverlayOpacity=".6"
-      [canDocScrollWhenOpen]="false" >
-      <h1>Accordion Features</h1>
-      <j-murky-hawk-navigation
-        navId="drawerNav"
-        listId="drawerNav"
-        [navItems]="navLinkData2"
-        linkStyle="text"
-        [linkScrollTo]="true"
-        linkScrollToId="mainContent" >
-      </j-murky-hawk-navigation>
-    </j-murky-hawk-drawer>
-  }
-</div>
 
-</div>
+    <div id="mainContent" aria-live="polite" tabindex="0" #mainContent
+        [@JmhRouteAnimation]="routeIdNumber"
+        (@JmhRouteAnimation.start)="jmRouteAnimationStart($event)"
+        (@JmhRouteAnimation.done)="jmRouteAnimationDone($event)">
+            <router-outlet (activate)="onActivate($event)" ></router-outlet>
+    </div>
 
-<div id="mainContent" aria-live="polite" tabindex="0" #mainContent
-  [@JmhRouteAnimation]="routeIdNumber"
-  (@JmhRouteAnimation.start)="jmRouteAnimationStart($event)"
-  (@JmhRouteAnimation.done)="jmRouteAnimationDone($event)">
-  <router-outlet (activate)="onActivate($event)" ></router-outlet>
-</div>
-
-<footer>
-  <j-murky-hawk-navigation
-    [navItems]="navLinkData2"
-    linkStyle="text"
-    [linkScrollTo]="true"
-    linkScrollToId="mainContent" >
-  </j-murky-hawk-navigation>
-  <small>
-    <p>{{footerNote}}</p>
-  </small>
-  <button class="goToPageTop" (click)="goToPageTop()">{{pageTop}}</button>
-</footer>
+    <footer>
+        <j-murky-hawk-navigation
+            [navItems]="navLinkData2"
+            linkStyle="text"
+            [linkScrollTo]="true"
+            linkScrollToId="mainContent" >
+        </j-murky-hawk-navigation>
+        <small>
+            <p>{{footerNote}}</p>
+        </small>
+        <button class="goToPageTop" (click)="goToPageTop()">{{pageTop}}</button>
+    </footer>
 
 </div>

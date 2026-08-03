@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, input, model } from '@angular/core';
+import { Component, ElementRef, OnInit, input, model, output, viewChild } from '@angular/core';
 
 import { jmAccordionIconAnimation,
         jmAccordionIconAnimation2,
@@ -27,183 +27,90 @@ export interface AccordionData {
 
 export class JMurkyHawkAccordionComponent implements OnInit {
 
-    titleText = model<string>('Hide/Show Content');
     readonly jmFieldId = input<string>('');
-    readonly titleTextOpen = input<string>(''); 
-    readonly titleTextClosed = input<string>(''); 
     readonly isOpenByDefault = input<boolean>(false);
     readonly customHeight = input<string>('');
     readonly emitInfo = input<boolean>(false);
+    public titleText = model<string>('Hide/Show Content');
+    public titleTextOpen = model<string>(''); 
+    public titleTextClosed = model<string>(''); 
 
-    // @Input() 
-    //     // Provide custom accordion styling for title as object. See getCustomStylingObj() for more info
-    //     public get customStylesTitle() {
-    //         return this.stylesTitle;
-    //     }
-
-    //     public set customStylesTitle(values: {[key: string] : string}) {
-    //         this.getCustomStylingObj(values, 'title');
-    //     }
+    // BEGIN Getter/Setters as Signals
     public customStylesTitle = input<{[key: string]: string}, {[key: string]: string}>({}, {
         transform: (values) => {
             this.getCustomStylingObj(values, 'title');
 
             return this.stylesTitle;
         }
-    })
+    });
     
-    // @Input() 
-    //     // Provide custom accordion styling for body as object. See getCustomStylingObj() for more info
-    //     public get customStylesBody() {
-    //         return this.stylesBody;
-    //     }
-
-    //     public set customStylesBody(values: {[key: string] : string}) {
-    //         this.getCustomStylingObj(values, 'body');
-    //     }
     public customStylesBody = input<{[key: string]: string}, {[key: string]: string}>({}, {
         transform: (values) => {
             this.getCustomStylingObj(values, 'body');
 
-            return values;
+            return this.stylesBody;
         }
     });
 
-    // @Input() 
-    //     public get accordionType() {
-    //         return this._accordionType;
-    //     }
-
-    //     public set accordionType(value: string) {
-    //         const validValue = this.provideOpts(value, 'accordionType', ['panel', 'minimal', 'basic']);
-    //         if ( validValue === value ) {
-    //             this._accordionType = validValue;
-    //         }
-    //     }
     public accordionType = input<string, string>('minimal', {
         transform: (value: string) => {
             const validValue = this.provideOpts(value, 'accordionType', ['panel', 'minimal', 'basic']);
 
             return validValue === value ? validValue : 'minimal';
         }
-    })
+    });
 
-    // @Input()
-    //     public get titleTransition() {
-    //         return this._titleTransition;
-    //     }
-
-    //     public set titleTransition(value: string) {
-    //         const validValue = this.provideOpts(value, 'titleTransition', ['none', 'full', 'partial']);
-    //         if ( validValue === value ) {
-    //             this._titleTransition = validValue;
-    //         }
-    //     }
-
-    public titleTransition = input<string, string>('', {
+    public titleTransition = input<string, string>('none', {
         transform: (value: string) => {
             const validValue = this.provideOpts(value, 'titleTransition', ['none', 'full', 'partial']);
             
             return validValue === value ? validValue : 'none';
         }
-    })
+    });
 
-    // @Input() 
-    //     // Align clickable header button text
-    //     public get titleAlign() {
-    //         return this._titleAlign;
-    //     }
-
-    //     public set titleAlign(value: string) {
-    //         const validValue = this.provideOpts(value, 'titleAlign', ['left', 'center', 'right']);
-    //         if ( validValue === value ) {
-    //             this._titleAlign = validValue;
-    //         }
-    //     }
     public titleAlign = input<string, string>('left', {
         transform: (value: string) => {
             const validValue = this.provideOpts(value, 'titleAlign', ['left', 'center', 'right']);
 
             return validValue === value ? validValue : 'left';
         }
-    })
+    });
 
-    // @Input()
-    //     // Align clickable header button icon
-    //     public get iconAlign() {
-    //         return this._iconAlign;
-    //     }
-
-    //     public set iconAlign(value: string) {
-    //         const validValue = this.provideOpts(value, 'iconAlign', ['left', 'right']);
-    //         if ( validValue === value ) {
-    //             this._iconAlign = validValue;
-    //         }
-    //     }
-    public iconAlign = input<string, string>('left', {
+    public iconAlign = input<string, string>('right', {
         transform: (value: string) => {
             const validValue = this.provideOpts(value, 'iconAlign', ['left', 'right']);
 
-            return validValue === value ? validValue : 'left';
+            return validValue === value ? validValue : 'right';
         }
-    })
+    });
 
-    // @Input() 
-    //     // Change clickable header button icon svg images
-    //     public get iconType() {
-    //         return this._iconType;
-    //     }
-
-    //     public set iconType(value: string) {
-    //         const validValue = this.provideOpts(value, 'iconType', ['chevron', 'plusMinus']);
-    //         if ( validValue === value ) {
-    //             this._iconType = validValue;
-    //         }
-    //     }
     public iconType = input<string, string>('chevron', {
         transform: (value: string) => {
             const validValue = this.provideOpts(value, 'iconType', ['chevron', 'plusMinus']);
 
             return validValue === value ? validValue : 'chevron';
         }
-    })
+    });
 
-    // @Input() 
-    //     // Change clickable header html tag type
-    //     public get titleTagType() {
-    //         return this._titleTagType;
-    //     }
-
-    //     public set titleTagType(value: string) {
-    //         const validValue = this.provideOpts(value, 'titleTagType', this.headingTagTypes);
-    //         if ( validValue === value ) {
-    //             this._titleTagType = validValue;
-    //         }
-    //     }
     public titleTagType = input<string, string>('strong', {
         transform: (value: string) => {
             const validValue = this.provideOpts(value, 'titleTagType', this.headingTagTypes);
 
             return validValue === value ? validValue : 'strong';
         }
-    })
+    });
+    // END Getter/Setters as Signals
 
-    @Output() clickHeader: EventEmitter<AccordionData> = new EventEmitter<AccordionData>(); 
+    public readonly clickHeader = output<AccordionData>();
 
-    @ViewChild('titleSlotOpen', {static: false}) titleSlotOpen!: ElementRef;
-    @ViewChild('titleSlotClose', {static: false}) titleSlotClose!: ElementRef;
+    private titleSlotOpen = viewChild<ElementRef>('titleSlotOpen');
+    private titleSlotClose = viewChild<ElementRef>('titleSlotClose');
     
     // Provide default accordion options
     public isAccordionOpen: boolean = false;
     public isScrollable: boolean = false;
     public customStyles: string = '';
-    private tagName: string = '';
-    // private _accordionType: any = 'minimal';
-    // private _titleTransition: any = 'none';
-    // private _titleAlign: any = 'left';
-    // private _iconAlign: any = 'right';
-    // private _iconType: any = 'chevron';
-    // private _titleTagType: any = 'strong';
+
     // For transitioning the width of changeable text when partial title text change is enabled
     public slotWidth: number | undefined = undefined;
     public titleTextSlotChange: string = '';
@@ -263,7 +170,8 @@ export class JMurkyHawkAccordionComponent implements OnInit {
     }
 
     getCustomStylingObj(evalObj: { [key: string] : string }, setElement: string) {
-        // To make setting multiple custom styles for component title and body more concise, options can be set as a group via customStylesTitle and customStylesBody. Allowable properties that can be used are set from the stylesTitleProps and stylesBodyProps arrays.
+        // To make setting multiple custom styles for component title and body more concise, options can be set as a group via customStylesTitle and customStylesBody. 
+        // Allowable properties that can be used are set from the stylesTitleProps and stylesBodyProps arrays.
         
         for ( const key in evalObj ) {
 
@@ -341,9 +249,9 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         let slotElement: any;
 
         if ( slotOpenClose === 'close' ) {
-            slotElement = this.titleSlotClose.nativeElement;
+            slotElement = this.titleSlotClose()?.nativeElement;
         } else {
-            slotElement = this.titleSlotOpen.nativeElement;
+            slotElement = this.titleSlotOpen()?.nativeElement;
         }
 
         const slotOpenBox = slotElement.getBoundingClientRect();
@@ -358,9 +266,9 @@ export class JMurkyHawkAccordionComponent implements OnInit {
         
         setTimeout(() => {
 
-            if ( this.titleSlotOpen ) {
+            if ( this.titleSlotOpen() ) {
                 this.slotWidth = this.calculateSlotWidth('open');
-            } else if ( this.titleSlotClose ) {
+            } else if ( this.titleSlotClose() ) {
                 this.slotWidth = this.calculateSlotWidth('close');
             }
 

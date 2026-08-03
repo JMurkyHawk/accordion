@@ -82,7 +82,7 @@
       <ng-template #accordionHeadContent>
 
         <!-- Default/unchanging title text -->
-        @if (titleTransition() === 'none' || !titleTransition) {
+        @if (titleTransition() === 'none') {
           <div [innerHTML]="titleText()"></div>
         }
 
@@ -106,14 +106,16 @@
         }
 
         <!-- Full title text change -->
-        @if (titleTransition() === 'full' && isAccordionOpen) {
-          <div [innerHTML]="titleText()"
-          [@jmAccordionTitleAnimation]="titleText() === titleTextOpen() ? 'open2' : 'close2' "></div>
-        }
+        @if (titleTransition() === 'full') {
+            @if (isAccordionOpen) {
+                <div [innerHTML]="titleText()"
+                    [@jmAccordionTitleAnimation]="titleText() === titleTextOpen() ? 'open2' : 'close2' "></div>
+            }
 
-        @if (titleTransition() === 'full' && !isAccordionOpen) {
-          <div [innerHTML]="titleText()"
-          [@jmAccordionTitleAnimation]="titleText() === titleTextClosed() ? 'close2' : 'open2' " ></div>
+            @if (!isAccordionOpen) {
+                <div [innerHTML]="titleText()"
+                    [@jmAccordionTitleAnimation]="titleText() === titleTextClosed() ? 'close2' : 'open2' " ></div>
+            }
         }
 
       </ng-template>

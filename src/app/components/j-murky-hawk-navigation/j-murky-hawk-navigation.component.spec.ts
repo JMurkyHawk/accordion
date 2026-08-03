@@ -52,8 +52,8 @@ describe('JMurkyHawkNavigationComponent', () => {
         fixture = TestBed.createComponent(JMurkyHawkNavigationComponent);
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
-        component.navItems = links;
-        component.linkStyle = 'button';
+        // component.navItems = links;
+        fixture.componentRef.setInput('navItems', links);
         linkButton = fixture.nativeElement.querySelector('a');
         fixture.detectChanges();
     });
@@ -87,7 +87,11 @@ describe('JMurkyHawkNavigationComponent', () => {
         for (let i = 0; i < listLength; i++) {
             const randomName = `Label ${Math.floor(Math.random() * 10)}`;
             const randomLink = `/${Math.floor(Math.random() * 10)}`;
-            component.navItems.push({'label': randomName, 'link': randomLink});
+            // component.navItems.push({'label': randomName, 'link': randomLink});
+            fixture.componentRef.setInput('navItems', [
+                ...component.navItems(),
+                {'label': randomName, 'link': randomLink}
+            ])
         }
         fixture.detectChanges();
 
@@ -95,9 +99,9 @@ describe('JMurkyHawkNavigationComponent', () => {
         const itemEls = fixture.debugElement.queryAll(By.css('li > a'));
         expect(itemEls.length).toEqual(listLength);
         itemEls.forEach((itemEl, index) => {
-            expect(itemEl.nativeElement.innerText).toEqual(`${component.navItems[index].label}`);
-            expect(itemEl.nativeElement.getAttribute('class')).toEqual(component.linkStyle);
-            expect(itemEl.nativeElement.getAttribute('href')).toEqual(`${component.navItems[index].link}`);
+            expect(itemEl.nativeElement.innerText).toEqual(`${component.navItems()[index].label}`);
+            expect(itemEl.nativeElement.getAttribute('class')).toEqual(component.linkStyle());
+            expect(itemEl.nativeElement.getAttribute('href')).toEqual(`${component.navItems()[index].link}`);
         })
     });
 
@@ -107,7 +111,7 @@ describe('JMurkyHawkNavigationComponent', () => {
         let btn = fixture.debugElement.query(By.css('a'));
         expect(btn).toBeTruthy;
         
-        btn.triggerEventHandler('click', null);
+        btn.triggerEventHandler('click', { a: 0, preventDefault: () => {} });
         fixture.detectChanges();
         expect(component.linkClick).toHaveBeenCalled();
     });
@@ -121,13 +125,13 @@ describe('JMurkyHawkNavigationComponent', () => {
 
         const doc = fixture.nativeElement.ownerDocument;
         const getScrollToElement = doc.getElementById(component.linkScrollToId());
-        expect(getScrollToElement).toBeTruthy;
+        expect(getScrollToElement).toBeTruthy();
         
         const btn = fixture.debugElement.query(By.css('li:last-child a'));
-        expect(btn).toBeTruthy;
+        expect(btn).toBeTruthy();
 
         const scrollToSpy = spyOn(getScrollToElement, 'scrollIntoView').and.callThrough();
-        btn.triggerEventHandler('click', null);
+        btn.triggerEventHandler('click', { a: 0, preventDefault: () => {} });
         tick(component.linkScrollDelay());
         expect(scrollToSpy).toHaveBeenCalled();
     }));

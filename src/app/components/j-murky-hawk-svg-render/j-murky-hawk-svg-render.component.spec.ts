@@ -21,6 +21,7 @@ describe('JMurkyHawkSvgRenderComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(JMurkyHawkSvgRenderComponent);
         component = fixture.componentInstance;
+        fixture.componentRef.setInput('src', '../../assets/images/github-icon.svg');
         fixture.detectChanges();
     });
 

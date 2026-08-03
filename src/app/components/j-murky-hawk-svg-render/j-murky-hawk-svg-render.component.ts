@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef, input } from '@angular/core';
+import { Component, OnInit, viewChild, ViewEncapsulation, ElementRef, input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -17,7 +17,7 @@ export class JMurkyHawkSvgRenderComponent implements OnInit {
     
     readonly src = input.required<string>();
 
-    @ViewChild('jmSvgRenderContainer', { static: true }) jmSvgRenderContainer!: ElementRef;
+    private jmSvgRenderContainer = viewChild<ElementRef<HTMLElement>>('jmSvgRenderContainer');
 
     constructor(public http: HttpClient) {}
 
@@ -26,7 +26,11 @@ export class JMurkyHawkSvgRenderComponent implements OnInit {
         this.http
         .get(this.src(), {responseType: 'text'})
         .subscribe(data => {
-            this.jmSvgRenderContainer.nativeElement.innerHTML = data;
+            const container = this.jmSvgRenderContainer()?.nativeElement;
+    
+            if (container) {
+                container.innerHTML = data;
+            }
         })
     }
 
