@@ -93,11 +93,12 @@ export class AppComponent {
         }
     ];
 
-    public navLinkData2 = [{
-        label: 'Overview',
-        link: 'accordion-overview'
-    },
-    ...this.optionLinks
+    public navLinkData2 = [
+        {
+            label: 'Overview',
+            link: 'accordion-overview'
+        },
+        ...this.optionLinks
     ];
 
     private screenBreakpoints: { [key: string] : number } = {
