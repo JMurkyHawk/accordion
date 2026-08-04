@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer2, Signal, ViewChild, WritableSignal, computed, input, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, WritableSignal, computed, input, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fromEvent } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -107,14 +107,12 @@ export class JMurkyHawkDrawerComponent {
         } 
 
         if (this.drawerShow() && isDrawerButtonPositionInside) {
-            drawerButtonPosition = this.drawerPosition + '_inside';
+            drawerButtonPosition = this.drawerPosition() + '_inside';
         }
         
         return drawerButtonPosition;
     });
 
-    private _drawerButtonAlign: string = 'left';
-    private _drawerPosition: string = 'left';
     private tagName: string = '';
     public buttonPosition = this.jmDrawerButtonWrapper()?.nativeElement.style.cssText;
     

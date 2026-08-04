@@ -87,7 +87,6 @@ describe('JMurkyHawkNavigationComponent', () => {
         for (let i = 0; i < listLength; i++) {
             const randomName = `Label ${Math.floor(Math.random() * 10)}`;
             const randomLink = `/${Math.floor(Math.random() * 10)}`;
-            // component.navItems.push({'label': randomName, 'link': randomLink});
             fixture.componentRef.setInput('navItems', [
                 ...component.navItems(),
                 {'label': randomName, 'link': randomLink}

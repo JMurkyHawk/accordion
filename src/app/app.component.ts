@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, VERSION, ViewChild, viewChild, ViewEncapsulation, WritableSignal,
+import { Component, ElementRef, VERSION, viewChild, ViewEncapsulation, WritableSignal,
     computed, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
@@ -93,11 +93,12 @@ export class AppComponent {
         }
     ];
 
-    public navLinkData2 = [{
-        label: 'Overview',
-        link: 'accordion-overview'
-    },
-    ...this.optionLinks
+    public navLinkData2 = [
+        {
+            label: 'Overview',
+            link: 'accordion-overview'
+        },
+        ...this.optionLinks
     ];
 
     private screenBreakpoints: { [key: string] : number } = {
