@@ -1,7 +1,7 @@
 import { Component, ElementRef, Renderer2, WritableSignal, computed, input, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fromEvent } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 import { drawerButtonIconAnimation,
     drawerButtonPositionAnimation,
@@ -39,7 +39,10 @@ export interface DrawerButtonOptions {
         drawerPageOverlayAnimation
     ],
     host: {
-        '(document:keydown.escape)': 'onKeyDown()'
+        '(window:keydown.escape)': 'handleEsc()',
+        '(window:keydown.Tab)': 'handleTab($event)',
+        '(window:keydown.Shift.Tab)': 'handleShiftTab($event)',
+        '(window:focus)': 'handleWindowFocus()'
     }
 })
 
@@ -58,7 +61,6 @@ export class JMurkyHawkDrawerComponent {
         size: '5rem',
         xyPosition: { x: '2rem', y: '2rem' }
     });
-    
     readonly drawerButtonBorderRadius = input<string>('.5rem');
     readonly isDrawerButtonPositionInside = input<boolean>(false);
     readonly drawerPageOverlayBackground = input<string>('#000000');
@@ -85,14 +87,6 @@ export class JMurkyHawkDrawerComponent {
     private jmDrawerButton = viewChild<ElementRef>('jmDrawerButton');
     private jmDrawerButtonWrapper = viewChild<ElementRef>('jmDrawerButtonWrapper');
     private jmDrawerOverlay = viewChild<ElementRef>('jmDrawerOverlay');
-
-    onKeyDown() {
-        // Escape key should close the drawer menu
-        if ( this.drawerShow() ) {
-            this.drawerButtonClick();
-        }
-    }
-
     public drawerShow: WritableSignal<boolean> = signal<boolean>(false);
     public screenSize: WritableSignal<string> = signal<string>('');
     public drawerButtonXYLeft: WritableSignal<string> = signal<string>('auto');
@@ -117,48 +111,13 @@ export class JMurkyHawkDrawerComponent {
     public buttonPosition = this.jmDrawerButtonWrapper()?.nativeElement.style.cssText;
     
     private windowResizeSubscription$: any;
-    private windowFocusSubscription$: any;
-    private windowTabSubscription$: any;
-    private windowTabShiftSubscription$: any;
 
     constructor(
         private elementRef: ElementRef,
         private renderer: Renderer2
     ) {
         this.tagName = elementRef.nativeElement.tagName.toLowerCase();
-
-        this.windowFocusSubscription$ = 
-            fromEvent(window, 'focus')
-            .subscribe(() => {
-                if ( this.drawerShow() && this.isFocusOutsideDrawer() ) {
-                    this.drawerFocusableItems()[0].focus();
-                } 
-            });
-
-        this.windowTabShiftSubscription$ = 
-            fromEvent<KeyboardEvent>(window, 'keydown')
-            .pipe(
-                filter(e => e.shiftKey),
-                filter(e => e.key === 'Tab')
-            )
-            .subscribe((event) => {
-                if ( this.drawerShow() ) {
-                    this.jmFocusTrap('Shift Tab', event);
-                }
-            }); 
             
-        this.windowTabSubscription$ = 
-            fromEvent<KeyboardEvent>(window, 'keydown')
-            .pipe(
-                filter((e: any) => !e.shiftKey),
-                filter((e: any) => e.key === 'Tab')
-            )
-            .subscribe((event) => {
-                if ( this.drawerShow() ) {
-                    this.jmFocusTrap('Tab', event);
-                }
-            })
-
         this.windowResizeSubscription$ =
             fromEvent(window, 'resize')
             .pipe(debounceTime(250))
@@ -202,13 +161,47 @@ export class JMurkyHawkDrawerComponent {
                             overlay.nativeElement.style.cssText = `${this.createOverlayCutout()}` +
                                 `background: ${this.drawerPageOverlayBackground()}; ` +
                                 `opacity: ${this.drawerPageOverlayOpacity()}; ` +
-                                `width': ${this.drawerWidth()};`;
+                                `width: ${this.drawerWidth()};`;
                         }
                     }
                 }, 0);
                 
             });
     }
+
+    /* ------------------------------------
+        Host Listener Event Functionality
+    --------------------------------------- */
+
+    // This section replaces the old Rxjs subscriptions in favor of the 
+    // host listener methodology recommended by newer versions of Angular (v20+)
+
+    handleEsc() {
+        // Escape key should close the drawer menu
+        if ( this.drawerShow() ) {
+            this.drawerButtonClick();
+        }
+    }
+
+    handleTab(event: KeyboardEvent) {
+        if (event.shiftKey || !this.drawerShow()) return;
+        this.jmFocusTrap('Tab', event);
+    }
+
+    handleShiftTab(event: KeyboardEvent) {
+        if (!this.drawerShow()) return;
+        this.jmFocusTrap('Shift Tab', event);
+    }
+
+    handleWindowFocus() {
+        if ( this.drawerShow() && this.isFocusOutsideDrawer() ) {
+            this.drawerFocusableItems()[0].focus();
+        } 
+    }
+
+    /* ----------------------------------------
+        End Host Listener Event Functionality
+    ------------------------------------------- */
 
     ngOnInit() {
         this.setDrawerButtonAlign();
@@ -432,8 +425,5 @@ export class JMurkyHawkDrawerComponent {
 
     ngOnDestroy() {
         this.windowResizeSubscription$.unsubscribe();
-        this.windowTabSubscription$.unsubscribe();
-        this.windowTabShiftSubscription$.unsubscribe();
-        this.windowFocusSubscription$.unsubscribe();
     }
 }
